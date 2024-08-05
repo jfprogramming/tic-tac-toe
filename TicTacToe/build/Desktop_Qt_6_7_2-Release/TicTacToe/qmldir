@@ -1,0 +1,6 @@
+module TicTacToe
+typeinfo appTicTacToe.qmltypes
+prefer :/qt/qml/TicTacToe/
+Main 1.0 Main.qml
+PlayArea 1.0 PlayArea.qml
+

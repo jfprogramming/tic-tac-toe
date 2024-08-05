@@ -1,0 +1,14 @@
+--resource
+/home/jfinn/Projects/tic-tac-toe/TicTacToe/build/Desktop_Qt_6_7_2-Debug/.qt/rcc/qmake_TicTacToe.qrc
+--resource
+/home/jfinn/Projects/tic-tac-toe/TicTacToe/build/Desktop_Qt_6_7_2-Debug/.qt/rcc/appTicTacToe_raw_qml_0.qrc
+/qt/qml/TicTacToe/Main.qml
+/qt/qml/TicTacToe/PlayArea.qml
+/qt/qml/TicTacToe/Home.qml
+/qt/qml/TicTacToe/DateTimeSetting.qml
+/qt/qml/TicTacToe/PlayerManager.qml
+/qt/qml/TicTacToe/PlayerSelection.qml
+/qt/qml/TicTacToe/AdminLogin.qml
+/qt/qml/TicTacToe/AdminPage.qml
+/qt/qml/TicTacToe/Footer.qml
+/qt/qml/TicTacToe/Header.qml

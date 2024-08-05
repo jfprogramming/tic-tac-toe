@@ -1,0 +1,14 @@
+module TicTacToe
+typeinfo appTicTacToe.qmltypes
+prefer :/qt/qml/TicTacToe/
+Main 1.0 Main.qml
+PlayArea 1.0 PlayArea.qml
+Home 1.0 Home.qml
+DateTimeSetting 1.0 DateTimeSetting.qml
+PlayerManager 1.0 PlayerManager.qml
+PlayerSelection 1.0 PlayerSelection.qml
+AdminLogin 1.0 AdminLogin.qml
+AdminPage 1.0 AdminPage.qml
+Footer 1.0 Footer.qml
+Header 1.0 Header.qml
+

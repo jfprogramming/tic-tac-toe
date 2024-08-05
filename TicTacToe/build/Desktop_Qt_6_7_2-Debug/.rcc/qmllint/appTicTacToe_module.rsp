@@ -1,0 +1,10 @@
+-I
+/home/jfinn/Projects/tic-tac-toe/TicTacToe/build/Desktop_Qt_6_7_2-Debug
+-I
+/opt/Qt/6.7.2/gcc_64/./qml
+--resource
+/home/jfinn/Projects/tic-tac-toe/TicTacToe/build/Desktop_Qt_6_7_2-Debug/.qt/rcc/qmake_TicTacToe.qrc
+--resource
+/home/jfinn/Projects/tic-tac-toe/TicTacToe/build/Desktop_Qt_6_7_2-Debug/.qt/rcc/appTicTacToe_raw_qml_0.qrc
+--module
+TicTacToe

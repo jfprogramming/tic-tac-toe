@@ -1,0 +1,16 @@
+<RCC>
+  <qresource prefix="/qt/qml/TicTacToe/">
+    <file alias="Main.qml">/home/jfinn/Projects/tic-tac-toe/TicTacToe/Main.qml</file>
+    <file alias="PlayArea.qml">/home/jfinn/Projects/tic-tac-toe/TicTacToe/PlayArea.qml</file>
+    <file alias="Home.qml">/home/jfinn/Projects/tic-tac-toe/TicTacToe/Home.qml</file>
+    <file alias="DateTimeSetting.qml">/home/jfinn/Projects/tic-tac-toe/TicTacToe/DateTimeSetting.qml</file>
+    <file alias="PlayerManager.qml">/home/jfinn/Projects/tic-tac-toe/TicTacToe/PlayerManager.qml</file>
+    <file alias="PlayerSelection.qml">/home/jfinn/Projects/tic-tac-toe/TicTacToe/PlayerSelection.qml</file>
+    <file alias="AdminLogin.qml">/home/jfinn/Projects/tic-tac-toe/TicTacToe/AdminLogin.qml</file>
+    <file alias="AdminPage.qml">/home/jfinn/Projects/tic-tac-toe/TicTacToe/AdminPage.qml</file>
+    <file alias="Footer.qml">/home/jfinn/Projects/tic-tac-toe/TicTacToe/Footer.qml</file>
+    <file alias="Header.qml">/home/jfinn/Projects/tic-tac-toe/TicTacToe/Header.qml</file>
+    <file alias="resources.qrc">/home/jfinn/Projects/tic-tac-toe/TicTacToe/resources.qrc</file>
+  </qresource>
+</RCC>
+
