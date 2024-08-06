@@ -32,6 +32,7 @@ qt_add_qml_module(appTicTacToe
         AdminPage.qml
         Footer.qml
         Header.qml
+        PlayerModel.qml
     RESOURCES
         resources.qrc
 )

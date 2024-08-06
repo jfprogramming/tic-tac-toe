@@ -10,9 +10,9 @@ Window {
     StackView {
         id: stackView
         anchors.fill: parent
-        initialItem: "PlayArea.qml" // Set the initial page
+        initialItem: "Home.qml" // Set the initial page
         Component.onCompleted: {
-            //stackView.push("Home.qml")
+            console.log("stackView count: "+stackView.depth)
         }
     }
 }

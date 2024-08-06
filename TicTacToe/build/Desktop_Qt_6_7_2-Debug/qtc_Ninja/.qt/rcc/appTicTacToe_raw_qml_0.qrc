@@ -1,8 +1,0 @@
-<RCC>
-  <qresource prefix="/qt/qml/TicTacToe/">
-    <file alias="Main.qml">/home/jfinn/Projects/tic-tac-toe/TicTacToe/Main.qml</file>
-    <file alias="PlayArea.qml">/home/jfinn/Projects/tic-tac-toe/TicTacToe/PlayArea.qml</file>
-    <file alias="resources.qrc">/home/jfinn/Projects/tic-tac-toe/TicTacToe/resources.qrc</file>
-  </qresource>
-</RCC>
-

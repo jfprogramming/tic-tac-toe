@@ -1,3 +1,0 @@
-/home/jfinn/Projects/tic-tac-toe/TicTacToe/build/Desktop_Qt_6_7_2-Debug/appTicTacToe_autogen/include/../EWIEGA46WW/moc_databasecontroller.cpp.json
-/home/jfinn/Projects/tic-tac-toe/TicTacToe/build/Desktop_Qt_6_7_2-Debug/appTicTacToe_autogen/include/../EWIEGA46WW/moc_gamelogic.cpp.json
-/home/jfinn/Projects/tic-tac-toe/TicTacToe/build/Desktop_Qt_6_7_2-Debug/appTicTacToe_autogen/include/../EWIEGA46WW/moc_playermanger.cpp.json

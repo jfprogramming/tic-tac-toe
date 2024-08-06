@@ -10,26 +10,26 @@ Rectangle{
 
     Rectangle{
         id: copyRight
-        anchors.left: footer.left
+        anchors.left: parent.left
         anchors.leftMargin: 10
-        anchors.verticalCenter: footer.verticalCenter
+        anchors.verticalCenter: parent.verticalCenter
         Text {
             id: copyRightText
             text: qsTr("(c) Jesse Finneman 2024")
-            anchors.verticalCenter: copyRight.verticalCenter
+            anchors.verticalCenter: parent.verticalCenter
         }
     }
 
     Button{
         id: homeButton
-        anchors.right: footer.right
+        anchors.right: parent.right
         anchors.rightMargin: 10
-        anchors.verticalCenter: footer.verticalCenter
+        anchors.verticalCenter: parent.verticalCenter
         Text {
             id: homeButtonText
             text: qsTr("Home")
-            anchors.horizontalCenter: homeButton.horizontalCenter
-            anchors.verticalCenter: homeButton.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
         }
         onClicked: {
             console.log("button clicked...")

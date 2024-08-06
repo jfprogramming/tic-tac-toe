@@ -1,6 +1,0 @@
---resource
-/home/jfinn/Projects/tic-tac-toe/TicTacToe/build/Desktop_Qt_6_7_2-Release/.qt/rcc/qmake_TicTacToe.qrc
---resource
-/home/jfinn/Projects/tic-tac-toe/TicTacToe/build/Desktop_Qt_6_7_2-Release/.qt/rcc/appTicTacToe_raw_qml_0.qrc
-/qt/qml/TicTacToe/Main.qml
-/qt/qml/TicTacToe/PlayArea.qml

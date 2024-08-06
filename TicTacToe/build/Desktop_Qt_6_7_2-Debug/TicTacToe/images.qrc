@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>images/oimg.jpg</file>
-        <file>images/ximg.jpg</file>
-    </qresource>
-</RCC>
