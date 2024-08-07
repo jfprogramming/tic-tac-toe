@@ -3,12 +3,16 @@ import QtQuick.Controls
 
 Item {
     id: playArea
-    anchors.fill: parent
 
     property string player1: "player1"
     property string player2: "player2"
 
     property string currentPlater: "player1"
+
+    // JavaScript Functions
+    function getCurrentPlayer(){
+        // TODO call Q_INVOKABLE Function to get current player turn
+    }
 
     Rectangle{
         id: threeInARow
@@ -261,5 +265,9 @@ Item {
 
     Footer{
         id:playAreaFooter
+        //homeBtn.onClicked: {
+            //stackView.pop()
+        //}
+        homeBtnTxt: "Back"
     }
 }

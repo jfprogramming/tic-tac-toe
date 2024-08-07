@@ -8,6 +8,12 @@ Rectangle{
     width: parent.width
     color: "lightBlue"
 
+    property alias homeBtn: homeButton
+    property alias homeBtnTxt: homeButtonText.text
+
+    property alias backBtn: backButton
+    property alias backBtnTxt: backButtonText.text
+
     Rectangle{
         id: copyRight
         anchors.left: parent.left
@@ -17,6 +23,23 @@ Rectangle{
             id: copyRightText
             text: qsTr("(c) Jesse Finneman 2024")
             anchors.verticalCenter: parent.verticalCenter
+        }
+    }
+
+    Button{
+        id: backButton
+        anchors.right: parent.right
+        anchors.rightMargin: homeButton.width+20
+        anchors.verticalCenter: parent.verticalCenter
+        visible: false
+        Text {
+            id: backButtonText
+            text: qsTr("Back")
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+        }
+        onClicked: {
+            console.log("back button clicked...")
         }
     }
 
@@ -32,7 +55,8 @@ Rectangle{
             anchors.verticalCenter: parent.verticalCenter
         }
         onClicked: {
-            console.log("button clicked...")
+            console.log("home button clicked...")
+            stackView.pop(homePage)
         }
     }
 }

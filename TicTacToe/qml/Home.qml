@@ -3,7 +3,7 @@ import QtQuick.Controls
 
 Item {
     id: homePage
-    anchors.fill: parent
+    objectName: "homePage"
 
     Header{
         id:homePageHeader
@@ -28,7 +28,7 @@ Item {
             height: 100
             width: 200
             Text{
-                id: onPlayerBtnTxt
+                id: onePlayerBtnTxt
                 text: "1 Player Game"
                 anchors.centerIn: parent
             }
@@ -68,11 +68,20 @@ Item {
                 text: "High Score"
                 anchors.centerIn: parent
             }
+            onClicked: {
+                stackView.push("HighScore.qml")
+            }
         }
     }
 
 
     Footer{
         id: homePagefooter
+        homeBtn.width: 200
+        homeBtn.onClicked: {
+            // TODO implement admin login
+            stackView.push("AdminLogin.qml")
+        }
+        homeBtnTxt: "Admin Login"
     }
 }

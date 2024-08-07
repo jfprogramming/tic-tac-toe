@@ -4,7 +4,7 @@ project(TicTacToe VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Sql)
 
 set(CMAKE_AUTORCC ON)
 
@@ -18,21 +18,27 @@ qt_add_qml_module(appTicTacToe
     URI TicTacToe
     VERSION 1.0
     SOURCES
-        gamelogic.h gamelogic.cpp
-        playermanger.h playermanger.cpp
-        databasecontroller.h databasecontroller.cpp
+        controllers/gamelogic.h
+        controllers/gamelogic.cpp
+        controllers/playermanger.h
+        controllers/playermanger.cpp
+        controllers/databasecontroller.h
+        controllers/databasecontroller.cpp
+        models/playermodel.h
+        models/playermodel.cpp
     QML_FILES
-        Main.qml
-        PlayArea.qml
-        Home.qml
-        DateTimeSetting.qml
-        PlayerManager.qml
-        PlayerSelection.qml
-        AdminLogin.qml
-        AdminPage.qml
-        Footer.qml
-        Header.qml
-        PlayerModel.qml
+        qml/AdminLogin.qml
+        qml/AdminPage.qml
+        qml/DateTimeSetting.qml
+        qml/Footer.qml
+        qml/Header.qml
+        qml/HighScore.qml
+        qml/Home.qml
+        qml/Main.qml
+        qml/PlayArea.qml
+        qml/PlayerManager.qml
+        qml/PlayerModel.qml
+        qml/PlayerSelection.qml
     RESOURCES
         resources.qrc
 )
@@ -49,7 +55,7 @@ set_target_properties(appTicTacToe PROPERTIES
 )
 
 target_link_libraries(appTicTacToe
-    PRIVATE Qt6::Quick
+    PRIVATE Qt6::Quick Qt6::Sql
 )
 
 include(GNUInstallDirs)
