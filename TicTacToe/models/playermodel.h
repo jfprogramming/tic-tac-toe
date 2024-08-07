@@ -1,33 +1,34 @@
-// playermodel.h
 #pragma once
 #include <QObject>
 
 class PlayerModel : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString userName READ userName WRITE setUserName NOTIFY userNameChanged)
-    Q_PROPERTY(int userAge READ userAge WRITE setUserAge NOTIFY userAgeChanged)
+
+    Q_PROPERTY(QString playerName READ playerName WRITE setPlayerName NOTIFY playerNameChanged FINAL)
+    Q_PROPERTY(QString playerColor READ playerColor WRITE setPlayerColor NOTIFY playerColorChanged FINAL)
+
 
 public:
     explicit PlayerModel(QObject* parent = nullptr);
 
-    QString userName() const;
-    void setUserName(QString& name);
+    QString playerColor() const;
+    QString playerName() const;
 
-    int userAge() const;
-    void setUserAge(int &age);
+    Q_INVOKABLE void saveToDatabase();
 
-     Q_INVOKABLE void saveToDatabase();
-
-signals:
+ signals:
     void userNameChanged(QString &name);
-    void userAgeChanged(int &age);
+    void userAgeChanged(QString &age);
+    void playerColorChanged();
+    void playerNameChanged();
 
 public slots:
-    void onFormEntry(QString& name, int& age);
-
+    void onFormEntry(QString& name, QString &color);
+    void setPlayerColor(QString &newPlayerColor);
+    void setPlayerName(const QString &newPlayerName);
 
 private:
-    QString m_userName;
-    int m_userAge;
+    QString m_playerName;
+    QString m_playerColor;
 };

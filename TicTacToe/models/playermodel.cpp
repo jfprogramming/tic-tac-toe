@@ -7,55 +7,49 @@ PlayerModel::PlayerModel(QObject* parent) : QObject(parent)
     // Initialize any necessary data or perform setup here
 }
 
-QString PlayerModel::userName() const
-{
-    return m_userName;
-}
-
-void PlayerModel::setUserName(QString& name)
-{
-    if (m_userName != name)
+void PlayerModel::onFormEntry(QString& name, QString& color){
+    if (m_playerName != name)
     {
-        m_userName = name;
+        m_playerName = name;
         emit userNameChanged(name);
     }
 
-    qInfo() << __FUNCTION__ << __LINE__ << "name:" << name;
+    qInfo() << __FUNCTION__ << __LINE__ << "player name:" << name;
+
+    if (m_playerColor != color)
+    {
+        m_playerColor = color;
+        emit userAgeChanged(color);
+    }
+
+    qInfo() << __FUNCTION__ << __LINE__ << "player color:" << color;
+
 }
 
-int PlayerModel::userAge() const
+QString PlayerModel::playerColor() const
 {
-    return m_userAge;
+    return m_playerColor;
 }
 
-void PlayerModel::setUserAge(int& age)
+void PlayerModel::setPlayerColor(QString& newPlayerColor)
 {
-    if (m_userAge != age)
-    {
-        m_userAge = age;
-        emit userAgeChanged(age);
-    }
-
-    qInfo() << __FUNCTION__ << __LINE__ << "age:" << age;
+    if (m_playerColor == newPlayerColor)
+        return;
+    m_playerColor = newPlayerColor;
+    emit playerColorChanged();
 }
 
-void PlayerModel::onFormEntry(QString& name, int& age){
-    if (m_userName != name)
-    {
-        m_userName = name;
-        emit userNameChanged(name);
-    }
+QString PlayerModel::playerName() const
+{
+    return m_playerName;
+}
 
-    qInfo() << __FUNCTION__ << __LINE__ << "name:" << name;
-
-    if (m_userAge != age)
-    {
-        m_userAge = age;
-        emit userAgeChanged(age);
-    }
-
-    qInfo() << __FUNCTION__ << __LINE__ << "age:" << age;
-
+void PlayerModel::setPlayerName(const QString &newPlayerName)
+{
+    if (m_playerName == newPlayerName)
+        return;
+    m_playerName = newPlayerName;
+    emit playerNameChanged();
 }
 
 void PlayerModel::saveToDatabase(){

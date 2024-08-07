@@ -1,6 +1,4 @@
-#ifndef PLAYERMANGER_H
-#define PLAYERMANGER_H
-
+#pragma once
 #include <QObject>
 
 class PlayerManger : public QObject
@@ -9,7 +7,18 @@ class PlayerManger : public QObject
 public:
     explicit PlayerManger(QObject *parent = nullptr);
 
-signals:
-};
+    QString getPlayerName() const;
+    QString getPlayerColor() const;
 
-#endif // PLAYERMANGER_H
+public slots:
+    void setPlayerName(const QString &newPlayerName);
+    void setPlayerColor(const QString &newPlayerColor);
+
+signals:
+
+
+private:
+    QString playerName;
+    QString playerColor;
+
+};

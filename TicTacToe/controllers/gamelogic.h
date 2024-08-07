@@ -1,5 +1,4 @@
-#ifndef GAMELOGIC_H
-#define GAMELOGIC_H
+#pragma once
 
 #include <QObject>
 
@@ -9,7 +8,20 @@ class GameLogic : public QObject
 public:
     explicit GameLogic(QObject *parent = nullptr);
 
-signals:
-};
+    QString getCurrent_player() const;
+    bool getIsOnePlayerMode() const;
+    bool getIsTwoPlayerMode() const;
 
-#endif // GAMELOGIC_H
+public slots:
+    void setCurrent_player(const QString &newCurrent_player);
+    void setIsOnePlayerMode(bool newIsOnePlayerMode);
+    void setIsTwoPlayerMode(bool newIsTwoPlayerMode);
+
+signals:
+
+private:
+    QString current_player;
+    bool isOnePlayerMode;
+    bool isTwoPlayerMode;
+
+};

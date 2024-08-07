@@ -12,14 +12,13 @@ public:
     void performDatabaseOperations();
     void closeDatabase();
 
-    QString getUserName(int userId);
-    int getUserAge(int userId);
+    QString getPlayerName(int userId);
+    QString getPlayerColor(QString &color);
     QString getUserSelectedOption(int userId);
 
-    bool setUserName(int userId, const QString& newName);
-    bool setUserAge(int userId, const QString& newAge);
-    bool setUserSelectedOption(int userId, const QString& newSelectedOption);
-    bool createNewUser(QString userName, const QString& newAge);
+    bool setPlayerName(int playerId, const QString& newName);
+    bool setPlayerColor(int playerId, const QString& color);
+    bool createNewPlayer(QString playerName, const QString& playerColor);
 
 
 signals:

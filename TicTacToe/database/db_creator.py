@@ -12,7 +12,6 @@ def create_database():
                 playerId INTEGER PRIMARY KEY,
                 playerName TEXT,
                 playerColor TEXT,
-                playerHighScore TEXT,
                 dateTime DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         """)

@@ -13,7 +13,7 @@ DatabaseController::DatabaseController(QObject *parent)
 void DatabaseController::initializeDatabase()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("/data/database/my_database.db");
+    db.setDatabaseName("/data/database/tictactoe.db");
     if (!db.open())
     {
         qDebug() << "Error opening database:" << db.lastError().text();
@@ -25,7 +25,7 @@ void DatabaseController::initializeDatabase()
 void DatabaseController::performDatabaseOperations()
 {
     QSqlQuery query;
-    if (query.exec("SELECT * FROM userTable"))
+    if (query.exec("SELECT * FROM PlayerTable"))
     {
         while (query.next())
         {
@@ -40,26 +40,26 @@ void DatabaseController::performDatabaseOperations()
     }
 }
 
-QString DatabaseController::getUserName(int userId)
+QString DatabaseController::getPlayerName(int playerId)
 {
     QSqlQuery query;
-    query.prepare("SELECT userName FROM UserTable WHERE userId = :id");
-    query.bindValue(":id", userId);
+    query.prepare("SELECT palyerName FROM PlayerTable WHERE playerId = :id");
+    query.bindValue(":playerId", playerId);
     if (query.exec() && query.next())
         return query.value(0).toString();
     else
         return ""; // Return an empty string or handle the error
 }
 
-int DatabaseController::getUserAge(int userId)
+QString DatabaseController::getPlayerColor(QString &color)
 {
     QSqlQuery query;
-    query.prepare("SELECT userAge FROM UserTable WHERE userId = :id");
-    query.bindValue(":id", userId);
+    query.prepare("SELECT playerColor FROM PlayerTable WHERE userId = :id");
+    query.bindValue(":color", color);
     if (query.exec() && query.next())
-        return query.value(0).toInt();
+        return query.value(0).toString();
     else
-        return -1; // Return an empty string or handle the error
+        return ""; // Return an empty string or handle the error
 }
 
 QString DatabaseController::getUserSelectedOption(int userId)
@@ -74,61 +74,51 @@ QString DatabaseController::getUserSelectedOption(int userId)
 }
 
 
-bool DatabaseController::setUserName(int userId, const QString& newName)
+bool DatabaseController::setPlayerName(int playerId, const QString& newName)
 {
     QSqlQuery query;
 
 
-    if(userId == 1){
-        //create new user
-        createNewUser(newName, "N/A");
+    if(playerId == 1){
+        //create new player
+        createNewPlayer(newName, "N/A");
 
     }else{
-        query.prepare("UPDATE UserTable SET userName = :userName WHERE userId = :id");
-        query.bindValue(":userName", newName);
-        query.bindValue(":id", userId);
+        query.prepare("UPDATE PlayerTable SET playerName = :playerName WHERE playerId = :playerId");
+        query.bindValue(":playerName", newName);
+        query.bindValue(":playerId", playerId);
     }
 
     return query.exec();
 }
 
 
-bool DatabaseController::setUserAge(int userId, const QString& newAge)
+bool DatabaseController::setPlayerColor(int playerId, const QString& color)
 {
     QSqlQuery query;
 
-    if(userId ==1){
+    if(playerId ==1){
         //create new user
-        createNewUser("N/A", newAge);
+        createNewPlayer("N/A", color);
     }else{
-        query.prepare("UPDATE UserTable SET userAge = :userAge WHERE userId = :id");
-        query.bindValue(":userAge", newAge);
-        query.bindValue(":id", userId);
+        query.prepare("UPDATE UserTable SET userAge = :playerColor WHERE playerId = :playerId");
+        query.bindValue(":playerColor", color);
+        query.bindValue(":playerId", playerId);
     }
 
     return query.exec();
 }
 
-bool DatabaseController::createNewUser(QString userName, const QString& newAge)
+bool DatabaseController::createNewPlayer(QString playerName, const QString& playerColor)
 {
     QSqlQuery query;
 
     //create new user
     query.prepare("INSERT INTO UserTable (userName, userAge, userOptionSelected, dateTime) VALUES(:userName, :userAge, :userOptionSelected, :dateTime)");
-    query.bindValue(":userName", userName);
-    query.bindValue(":userAge", newAge);
-    query.bindValue(":userOptionSelected", "N/A");
+    query.bindValue(":playerName", playerName);
+    query.bindValue(":playerColor", playerColor);
     query.bindValue(":dateTime", QDateTime::currentDateTime());
 
-    return query.exec();
-}
-
-bool DatabaseController::setUserSelectedOption(int userId, const QString& newSelectedOption)
-{
-    QSqlQuery query;
-    query.prepare("UPDATE UserTable SET userSelectedOption = :userSelectedOption WHERE userId = :id");
-    query.bindValue(":userSelectedOption", newSelectedOption);
-    query.bindValue(":id", userId);
     return query.exec();
 }
 

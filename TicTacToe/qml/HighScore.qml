@@ -9,9 +9,9 @@ Item {
         id: mainArea
         anchors.fill: parent
         color: "white"
-        anchors.top: adminPageHeader.bottom
+        anchors.top: highScoreHeader.bottom
         anchors.topMargin: 50
-        anchors.bottom: adminPagefooter.top
+        anchors.bottom: highScoreFooter.top
         anchors.bottomMargin: 50
         Column{
             id: highScoreColumn

@@ -23,7 +23,7 @@ Item {
             anchors.top: parent.top
             anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
-            flat: true
+            //flat: true
             highlighted: true
             height: 100
             width: 200
@@ -44,7 +44,7 @@ Item {
             anchors.top: onePlayerBtn.bottom
             anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
-            flat: true
+            //flat: true
             highlighted: true
             height: 100
             width: 200
@@ -59,7 +59,7 @@ Item {
             anchors.top: twoPlayerBtn.bottom
             anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
-            flat: true
+            //flat: true
             highlighted: true
             height: 100
             width: 200
