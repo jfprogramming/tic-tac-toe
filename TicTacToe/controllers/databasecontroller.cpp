@@ -4,14 +4,27 @@
 #include <QDebug>
 #include <QDateTime>
 #include "databasecontroller.h"
+#include "cryptclass.h"
 
 DatabaseController::DatabaseController(QObject *parent)
-    : QThread{parent}
-{}
+    : QThread(parent)
+{
+    initializeDatabase();
+    this->start();
+}
+
+DatabaseController::~DatabaseController(){
+    closeDatabase();
+    if (isRunning()) {
+        quit();
+        wait();
+    }
+}
 
 
 void DatabaseController::initializeDatabase()
 {
+    qInfo() << "database initialization...";
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("/data/database/tictactoe.db");
     if (!db.open())
@@ -19,6 +32,44 @@ void DatabaseController::initializeDatabase()
         qDebug() << "Error opening database:" << db.lastError().text();
         // Handle the error (e.g., show an error message)
     }
+}
+
+bool DatabaseController::authenticateAdmin(const QString &username, const QString &password) {
+    QSqlQuery query;
+
+    qInfo() << "Admin Login username:" << username << " Admin password:" << password;
+
+    QByteArray byteArray = password.toLatin1();
+    const char* charArray = byteArray.data();
+
+    // Decrypt the password using bcrypt
+    QString decryptedPassword = CryptClass::bcrypt_checkpw(charArray, password.toUtf8().constData())
+                                    ? "admin" // Correct password
+                                    : ""; // Incorrect password
+
+    qInfo() << "decryptedPassword:" << decryptedPassword;
+
+    query.prepare("SELECT * FROM AdminTable WHERE adminName = :adminName AND adminPassword = :adminPassword");
+    query.bindValue(":adminName", username);
+    query.bindValue(":adminPassword", decryptedPassword);
+
+    qInfo() << "query statement:" << query.lastQuery();
+    qInfo() << query.exec();
+    qInfo() << query.value(1);
+    qInfo() << query.next();
+
+    if (query.exec() && query.next()) {
+        int count = query.value(0).toInt();
+        qInfo() << "count:" << count;
+        return count > 0;
+    }
+
+    return false;
+}
+
+void DatabaseController::closeDatabase()
+{
+    QSqlDatabase::database().close();
 }
 
 
@@ -122,7 +173,30 @@ bool DatabaseController::createNewPlayer(QString playerName, const QString& play
     return query.exec();
 }
 
-void DatabaseController::closeDatabase()
+QString DatabaseController::getAdminUsername()
 {
-    QSqlDatabase::database().close();
+    QSqlQuery query;
+    query.prepare("SELECT adminName FROM AdminTable");
+    if (query.exec() && query.next())
+        return query.value(0).toString();
+    else
+        return ""; // Return an empty string or handle the error
+}
+
+QString DatabaseController::getDecryptedAdminPassword()
+{
+    QString decryptedPassword;
+    QSqlQuery query;
+    query.prepare("SELECT adminPassword FROM AdminTable");
+    if (query.exec() && query.next())
+    {
+        QString encryptedPassword = query.value(0).toString();
+        // Decrypt the password using bcrypt (replace "admin" with the actual admin password)
+        QString decryptedPassword = CryptClass::bcrypt_checkpw("admin", encryptedPassword.toUtf8().constData())
+                                        ? "admin" // Correct password
+                                        : ""; // Incorrect password
+        return decryptedPassword;
+    }
+    else
+        return ""; // Return an empty string or handle the error
 }

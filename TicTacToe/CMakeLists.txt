@@ -26,6 +26,10 @@ qt_add_qml_module(appTicTacToe
         controllers/databasecontroller.cpp
         models/playermodel.h
         models/playermodel.cpp
+        models/aboutinfo.h
+        models/aboutinfo.cpp
+        cryptclass.h
+        cryptclass.cpp
     QML_FILES
         qml/AdminLogin.qml
         qml/AdminPage.qml
@@ -39,6 +43,7 @@ qt_add_qml_module(appTicTacToe
         qml/PlayerManager.qml
         qml/PlayerModel.qml
         qml/PlayerSelection.qml
+        qml/About.qml
     RESOURCES
         resources.qrc
 )
@@ -57,6 +62,8 @@ set_target_properties(appTicTacToe PROPERTIES
 target_link_libraries(appTicTacToe
     PRIVATE Qt6::Quick Qt6::Sql
 )
+target_link_libraries(appTicTacToe
+    PRIVATE crypt crypto)
 
 include(GNUInstallDirs)
 install(TARGETS appTicTacToe

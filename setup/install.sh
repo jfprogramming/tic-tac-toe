@@ -16,4 +16,6 @@ sudo apt-get install libxcb-cursor0
 git config --global user.email "jfskibum123@yahoo.com"
 git config --global user.name  "jesse finneman"
 
+sudo apt-get install libssl-dev
 
+pip install bcrpyt 

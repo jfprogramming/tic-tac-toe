@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import DbModule 1.0
 
 Item {
 
@@ -39,6 +40,7 @@ Item {
                 id: passwordTextInput
                 width: 300
                 height: 50
+                echoMode: TextInput.Password
                 passwordCharacter: '*'
             }
         }
@@ -49,7 +51,14 @@ Item {
         id: adminLoginPagefooter
         homeBtnTxt: "Login"
         homeBtn.onClicked: {
-            stackView.push("AdminPage.qml")
+            // Validate the admin username and passwordLabel
+            databaseController.print();
+            if(databaseController.authenticateAdmin(userNameTextInput.text, passwordTextInput.text)){
+                stackView.push("AdminPage.qml")
+            }else{
+                // TODO display popup message
+                console.log("error authenticating....");
+            }
         }
         backBtn.visible: true
         backBtn.onClicked: {

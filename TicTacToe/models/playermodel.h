@@ -21,7 +21,7 @@ public:
     void userNameChanged(QString &name);
     void userAgeChanged(QString &age);
     void playerColorChanged();
-    void playerNameChanged();
+    void playerNameChanged(const QString &playerName, const QString &playerColor);
 
 public slots:
     void onFormEntry(QString& name, QString &color);

@@ -49,7 +49,7 @@ void PlayerModel::setPlayerName(const QString &newPlayerName)
     if (m_playerName == newPlayerName)
         return;
     m_playerName = newPlayerName;
-    emit playerNameChanged();
+    emit playerNameChanged(m_playerName, m_playerColor);
 }
 
 void PlayerModel::saveToDatabase(){
