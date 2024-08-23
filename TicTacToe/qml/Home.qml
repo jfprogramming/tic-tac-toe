@@ -23,7 +23,6 @@ Item {
             anchors.top: parent.top
             anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
-            //flat: true
             highlighted: true
             height: 100
             width: 200
@@ -35,6 +34,7 @@ Item {
             onClicked: {
                 console.log("One Player Game Selected...")
                 //display play area
+                //
                 stackView.push("PlayerSelection.qml")
             }
         }
@@ -59,7 +59,6 @@ Item {
             anchors.top: twoPlayerBtn.bottom
             anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
-            //flat: true
             highlighted: true
             height: 100
             width: 200
@@ -74,12 +73,10 @@ Item {
         }
     }
 
-
     Footer{
         id: homePagefooter
         homeBtn.width: 200
         homeBtn.onClicked: {
-            // TODO implement admin login
             stackView.push("AdminLogin.qml")
         }
         homeBtnTxt: "Admin Login"

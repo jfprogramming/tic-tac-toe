@@ -28,6 +28,8 @@ qt_add_qml_module(appTicTacToe
         models/playermodel.cpp
         models/aboutinfo.h
         models/aboutinfo.cpp
+        models/gamemodel.h
+        models/gamemodel.cpp
         cryptclass.h
         cryptclass.cpp
     QML_FILES

@@ -10,6 +10,8 @@ Item {
     property int currentPlayer: 0
     property bool playerWon: false
 
+    property string gameType: getGameType()
+
     property alias rowWidth: row1.width
     property alias row1Id: row1
     property alias row1Rect1ImgAlias: row1rect1Img
