@@ -7,21 +7,72 @@ Item {
     property string player1: "player1"
     property string player2: "player2"
 
-    property string currentPlater: "player1"
+    property int currentPlayer: 0
+
+    property alias rowWidth: row1.width
+    property alias row1Id: row1
+    property alias row1Rect1ImgAlias: row1rect1Img
+
 
     // JavaScript Functions
     function getCurrentPlayer(){
         // TODO call Q_INVOKABLE Function to get current player turn
     }
 
-    Rectangle{
-        id: threeInARow
-        visible: false
-        rotation: 0
-        width: 20
-        height: parent.height
-        color: "black"
-        z:100
+
+    function checkPlayerTurn(){
+        if(currentPlayer == 1){
+            //set the next play to player 2
+            currentPlayer = 2;
+        }
+        else{
+            currentPlayer = 1;
+        }
+    }
+
+    function checkForWin(){
+        // Row 1 Horizontal win
+        //
+        if(row1rect1Img.source == "qrc:///x_img.png" &&
+            row1rect2Img.source == "qrc:///x_img.png" &&
+            row1rect3Img.source == "qrc:///x_img.png"){
+            console.log("X Wins")
+            win1.visible = true
+        }
+        if(row1rect1Img.source == "qrc:///o_img.png" &&
+            row1rect2Img.source == "qrc:///o_img.png" &&
+            row1rect3Img.source == "qrc:///o_img.png"){
+            console.log("O Wins")
+            win1.visible = true
+        }
+        // Row 2 Horizontal win
+        //
+        if(row2rect1Img.source == "qrc:///x_img.png" &&
+           row2rect2Img.source == "qrc:///x_img.png" &&
+           row2rect3Img.source == "qrc:///x_img.png"){
+            console.log("Row 2 X Wins")
+            win2.visible = true
+        }
+        if(row2rect1Img.source == "qrc:///o_img.png" &&
+           row2rect2Img.source == "qrc:///o_img.png" &&
+           row2rect3Img.source == "qrc:///o_img.png"){
+            console.log("O Wins")
+            win2.visible = true
+        }
+        // Row 3 Horizontal win
+        //
+        if(row3rect1Img.source == "qrc:///x_img.png" &&
+           row3rect2Img.source == "qrc:///x_img.png" &&
+           row3rect3Img.source == "qrc:///x_img.png"){
+            console.log("X Wins")
+            win3.visible = true
+        }
+        if(row3rect1Img.source == "qrc:///o_img.png" &&
+           row3rect2Img.source == "qrc:///o_img.png" &&
+           row3rect3Img.source == "qrc:///o_img.png"){
+            console.log("O Wins")
+            win3.visible = true
+        }
     }
 
     Header{
@@ -36,6 +87,66 @@ Item {
         anchors.topMargin: 50
         anchors.bottom: playAreaFooter.top
         anchors.bottomMargin: 50
+
+        Rectangle{
+            id: win1
+            visible: false
+            rotation: 0
+            width: parent.width
+            height: 20
+            anchors.top: parent.top
+            anchors.topMargin: 50
+            color: "red"
+            z:100
+        }
+
+        Rectangle{
+            id: win2
+            visible: false
+            rotation: 0
+            width: parent.width
+            height: 20
+            anchors.top: parent.top
+            anchors.topMargin: 185
+            color: "red"
+            z:100
+        }
+
+        Rectangle{
+            id: win3
+            visible: false
+            rotation: 0
+            width: parent.width
+            height: 20
+            anchors.top: parent.top
+            anchors.topMargin: 325
+            color: "red"
+            z:100
+        }
+
+        Rectangle{
+            id: win4
+            visible: false
+            rotation: -45
+            width: parent.width
+            height: 20
+            anchors.top: parent.top
+            anchors.topMargin: 50
+            color: "red"
+            z:100
+        }
+
+        Rectangle{
+            id: win5
+            visible: false
+            rotation: 45
+            width: parent.width
+            height: 20
+            anchors.top: parent.top
+            anchors.topMargin: 50
+            color: "red"
+            z:100
+        }
 
         Column{
             id: mainColumn
@@ -53,69 +164,79 @@ Item {
                     width: row1.width / 3
                     height: row1.height
                     color: "white"
+                    enabled: true
                     Image {
                         id: row1rect1Img
                         anchors.fill: parent
                         visible: false
-                        source: currentPlater == "player1" ? "qrc:///x_img.png" : "qrc:///o_img.jpg"
+                        source: ""
                     }
-
                     MouseArea {
                         anchors.fill: parent
                         onClicked:{
                             // set X or O based of player 1 or player 2
                             row1rect1Img.visible = true;
-                            console.log("row 1 column 1 clicked, visible:"+row1rect1Img.visible)
-                            console.log("image src: "+row1rect1Img.source)
+                            checkPlayerTurn();
+                            row1rect1Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
+                            console.log("source:"+row1rect1Img.source)
+                            checkForWin()
+                            row1rect1.enabled = false
                         }
                     }
-
                 }
                 Rectangle {
                     id: row1rect2
                     width: row1.width / 3
                     height: row1.height
                     color: "white"
+                    enabled: true
                     Image {
                         id: row1rect2Img
                         visible: false
                         anchors.fill: parent
-                        source: currentPlater == "player1" ? "qrc:///x_img.png" : "qrc:///o_img.jpg"
+                        source: ""
                     }
-
                     MouseArea {
                         anchors.fill: parent
                         onClicked:{
+                            //checkPlayerTurn();
                             // set X or O based of player 1 or player 2
                             row1rect2Img.visible = true;
-
+                            checkPlayerTurn();
+                            row1rect2Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
+                            checkForWin()
+                            row1rect2.enabled = false
                         }
                     }
-
                 }
                 Rectangle {
                     id: row1rect3
                     width: row1.width / 3
                     height: row1.height
                     color: "white"
+                    enabled: true
                     Image {
                         id: row1rect3Img
                         visible: false
                         anchors.fill: parent
-                        source: currentPlater == "player1" ? "qrc:///x_img.png" : "qrc:///o_img.jpg"
+                        source: ""
                     }
-
                     MouseArea {
                         anchors.fill: parent
                         onClicked:{
+                            //checkPlayerTurn();
                             // set X or O based of player 1 or player 2
                             row1rect3Img.visible = true;
-
+                            checkPlayerTurn();
+                            row1rect3Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
+                            checkForWin()
+                            row1rect3.enabled = false
                         }
                     }
-
                 }
             }
+
+            // Row 2
             Row{
                 id: row2
                 spacing: 10
@@ -127,68 +248,79 @@ Item {
                     width: row2.width / 3
                     height: row2.height
                     color: "white"
+                    enabled: true
                     Image {
                         id: row2rect1Img
                         visible: false
                         anchors.fill: parent
-                        source: currentPlater == "player1" ? "qrc:///x_img.png" : "qrc:///o_img.jpg"
+                        source: ""
                     }
-
                     MouseArea {
                         anchors.fill: parent
                         onClicked:{
+                            //checkPlayerTurn();
                             // set X or O based of player 1 or player 2
                             row2rect1Img.visible = true;
-
+                            checkPlayerTurn();
+                            row2rect1Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
+                            checkForWin()
+                            row2rect1.enabled = false
                         }
                     }
-
                 }
                 Rectangle {
                     id: row2rect2
                     width: row2.width / 3
                     height: row2.height
                     color: "white"
+                    enabled: true
                     Image {
                         id: row2rect2Img
                         visible: false
                         anchors.fill: parent
-                        source: currentPlater == "player1" ? "qrc:///x_img.png" : "qrc:///o_img.jpg"
+                        source: ""
                     }
-
                     MouseArea {
                         anchors.fill: parent
                         onClicked:{
+                            //checkPlayerTurn();
                             // set X or O based of player 1 or player 2
                             row2rect2Img.visible = true;
-
+                            checkPlayerTurn();
+                            row2rect2Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
+                            checkForWin()
+                            row2rect2.enabled = false
                         }
                     }
-
                 }
                 Rectangle {
                     id: row2rect3
                     width: row2.width / 3
                     height: row2.height
                     color: "white"
+                    enabled: true
                     Image {
                         id: row2rect3Img
                         visible: false
                         anchors.fill: parent
-                        source: currentPlater == "player1" ? "qrc:///x_img.png" : "qrc:///o_img.jpg"
+                        source: ""
                     }
-
                     MouseArea {
                         anchors.fill: parent
                         onClicked:{
+                            //checkPlayerTurn();
                             // set X or O based of player 1 or player 2
                             row2rect3Img.visible = true;
-
+                            checkPlayerTurn();
+                            row2rect3Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
+                            checkForWin()
+                            row2rect3.enabled = false
                         }
                     }
-
                 }
             }
+
+            // Row 3
             Row{
                 id: row3
                 spacing: 10
@@ -200,62 +332,74 @@ Item {
                     width: row3.width / 3
                     height: row3.height
                     color: "white"
+                    enabled: true
                     Image {
                         id: row3rect1Img
                         visible: false
                         anchors.fill: parent
-                        source: currentPlater == "player1" ? "qrc:///x_img.png" : "qrc:///o_img.jpg"
+                        source: ""
                     }
 
                     MouseArea {
                         anchors.fill: parent
                         onClicked:{
+                            //checkPlayerTurn();
                             // set X or O based of player 1 or player 2
                             row3rect1Img.visible = true;
-
+                            checkPlayerTurn();
+                            row3rect1Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
+                            checkForWin()
+                            row3rect1.enabled = false
                         }
                     }
-
                 }
                 Rectangle {
                     id: row3rect2
                     width: row3.width / 3
                     height: row3.height
                     color: "white"
+                    enabled: true
                     Image {
                         id: row3rect2Img
                         visible: false
                         anchors.fill: parent
-                        source: currentPlater == "player1" ? "qrc:///x_img.png" : "qrc:///o_img.jpg"
+                        source: ""
                     }
-
                     MouseArea {
                         anchors.fill: parent
                         onClicked:{
+                            //checkPlayerTurn();
                             // set X or O based of player 1 or player 2
                             row3rect2Img.visible = true;
-
+                            checkPlayerTurn();
+                            row3rect2Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
+                            checkForWin()
+                            row3rect2.enabled = false
                         }
                     }
-
                 }
                 Rectangle {
                     id: row3rect3
                     width: row3.width / 3
                     height: row3.height
                     color: "white"
+                    enabled: true
                     Image {
                         id: row3rect3Img
                         visible: false
                         anchors.fill: parent
-                        source: currentPlater == "player1" ? "qrc:///x_img.png" : "qrc:///o_img.jpg"
+                        source: ""
                     }
-
                     MouseArea {
                         anchors.fill: parent
                         onClicked:{
+                            //checkPlayerTurn();
                             // set X or O based of player 1 or player 2
                             row3rect3Img.visible = true;
+                            checkPlayerTurn();
+                            row3rect3Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
+                            checkForWin()
+                            row3rect3.enabled = false
                         }
                     }
                 }
@@ -266,7 +410,7 @@ Item {
     Footer{
         id:playAreaFooter
         //homeBtn.onClicked: {
-            //stackView.pop()
+        //stackView.pop()
         //}
         homeBtnTxt: "Back"
     }
