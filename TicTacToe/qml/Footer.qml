@@ -56,7 +56,7 @@ Rectangle{
         }
         onClicked: {
             console.log("home button clicked...")
-            stackView.pop(homePage)
+            //stackView.pop(homePage)
         }
     }
 }

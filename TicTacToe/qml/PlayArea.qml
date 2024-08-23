@@ -8,13 +8,14 @@ Item {
     property string player2: "player2"
 
     property int currentPlayer: 0
+    property bool playerWon: false
 
     property alias rowWidth: row1.width
     property alias row1Id: row1
     property alias row1Rect1ImgAlias: row1rect1Img
 
 
-    // JavaScript Functions
+    // *** JavaScript Function Section *** //
     function getCurrentPlayer(){
         // TODO call Q_INVOKABLE Function to get current player turn
     }
@@ -30,7 +31,7 @@ Item {
         }
     }
 
-    function checkForWin(){
+    function checkForHorizontalWin(){
         // Row 1 Horizontal win
         //
         if(row1rect1Img.source == "qrc:///x_img.png" &&
@@ -38,12 +39,16 @@ Item {
             row1rect3Img.source == "qrc:///x_img.png"){
             console.log("X Wins")
             win1.visible = true
+            winText.visible = true
+            mainColumn.enabled = false
         }
         if(row1rect1Img.source == "qrc:///o_img.png" &&
             row1rect2Img.source == "qrc:///o_img.png" &&
             row1rect3Img.source == "qrc:///o_img.png"){
             console.log("O Wins")
             win1.visible = true
+            winText.visible = true
+            mainColumn.enabled = false
         }
         // Row 2 Horizontal win
         //
@@ -52,12 +57,16 @@ Item {
            row2rect3Img.source == "qrc:///x_img.png"){
             console.log("Row 2 X Wins")
             win2.visible = true
+            winText.visible = true
+            mainColumn.enabled = false
         }
         if(row2rect1Img.source == "qrc:///o_img.png" &&
            row2rect2Img.source == "qrc:///o_img.png" &&
            row2rect3Img.source == "qrc:///o_img.png"){
             console.log("O Wins")
             win2.visible = true
+            winText.visible = true
+            mainColumn.enabled = false
         }
         // Row 3 Horizontal win
         //
@@ -66,12 +75,16 @@ Item {
            row3rect3Img.source == "qrc:///x_img.png"){
             console.log("X Wins")
             win3.visible = true
+            winText.visible = true
+            mainColumn.enabled = false
         }
         if(row3rect1Img.source == "qrc:///o_img.png" &&
            row3rect2Img.source == "qrc:///o_img.png" &&
            row3rect3Img.source == "qrc:///o_img.png"){
             console.log("O Wins")
             win3.visible = true
+            winText.visible = true
+            mainColumn.enabled = false
         }
     }
 
@@ -87,6 +100,23 @@ Item {
         anchors.topMargin: 50
         anchors.bottom: playAreaFooter.top
         anchors.bottomMargin: 50
+
+        Text {
+            id: winText
+            text: currentPlayer == 1 ? "Player 1 Wins!" : "Player 2 Wins"
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+            font.pointSize: 56
+            color: "red"
+            visible: false
+            z:100
+            onVisibleChanged: {
+                console.log("winText visibility:", visible);
+            }
+            Component.onCompleted: {
+                console.log("winText visibility:", visible);
+            }
+        }
 
         Rectangle{
             id: win1
@@ -179,7 +209,7 @@ Item {
                             checkPlayerTurn();
                             row1rect1Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
                             console.log("source:"+row1rect1Img.source)
-                            checkForWin()
+                            checkForHorizontalWin()
                             row1rect1.enabled = false
                         }
                     }
@@ -204,7 +234,7 @@ Item {
                             row1rect2Img.visible = true;
                             checkPlayerTurn();
                             row1rect2Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
-                            checkForWin()
+                            checkForHorizontalWin()
                             row1rect2.enabled = false
                         }
                     }
@@ -229,7 +259,7 @@ Item {
                             row1rect3Img.visible = true;
                             checkPlayerTurn();
                             row1rect3Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
-                            checkForWin()
+                            checkForHorizontalWin()
                             row1rect3.enabled = false
                         }
                     }
@@ -263,7 +293,7 @@ Item {
                             row2rect1Img.visible = true;
                             checkPlayerTurn();
                             row2rect1Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
-                            checkForWin()
+                            checkForHorizontalWin()
                             row2rect1.enabled = false
                         }
                     }
@@ -288,7 +318,7 @@ Item {
                             row2rect2Img.visible = true;
                             checkPlayerTurn();
                             row2rect2Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
-                            checkForWin()
+                            checkForHorizontalWin()
                             row2rect2.enabled = false
                         }
                     }
@@ -313,7 +343,7 @@ Item {
                             row2rect3Img.visible = true;
                             checkPlayerTurn();
                             row2rect3Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
-                            checkForWin()
+                            checkForHorizontalWin()
                             row2rect3.enabled = false
                         }
                     }
@@ -348,7 +378,7 @@ Item {
                             row3rect1Img.visible = true;
                             checkPlayerTurn();
                             row3rect1Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
-                            checkForWin()
+                            checkForHorizontalWin()
                             row3rect1.enabled = false
                         }
                     }
@@ -373,7 +403,7 @@ Item {
                             row3rect2Img.visible = true;
                             checkPlayerTurn();
                             row3rect2Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
-                            checkForWin()
+                            checkForHorizontalWin()
                             row3rect2.enabled = false
                         }
                     }
@@ -398,7 +428,7 @@ Item {
                             row3rect3Img.visible = true;
                             checkPlayerTurn();
                             row3rect3Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
-                            checkForWin()
+                            checkForHorizontalWin()
                             row3rect3.enabled = false
                         }
                     }
@@ -409,9 +439,9 @@ Item {
 
     Footer{
         id:playAreaFooter
-        //homeBtn.onClicked: {
-        //stackView.pop()
-        //}
+        homeBtn.onClicked: {
+        stackView.pop()
+        }
         homeBtnTxt: "Back"
     }
 }

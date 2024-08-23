@@ -37,7 +37,7 @@ Item {
         }
     }
 
-    //Playlist delegate
+    //Player slist delegate
     Component {
         id:playerListdelegate
         Column {
@@ -92,9 +92,9 @@ Item {
 
     Footer{
         id: playerSelectionfooter
-        //homeBtn.onClicked: {
-            //stackView.pop()
-        //}
+        homeBtn.onClicked: {
+            stackView.pop()
+        }
         homeBtnTxt: "Back"
     }
 }
