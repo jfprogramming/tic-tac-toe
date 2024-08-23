@@ -1,5 +1,7 @@
 import QtQuick
 import QtQuick.Controls
+import "qrc:///onePlayerMode.js" as JavaScript
+
 
 Item {
     id: playArea
@@ -10,7 +12,11 @@ Item {
     property int currentPlayer: 0
     property bool playerWon: false
 
-    property string gameType: getGameType()
+    property string gameType: "1Player" //getGameType()
+
+    // Create an array to store item IDs
+    property var itemIds: []
+    property var emptyImgs: []
 
     property alias rowWidth: row1.width
     property alias row1Id: row1
@@ -22,11 +28,13 @@ Item {
         // TODO call Q_INVOKABLE Function to get current player turn
     }
 
-
     function checkPlayerTurn(){
         if(currentPlayer == 1){
             //set the next play to player 2
             currentPlayer = 2;
+            if(currentPlayer == 2 && gameType == "1Player"){
+                playerTwoTurn();
+            }
         }
         else{
             currentPlayer = 1;
@@ -187,6 +195,30 @@ Item {
         }
     }
 
+    function playerTwoTurn(){
+        if(gameType == "1Player"){
+            // get list of avaliable sqrs
+            //
+            for (var i = 0; i < itemIds.length; ++i) {
+                console.log("Item ID:", itemIds[i]);
+
+                if(itemIds[i].source === ""){
+                    emptyImgs.push(itemIds[i])
+                }
+            }
+            // Randomly select an empty square
+            if (emptyImgs.length > 0) {
+                var randomIndex = Math.floor(Math.random() * emptyImgs.length);
+                var selectedSquare = emptyImgs[randomIndex];
+                console.log("Selected square ID:", selectedSquare.objectName);
+            } else {
+                console.log("No empty squares available.");
+            }
+            console.log("obj:" + selectedSquare.id)
+            selectedSquare.source = "qrc:///o_img.png"
+            return;
+        }
+    }
 
     Header{
         id:playAreaHeader
@@ -334,6 +366,9 @@ Item {
                         anchors.fill: parent
                         visible: false
                         source: ""
+                        Component.onCompleted: {
+                            itemIds.push(row1rect1Img)
+                        }
                     }
                     MouseArea {
                         anchors.fill: parent
@@ -361,6 +396,9 @@ Item {
                         visible: false
                         anchors.fill: parent
                         source: ""
+                        Component.onCompleted: {
+                            itemIds.push(row1rect2Img)
+                        }
                     }
                     MouseArea {
                         anchors.fill: parent
@@ -388,6 +426,9 @@ Item {
                         visible: false
                         anchors.fill: parent
                         source: ""
+                        Component.onCompleted: {
+                            itemIds.push(row1rect3Img)
+                        }
                     }
                     MouseArea {
                         anchors.fill: parent
@@ -424,6 +465,9 @@ Item {
                         visible: false
                         anchors.fill: parent
                         source: ""
+                        Component.onCompleted: {
+                            itemIds.push(row2rect1Img)
+                        }
                     }
                     MouseArea {
                         anchors.fill: parent
@@ -451,6 +495,9 @@ Item {
                         visible: false
                         anchors.fill: parent
                         source: ""
+                        Component.onCompleted: {
+                            itemIds.push(row2rect2Img)
+                        }
                     }
                     MouseArea {
                         anchors.fill: parent
@@ -478,6 +525,9 @@ Item {
                         visible: false
                         anchors.fill: parent
                         source: ""
+                        Component.onCompleted: {
+                            itemIds.push(row2rect3Img)
+                        }
                     }
                     MouseArea {
                         anchors.fill: parent
@@ -514,6 +564,9 @@ Item {
                         visible: false
                         anchors.fill: parent
                         source: ""
+                        Component.onCompleted: {
+                            itemIds.push(row3rect1Img)
+                        }
                     }
 
                     MouseArea {
@@ -542,6 +595,9 @@ Item {
                         visible: false
                         anchors.fill: parent
                         source: ""
+                        Component.onCompleted: {
+                            itemIds.push(row3rect2Img)
+                        }
                     }
                     MouseArea {
                         anchors.fill: parent
@@ -569,6 +625,9 @@ Item {
                         visible: false
                         anchors.fill: parent
                         source: ""
+                        Component.onCompleted: {
+                            itemIds.push(row3rect3Img)
+                        }
                     }
                     MouseArea {
                         anchors.fill: parent
