@@ -195,30 +195,36 @@ Item {
         }
     }
 
-    function playerTwoTurn(){
-        if(gameType == "1Player"){
-            // get list of avaliable sqrs
-            //
-            for (var i = 0; i < itemIds.length; ++i) {
-                console.log("Item ID:", itemIds[i]);
+    function playerTwoTurn() {
+        const selectedSquare=null;
+        if (gameType === "1Player") {
+            //const emptySquares = itemIds.filter(item => item.source === "");
+            //console.log("emptySquares Length:" + emptySquares.length)
 
-                if(itemIds[i].source === ""){
-                    emptyImgs.push(itemIds[i])
-                }
-            }
-            // Randomly select an empty square
-            if (emptyImgs.length > 0) {
-                var randomIndex = Math.floor(Math.random() * emptyImgs.length);
-                var selectedSquare = emptyImgs[randomIndex];
+            const emptySquares = itemIds.filter(item => {
+                console.log("Item ID:", item.objectName, "Source:", item.source);
+                return item.source === "";
+            });
+
+
+            if (emptySquares.length > 0) {
+                const randomIndex = Math.floor(Math.random() * emptySquares.length);
+                selectedSquare = emptySquares[randomIndex];
                 console.log("Selected square ID:", selectedSquare.objectName);
-            } else {
+                selectedSquare.source = "qrc:/o_img.png";
+            }
+            else {
                 console.log("No empty squares available.");
             }
-            console.log("obj:" + selectedSquare.id)
-            selectedSquare.source = "qrc:///o_img.png"
-            return;
+        }
+        if (selectedSquare!=null) {
+            selectedSquare.source = "qrc:/o_img.png";
+        }
+        else {
+            console.log("No empty squares available.");
         }
     }
+
 
     Header{
         id:playAreaHeader
