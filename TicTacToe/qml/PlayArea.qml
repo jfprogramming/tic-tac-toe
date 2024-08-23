@@ -288,7 +288,6 @@ Item {
             z:100
         }
 
-
         Rectangle{
             id: win7
             visible: false

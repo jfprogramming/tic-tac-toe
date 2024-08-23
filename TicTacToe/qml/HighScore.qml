@@ -62,9 +62,9 @@ Item {
 
     Footer{
         id:highScoreFooter
-        //homeBtn.onClicked: {
-            //stackView.pop(homePage)
-        //}
+        homeBtn.onClicked: {
+            stackView.pop()
+        }
     }
 
 }

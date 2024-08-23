@@ -36,35 +36,42 @@ void DatabaseController::initializeDatabase()
 
 bool DatabaseController::authenticateAdmin(const QString &username, const QString &password) {
     QSqlQuery query;
+    QString   adminName;
+    QString   adminPassword;
 
     qInfo() << "Admin Login username:" << username << " Admin password:" << password;
 
-    QByteArray byteArray = password.toLatin1();
-    const char* charArray = byteArray.data();
+    query.prepare("SELECT * FROM AdminTable WHERE adminName = :adminName");
+    query.bindValue(":adminName", username);
+
+    if (query.exec() && query.next()) {
+        int count = query.value(0).toInt();
+
+        qInfo() << "Query executed successfully. Record count:" << count;
+
+        adminName     = query.value("adminName").toString();
+        adminPassword = query.value("adminPassword").toString();
+    } else {
+        qWarning() << "Error executing query:" << query.lastError().text();
+        return false;
+    }
 
     // Decrypt the password using bcrypt
+    //
+    QByteArray byteArray      = password.toLatin1();
+    const char* charArray     = byteArray.data();
     QString decryptedPassword = CryptClass::bcrypt_checkpw(charArray, password.toUtf8().constData())
                                     ? "admin" // Correct password
                                     : ""; // Incorrect password
 
-    qInfo() << "decryptedPassword:" << decryptedPassword;
 
-    query.prepare("SELECT * FROM AdminTable WHERE adminName = :adminName AND adminPassword = :adminPassword");
-    query.bindValue(":adminName", username);
-    query.bindValue(":adminPassword", decryptedPassword);
+    qInfo() << "Decrypted password:" << decryptedPassword;
 
-    qInfo() << "query statement:" << query.lastQuery();
-    qInfo() << query.exec();
-    qInfo() << query.value(1);
-    qInfo() << query.next();
-
-    if (query.exec() && query.next()) {
-        int count = query.value(0).toInt();
-        qInfo() << "count:" << count;
-        return count > 0;
+    if(username == adminName && password == decryptedPassword){
+        return true;
+    }else{
+        return false;
     }
-
-    return false;
 }
 
 void DatabaseController::closeDatabase()
