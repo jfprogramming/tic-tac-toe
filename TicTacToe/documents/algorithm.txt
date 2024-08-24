@@ -1,0 +1,27 @@
+algorithm for the second player’s move in a “1Player” game:
+
+Objective:
+- The goal is to simulate the second player’s turn in a Tic Tac Toe game when playing against the computer (AI).
+Game Flow:
+The game alternates between player 1 (human) and player 2 (computer).
+When it’s player 2’s turn:
+The computer identifies empty squares on the board.
+It randomly selects one of the empty squares.
+It places an “O” (computer’s symbol) in the chosen square.
+The computer checks for a win condition (horizontal, vertical, or diagonal).
+Algorithm Steps:
+Initialize selectedSquare as null.
+Create an empty array called emptySquares.
+If the game type is “1Player” and it’s currently player 2’s turn:
+Iterate through each item in itemIds (representing the game board squares).
+If an item has an empty image source, add it to emptySquares.
+If there are empty squares available:
+Randomly select an index from emptySquares.
+Set selectedSquare to the chosen square.
+Set the image source of selectedSquare to “qrc:/o_img.png” (placing an “O” on the board).
+Check for a win condition (horizontal, vertical, or diagonal).
+Otherwise, log that no empty squares are available.
+If it’s not player 2’s turn, log a message indicating that the computer should wait.
+User Interaction:
+The user interacts with the game by clicking on empty squares.
+The computer’s move (player 2) is automatically triggered after a 1-second delay.
