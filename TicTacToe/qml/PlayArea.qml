@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Controls
-import "qrc:///onePlayerMode.js" as JavaScript
+import "qrc:/onePlayerMode.js" as JavaScript
 
 
 Item {
@@ -30,198 +30,247 @@ Item {
 
     function checkPlayerTurn(){
         if(currentPlayer == 1){
-            //set the next play to player 2
-            currentPlayer = 2;
-            if(currentPlayer == 2 && gameType == "1Player"){
-                playerTwoTurn();
-            }
+            currentPlayer = 2
+        }
+        else if(currentPlayer == 2){
+            currentPlayer = 1
         }
         else{
-            currentPlayer = 1;
+            // set the first player at start of game
+            currentPlayer = 1
         }
+
+        console.log("set player turn to: " + currentPlayer)
     }
 
     function checkForHorizontalWin(){
+        console.log("check for a horizontal win")
         // Row 1 Horizontal win
         //
-        if(row1rect1Img.source == "qrc:///x_img.png" &&
-                row1rect2Img.source == "qrc:///x_img.png" &&
-                row1rect3Img.source == "qrc:///x_img.png"){
+        if(row1rect1Img.source == "qrc:/x_img.png" &&
+                row1rect2Img.source == "qrc:/x_img.png" &&
+                row1rect3Img.source == "qrc:/x_img.png"){
             console.log("X Wins")
             win1.visible = true
             winText.visible = true
             mainColumn.enabled = false
+            playerWon = true
         }
-        if(row1rect1Img.source == "qrc:///o_img.png" &&
-                row1rect2Img.source == "qrc:///o_img.png" &&
-                row1rect3Img.source == "qrc:///o_img.png"){
+        else if(row1rect1Img.source == "qrc:/o_img.png" &&
+                row1rect2Img.source == "qrc:/o_img.png" &&
+                row1rect3Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
             win1.visible = true
             winText.visible = true
             mainColumn.enabled = false
+            playerWon = true
         }
         // Row 2 Horizontal win
         //
-        if(row2rect1Img.source == "qrc:///x_img.png" &&
-                row2rect2Img.source == "qrc:///x_img.png" &&
-                row2rect3Img.source == "qrc:///x_img.png"){
+        else if(row2rect1Img.source == "qrc:/x_img.png" &&
+                row2rect2Img.source == "qrc:/x_img.png" &&
+                row2rect3Img.source == "qrc:/x_img.png"){
             console.log("Row 2 X Wins")
             win2.visible = true
             winText.visible = true
             mainColumn.enabled = false
+            playerWon = true
         }
-        if(row2rect1Img.source == "qrc:///o_img.png" &&
-                row2rect2Img.source == "qrc:///o_img.png" &&
-                row2rect3Img.source == "qrc:///o_img.png"){
+        else if(row2rect1Img.source == "qrc:/o_img.png" &&
+                row2rect2Img.source == "qrc:/o_img.png" &&
+                row2rect3Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
             win2.visible = true
             winText.visible = true
             mainColumn.enabled = false
+            playerWon = true
         }
         // Row 3 Horizontal win
         //
-        if(row3rect1Img.source == "qrc:///x_img.png" &&
-                row3rect2Img.source == "qrc:///x_img.png" &&
-                row3rect3Img.source == "qrc:///x_img.png"){
+        else if(row3rect1Img.source == "qrc:/x_img.png" &&
+                row3rect2Img.source == "qrc:/x_img.png" &&
+                row3rect3Img.source == "qrc:/x_img.png"){
             console.log("X Wins")
             win3.visible = true
             winText.visible = true
             mainColumn.enabled = false
+            playerWon = true
         }
-        if(row3rect1Img.source == "qrc:///o_img.png" &&
-                row3rect2Img.source == "qrc:///o_img.png" &&
-                row3rect3Img.source == "qrc:///o_img.png"){
+        else if(row3rect1Img.source == "qrc:/o_img.png" &&
+                row3rect2Img.source == "qrc:/o_img.png" &&
+                row3rect3Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
             win3.visible = true
             winText.visible = true
             mainColumn.enabled = false
+            playerWon = true
+        }
+        else{
+            console.log("no horizontal win...")
         }
     }
 
     function checkForVerticalWin(){
+        console.log("check for a vertical win")
         // Colum 1 Vertical win
         //
-        if(row1rect1Img.source == "qrc:///x_img.png" &&
-                row2rect1Img.source == "qrc:///x_img.png" &&
-                row3rect1Img.source == "qrc:///x_img.png"){
+        if(row1rect1Img.source == "qrc:/x_img.png" &&
+                row2rect1Img.source == "qrc:/x_img.png" &&
+                row3rect1Img.source == "qrc:/x_img.png"){
             console.log("X Wins")
             win4.visible = true
             winText.visible = true
             mainColumn.enabled = false
+            playerWon = true
         }
-        if(row1rect1Img.source == "qrc:///o_img.png" &&
-                row2rect1Img.source == "qrc:///o_img.png" &&
-                row3rect1Img.source == "qrc:///o_img.png"){
+        else if(row1rect1Img.source == "qrc:/o_img.png" &&
+                row2rect1Img.source == "qrc:/o_img.png" &&
+                row3rect1Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
             win4.visible = true
             winText.visible = true
             mainColumn.enabled = false
+            playerWon = true
         }
         // Colum 2 Vertical win
         //
-        if(row1rect2Img.source == "qrc:///x_img.png" &&
-                row2rect2Img.source == "qrc:///x_img.png" &&
-                row3rect2Img.source == "qrc:///x_img.png"){
+        else if(row1rect2Img.source == "qrc:/x_img.png" &&
+                row2rect2Img.source == "qrc:/x_img.png" &&
+                row3rect2Img.source == "qrc:/x_img.png"){
             console.log("Row 2 X Wins")
             win5.visible = true
             winText.visible = true
             mainColumn.enabled = false
+            playerWon = true
         }
-        if(row1rect2Img.source == "qrc:///o_img.png" &&
-                row2rect2Img.source == "qrc:///o_img.png" &&
-                row3rect2Img.source == "qrc:///o_img.png"){
+        else if(row1rect2Img.source == "qrc:/o_img.png" &&
+                row2rect2Img.source == "qrc:/o_img.png" &&
+                row3rect2Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
             win5.visible = true
             winText.visible = true
             mainColumn.enabled = false
+            playerWon = true
         }
         // Colum 3 Vertical win
         //
-        if(row1rect3Img.source == "qrc:///x_img.png" &&
-                row2rect3Img.source == "qrc:///x_img.png" &&
-                row3rect3Img.source == "qrc:///x_img.png"){
+        else if(row1rect3Img.source == "qrc:/x_img.png" &&
+                row2rect3Img.source == "qrc:/x_img.png" &&
+                row3rect3Img.source == "qrc:/x_img.png"){
             console.log("X Wins")
             win6.visible = true
             winText.visible = true
             mainColumn.enabled = false
+            playerWon = true
         }
-        if(row1rect3Img.source == "qrc:///o_img.png" &&
-                row2rect3Img.source == "qrc:///o_img.png" &&
-                row3rect3Img.source == "qrc:///o_img.png"){
+        else if(row1rect3Img.source == "qrc:/o_img.png" &&
+                row2rect3Img.source == "qrc:/o_img.png" &&
+                row3rect3Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
             win6.visible = true
             winText.visible = true
             mainColumn.enabled = false
+            playerWon = true
+        }
+        else{
+            console.log("no vertical win...")
         }
     }
 
     function checkFordiagonalWin(){
+        console.log("check for a diagonal win")
         // Diagonal Win 1
         //
-        if(row1rect1Img.source == "qrc:///x_img.png" &&
-                row2rect2Img.source == "qrc:///x_img.png" &&
-                row3rect3Img.source == "qrc:///x_img.png"){
+        if(row1rect1Img.source == "qrc:/x_img.png" &&
+                row2rect2Img.source == "qrc:/x_img.png" &&
+                row3rect3Img.source == "qrc:/x_img.png"){
             console.log("X Wins")
             win7.visible = true
             winText.visible = true
             mainColumn.enabled = false
+            playerWon = true
         }
-        if(row1rect1Img.source == "qrc:///o_img.png" &&
-                row2rect2Img.source == "qrc:///o_img.png" &&
-                row3rect3Img.source == "qrc:///o_img.png"){
+        else if(row1rect1Img.source == "qrc:/o_img.png" &&
+                row2rect2Img.source == "qrc:/o_img.png" &&
+                row3rect3Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
             win7.visible = true
             winText.visible = true
             mainColumn.enabled = false
+            playerWon = true
         }
 
         // Diagonal Win 2
         //
-        if(row1rect3Img.source == "qrc:///x_img.png" &&
-                row2rect2Img.source == "qrc:///x_img.png" &&
-                row3rect1Img.source == "qrc:///x_img.png"){
+        else if(row1rect3Img.source == "qrc:/x_img.png" &&
+                row2rect2Img.source == "qrc:/x_img.png" &&
+                row3rect1Img.source == "qrc:/x_img.png"){
             console.log("X Wins")
             win8.visible = true
             winText.visible = true
             mainColumn.enabled = false
+            playerWon = true
         }
-        if(row1rect3Img.source == "qrc:///o_img.png" &&
-                row2rect2Img.source == "qrc:///o_img.png" &&
-                row3rect1Img.source == "qrc:///o_img.png"){
+        else if(row1rect3Img.source == "qrc:/o_img.png" &&
+                row2rect2Img.source == "qrc:/o_img.png" &&
+                row3rect1Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
             win8.visible = true
             winText.visible = true
             mainColumn.enabled = false
+            playerWon = true
+        }
+        else{
+            console.log("no diagonal win...")
         }
     }
 
     function playerTwoTurn() {
-        const selectedSquare=null;
-        if (gameType === "1Player") {
-            //const emptySquares = itemIds.filter(item => item.source === "");
-            //console.log("emptySquares Length:" + emptySquares.length)
+        checkPlayerTurn()
+        var selectedSquare = null
+        const emptySquares = []
 
-            const emptySquares = itemIds.filter(item => {
-                console.log("Item ID:", item.objectName, "Source:", item.source);
-                return item.source === "";
-            });
-
+        if (gameType == "1Player" && currentPlayer == 2) {
+            // find the empty squars
+            //
+            for (const item of itemIds) {
+                console.log("Item ID:", item.objectName, "Source:", item.source)
+                if (item.source == "") {
+                    console.log("add item")
+                    emptySquares.push(item)
+                }
+            }
 
             if (emptySquares.length > 0) {
-                const randomIndex = Math.floor(Math.random() * emptySquares.length);
-                selectedSquare = emptySquares[randomIndex];
-                console.log("Selected square ID:", selectedSquare.objectName);
-                selectedSquare.source = "qrc:/o_img.png";
+                var randomIndex = Math.floor(Math.random() * emptySquares.length)
+                console.log("randomIndex: "+randomIndex)
+                selectedSquare = emptySquares[randomIndex]
+                console.log("Selected square ID:", selectedSquare.objectName)
+                selectedSquare.source = "qrc:/o_img.png"
+                selectedSquare.visible = true
+                //selectedSquare.parent.endabled = false
+
+                // check for a winner
+                checkForHorizontalWin()
+                checkForVerticalWin()
+                checkFordiagonalWin()
             }
             else {
-                console.log("No empty squares available.");
+                console.log("No empty squares available.")
             }
         }
-        if (selectedSquare!=null) {
-            selectedSquare.source = "qrc:/o_img.png";
+        else{
+            console.log("not your turn computer... wait your turn!")
         }
-        else {
-            console.log("No empty squares available.");
+    }
+
+    // Timer object only used for 1Player games
+    Timer {
+        id: delayTimer
+        interval: 1000 // 1 second
+        onTriggered: {
+            console.log("timer triggered...")
+            playerTwoTurn() // Call playerTwoTurn after the delay
         }
     }
 
@@ -238,23 +287,6 @@ Item {
         anchors.topMargin: 50
         anchors.bottom: playAreaFooter.top
         anchors.bottomMargin: 50
-
-        Text {
-            id: winText
-            text: currentPlayer == 1 ? "Player 1 Wins!" : "Player 2 Wins"
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
-            font.pointSize: 56
-            color: "red"
-            visible: false
-            z:100
-            onVisibleChanged: {
-                console.log("winText visibility:", visible);
-            }
-            Component.onCompleted: {
-                console.log("winText visibility:", visible);
-            }
-        }
 
         Rectangle{
             id: win1
@@ -350,6 +382,23 @@ Item {
             z:100
         }
 
+        Text {
+            id: winText
+            text: currentPlayer == 1 ? "Player 1 Wins!" : "Player 2 Wins"
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+            font.pointSize: 56
+            color: "red"
+            visible: false
+            z:100
+            onVisibleChanged: {
+                console.log("winText visibility:", visible)
+            }
+            Component.onCompleted: {
+                console.log("winText visibility:", visible)
+            }
+        }
+
         Column{
             id: mainColumn
             spacing: 10
@@ -380,14 +429,18 @@ Item {
                         anchors.fill: parent
                         onClicked:{
                             // set X or O based of player 1 or player 2
-                            row1rect1Img.visible = true;
-                            checkPlayerTurn();
-                            row1rect1Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
+                            row1rect1Img.visible = true
+                            checkPlayerTurn()
+                            console.log("current player turn: "+currentPlayer)
+                            row1rect1Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
                             console.log("source:"+row1rect1Img.source)
                             checkForHorizontalWin()
                             checkForVerticalWin()
                             checkFordiagonalWin()
                             row1rect1.enabled = false
+                            if(gameType  == "1Player" && playerWon == false){
+                                delayTimer.start() // Start the timer after the click
+                            }
                         }
                     }
                 }
@@ -409,15 +462,17 @@ Item {
                     MouseArea {
                         anchors.fill: parent
                         onClicked:{
-                            //checkPlayerTurn();
-                            // set X or O based of player 1 or player 2
-                            row1rect2Img.visible = true;
-                            checkPlayerTurn();
-                            row1rect2Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
+                            row1rect2Img.visible = true
+                            checkPlayerTurn()
+                            console.log("current player turn: "+currentPlayer)
+                            row1rect2Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
                             checkForHorizontalWin()
                             checkForVerticalWin()
                             checkFordiagonalWin()
                             row1rect2.enabled = false
+                            if(gameType  == "1Player" && playerWon == false){
+                                delayTimer.start() // Start the timer after the click
+                            }
                         }
                     }
                 }
@@ -439,15 +494,17 @@ Item {
                     MouseArea {
                         anchors.fill: parent
                         onClicked:{
-                            //checkPlayerTurn();
-                            // set X or O based of player 1 or player 2
-                            row1rect3Img.visible = true;
-                            checkPlayerTurn();
-                            row1rect3Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
+                            row1rect3Img.visible = true
+                            checkPlayerTurn()
+                            console.log("current player turn: "+currentPlayer)
+                            row1rect3Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
                             checkForHorizontalWin()
                             checkForVerticalWin()
                             checkFordiagonalWin()
                             row1rect3.enabled = false
+                            if(gameType  == "1Player" && playerWon == false){
+                                delayTimer.start() // Start the timer after the click
+                            }
                         }
                     }
                 }
@@ -478,15 +535,17 @@ Item {
                     MouseArea {
                         anchors.fill: parent
                         onClicked:{
-                            //checkPlayerTurn();
-                            // set X or O based of player 1 or player 2
-                            row2rect1Img.visible = true;
-                            checkPlayerTurn();
-                            row2rect1Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
+                            row2rect1Img.visible = true
+                            checkPlayerTurn()
+                            console.log("current player turn: "+currentPlayer)
+                            row2rect1Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
                             checkForHorizontalWin()
                             checkForVerticalWin()
                             checkFordiagonalWin()
                             row2rect1.enabled = false
+                            if(gameType  == "1Player" && playerWon == false){
+                                delayTimer.start() // Start the timer after the click
+                            }
                         }
                     }
                 }
@@ -508,15 +567,17 @@ Item {
                     MouseArea {
                         anchors.fill: parent
                         onClicked:{
-                            //checkPlayerTurn();
-                            // set X or O based of player 1 or player 2
-                            row2rect2Img.visible = true;
-                            checkPlayerTurn();
-                            row2rect2Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
+                            row2rect2Img.visible = true
+                            checkPlayerTurn()
+                            console.log("current player turn: "+currentPlayer)
+                            row2rect2Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
                             checkForHorizontalWin()
                             checkForVerticalWin()
                             checkFordiagonalWin()
                             row2rect2.enabled = false
+                            if(gameType  == "1Player" && playerWon == false){
+                                delayTimer.start() // Start the timer after the click
+                            }
                         }
                     }
                 }
@@ -538,15 +599,17 @@ Item {
                     MouseArea {
                         anchors.fill: parent
                         onClicked:{
-                            //checkPlayerTurn();
-                            // set X or O based of player 1 or player 2
-                            row2rect3Img.visible = true;
-                            checkPlayerTurn();
-                            row2rect3Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
+                            row2rect3Img.visible = true
+                            checkPlayerTurn()
+                            console.log("current player turn: "+currentPlayer)
+                            row2rect3Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
                             checkForHorizontalWin()
                             checkForVerticalWin()
                             checkFordiagonalWin()
                             row2rect3.enabled = false
+                            if(gameType  == "1Player" && playerWon == false){
+                                delayTimer.start() // Start the timer after the click
+                            }
                         }
                     }
                 }
@@ -578,15 +641,17 @@ Item {
                     MouseArea {
                         anchors.fill: parent
                         onClicked:{
-                            //checkPlayerTurn();
-                            // set X or O based of player 1 or player 2
-                            row3rect1Img.visible = true;
-                            checkPlayerTurn();
-                            row3rect1Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
+                            row3rect1Img.visible = true
+                            checkPlayerTurn()
+                            console.log("current player turn: "+currentPlayer)
+                            row3rect1Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
                             checkForHorizontalWin()
                             checkForVerticalWin()
                             checkFordiagonalWin()
                             row3rect1.enabled = false
+                            if(gameType  == "1Player" && playerWon == false){
+                                delayTimer.start() // Start the timer after the click
+                            }
                         }
                     }
                 }
@@ -608,15 +673,17 @@ Item {
                     MouseArea {
                         anchors.fill: parent
                         onClicked:{
-                            //checkPlayerTurn();
-                            // set X or O based of player 1 or player 2
-                            row3rect2Img.visible = true;
-                            checkPlayerTurn();
-                            row3rect2Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
+                            row3rect2Img.visible = true
+                            checkPlayerTurn()
+                            console.log("current player turn: "+currentPlayer)
+                            row3rect2Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
                             checkForHorizontalWin()
                             checkForVerticalWin()
                             checkFordiagonalWin()
                             row3rect2.enabled = false
+                            if(gameType  == "1Player" && playerWon == false){
+                                delayTimer.start() // Start the timer after the click
+                            }
                         }
                     }
                 }
@@ -638,15 +705,17 @@ Item {
                     MouseArea {
                         anchors.fill: parent
                         onClicked:{
-                            //checkPlayerTurn();
-                            // set X or O based of player 1 or player 2
-                            row3rect3Img.visible = true;
-                            checkPlayerTurn();
-                            row3rect3Img.source = currentPlayer == 1 ? "qrc:///x_img.png" : "qrc:///o_img.png"
+                            row3rect3Img.visible = true
+                            checkPlayerTurn()
+                            console.log("current player turn: "+currentPlayer)
+                            row3rect3Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
                             checkForHorizontalWin()
                             checkForVerticalWin()
                             checkFordiagonalWin()
                             row3rect3.enabled = false
+                            if(gameType  == "1Player" && playerWon == false){
+                                delayTimer.start() // Start the timer after the click
+                            }
                         }
                     }
                 }
