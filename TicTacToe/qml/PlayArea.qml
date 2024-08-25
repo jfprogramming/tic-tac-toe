@@ -45,6 +45,20 @@ Item {
         console.log("set player turn to: " + currentPlayer)
     }
 
+    function setWinVariables(player) {
+        winText.visible    = true
+        mainColumn.enabled = false
+        playerWon          = true
+
+        // Create an instance of the custom popup
+        var popupComponent = Qt.createComponent("PopupMSg.qml")
+        if (popupComponent.status === Component.Ready) {
+            var popupInstance = popupComponent.createObject(root)
+            popupComponent.popupMsgText = player+" is The Winner"
+            popupInstance.open()
+        }
+    }
+
     function checkForHorizontalWin(){
         console.log("check for a horizontal win")
         // Row 1 Horizontal win
@@ -54,21 +68,18 @@ Item {
                 row1rect3Img.source == "qrc:/x_img.png"){
             console.log("X Wins")
             win1.visible = true
-            winText.visible = true
-            mainColumn.enabled = false
-            playerWon = true
             p1Score +=1
-
+            setWinVariables("Player1")
+            return true
         }
         else if(row1rect1Img.source == "qrc:/o_img.png" &&
                 row1rect2Img.source == "qrc:/o_img.png" &&
                 row1rect3Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
             win1.visible = true
-            winText.visible = true
-            mainColumn.enabled = false
-            playerWon = true
+            setWinVariables("Player2")
             p2Score +=1
+            return true
         }
         // Row 2 Horizontal win
         //
@@ -77,20 +88,18 @@ Item {
                 row2rect3Img.source == "qrc:/x_img.png"){
             console.log("Row 2 X Wins")
             win2.visible = true
-            winText.visible = true
-            mainColumn.enabled = false
-            playerWon = true
+            setWinVariables("Player1")
             p2Score +=1
+            return true
         }
         else if(row2rect1Img.source == "qrc:/o_img.png" &&
                 row2rect2Img.source == "qrc:/o_img.png" &&
                 row2rect3Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
             win2.visible = true
-            winText.visible = true
-            mainColumn.enabled = false
-            playerWon = true
+            setWinVariables("Player2")
             p2Score +=1
+            return true
         }
         // Row 3 Horizontal win
         //
@@ -99,23 +108,22 @@ Item {
                 row3rect3Img.source == "qrc:/x_img.png"){
             console.log("X Wins")
             win3.visible = true
-            winText.visible = true
-            mainColumn.enabled = false
-            playerWon = true
+            setWinVariables("Player1")
             p1Score +=1
+            return true
         }
         else if(row3rect1Img.source == "qrc:/o_img.png" &&
                 row3rect2Img.source == "qrc:/o_img.png" &&
                 row3rect3Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
             win3.visible = true
-            winText.visible = true
-            mainColumn.enabled = false
-            playerWon = true
+            setWinVariables("Player2")
             p2Score +=1
+            return true
         }
         else{
             console.log("no horizontal win...")
+            return false
         }
     }
 
@@ -128,42 +136,38 @@ Item {
                 row3rect1Img.source == "qrc:/x_img.png"){
             console.log("X Wins")
             win4.visible = true
-            winText.visible = true
-            mainColumn.enabled = false
-            playerWon = true
+            setWinVariables("Player1")
             p1Score +=1
+            return true
         }
         else if(row1rect1Img.source == "qrc:/o_img.png" &&
                 row2rect1Img.source == "qrc:/o_img.png" &&
                 row3rect1Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
             win4.visible = true
-            winText.visible = true
-            mainColumn.enabled = false
-            playerWon = true
+            setWinVariables("Player2")
             p2Score +=1
+            return true
         }
         // Colum 2 Vertical win
         //
         else if(row1rect2Img.source == "qrc:/x_img.png" &&
                 row2rect2Img.source == "qrc:/x_img.png" &&
                 row3rect2Img.source == "qrc:/x_img.png"){
-            console.log("Row 2 X Wins")
+            console.log("X Wins")
             win5.visible = true
-            winText.visible = true
-            mainColumn.enabled = false
-            playerWon = true
+            setWinVariables("Player1")
             p1Score +=1
+            return true
         }
         else if(row1rect2Img.source == "qrc:/o_img.png" &&
                 row2rect2Img.source == "qrc:/o_img.png" &&
                 row3rect2Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
             win5.visible = true
-            winText.visible = true
-            mainColumn.enabled = false
-            playerWon = true
+            setWinVariables("Player2")
             p2Score +=1
+            return true
         }
         // Colum 3 Vertical win
         //
@@ -172,23 +176,22 @@ Item {
                 row3rect3Img.source == "qrc:/x_img.png"){
             console.log("X Wins")
             win6.visible = true
-            winText.visible = true
-            mainColumn.enabled = false
-            playerWon = true
+            setWinVariables("Player1")
             p1Score +=1
+            return true
         }
         else if(row1rect3Img.source == "qrc:/o_img.png" &&
                 row2rect3Img.source == "qrc:/o_img.png" &&
                 row3rect3Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
             win6.visible = true
-            winText.visible = true
-            mainColumn.enabled = false
-            playerWon = true
+            setWinVariables("Player1")
             p2Score +=1
+            return true
         }
         else{
             console.log("no vertical win...")
+            return false
         }
     }
 
@@ -201,20 +204,18 @@ Item {
                 row3rect3Img.source == "qrc:/x_img.png"){
             console.log("X Wins")
             win7.visible = true
-            winText.visible = true
-            mainColumn.enabled = false
-            playerWon = true
+            setWinVariables("Player1")
             p1Score +=1
+            return true
         }
         else if(row1rect1Img.source == "qrc:/o_img.png" &&
                 row2rect2Img.source == "qrc:/o_img.png" &&
                 row3rect3Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
             win7.visible = true
-            winText.visible = true
-            mainColumn.enabled = false
-            playerWon = true
+            setWinVariables("Player2")
             p2Score +=1
+            return true
         }
 
         // Diagonal Win 2
@@ -224,23 +225,44 @@ Item {
                 row3rect1Img.source == "qrc:/x_img.png"){
             console.log("X Wins")
             win8.visible = true
-            winText.visible = true
-            mainColumn.enabled = false
-            playerWon = true
+            setWinVariables("Player1")
             p1Score +=1
+            return true
         }
         else if(row1rect3Img.source == "qrc:/o_img.png" &&
                 row2rect2Img.source == "qrc:/o_img.png" &&
                 row3rect1Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
             win8.visible = true
-            winText.visible = true
-            mainColumn.enabled = false
-            playerWon = true
+            setWinVariables("Player2")
             p2Score +=1
+            return true
         }
         else{
             console.log("no diagonal win...")
+            return false
+        }
+    }
+
+    function checkForCatsCradle(){
+        console.log("Checking for CatsCradle...");
+
+        // Check if all cells are filled (assuming "X" and "O" images)
+        if (row1rect1Img.source !== "" &&
+            row1rect2Img.source !== "" &&
+            row1rect3Img.source !== "" &&
+            row2rect1Img.source !== "" &&
+            row2rect2Img.source !== "" &&
+            row2rect3Img.source !== "" &&
+            row3rect1Img.source !== "" &&
+            row3rect2Img.source !== "" &&
+            row3rect3Img.source !== "") {
+            console.log("CatsCradle! All squares filled without a winner.");
+            // Handle the CatsCradle scenario (e.g., display a message or end the game)
+            return true
+        } else {
+            console.log("No CatsCradle yet...");
+            return false
         }
     }
 
@@ -272,9 +294,12 @@ Item {
                 //selectedSquare.parent.endabled = false
 
                 // check for a winner
-                checkForHorizontalWin()
-                checkForVerticalWin()
-                checkFordiagonalWin()
+                if(!checkForHorizontalWin()
+                   && !checkForVerticalWin()
+                   && !checkFordiagonalWin()){
+                    // if no winner check for a Tie Game
+                    checkForCatsCradle()
+                }
             }
             else {
                 console.log("No empty squares available.")
@@ -371,7 +396,7 @@ Item {
             height: parent.height
             width: 20
             anchors.left: parent.left
-            anchors.leftMargin: 185
+            anchors.leftMargin: 315
             color: "red"
             z:100
         }
@@ -383,7 +408,7 @@ Item {
             height: parent.height
             width: 20
             anchors.left: parent.left
-            anchors.leftMargin: 325
+            anchors.leftMargin: 540
             color: "red"
             z:100
         }
@@ -463,9 +488,13 @@ Item {
                             console.log("current player turn: "+currentPlayer)
                             row1rect1Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
                             console.log("source:"+row1rect1Img.source)
-                            checkForHorizontalWin()
-                            checkForVerticalWin()
-                            checkFordiagonalWin()
+                            // check for a winner
+                            if(!checkForHorizontalWin()
+                               && !checkForVerticalWin()
+                               && !checkFordiagonalWin()){
+                                // if no winner check for a Tie Game
+                                checkForCatsCradle()
+                            }
                             row1rect1.enabled = false
                             if(gameType  == "1Player"){
                                 delayTimer.start() // Start the timer after the click
@@ -495,9 +524,12 @@ Item {
                             checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
                             row1rect2Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
-                            checkForHorizontalWin()
-                            checkForVerticalWin()
-                            checkFordiagonalWin()
+                            if(!checkForHorizontalWin()
+                               && !checkForVerticalWin()
+                               && !checkFordiagonalWin()){
+                                // if no winner check for a Tie Game
+                                checkForCatsCradle()
+                            }
                             row1rect2.enabled = false
                             if(gameType  == "1Player"){
                                 delayTimer.start() // Start the timer after the click
@@ -527,9 +559,12 @@ Item {
                             checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
                             row1rect3Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
-                            checkForHorizontalWin()
-                            checkForVerticalWin()
-                            checkFordiagonalWin()
+                            if(!checkForHorizontalWin()
+                               && !checkForVerticalWin()
+                               && !checkFordiagonalWin()){
+                                // if no winner check for a Tie Game
+                                checkForCatsCradle()
+                            }
                             row1rect3.enabled = false
                             if(gameType  == "1Player"){
                                 delayTimer.start() // Start the timer after the click
@@ -568,9 +603,12 @@ Item {
                             checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
                             row2rect1Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
-                            checkForHorizontalWin()
-                            checkForVerticalWin()
-                            checkFordiagonalWin()
+                            if(!checkForHorizontalWin()
+                               && !checkForVerticalWin()
+                               && !checkFordiagonalWin()){
+                                // if no winner check for a Tie Game
+                                checkForCatsCradle()
+                            }
                             row2rect1.enabled = false
                             if(gameType  == "1Player"){
                                 delayTimer.start() // Start the timer after the click
@@ -600,9 +638,12 @@ Item {
                             checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
                             row2rect2Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
-                            checkForHorizontalWin()
-                            checkForVerticalWin()
-                            checkFordiagonalWin()
+                            if(!checkForHorizontalWin()
+                               && !checkForVerticalWin()
+                               && !checkFordiagonalWin()){
+                                // if no winner check for a Tie Game
+                                checkForCatsCradle()
+                            }
                             row2rect2.enabled = false
                             if(gameType  == "1Player"){
                                 delayTimer.start() // Start the timer after the click
@@ -632,9 +673,12 @@ Item {
                             checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
                             row2rect3Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
-                            checkForHorizontalWin()
-                            checkForVerticalWin()
-                            checkFordiagonalWin()
+                            if(!checkForHorizontalWin()
+                               && !checkForVerticalWin()
+                               && !checkFordiagonalWin()){
+                                // if no winner check for a Tie Game
+                                checkForCatsCradle()
+                            }
                             row2rect3.enabled = false
                             if(gameType  == "1Player"){
                                 delayTimer.start() // Start the timer after the click
@@ -674,9 +718,12 @@ Item {
                             checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
                             row3rect1Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
-                            checkForHorizontalWin()
-                            checkForVerticalWin()
-                            checkFordiagonalWin()
+                            if(!checkForHorizontalWin()
+                               && !checkForVerticalWin()
+                               && !checkFordiagonalWin()){
+                                // if no winner check for a Tie Game
+                                checkForCatsCradle()
+                            }
                             row3rect1.enabled = false
                             if(gameType  == "1Player"){
                                 delayTimer.start() // Start the timer after the click
@@ -706,9 +753,12 @@ Item {
                             checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
                             row3rect2Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
-                            checkForHorizontalWin()
-                            checkForVerticalWin()
-                            checkFordiagonalWin()
+                            if(!checkForHorizontalWin()
+                               && !checkForVerticalWin()
+                               && !checkFordiagonalWin()){
+                                // if no winner check for a Tie Game
+                                checkForCatsCradle()
+                            }
                             row3rect2.enabled = false
                             if(gameType  == "1Player"){
                                 delayTimer.start() // Start the timer after the click
@@ -738,9 +788,12 @@ Item {
                             checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
                             row3rect3Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
-                            checkForHorizontalWin()
-                            checkForVerticalWin()
-                            checkFordiagonalWin()
+                            if(!checkForHorizontalWin()
+                               && !checkForVerticalWin()
+                               && !checkFordiagonalWin()){
+                                // if no winner check for a Tie Game
+                                checkForCatsCradle()
+                            }
                             row3rect3.enabled = false
                             if(gameType  == "1Player"){
                                 delayTimer.start() // Start the timer after the click
