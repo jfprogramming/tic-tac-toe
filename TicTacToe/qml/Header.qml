@@ -8,6 +8,10 @@ Rectangle{
     width: parent.width
     color: "lightBlue"
 
+    property int player1Score: 0
+    property int player2Score: 0
+    property alias scoreAlias: score
+
     Rectangle{
         id: title
         anchors.left: parent.left
@@ -16,6 +20,18 @@ Rectangle{
         Text {
             id: titleText
             text: qsTr("TicTacToe")
+            anchors.verticalCenter: parent.verticalCenter
+        }
+    }
+
+    Rectangle{
+        id: score
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+        visible: false
+        Text {
+            id: scorText
+            text: qsTr("Score - Player 1: "+player1Score+"   Player 2: "+player2Score)
             anchors.verticalCenter: parent.verticalCenter
         }
     }

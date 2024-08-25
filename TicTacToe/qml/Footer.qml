@@ -11,6 +11,9 @@ Rectangle{
     property alias homeBtn: homeButton
     property alias homeBtnTxt: homeButtonText.text
 
+    property alias restBtn: restButton
+    property alias restBtnTxt: restButtonText.text
+
     property alias backBtn: backButton
     property alias backBtnTxt: backButtonText.text
 
@@ -40,6 +43,23 @@ Rectangle{
         }
         onClicked: {
             console.log("back button clicked...")
+        }
+    }
+
+    Button{
+        id: restButton
+        anchors.right: parent.right
+        anchors.rightMargin: homeButton.width+20
+        anchors.verticalCenter: parent.verticalCenter
+        visible: false
+        Text {
+            id: restButtonText
+            text: qsTr("Rest")
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+        }
+        onClicked: {
+            console.log("reset button clicked...")
         }
     }
 

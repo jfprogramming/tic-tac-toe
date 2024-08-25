@@ -12,6 +12,9 @@ Item {
     property int currentPlayer: 0
     property bool playerWon: false
 
+    property int p1Score: 0
+    property int p2Score: 0
+
     property string gameType: "1Player" //getGameType()
 
     // Create an array to store item IDs
@@ -39,7 +42,6 @@ Item {
             // set the first player at start of game
             currentPlayer = 1
         }
-
         console.log("set player turn to: " + currentPlayer)
     }
 
@@ -55,6 +57,8 @@ Item {
             winText.visible = true
             mainColumn.enabled = false
             playerWon = true
+            p1Score +=1
+
         }
         else if(row1rect1Img.source == "qrc:/o_img.png" &&
                 row1rect2Img.source == "qrc:/o_img.png" &&
@@ -64,6 +68,7 @@ Item {
             winText.visible = true
             mainColumn.enabled = false
             playerWon = true
+            p2Score +=1
         }
         // Row 2 Horizontal win
         //
@@ -75,6 +80,7 @@ Item {
             winText.visible = true
             mainColumn.enabled = false
             playerWon = true
+            p2Score +=1
         }
         else if(row2rect1Img.source == "qrc:/o_img.png" &&
                 row2rect2Img.source == "qrc:/o_img.png" &&
@@ -84,6 +90,7 @@ Item {
             winText.visible = true
             mainColumn.enabled = false
             playerWon = true
+            p2Score +=1
         }
         // Row 3 Horizontal win
         //
@@ -95,6 +102,7 @@ Item {
             winText.visible = true
             mainColumn.enabled = false
             playerWon = true
+            p1Score +=1
         }
         else if(row3rect1Img.source == "qrc:/o_img.png" &&
                 row3rect2Img.source == "qrc:/o_img.png" &&
@@ -104,6 +112,7 @@ Item {
             winText.visible = true
             mainColumn.enabled = false
             playerWon = true
+            p2Score +=1
         }
         else{
             console.log("no horizontal win...")
@@ -122,6 +131,7 @@ Item {
             winText.visible = true
             mainColumn.enabled = false
             playerWon = true
+            p1Score +=1
         }
         else if(row1rect1Img.source == "qrc:/o_img.png" &&
                 row2rect1Img.source == "qrc:/o_img.png" &&
@@ -131,6 +141,7 @@ Item {
             winText.visible = true
             mainColumn.enabled = false
             playerWon = true
+            p2Score +=1
         }
         // Colum 2 Vertical win
         //
@@ -142,6 +153,7 @@ Item {
             winText.visible = true
             mainColumn.enabled = false
             playerWon = true
+            p1Score +=1
         }
         else if(row1rect2Img.source == "qrc:/o_img.png" &&
                 row2rect2Img.source == "qrc:/o_img.png" &&
@@ -151,6 +163,7 @@ Item {
             winText.visible = true
             mainColumn.enabled = false
             playerWon = true
+            p2Score +=1
         }
         // Colum 3 Vertical win
         //
@@ -162,6 +175,7 @@ Item {
             winText.visible = true
             mainColumn.enabled = false
             playerWon = true
+            p1Score +=1
         }
         else if(row1rect3Img.source == "qrc:/o_img.png" &&
                 row2rect3Img.source == "qrc:/o_img.png" &&
@@ -171,6 +185,7 @@ Item {
             winText.visible = true
             mainColumn.enabled = false
             playerWon = true
+            p2Score +=1
         }
         else{
             console.log("no vertical win...")
@@ -189,6 +204,7 @@ Item {
             winText.visible = true
             mainColumn.enabled = false
             playerWon = true
+            p1Score +=1
         }
         else if(row1rect1Img.source == "qrc:/o_img.png" &&
                 row2rect2Img.source == "qrc:/o_img.png" &&
@@ -198,6 +214,7 @@ Item {
             winText.visible = true
             mainColumn.enabled = false
             playerWon = true
+            p2Score +=1
         }
 
         // Diagonal Win 2
@@ -210,6 +227,7 @@ Item {
             winText.visible = true
             mainColumn.enabled = false
             playerWon = true
+            p1Score +=1
         }
         else if(row1rect3Img.source == "qrc:/o_img.png" &&
                 row2rect2Img.source == "qrc:/o_img.png" &&
@@ -219,12 +237,15 @@ Item {
             winText.visible = true
             mainColumn.enabled = false
             playerWon = true
+            p2Score +=1
         }
         else{
             console.log("no diagonal win...")
         }
     }
 
+    // only used for 1Player games
+    //
     function playerTwoTurn() {
         checkPlayerTurn()
         var selectedSquare = null
@@ -264,7 +285,8 @@ Item {
         }
     }
 
-    // Timer object only used for 1Player games
+    // only used for 1Player games
+    //
     Timer {
         id: delayTimer
         interval: 1000 // 1 second
@@ -277,6 +299,9 @@ Item {
 
     Header{
         id:playAreaHeader
+        scoreAlias.visible: true
+        player1Score: p1Score
+        player2Score: p2Score
     }
 
     Rectangle {
@@ -288,6 +313,9 @@ Item {
         anchors.bottom: playAreaFooter.top
         anchors.bottomMargin: 50
 
+        // win rectangles are used to display the
+        // visual cross out line for 3 in a row
+        //
         Rectangle{
             id: win1
             visible: false
@@ -382,6 +410,7 @@ Item {
             z:100
         }
 
+        // Win Text only shown if a player wins
         Text {
             id: winText
             text: currentPlayer == 1 ? "Player 1 Wins!" : "Player 2 Wins"
@@ -438,7 +467,7 @@ Item {
                             checkForVerticalWin()
                             checkFordiagonalWin()
                             row1rect1.enabled = false
-                            if(gameType  == "1Player" && playerWon == false){
+                            if(gameType  == "1Player"){
                                 delayTimer.start() // Start the timer after the click
                             }
                         }
@@ -470,7 +499,7 @@ Item {
                             checkForVerticalWin()
                             checkFordiagonalWin()
                             row1rect2.enabled = false
-                            if(gameType  == "1Player" && playerWon == false){
+                            if(gameType  == "1Player"){
                                 delayTimer.start() // Start the timer after the click
                             }
                         }
@@ -502,7 +531,7 @@ Item {
                             checkForVerticalWin()
                             checkFordiagonalWin()
                             row1rect3.enabled = false
-                            if(gameType  == "1Player" && playerWon == false){
+                            if(gameType  == "1Player"){
                                 delayTimer.start() // Start the timer after the click
                             }
                         }
@@ -543,7 +572,7 @@ Item {
                             checkForVerticalWin()
                             checkFordiagonalWin()
                             row2rect1.enabled = false
-                            if(gameType  == "1Player" && playerWon == false){
+                            if(gameType  == "1Player"){
                                 delayTimer.start() // Start the timer after the click
                             }
                         }
@@ -575,7 +604,7 @@ Item {
                             checkForVerticalWin()
                             checkFordiagonalWin()
                             row2rect2.enabled = false
-                            if(gameType  == "1Player" && playerWon == false){
+                            if(gameType  == "1Player"){
                                 delayTimer.start() // Start the timer after the click
                             }
                         }
@@ -607,7 +636,7 @@ Item {
                             checkForVerticalWin()
                             checkFordiagonalWin()
                             row2rect3.enabled = false
-                            if(gameType  == "1Player" && playerWon == false){
+                            if(gameType  == "1Player"){
                                 delayTimer.start() // Start the timer after the click
                             }
                         }
@@ -649,7 +678,7 @@ Item {
                             checkForVerticalWin()
                             checkFordiagonalWin()
                             row3rect1.enabled = false
-                            if(gameType  == "1Player" && playerWon == false){
+                            if(gameType  == "1Player"){
                                 delayTimer.start() // Start the timer after the click
                             }
                         }
@@ -681,7 +710,7 @@ Item {
                             checkForVerticalWin()
                             checkFordiagonalWin()
                             row3rect2.enabled = false
-                            if(gameType  == "1Player" && playerWon == false){
+                            if(gameType  == "1Player"){
                                 delayTimer.start() // Start the timer after the click
                             }
                         }
@@ -713,7 +742,7 @@ Item {
                             checkForVerticalWin()
                             checkFordiagonalWin()
                             row3rect3.enabled = false
-                            if(gameType  == "1Player" && playerWon == false){
+                            if(gameType  == "1Player"){
                                 delayTimer.start() // Start the timer after the click
                             }
                         }
@@ -729,5 +758,57 @@ Item {
             stackView.pop()
         }
         homeBtnTxt: "Back"
+
+        restBtnTxt: "Rest"
+        restBtn.visible: true
+        restBtn.onClicked: {
+            // clear the board
+            //
+
+            // Row 1
+            row1rect1Img.source = ""
+            row1rect2Img.source = ""
+            row1rect3Img.source = ""
+            // Row 2
+            row2rect1Img.source = ""
+            row2rect2Img.source = ""
+            row2rect3Img.source = ""
+            // Row 3
+            row3rect1Img.source = ""
+            row3rect2Img.source = ""
+            row3rect3Img.source = ""
+
+            // Enable the play area
+            mainColumn.enabled = true
+
+            // Re-Enable and disabled squares
+            row1rect1.enabled = true
+            row1rect2.enabled = true
+            row1rect3.enabled = true
+
+            row2rect1.enabled = true
+            row2rect2.enabled = true
+            row2rect3.enabled = true
+
+            row3rect1.enabled = true
+            row3rect2.enabled = true
+            row3rect3.enabled = true
+
+            // Reset Win Dispaly
+            winText.text    = ""
+            winText.visible = false
+            win1.visible    = false
+            win2.visible    = false
+            win3.visible    = false
+            win4.visible    = false
+            win5.visible    = false
+            win6.visible    = false
+            win7.visible    = false
+            win8.visible    = false
+
+            // Reset the current player
+            currentPlayer = 0
+
+        }
     }
 }
