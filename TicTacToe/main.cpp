@@ -1,4 +1,5 @@
 #include "controllers/databasecontroller.h"
+#include "models/highscoremodel.h"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -12,6 +13,10 @@ int main(int argc, char *argv[])
 
     DatabaseController databaseController;
     qmlRegisterType<DatabaseController>("DbModule", 1, 0, "DtabaseController");
+
+    HighscoreModel highscoreModel; // Instantiate your model
+    engine.rootContext()->setContextProperty("HighscoreModel", &highscoreModel);
+
     // directly access the database controller to save
     engine.rootContext()->setContextProperty("databaseController", &databaseController);
 

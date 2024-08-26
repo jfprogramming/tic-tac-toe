@@ -1,8 +1,11 @@
 #include "highscoremodel.h"
+#include "controllers/databasecontroller.h"
 
 HighscoreModel::HighscoreModel(QObject *parent) : QAbstractListModel{parent}
 {
-
+    DatabaseController databaseController;
+    QList<int> fetchedHighScores = databaseController.getHighScoreList();
+    setHighScoreList(fetchedHighScores);
 }
 
 HighscoreModel::~HighscoreModel(){
