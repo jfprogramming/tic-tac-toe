@@ -27,6 +27,8 @@ public:
     QString getAdminUsername();
     QString getDecryptedAdminPassword();
 
+    QList<int> getHighScoreList();
+
 public slots:
 
     Q_INVOKABLE bool authenticateAdmin(const QString &username, const QString &password);

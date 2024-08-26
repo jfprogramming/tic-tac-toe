@@ -34,6 +34,36 @@ void DatabaseController::initializeDatabase()
     }
 }
 
+
+void DatabaseController::closeDatabase()
+{
+    QSqlDatabase::database().close();
+}
+
+
+QList<int> DatabaseController::getHighScoreList(){
+    QList<int> highScores;
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("/data/database/tictactoe.db");
+
+    if (!db.open()) {
+        qDebug() << "Error opening database:" << db.lastError().text();
+        // Handle the error (e.g., show an error message)
+        return highScores;
+    }
+
+    QSqlQuery query("SELECT highScore FROM HighScoreTable");
+    while (query.next()) {
+        highScores.append(query.value(0).toInt());
+    }
+
+    qInfo() << "highscore list:" << highScores;
+
+    db.close();
+    return highScores;
+}
+
+
 bool DatabaseController::authenticateAdmin(const QString &username, const QString &password) {
     QSqlQuery query;
     QString   adminName;
@@ -72,11 +102,6 @@ bool DatabaseController::authenticateAdmin(const QString &username, const QStrin
     }else{
         return false;
     }
-}
-
-void DatabaseController::closeDatabase()
-{
-    QSqlDatabase::database().close();
 }
 
 
@@ -207,3 +232,5 @@ QString DatabaseController::getDecryptedAdminPassword()
     else
         return ""; // Return an empty string or handle the error
 }
+
+

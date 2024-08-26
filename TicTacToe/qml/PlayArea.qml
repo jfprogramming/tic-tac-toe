@@ -54,7 +54,7 @@ Item {
         var popupComponent = Qt.createComponent("PopupMSg.qml")
         if (popupComponent.status === Component.Ready) {
             var popupInstance = popupComponent.createObject(root)
-            popupComponent.popupMsgText = player+" is The Winner"
+            //popupComponent.popupMsgText = player+" is The Winner"
             popupInstance.open()
         }
     }

@@ -1,14 +1,40 @@
 #include "highscoremodel.h"
 
-highscoreModel::highscoreModel(QObject *parent) : QObject{parent}
-{}
-
-QList<int> highscoreModel::highScoreList() const
+HighscoreModel::HighscoreModel(QObject *parent) : QAbstractListModel{parent}
 {
-    return m_highScoreList;
+
 }
 
-void highscoreModel::setHighScoreList(const QList<int> &newHighScoreList)
+HighscoreModel::~HighscoreModel(){
+
+}
+
+
+void HighscoreModel::setHighScoreList(const QList<int> &newHighScoreList)
 {
+    beginResetModel();
     m_highScoreList = newHighScoreList;
+    endResetModel();
 }
+
+int HighscoreModel::rowCount(const QModelIndex &parent) const
+{
+    if (parent.isValid())
+        return 0; // No child items
+    return m_highScoreList.size();
+}
+
+QVariant HighscoreModel::data(const QModelIndex &index, int role) const
+{
+    if (!index.isValid())
+        return QVariant();
+
+    if (role == Qt::DisplayRole) {
+        // Return the high score value as a QVariant
+        return m_highScoreList.at(index.row());
+    }
+
+    return QVariant();
+}
+
+
