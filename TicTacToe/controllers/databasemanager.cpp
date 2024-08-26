@@ -3,17 +3,18 @@
 #include <QSqlQuery>
 #include <QDebug>
 #include <QDateTime>
-#include "databasecontroller.h"
+#include "databasemanager.h"
 #include "cryptclass.h"
 
-DatabaseController::DatabaseController(QObject *parent)
-    : QThread(parent)
+DatabaseManager::DatabaseManager(QObject *parent) : QThread(parent)
 {
-    initializeDatabase();
+    // Initialize the flag to false
+    m_isDatabaseInitialized = false;
+    //initializeDatabase();
     this->start();
 }
 
-DatabaseController::~DatabaseController(){
+DatabaseManager::~DatabaseManager(){
     closeDatabase();
     if (isRunning()) {
         quit();
@@ -22,35 +23,41 @@ DatabaseController::~DatabaseController(){
 }
 
 
-void DatabaseController::initializeDatabase()
+bool DatabaseManager::initializeDatabase()
 {
     qInfo() << "database initialization...";
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("/data/database/tictactoe.db");
-    if (!db.open())
-    {
-        qDebug() << "Error opening database:" << db.lastError().text();
+
+    if (m_isDatabaseInitialized) {
+        // Database already initialized, no need to proceed
+        return true;
+    }
+
+    *m_db = QSqlDatabase::addDatabase("QSQLITE");
+    m_db->setDatabaseName("/data/database/tictactoe.db");
+
+    if (!m_db->open()) {
+        qDebug() << "Error opening database:" << m_db->lastError().text();
         // Handle the error (e.g., show an error message)
+        return false;
+    } else {
+        // Set the flag to true after successful initialization
+        m_isDatabaseInitialized = true;
+        return true;
     }
 }
 
 
-void DatabaseController::closeDatabase()
+void DatabaseManager::closeDatabase()
 {
+    m_isDatabaseInitialized = false;
     QSqlDatabase::database().close();
 }
 
 
-QList<int> DatabaseController::getHighScoreList(){
+QList<int> DatabaseManager::getHighScoreList(){
     QList<int> highScores;
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("/data/database/tictactoe.db");
 
-    if (!db.open()) {
-        qDebug() << "Error opening database:" << db.lastError().text();
-        // Handle the error (e.g., show an error message)
-        return highScores;
-    }
+    initializeDatabase();
 
     QSqlQuery query("SELECT highScore FROM HighScoreTable");
     while (query.next()) {
@@ -58,21 +65,24 @@ QList<int> DatabaseController::getHighScoreList(){
     }
 
     qInfo() << "highscore list:" << highScores;
-
-    db.close();
+    m_db->close();
     return highScores;
 }
 
 
-bool DatabaseController::authenticateAdmin(const QString &username, const QString &password) {
+bool DatabaseManager::authenticateAdmin(const QString &username, const QString &password) {
     QSqlQuery query;
     QString   adminName;
     QString   adminPassword;
+
+    initializeDatabase();
 
     qInfo() << "Admin Login username:" << username << " Admin password:" << password;
 
     query.prepare("SELECT * FROM AdminTable WHERE adminName = :adminName");
     query.bindValue(":adminName", username);
+
+    qInfo() << "Query:" << &query;
 
     if (query.exec() && query.next()) {
         int count = query.value(0).toInt();
@@ -83,6 +93,7 @@ bool DatabaseController::authenticateAdmin(const QString &username, const QStrin
         adminPassword = query.value("adminPassword").toString();
     } else {
         qWarning() << "Error executing query:" << query.lastError().text();
+        m_db->close();
         return false;
     }
 
@@ -98,14 +109,16 @@ bool DatabaseController::authenticateAdmin(const QString &username, const QStrin
     qInfo() << "Decrypted password:" << decryptedPassword;
 
     if(username == adminName && password == decryptedPassword){
+        m_db->close();
         return true;
     }else{
+        m_db->close();
         return false;
     }
 }
 
 
-void DatabaseController::performDatabaseOperations()
+void DatabaseManager::performDatabaseOperations()
 {
     QSqlQuery query;
     if (query.exec("SELECT * FROM PlayerTable"))
@@ -123,7 +136,8 @@ void DatabaseController::performDatabaseOperations()
     }
 }
 
-QString DatabaseController::getPlayerName(int playerId)
+
+QString DatabaseManager::getPlayerName(int playerId)
 {
     QSqlQuery query;
     query.prepare("SELECT palyerName FROM PlayerTable WHERE playerId = :id");
@@ -134,7 +148,8 @@ QString DatabaseController::getPlayerName(int playerId)
         return ""; // Return an empty string or handle the error
 }
 
-QString DatabaseController::getPlayerColor(QString &color)
+
+QString DatabaseManager::getPlayerColor(QString &color)
 {
     QSqlQuery query;
     query.prepare("SELECT playerColor FROM PlayerTable WHERE userId = :id");
@@ -145,7 +160,8 @@ QString DatabaseController::getPlayerColor(QString &color)
         return ""; // Return an empty string or handle the error
 }
 
-QString DatabaseController::getUserSelectedOption(int userId)
+
+QString DatabaseManager::getUserSelectedOption(int userId)
 {
     QSqlQuery query;
     query.prepare("SELECT userSelectedOption FROM UserTable WHERE userId = :id");
@@ -157,7 +173,7 @@ QString DatabaseController::getUserSelectedOption(int userId)
 }
 
 
-bool DatabaseController::setPlayerName(int playerId, const QString& newName)
+bool DatabaseManager::setPlayerName(int playerId, const QString& newName)
 {
     QSqlQuery query;
 
@@ -176,7 +192,7 @@ bool DatabaseController::setPlayerName(int playerId, const QString& newName)
 }
 
 
-bool DatabaseController::setPlayerColor(int playerId, const QString& color)
+bool DatabaseManager::setPlayerColor(int playerId, const QString& color)
 {
     QSqlQuery query;
 
@@ -192,7 +208,8 @@ bool DatabaseController::setPlayerColor(int playerId, const QString& color)
     return query.exec();
 }
 
-bool DatabaseController::createNewPlayer(QString playerName, const QString& playerColor)
+
+bool DatabaseManager::createNewPlayer(QString playerName, const QString& playerColor)
 {
     QSqlQuery query;
 
@@ -205,7 +222,8 @@ bool DatabaseController::createNewPlayer(QString playerName, const QString& play
     return query.exec();
 }
 
-QString DatabaseController::getAdminUsername()
+
+QString DatabaseManager::getAdminUsername()
 {
     QSqlQuery query;
     query.prepare("SELECT adminName FROM AdminTable");
@@ -215,7 +233,8 @@ QString DatabaseController::getAdminUsername()
         return ""; // Return an empty string or handle the error
 }
 
-QString DatabaseController::getDecryptedAdminPassword()
+
+QString DatabaseManager::getDecryptedAdminPassword()
 {
     QString decryptedPassword;
     QSqlQuery query;
@@ -232,5 +251,4 @@ QString DatabaseController::getDecryptedAdminPassword()
     else
         return ""; // Return an empty string or handle the error
 }
-
 

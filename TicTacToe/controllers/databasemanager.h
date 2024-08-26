@@ -1,18 +1,19 @@
 #pragma once
 
 #include "qdebug.h"
+#include "qsqldatabase.h"
 #include <QThread>
 #include <QObject>
 
-class DatabaseController : public QThread
+class DatabaseManager : public QThread
 {
     Q_OBJECT
 
 public:
-    explicit DatabaseController(QObject *parent = nullptr);
-    ~DatabaseController();
+    explicit DatabaseManager(QObject *parent = nullptr);
+    ~DatabaseManager();
 
-    void initializeDatabase();
+    bool initializeDatabase();
     void performDatabaseOperations();
     void closeDatabase();
 
@@ -35,6 +36,8 @@ public slots:
     Q_INVOKABLE void print(){qInfo() << "test***";};
 
 
-signals:
+private:
+    bool m_isDatabaseInitialized;
+    QSqlDatabase *m_db;
 };
 
