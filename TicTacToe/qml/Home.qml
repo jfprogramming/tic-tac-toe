@@ -53,6 +53,12 @@ Item {
                 text: "2 Player Game"
                 anchors.centerIn: parent
             }
+            onClicked: {
+                console.log("Two Player Game Selected...")
+                //display play area
+                //
+                stackView.push("PlayerSelection.qml")
+            }
         }
         Button{
             id:highScoreBtn
