@@ -12,7 +12,7 @@ Item {
         anchors.topMargin: 50
         anchors.bottom: highScoreFooter.top
         anchors.bottomMargin: 50
-        model: HighscoreModel // Use the registered model
+        model: highscoreModel // Use the registered model
 
         delegate: Item {
             width: parent.width

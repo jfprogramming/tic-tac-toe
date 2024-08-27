@@ -1,9 +1,11 @@
-#include "controllers/databasecontroller.h"
+#include "controllers/databasemanager.h"
 #include "models/highscoremodel.h"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QtCore>
+#include "controllers.h"
+#include "models/playermodel.h"
 
 
 int main(int argc, char *argv[])
@@ -11,14 +13,14 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
 
-    DatabaseController databaseController;
-    qmlRegisterType<DatabaseController>("DbModule", 1, 0, "DtabaseController");
+    Controllers::dbManager.initializeDatabase();
 
-    HighscoreModel highscoreModel; // Instantiate your model
-    engine.rootContext()->setContextProperty("HighscoreModel", &highscoreModel);
+    PlayerModel playerModel;
+    engine.rootContext()->setContextProperty("playerModel", &playerModel);
 
-    // directly access the database controller to save
-    engine.rootContext()->setContextProperty("databaseController", &databaseController);
+    HighscoreModel highscoreModel;
+    engine.rootContext()->setContextProperty("highscoreModel", &highscoreModel);
+
 
     QObject::connect(
         &engine,
@@ -28,8 +30,6 @@ int main(int argc, char *argv[])
         Qt::QueuedConnection);
 
     engine.loadFromModule("TicTacToe", "Main");
-
-
 
     return app.exec();
 }

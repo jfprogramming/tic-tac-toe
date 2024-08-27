@@ -6,20 +6,13 @@
 #include "databasemanager.h"
 #include "cryptclass.h"
 
-DatabaseManager::DatabaseManager(QObject *parent) : QThread(parent)
+DatabaseManager::DatabaseManager(QThread* home, QObject* parent) : QObject(parent)
 {
-    // Initialize the flag to false
     m_isDatabaseInitialized = false;
-    //initializeDatabase();
-    this->start();
 }
 
 DatabaseManager::~DatabaseManager(){
     closeDatabase();
-    if (isRunning()) {
-        quit();
-        wait();
-    }
 }
 
 
@@ -28,10 +21,11 @@ bool DatabaseManager::initializeDatabase()
     qInfo() << "database initialization...";
 
     if (m_isDatabaseInitialized) {
-        // Database already initialized, no need to proceed
+        //Database already initialized, no need to proceed
         return true;
     }
 
+    m_db  = new QSqlDatabase();
     *m_db = QSqlDatabase::addDatabase("QSQLITE");
     m_db->setDatabaseName("/data/database/tictactoe.db");
 
@@ -41,7 +35,7 @@ bool DatabaseManager::initializeDatabase()
         return false;
     } else {
         // Set the flag to true after successful initialization
-        m_isDatabaseInitialized = true;
+        //m_isDatabaseInitialized = true;
         return true;
     }
 }
@@ -57,16 +51,42 @@ void DatabaseManager::closeDatabase()
 QList<int> DatabaseManager::getHighScoreList(){
     QList<int> highScores;
 
-    initializeDatabase();
-
     QSqlQuery query("SELECT highScore FROM HighScoreTable");
     while (query.next()) {
         highScores.append(query.value(0).toInt());
     }
 
     qInfo() << "highscore list:" << highScores;
-    m_db->close();
     return highScores;
+}
+
+QString DatabaseManager::getAdminUsername()
+{
+    QSqlQuery query;
+    query.prepare("SELECT adminName FROM AdminTable");
+    if (query.exec() && query.next())
+        return query.value(0).toString();
+    else
+        return ""; // Return an empty string or handle the error
+}
+
+
+QString DatabaseManager::getDecryptedAdminPassword()
+{
+    QString decryptedPassword;
+    QSqlQuery query;
+    query.prepare("SELECT adminPassword FROM AdminTable");
+    if (query.exec() && query.next())
+    {
+        QString encryptedPassword = query.value(0).toString();
+        // Decrypt the password using bcrypt (replace "admin" with the actual admin password)
+        QString decryptedPassword = CryptClass::bcrypt_checkpw("admin", encryptedPassword.toUtf8().constData())
+                                        ? "admin" // Correct password
+                                        : ""; // Incorrect password
+        return decryptedPassword;
+    }
+    else
+        return ""; // Return an empty string or handle the error
 }
 
 
@@ -74,8 +94,6 @@ bool DatabaseManager::authenticateAdmin(const QString &username, const QString &
     QSqlQuery query;
     QString   adminName;
     QString   adminPassword;
-
-    initializeDatabase();
 
     qInfo() << "Admin Login username:" << username << " Admin password:" << password;
 
@@ -93,7 +111,6 @@ bool DatabaseManager::authenticateAdmin(const QString &username, const QString &
         adminPassword = query.value("adminPassword").toString();
     } else {
         qWarning() << "Error executing query:" << query.lastError().text();
-        m_db->close();
         return false;
     }
 
@@ -109,10 +126,8 @@ bool DatabaseManager::authenticateAdmin(const QString &username, const QString &
     qInfo() << "Decrypted password:" << decryptedPassword;
 
     if(username == adminName && password == decryptedPassword){
-        m_db->close();
         return true;
     }else{
-        m_db->close();
         return false;
     }
 }
@@ -173,14 +188,15 @@ QString DatabaseManager::getUserSelectedOption(int userId)
 }
 
 
-bool DatabaseManager::setPlayerName(int playerId, const QString& newName)
+bool DatabaseManager::setPlayerName(int playerId, QString &newName)
 {
     QSqlQuery query;
 
 
     if(playerId == 1){
         //create new player
-        createNewPlayer(newName, "N/A");
+        QString na = "N/A";
+        createNewPlayer(newName, na);
 
     }else{
         query.prepare("UPDATE PlayerTable SET playerName = :playerName WHERE playerId = :playerId");
@@ -192,13 +208,14 @@ bool DatabaseManager::setPlayerName(int playerId, const QString& newName)
 }
 
 
-bool DatabaseManager::setPlayerColor(int playerId, const QString& color)
+bool DatabaseManager::setPlayerColor(int playerId, QString &color)
 {
     QSqlQuery query;
 
     if(playerId ==1){
         //create new user
-        createNewPlayer("N/A", color);
+        QString na = "N/A";
+        createNewPlayer(na, color);
     }else{
         query.prepare("UPDATE UserTable SET userAge = :playerColor WHERE playerId = :playerId");
         query.bindValue(":playerColor", color);
@@ -209,7 +226,7 @@ bool DatabaseManager::setPlayerColor(int playerId, const QString& color)
 }
 
 
-bool DatabaseManager::createNewPlayer(QString playerName, const QString& playerColor)
+bool DatabaseManager::createNewPlayer(QString &playerName, QString &playerColor)
 {
     QSqlQuery query;
 
@@ -220,35 +237,5 @@ bool DatabaseManager::createNewPlayer(QString playerName, const QString& playerC
     query.bindValue(":dateTime", QDateTime::currentDateTime());
 
     return query.exec();
-}
-
-
-QString DatabaseManager::getAdminUsername()
-{
-    QSqlQuery query;
-    query.prepare("SELECT adminName FROM AdminTable");
-    if (query.exec() && query.next())
-        return query.value(0).toString();
-    else
-        return ""; // Return an empty string or handle the error
-}
-
-
-QString DatabaseManager::getDecryptedAdminPassword()
-{
-    QString decryptedPassword;
-    QSqlQuery query;
-    query.prepare("SELECT adminPassword FROM AdminTable");
-    if (query.exec() && query.next())
-    {
-        QString encryptedPassword = query.value(0).toString();
-        // Decrypt the password using bcrypt (replace "admin" with the actual admin password)
-        QString decryptedPassword = CryptClass::bcrypt_checkpw("admin", encryptedPassword.toUtf8().constData())
-                                        ? "admin" // Correct password
-                                        : ""; // Incorrect password
-        return decryptedPassword;
-    }
-    else
-        return ""; // Return an empty string or handle the error
 }
 

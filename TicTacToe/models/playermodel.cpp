@@ -1,10 +1,20 @@
 #include "playermodel.h"
+#include "controllers.h"
 #include <QDebug>
 
 
 PlayerModel::PlayerModel(QObject* parent) : QObject(parent)
 {
-    // Initialize any necessary data or perform setup here
+
+}
+
+bool PlayerModel::onAdminLogin(const QString &username, const QString &password){
+    if(Controllers::dbManager.authenticateAdmin(username, password)){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 void PlayerModel::onFormEntry(QString& name, QString& color){
@@ -52,7 +62,10 @@ void PlayerModel::setPlayerName(const QString &newPlayerName)
     emit playerNameChanged(m_playerName, m_playerColor);
 }
 
-void PlayerModel::saveToDatabase(){
-    // TODO call to database controller to save to db
+void PlayerModel::saveToDatabase(QString &name, QString &color){
+
+    Controllers::dbManager.createNewPlayer(name, color);
 }
+
+
 

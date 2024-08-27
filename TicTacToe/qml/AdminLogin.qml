@@ -1,8 +1,9 @@
 import QtQuick
 import QtQuick.Controls
-import DbModule 1.0
 
 Item {
+    id:adminLoginItem
+    objectName: "adminLoginPage"
 
     Header{
         id:adminLoginPageHeader
@@ -16,6 +17,7 @@ Item {
         anchors.topMargin: 50
         anchors.bottom: adminLoginPagefooter.top
         anchors.bottomMargin: 50
+        //signal loginBtnClicked(string username, string password)
 
         Column {
             id:textEntryColumn
@@ -44,22 +46,35 @@ Item {
                 passwordCharacter: '*'
             }
         }
+
+        Connections {
+            target: adminLoginPagefooter
+            function onLoginBtnClicked(username, password) {
+                console.log("admin login slot")
+                if(playerModel.onAdminLogin(username, password)){
+                    stackView.push("AdminPage.qml")
+                }else{
+                    // TODO display popup message
+                    console.log("error authenticating....");
+                }
+            }
+        }
     }
 
+    // PlayerModel{
+    //     id:playerModel
+    //     signal loginBtnClicked(string username, string password)
+    // }
 
     Footer{
         id: adminLoginPagefooter
         homeBtnTxt: "Login"
+        signal loginBtnClicked(string username, string password)
         homeBtn.onClicked: {
-            // Validate the admin username and passwordLabel
-            databaseController.print();
-            if(databaseController.authenticateAdmin(userNameTextInput.text, passwordTextInput.text)){
-                stackView.push("AdminPage.qml")
-            }else{
-                // TODO display popup message
-                console.log("error authenticating....");
-            }
+            console.log("admin login signal")
+            loginBtnClicked(userNameTextInput.text, passwordTextInput.text)
         }
+
         backBtn.visible: true
         backBtn.onClicked: {
             stackView.pop()

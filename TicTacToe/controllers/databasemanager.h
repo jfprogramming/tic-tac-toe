@@ -5,12 +5,12 @@
 #include <QThread>
 #include <QObject>
 
-class DatabaseManager : public QThread
+class DatabaseManager : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit DatabaseManager(QObject *parent = nullptr);
+    explicit DatabaseManager(QThread* home = NULL, QObject *parent = NULL);
     ~DatabaseManager();
 
     bool initializeDatabase();
@@ -21,9 +21,9 @@ public:
     QString getPlayerColor(QString &color);
     QString getUserSelectedOption(int userId);
 
-    bool setPlayerName(int playerId, const QString& newName);
-    bool setPlayerColor(int playerId, const QString& color);
-    bool createNewPlayer(QString playerName, const QString& playerColor);
+    bool setPlayerName(int playerId, QString &newName);
+    bool setPlayerColor(int playerId, QString &color);
+    bool createNewPlayer(QString &playerName, QString &playerColor);
 
     QString getAdminUsername();
     QString getDecryptedAdminPassword();

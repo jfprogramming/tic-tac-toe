@@ -3,6 +3,7 @@ import QtQuick.Controls
 
 Item {
     id:adminPageItem
+    objectName: "adminSettingsPage"
 
     Header{
         id:adminPageHeader
@@ -65,10 +66,11 @@ Item {
 
     Footer{
         id: adminPagefooter
-        //homeBtn.onClicked: {
-            //stackView.pop("Home.qml")
-            //console.log("stack view size: "+stackView.depth+" "+stackView.get(0))
-        //}
+        homeBtn.onClicked: {
+            stackView.clear()
+            stackView.push("Home.qml", StackView.PushTransition)
+            console.log("stack view size: "+stackView.depth+" "+stackView.get(0))
+        }
         backBtn.visible: true
         backBtn.onClicked: {
             stackView.pop()

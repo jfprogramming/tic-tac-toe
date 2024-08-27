@@ -22,8 +22,8 @@ qt_add_qml_module(appTicTacToe
         controllers/gamelogic.cpp
         controllers/playermanger.h
         controllers/playermanger.cpp
-        controllers/databasecontroller.h
-        controllers/databasecontroller.cpp
+        controllers/databasemanager.h
+        controllers/databasemanager.cpp
         models/playermodel.h
         models/playermodel.cpp
         models/aboutinfo.h
@@ -32,6 +32,8 @@ qt_add_qml_module(appTicTacToe
         models/gamemodel.cpp
         models/highscoremodel.h
         models/highscoremodel.cpp
+        controllers.h
+        controllers.cpp
         cryptclass.h
         cryptclass.cpp
     QML_FILES
