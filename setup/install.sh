@@ -11,11 +11,14 @@ sudo apt-get install git
 sudo apt-get install libgl-dev 
 sudo apt-get install xcb
 sudo apt-get install libxcb-cursor0 
-
-
-git config --global user.email "jfskibum123@yahoo.com"
-git config --global user.name  "jesse finneman"
-
 sudo apt-get install libssl-dev
 
 pip install bcrpyt 
+
+#setup data directory
+sudo mkdir /data
+cd /data
+sudo mkdir database
+sudo chmod 777 database
+sudo mkdir config
+sudo chmod 777 config
