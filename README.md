@@ -85,6 +85,9 @@ Below is a list of features not yet complete:
 - **Other Game Modes**: Connect 4 / Battle Ships
 - **IoT High Score Web App**
   - Implement the AWS web application for displaying high scores.
+- **Mqtt API Creation and Integration**
+  - Create API and coresponding API Document.
+  - Mqtt Connectivity and payload managemnet. 
 - **Popup** (Partial)
   - Popup mechanism to control player input and player turn sequence.
 - **QSetting Files** (Partial)
@@ -95,6 +98,13 @@ Below is a list of features not yet complete:
 ## TODO
 - Clean up win graphics.
 - Implement Player Management for Admin User.
+- Implement date/time settings for Admin User.
 - Implement 2 Player Game Mode logic.
-- Implement date/time settings.
 - Finish High Score.
+- Finish integrating QSettings File examle. 
+- Create AWS web application to display high score table over the web.
+- Itergrate Mqtt proctocl and payload mangement.
+- Creaet custom Poky build for RootFS.
+- Deploy to RPI.
+- Implement sub project connect 4.
+- Implement sub project battleships.
