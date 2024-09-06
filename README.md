@@ -15,9 +15,11 @@ Project Structure:
             - qml (view)
             - modles (used by view)
             - javascript (functions used by view)
+            -Cmakelist file
         - README.md
         - .gitignore
         - .git
+
 
 Building and Running:
     - Currently compiled and tested on Ubuntu 22.4
@@ -34,14 +36,23 @@ Building and Running:
     - Open the TicTacToe Project in Qt creator & setup compiler and build and run project 
 
 
-Game Mode: 
+Screen/Page Layout:
     - Home Screen 
-        - 1 Player 
-        - 2 Player
-        - High Score 
-        - Admin Login 
-            - admin / admin
-        
+        - 1 Player Mode Selected
+            - player selection Page
+                - game board Page
+        - 2 Player Mode Selcted
+            - player selection Page
+                - game board Page
+        - High Score Page
+        - Admin Login Page
+            - admin / admin Page
+                - About Page
+                - Date Time Settings Page
+                - Player Manager Page
+                
+
+ Game Mode:        
     - Selecting 1 player 
         - select player 
             - play against computer
@@ -53,6 +64,7 @@ Game Mode:
         - Back button 
     
     - NOTE: Please allow for up to 1 second for Player 2 (computer) to place its Mark 'O' 
+    
     
 Admin Mode:
     - You can login as an admin user from the home screen by clicking the login admin button

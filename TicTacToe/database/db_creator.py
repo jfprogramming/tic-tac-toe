@@ -38,6 +38,16 @@ def create_database():
             )
         """)
 
+        # Create the System Information Table
+        cursor.execute("""
+            CREATE TABLE SystemInformation (
+                softwareVersion TEXT,
+                dataBaseVersion TEXT,
+                gameVersion TEXT,
+                dateTime DATETIME DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+
         # Commit changes and close the connection
         conn.commit()
         conn.close()
