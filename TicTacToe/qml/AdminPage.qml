@@ -38,7 +38,8 @@ Item {
                 }
                 onClicked: {
                     console.log("Date Time Setting Selected...")
-                    //display play area
+                    // Display date time settings page
+                    //
                     stackView.push("DateTimeSetting.qml")
                 }
             }
@@ -56,8 +57,28 @@ Item {
                 }
                 onClicked: {
                     console.log("Manage Players Setting Selected...")
-                    //display play area
+                    // Display Player Manager page
+                    //
                     stackView.push("PlayerManager.qml")
+                }
+            }
+
+            Button{
+                id:aboutBtn
+                flat: true
+                highlighted: true
+                height: 100
+                width: 200
+                Text{
+                    id: aboutBtnTxt
+                    text: "About"
+                    anchors.centerIn: parent
+                }
+                onClicked: {
+                    console.log("About Setting Selected...")
+                    // Display the About page
+                    //
+                    stackView.push("About.qml")
                 }
             }
         }

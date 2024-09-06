@@ -13,8 +13,12 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
 
+    // Setup DB
+    //
     Controllers::dbManager.initializeDatabase();
 
+    // Setup models for QML
+    //
     PlayerModel playerModel;
     engine.rootContext()->setContextProperty("playerModel", &playerModel);
 

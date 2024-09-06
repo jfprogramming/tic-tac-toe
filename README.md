@@ -47,16 +47,31 @@ Game Mode:
             - play against computer
             - score is keept in the header      
         - Once game is complete select the RESET button to clear the board. 
+        
+    - Screen nagivation button located in footer of application 
+        - Home button 
+        - Back button 
     
     - NOTE: Please allow for up to 1 second for Player 2 (computer) to place its Mark 'O' 
+    
+Admin Mode:
+    - You can login as an admin user from the home screen by clicking the login admin button
+        - admin / admin
+    - admin mode gives you access to system setting features
+        - About Page (Partially complete)
+        - Date Time Settings Page (Partially complete)
+        - Player Manager Page (Partially complete)
     
 
 Features Incomplete:
     Below is a list of features not complete yet
     - 2 Player Mode 
+        - Player input controll
     - Date/Time setting (Admin Only)
     - Player Managment (Admin Only)
     - High Score (Partial) 
+        - High Score data is being pulled from db and display in GUI table 
+        - TODO accumulate player scor and save to the database
     - Other Game Modes - Connect 4 / Battle Ships
     - IoT High Score Web App
         - implement the AWS web application for displaying high score 
@@ -67,7 +82,12 @@ Features Incomplete:
         - housed in seperate repo 
     
     
-
+TODO: 
+  - Clean up win graphics
+  - Implment Player Management for Admin User
+  - Implement 2 Player Game Mode logic      
+  - Implement date / time settings 
+  - Finish High Score 
 
 
 
