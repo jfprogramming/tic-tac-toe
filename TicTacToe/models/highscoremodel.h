@@ -12,10 +12,12 @@ public:
 
 
     // Implement the necessary methods for a list model
+    //
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
     // Set the high score list
+    //
     void setHighScoreList(const QList<int> &newHighScoreList);;
 
 private:

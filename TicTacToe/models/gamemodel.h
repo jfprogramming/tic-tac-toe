@@ -2,6 +2,14 @@
 
 #include <QObject>
 
+
+/**
+ * @file GameModel.h
+ *
+ * @brief The GameModel class manages game data.
+ *        Handles game type and player information.
+ *        Provides interface for setting and retrieving game details.
+ */
 class GameModel : public QObject
 {
     Q_OBJECT

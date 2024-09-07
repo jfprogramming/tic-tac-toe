@@ -17,6 +17,8 @@ public:
     void performDatabaseOperations();
     void closeDatabase();
 
+    // Player Management
+    //
     QString getPlayerName(int userId);
     QString getPlayerColor(QString &color);
     QString getUserSelectedOption(int userId);
@@ -25,6 +27,8 @@ public:
     bool setPlayerColor(int playerId, QString &color);
     bool createNewPlayer(QString &playerName, QString &playerColor);
 
+    // Admin Login
+    //
     QString getAdminUsername();
     QString getDecryptedAdminPassword();
 

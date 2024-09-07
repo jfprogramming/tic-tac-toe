@@ -6,22 +6,39 @@
 #include "databasemanager.h"
 #include "cryptclass.h"
 
+
+/**
+*  @fn    DatabaseManager::DatabaseManager
+ * @brief Constructor for DatabaseManager.
+ * @param home The QThread object.
+ * @param parent The parent QObject.
+ */
 DatabaseManager::DatabaseManager(QThread* home, QObject* parent) : QObject(parent)
 {
     m_isDatabaseInitialized = false;
 }
 
+
+/**
+ * @fn    DatabaseManager::~DatabaseManager
+ * @brief Destructor for DatabaseManager.
+ */
 DatabaseManager::~DatabaseManager(){
     closeDatabase();
 }
 
 
+/**
+ * @fn     DatabaseManager::initializeDatabase
+ * @brief  Initializes the database.
+ * @return True if the database is successfully initialized, false otherwise.
+ */
 bool DatabaseManager::initializeDatabase()
 {
     qInfo() << "database initialization...";
 
     if (m_isDatabaseInitialized) {
-        //Database already initialized, no need to proceed
+        // Database already initialized, no need to proceed
         return true;
     }
 
@@ -35,12 +52,17 @@ bool DatabaseManager::initializeDatabase()
         return false;
     } else {
         // Set the flag to true after successful initialization
-        //m_isDatabaseInitialized = true;
+        // m_isDatabaseInitialized = true;
         return true;
     }
 }
 
 
+/**
+ * @fn    DatabaseManager::closeDatabase
+ * @brief Closes the database.
+ * @return void
+ */
 void DatabaseManager::closeDatabase()
 {
     m_isDatabaseInitialized = false;
@@ -48,6 +70,11 @@ void DatabaseManager::closeDatabase()
 }
 
 
+/**
+ * @fn     DatabaseManager::getHighScoreList
+ * @brief  Retrieves the high score list from the database.
+ * @return A QList of high scores.
+ */
 QList<int> DatabaseManager::getHighScoreList(){
     QList<int> highScores;
 
@@ -60,6 +87,12 @@ QList<int> DatabaseManager::getHighScoreList(){
     return highScores;
 }
 
+
+/**
+ * @fn     DatabaseManager::getAdminUsername
+ * @brief  Retrieves the admin username from the database.
+ * @return The admin username as a QString.
+ */
 QString DatabaseManager::getAdminUsername()
 {
     QSqlQuery query;
@@ -67,10 +100,15 @@ QString DatabaseManager::getAdminUsername()
     if (query.exec() && query.next())
         return query.value(0).toString();
     else
-        return ""; // Return an empty string or handle the error
+        return "";
 }
 
 
+/**
+ * @fn     DatabaseManager::getDecryptedAdminPassword
+ * @brief  Retrieves and decrypts the admin password from the database.
+ * @return The decrypted admin password as a QString.
+ */
 QString DatabaseManager::getDecryptedAdminPassword()
 {
     QString decryptedPassword;
@@ -86,10 +124,17 @@ QString DatabaseManager::getDecryptedAdminPassword()
         return decryptedPassword;
     }
     else
-        return ""; // Return an empty string or handle the error
+        return "";
 }
 
 
+/**
+ * @fn     DatabaseManager::authenticateAdmin
+ * @brief  Authenticates the admin user.
+ * @param  username The admin username.
+ * @param  password The admin password.
+ * @return True if authentication is successful, false otherwise.
+ */
 bool DatabaseManager::authenticateAdmin(const QString &username, const QString &password) {
     QSqlQuery query;
     QString   adminName;
@@ -115,13 +160,11 @@ bool DatabaseManager::authenticateAdmin(const QString &username, const QString &
     }
 
     // Decrypt the password using bcrypt
-    //
     QByteArray byteArray      = password.toLatin1();
     const char* charArray     = byteArray.data();
     QString decryptedPassword = CryptClass::bcrypt_checkpw(charArray, password.toUtf8().constData())
                                     ? "admin" // Correct password
                                     : ""; // Incorrect password
-
 
     qInfo() << "Decrypted password:" << decryptedPassword;
 
@@ -133,8 +176,15 @@ bool DatabaseManager::authenticateAdmin(const QString &username, const QString &
 }
 
 
+/**
+ * @fn     DatabaseManager::performDatabaseOperations
+ * @brief  generic database operation place holder
+ * @return void
+ */
 void DatabaseManager::performDatabaseOperations()
 {
+    // TODO: fill in when needed.
+    //
     QSqlQuery query;
     if (query.exec("SELECT * FROM PlayerTable"))
     {
@@ -151,7 +201,12 @@ void DatabaseManager::performDatabaseOperations()
     }
 }
 
-
+/**
+ * @fn     DatabaseManager::getPlayerName
+ * @brief  Retrieves the name of a player from the database.
+ * @param  playerId The ID of the player.
+ * @return QString The name of the player.
+ */
 QString DatabaseManager::getPlayerName(int playerId)
 {
     QSqlQuery query;
@@ -160,10 +215,16 @@ QString DatabaseManager::getPlayerName(int playerId)
     if (query.exec() && query.next())
         return query.value(0).toString();
     else
-        return ""; // Return an empty string or handle the error
+        return "";
 }
 
 
+/**
+ * @fn     DatabaseManager::getPlayerColor
+ * @brief  Retrieves the color associated with a player from the database.
+ * @param  color The color to search for.
+ * @return QString The color associated with the player.
+ */
 QString DatabaseManager::getPlayerColor(QString &color)
 {
     QSqlQuery query;
@@ -172,10 +233,16 @@ QString DatabaseManager::getPlayerColor(QString &color)
     if (query.exec() && query.next())
         return query.value(0).toString();
     else
-        return ""; // Return an empty string or handle the error
+        return "";
 }
 
 
+/**
+ * @fn     DatabaseManager::getUserSelectedOption
+ * @brief  Retrieves the selected option of a user from the database.
+ * @param  userId The ID of the user.
+ * @return QString The selected option of the user.
+ */
 QString DatabaseManager::getUserSelectedOption(int userId)
 {
     QSqlQuery query;
@@ -184,21 +251,26 @@ QString DatabaseManager::getUserSelectedOption(int userId)
     if (query.exec() && query.next())
         return query.value(0).toString();
     else
-        return ""; // Return an empty string or handle the error
+        return "";
 }
 
 
+/**
+ * @fn    DatabaseManager::setPlayerName
+ * @brief  Sets the name of a player in the database.
+ * @param  playerId The ID of the player.
+ * @param  newName The new name of the player.
+ * @return bool True if the operation was successful, false otherwise.
+ */
 bool DatabaseManager::setPlayerName(int playerId, QString &newName)
 {
     QSqlQuery query;
 
-
     if(playerId == 1){
-        //create new player
+        // Create new player
         QString na = "N/A";
         createNewPlayer(newName, na);
-
-    }else{
+    } else {
         query.prepare("UPDATE PlayerTable SET playerName = :playerName WHERE playerId = :playerId");
         query.bindValue(":playerName", newName);
         query.bindValue(":playerId", playerId);
@@ -208,12 +280,20 @@ bool DatabaseManager::setPlayerName(int playerId, QString &newName)
 }
 
 
+/**
+ * @fn     DatabaseManager::setPlayerColor
+ * @brief  set the player color int the player table
+ * @param  playerId
+ * @param  color
+ * @return bool
+ */
 bool DatabaseManager::setPlayerColor(int playerId, QString &color)
 {
     QSqlQuery query;
 
     if(playerId ==1){
-        //create new user
+        // Create new player
+        //
         QString na = "N/A";
         createNewPlayer(na, color);
     }else{
@@ -226,11 +306,19 @@ bool DatabaseManager::setPlayerColor(int playerId, QString &color)
 }
 
 
+/**
+ * @fn      DatabaseManager::createNewPlayer
+ * @brief   Inserts a new user int the player table
+ * @param   playerName
+ * @param   playerColor
+ * @return  bool
+ */
 bool DatabaseManager::createNewPlayer(QString &playerName, QString &playerColor)
 {
     QSqlQuery query;
 
-    //create new user
+    // Create new player
+    //
     query.prepare("INSERT INTO UserTable (userName, userAge, userOptionSelected, dateTime) VALUES(:userName, :userAge, :userOptionSelected, :dateTime)");
     query.bindValue(":playerName", playerName);
     query.bindValue(":playerColor", playerColor);

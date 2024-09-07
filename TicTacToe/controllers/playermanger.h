@@ -10,6 +10,7 @@ public:
     explicit PlayerManger(QThread *parent = nullptr);
 
     // Player Model Obj
+    //
     PlayerModel playerModel;
 
     QString getPlayerName() const;

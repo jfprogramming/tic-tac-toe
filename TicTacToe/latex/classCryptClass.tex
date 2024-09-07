@@ -1,0 +1,376 @@
+\hypertarget{classCryptClass}{}\doxysection{Crypt\+Class Class Reference}
+\label{classCryptClass}\index{CryptClass@{CryptClass}}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{classCryptClass_ae56c1a1db462d2488cd45478491bc5fc}{rand\+\_\+read}} (int fd, char $\ast$out, size\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em Random read from a file descriptor. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{classCryptClass_ae311bfb36a9e58a6fe7fc51dbbadd292}{bcrypt\+\_\+gensalt}} (int salt\+\_\+rounds, char salt\mbox{[}BCRYPT\+\_\+\+HASHSIZE\mbox{]})
+\begin{DoxyCompactList}\small\item\em Generate a salt for bcrypt. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{classCryptClass_ad34eb1050b6de1234766e055cad89007}{bcrypt\+\_\+hashpw}} (const char $\ast$passwd, const char salt\mbox{[}BCRYPT\+\_\+\+HASHSIZE\mbox{]}, char hash\mbox{[}BCRYPT\+\_\+\+HASHSIZE\mbox{]})
+\begin{DoxyCompactList}\small\item\em Hash a password using bcrypt. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{classCryptClass_a9050997f13df8ce500fc21728c936d00}{bcrypt\+\_\+checkpw}} (const char $\ast$passwd, const char hash\mbox{[}BCRYPT\+\_\+\+HASHSIZE\mbox{]})
+\begin{DoxyCompactList}\small\item\em Check a password against a bcrypt hash. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classCryptClass_ab20e7cc37f661cb1ab2eeb5d14ec1821}{set\+Key}} (QString hex\+Key\+String)
+\begin{DoxyCompactList}\small\item\em Create Key (setter for key256) \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classCryptClass_a7c5f77c66f336b76da26ee304c858f76}{set\+Iv}} (QString hex\+Iv\+String)
+\begin{DoxyCompactList}\small\item\em Create iv128 (setter for iv128) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classCryptClass_adf002fd5187731147a5f49234d4039c5}\label{classCryptClass_adf002fd5187731147a5f49234d4039c5}} 
+static QString {\bfseries get\+Key} ()
+\item 
+\mbox{\Hypertarget{classCryptClass_a176c2174a89ac871f965828458632505}\label{classCryptClass_a176c2174a89ac871f965828458632505}} 
+static QString {\bfseries get\+Iv} ()
+\item 
+static int \mbox{\hyperlink{classCryptClass_aff0090ce3728d0f803abba43bb543d11}{base64encode}} (const char $\ast$text\+Buf, int text\+Len, char $\ast$enc\+Buf)
+\begin{DoxyCompactList}\small\item\em Encode a string using Base64. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{classCryptClass_a4ad42e7ccf56ab9a286bd274124a0f65}{base64decode}} (const char $\ast$enc\+Buf, int enc\+Len, char $\ast$text\+Buf)
+\begin{DoxyCompactList}\small\item\em Decode String using Base64 Encoder. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{classCryptClass_a271a7b5c4fb8c9d7b001415a3c2dff77}{aes256encode}} (const char $\ast$text\+Buf, int text\+Len, char $\ast$enc\+Buf)
+\begin{DoxyCompactList}\small\item\em AES 256 Encoder. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{classCryptClass_ade6ff851c1ca484609de18eba9b263da}{aes256decode}} (const char $\ast$enc\+Buf, int enc\+Len, char $\ast$text\+Buf)
+\begin{DoxyCompactList}\small\item\em AES 256 Decoder. \end{DoxyCompactList}\item 
+static QString \mbox{\hyperlink{classCryptClass_a2eabc0cd675ee7b34f2552faf30f4354}{aes256to\+Hex\+Str}} (const char $\ast$char\+Buf, int len)
+\begin{DoxyCompactList}\small\item\em AES 256 to Hex String. \end{DoxyCompactList}\item 
+static QByte\+Array \mbox{\hyperlink{classCryptClass_a2db2495aca71c21aeb1a428581316644}{aes256from\+Hex\+Str}} (const QString q\+String)
+\begin{DoxyCompactList}\small\item\em AES 256 from Hex String. \end{DoxyCompactList}\item 
+static QString \mbox{\hyperlink{classCryptClass_a3aae6961840d453e7d0692ad6d8cf846}{aes256to\+Base64\+Str}} (const char $\ast$aes2656\+Buf, int len)
+\begin{DoxyCompactList}\small\item\em AES 256 to Base64 String. \end{DoxyCompactList}\item 
+static QByte\+Array \mbox{\hyperlink{classCryptClass_a954fc05f64d62e9f053e21e4dd379c61}{aes256from\+Base64\+Str}} (const QString base64str)
+\begin{DoxyCompactList}\small\item\em AES 256 from Base64 String. \end{DoxyCompactList}\item 
+static QString \mbox{\hyperlink{classCryptClass_a576902c500d81cf3cfef795772aa19e2}{base64aes256encode}} (QString text\+String)
+\begin{DoxyCompactList}\small\item\em base64 aes256 encode \end{DoxyCompactList}\item 
+static QString \mbox{\hyperlink{classCryptClass_a1b08460b5f7fe46a7e9cec41baf9b055}{base64aes256decode}} (QString text\+String)
+\begin{DoxyCompactList}\small\item\em Base64 aes256 Decode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCryptClass_ade6ff851c1ca484609de18eba9b263da}\label{classCryptClass_ade6ff851c1ca484609de18eba9b263da}} 
+\index{CryptClass@{CryptClass}!aes256decode@{aes256decode}}
+\index{aes256decode@{aes256decode}!CryptClass@{CryptClass}}
+\doxysubsubsection{\texorpdfstring{aes256decode()}{aes256decode()}}
+{\footnotesize\ttfamily int Crypt\+Class\+::aes256decode (\begin{DoxyParamCaption}\item[{const char $\ast$}]{enc\+Buf,  }\item[{int}]{enc\+Len,  }\item[{char $\ast$}]{text\+Buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+AES 256 Decoder. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & char$\ast$ enc\+Buf \\
+\hline
+{\em int} & enc\+Len \\
+\hline
+{\em char$\ast$} & text\+Buf \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCryptClass_a271a7b5c4fb8c9d7b001415a3c2dff77}\label{classCryptClass_a271a7b5c4fb8c9d7b001415a3c2dff77}} 
+\index{CryptClass@{CryptClass}!aes256encode@{aes256encode}}
+\index{aes256encode@{aes256encode}!CryptClass@{CryptClass}}
+\doxysubsubsection{\texorpdfstring{aes256encode()}{aes256encode()}}
+{\footnotesize\ttfamily int Crypt\+Class\+::aes256encode (\begin{DoxyParamCaption}\item[{const char $\ast$}]{text\+Buf,  }\item[{int}]{text\+Len,  }\item[{char $\ast$}]{enc\+Buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+AES 256 Encoder. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & char$\ast$ text\+Buf \\
+\hline
+{\em int} & text\+Len \\
+\hline
+{\em char$\ast$} & enc\+Buf \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCryptClass_a954fc05f64d62e9f053e21e4dd379c61}\label{classCryptClass_a954fc05f64d62e9f053e21e4dd379c61}} 
+\index{CryptClass@{CryptClass}!aes256fromBase64Str@{aes256fromBase64Str}}
+\index{aes256fromBase64Str@{aes256fromBase64Str}!CryptClass@{CryptClass}}
+\doxysubsubsection{\texorpdfstring{aes256fromBase64Str()}{aes256fromBase64Str()}}
+{\footnotesize\ttfamily QByte\+Array Crypt\+Class\+::aes256from\+Base64\+Str (\begin{DoxyParamCaption}\item[{const QString}]{base64str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+AES 256 from Base64 String. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & char$\ast$ char\+Buf \\
+\hline
+{\em int} & len \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCryptClass_a2db2495aca71c21aeb1a428581316644}\label{classCryptClass_a2db2495aca71c21aeb1a428581316644}} 
+\index{CryptClass@{CryptClass}!aes256fromHexStr@{aes256fromHexStr}}
+\index{aes256fromHexStr@{aes256fromHexStr}!CryptClass@{CryptClass}}
+\doxysubsubsection{\texorpdfstring{aes256fromHexStr()}{aes256fromHexStr()}}
+{\footnotesize\ttfamily QByte\+Array Crypt\+Class\+::aes256from\+Hex\+Str (\begin{DoxyParamCaption}\item[{const QString}]{q\+String }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+AES 256 from Hex String. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & char$\ast$ char\+Buf \\
+\hline
+{\em int} & len \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCryptClass_a3aae6961840d453e7d0692ad6d8cf846}\label{classCryptClass_a3aae6961840d453e7d0692ad6d8cf846}} 
+\index{CryptClass@{CryptClass}!aes256toBase64Str@{aes256toBase64Str}}
+\index{aes256toBase64Str@{aes256toBase64Str}!CryptClass@{CryptClass}}
+\doxysubsubsection{\texorpdfstring{aes256toBase64Str()}{aes256toBase64Str()}}
+{\footnotesize\ttfamily QString Crypt\+Class\+::aes256to\+Base64\+Str (\begin{DoxyParamCaption}\item[{const char $\ast$}]{aes2656\+Buf,  }\item[{int}]{len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+AES 256 to Base64 String. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & char$\ast$ char\+Buf \\
+\hline
+{\em int} & len \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCryptClass_a2eabc0cd675ee7b34f2552faf30f4354}\label{classCryptClass_a2eabc0cd675ee7b34f2552faf30f4354}} 
+\index{CryptClass@{CryptClass}!aes256toHexStr@{aes256toHexStr}}
+\index{aes256toHexStr@{aes256toHexStr}!CryptClass@{CryptClass}}
+\doxysubsubsection{\texorpdfstring{aes256toHexStr()}{aes256toHexStr()}}
+{\footnotesize\ttfamily QString Crypt\+Class\+::aes256to\+Hex\+Str (\begin{DoxyParamCaption}\item[{const char $\ast$}]{char\+Buf,  }\item[{int}]{len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+AES 256 to Hex String. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & char$\ast$ char\+Buf \\
+\hline
+{\em int} & len \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCryptClass_a1b08460b5f7fe46a7e9cec41baf9b055}\label{classCryptClass_a1b08460b5f7fe46a7e9cec41baf9b055}} 
+\index{CryptClass@{CryptClass}!base64aes256decode@{base64aes256decode}}
+\index{base64aes256decode@{base64aes256decode}!CryptClass@{CryptClass}}
+\doxysubsubsection{\texorpdfstring{base64aes256decode()}{base64aes256decode()}}
+{\footnotesize\ttfamily QString Crypt\+Class\+::base64aes256decode (\begin{DoxyParamCaption}\item[{QString}]{text\+String }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Base64 aes256 Decode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em QString} & text\+String \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCryptClass_a576902c500d81cf3cfef795772aa19e2}\label{classCryptClass_a576902c500d81cf3cfef795772aa19e2}} 
+\index{CryptClass@{CryptClass}!base64aes256encode@{base64aes256encode}}
+\index{base64aes256encode@{base64aes256encode}!CryptClass@{CryptClass}}
+\doxysubsubsection{\texorpdfstring{base64aes256encode()}{base64aes256encode()}}
+{\footnotesize\ttfamily QString Crypt\+Class\+::base64aes256encode (\begin{DoxyParamCaption}\item[{QString}]{text\+String }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+base64 aes256 encode 
+
+
+\begin{DoxyParams}{Parameters}
+{\em QString} & text\+String \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCryptClass_a4ad42e7ccf56ab9a286bd274124a0f65}\label{classCryptClass_a4ad42e7ccf56ab9a286bd274124a0f65}} 
+\index{CryptClass@{CryptClass}!base64decode@{base64decode}}
+\index{base64decode@{base64decode}!CryptClass@{CryptClass}}
+\doxysubsubsection{\texorpdfstring{base64decode()}{base64decode()}}
+{\footnotesize\ttfamily int Crypt\+Class\+::base64decode (\begin{DoxyParamCaption}\item[{const char $\ast$}]{enc\+Buf,  }\item[{int}]{enc\+Len,  }\item[{char $\ast$}]{text\+Buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Decode String using Base64 Encoder. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em const} & char$\ast$ enc\+Buf \\
+\hline
+{\em int} & len \\
+\hline
+{\em char$\ast$} & text\+Buf \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCryptClass_aff0090ce3728d0f803abba43bb543d11}\label{classCryptClass_aff0090ce3728d0f803abba43bb543d11}} 
+\index{CryptClass@{CryptClass}!base64encode@{base64encode}}
+\index{base64encode@{base64encode}!CryptClass@{CryptClass}}
+\doxysubsubsection{\texorpdfstring{base64encode()}{base64encode()}}
+{\footnotesize\ttfamily int Crypt\+Class\+::base64encode (\begin{DoxyParamCaption}\item[{const char $\ast$}]{text\+Buf,  }\item[{int}]{text\+Len,  }\item[{char $\ast$}]{enc\+Buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Encode a string using Base64. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text\+Buf} & The input text buffer. \\
+\hline
+{\em len} & The length of the input text. \\
+\hline
+{\em enc\+Buf} & The output encoded buffer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, non-\/zero on failure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCryptClass_a9050997f13df8ce500fc21728c936d00}\label{classCryptClass_a9050997f13df8ce500fc21728c936d00}} 
+\index{CryptClass@{CryptClass}!bcrypt\_checkpw@{bcrypt\_checkpw}}
+\index{bcrypt\_checkpw@{bcrypt\_checkpw}!CryptClass@{CryptClass}}
+\doxysubsubsection{\texorpdfstring{bcrypt\_checkpw()}{bcrypt\_checkpw()}}
+{\footnotesize\ttfamily int Crypt\+Class\+::bcrypt\+\_\+checkpw (\begin{DoxyParamCaption}\item[{const char $\ast$}]{passwd,  }\item[{const char}]{hash\mbox{[}\+BCRYPT\+\_\+\+HASHSIZE\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check a password against a bcrypt hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em passwd} & The password to check. \\
+\hline
+{\em hash} & The hash to check against. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if the password matches, non-\/zero otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCryptClass_ae311bfb36a9e58a6fe7fc51dbbadd292}\label{classCryptClass_ae311bfb36a9e58a6fe7fc51dbbadd292}} 
+\index{CryptClass@{CryptClass}!bcrypt\_gensalt@{bcrypt\_gensalt}}
+\index{bcrypt\_gensalt@{bcrypt\_gensalt}!CryptClass@{CryptClass}}
+\doxysubsubsection{\texorpdfstring{bcrypt\_gensalt()}{bcrypt\_gensalt()}}
+{\footnotesize\ttfamily int Crypt\+Class\+::bcrypt\+\_\+gensalt (\begin{DoxyParamCaption}\item[{int}]{salt\+\_\+rounds,  }\item[{char}]{salt\mbox{[}\+BCRYPT\+\_\+\+HASHSIZE\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Generate a salt for bcrypt. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em salt\+\_\+rounds} & The number of salt rounds. \\
+\hline
+{\em salt} & The generated salt. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, non-\/zero on failure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCryptClass_ad34eb1050b6de1234766e055cad89007}\label{classCryptClass_ad34eb1050b6de1234766e055cad89007}} 
+\index{CryptClass@{CryptClass}!bcrypt\_hashpw@{bcrypt\_hashpw}}
+\index{bcrypt\_hashpw@{bcrypt\_hashpw}!CryptClass@{CryptClass}}
+\doxysubsubsection{\texorpdfstring{bcrypt\_hashpw()}{bcrypt\_hashpw()}}
+{\footnotesize\ttfamily int Crypt\+Class\+::bcrypt\+\_\+hashpw (\begin{DoxyParamCaption}\item[{const char $\ast$}]{passwd,  }\item[{const char}]{salt\mbox{[}\+BCRYPT\+\_\+\+HASHSIZE\mbox{]},  }\item[{char}]{hash\mbox{[}\+BCRYPT\+\_\+\+HASHSIZE\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Hash a password using bcrypt. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em passwd} & The password to hash. \\
+\hline
+{\em salt} & The salt to use. \\
+\hline
+{\em hash} & The resulting hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, non-\/zero on failure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCryptClass_ae56c1a1db462d2488cd45478491bc5fc}\label{classCryptClass_ae56c1a1db462d2488cd45478491bc5fc}} 
+\index{CryptClass@{CryptClass}!rand\_read@{rand\_read}}
+\index{rand\_read@{rand\_read}!CryptClass@{CryptClass}}
+\doxysubsubsection{\texorpdfstring{rand\_read()}{rand\_read()}}
+{\footnotesize\ttfamily int Crypt\+Class\+::rand\+\_\+read (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{char $\ast$}]{out,  }\item[{size\+\_\+t}]{count }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Random read from a file descriptor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & The file descriptor. \\
+\hline
+{\em out} & The output buffer. \\
+\hline
+{\em count} & The number of bytes to read. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCryptClass_a7c5f77c66f336b76da26ee304c858f76}\label{classCryptClass_a7c5f77c66f336b76da26ee304c858f76}} 
+\index{CryptClass@{CryptClass}!setIv@{setIv}}
+\index{setIv@{setIv}!CryptClass@{CryptClass}}
+\doxysubsubsection{\texorpdfstring{setIv()}{setIv()}}
+{\footnotesize\ttfamily void Crypt\+Class\+::set\+Iv (\begin{DoxyParamCaption}\item[{QString}]{hex\+Iv\+String }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create iv128 (setter for iv128) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em QString} & hex\+Iv\+String \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCryptClass_ab20e7cc37f661cb1ab2eeb5d14ec1821}\label{classCryptClass_ab20e7cc37f661cb1ab2eeb5d14ec1821}} 
+\index{CryptClass@{CryptClass}!setKey@{setKey}}
+\index{setKey@{setKey}!CryptClass@{CryptClass}}
+\doxysubsubsection{\texorpdfstring{setKey()}{setKey()}}
+{\footnotesize\ttfamily void Crypt\+Class\+::set\+Key (\begin{DoxyParamCaption}\item[{QString}]{hex\+Key\+String }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create Key (setter for key256) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em QString} & hex\+Key\+String \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+cryptclass.\+h\item 
+cryptclass.\+cpp\end{DoxyCompactItemize}

@@ -2,22 +2,17 @@
 #include <crypt.h>
 #include <QDebug>
 
-
 unsigned char CryptClass::_key256[256];
 unsigned char CryptClass::_iv128[128];
 
-
-/***********************************************************************************************
- *
- * \fn CryptClass::rand_read
- *
- * \brief randon read
- * \param - int fd
- * \param - char *out
- * \param - size_t count
- * \return - int
- *
- ***********************************************************************************************/
+/**
+ * @fn    CryptClass::rand_read
+ * @brief Random read from a file descriptor.
+ * @param fd The file descriptor.
+ * @param out The output buffer.
+ * @param count The number of bytes to read.
+ * @return 0 on success, -1 on failure.
+ */
 int CryptClass::rand_read(int fd, char *out, size_t count)
 {
     size_t total;
@@ -43,17 +38,13 @@ int CryptClass::rand_read(int fd, char *out, size_t count)
     return 0;
 }
 
-
-/***********************************************************************************************
- *
- * \fn CryptClass::bcrypt_gensalt
- *
- * \brief Generate Salt Rounds
- * \param - int salt_rounds
- * \param - char salt[BCRYPT_HASHSIZE]
- * \return int
- *
- ***********************************************************************************************/
+/**
+ * @fn    CryptClass::bcrypt_gensalt
+ * @brief Generate a salt for bcrypt.
+ * @param salt_rounds The number of salt rounds.
+ * @param salt The generated salt.
+ * @return 0 on success, non-zero on failure.
+ */
 int CryptClass::bcrypt_gensalt(int salt_rounds, char salt[BCRYPT_HASHSIZE])
 {
     int fd;
@@ -61,7 +52,6 @@ int CryptClass::bcrypt_gensalt(int salt_rounds, char salt[BCRYPT_HASHSIZE])
     char *aux;
 
     // Get a random starting salt
-    //
     fd = open("/dev/urandom", O_RDONLY);
     if (fd == -1) return 1;
     else if (rand_read(fd, rand_salt, RANDBYTES) != 0) {
@@ -71,27 +61,21 @@ int CryptClass::bcrypt_gensalt(int salt_rounds, char salt[BCRYPT_HASHSIZE])
     if (close(fd) != 0) return 4;
 
     // Validate requested rounds
-    //
-    salt_rounds = (salt_rounds < MIN_ROUNDS || salt_rounds > MAX_ROUNDS)? DEF_ROUNDS:salt_rounds;
+    salt_rounds = (salt_rounds < MIN_ROUNDS || salt_rounds > MAX_ROUNDS) ? DEF_ROUNDS : salt_rounds;
 
     // Get the final salt
-    //
     aux = crypt_gensalt_rn("$2b$", salt_rounds, rand_salt, RANDBYTES, salt, BCRYPT_HASHSIZE);
-    return (aux == NULL)?5:0;
+    return (aux == NULL) ? 5 : 0;
 }
 
-
-/***********************************************************************************************
- *
- * \fn CryptClass::bcrypt_hashpw
- *
- * \brief Hash User Password
- * \param - const char *passwd
- * \param - const char salt[BCRYPT_HASHSIZE]
- * \param - char hash[BCRYPT_HASHSIZE]
- * \return int
- *
- ***********************************************************************************************/
+/**
+ * @fn    CryptClass::bcrypt_hashpw
+ * @brief Hash a password using bcrypt.
+ * @param passwd The password to hash.
+ * @param salt The salt to use.
+ * @param hash The resulting hash.
+ * @return 0 on success, non-zero on failure.
+ */
 int CryptClass::bcrypt_hashpw(const char *passwd, const char salt[BCRYPT_HASHSIZE], char hash[BCRYPT_HASHSIZE])
 {
     char *aux;
@@ -100,26 +84,20 @@ int CryptClass::bcrypt_hashpw(const char *passwd, const char salt[BCRYPT_HASHSIZ
     strcpy(data.setting, salt);
     aux = crypt_rn(passwd, salt, &data, sizeof(data));
     strncpy(hash, data.output, BCRYPT_HASHSIZE);
-    return (aux == NULL)?1:0;
+    return (aux == NULL) ? 1 : 0;
 }
 
-
-/***********************************************************************************************
- *
- * \fn CryptClass::bcrypt_checkpw
- *
- * \brief Check Hashed Password
- * \param - const char *passwd
- * \param - const char hash[BCRYPT_HASHSIZE]
- * \return int
- *
- ***********************************************************************************************/
+/**
+ * @fn    CryptClass::bcrypt_checkpw
+ * @brief Check a password against a bcrypt hash.
+ * @param passwd The password to check.
+ * @param hash The hash to check against.
+ * @return 0 if the password matches, non-zero otherwise.
+ */
 int CryptClass::bcrypt_checkpw(const char *passwd, const char hash[BCRYPT_HASHSIZE])
 {
     int ret;
     char outhash[BCRYPT_HASHSIZE];
-
-
 
     ret = bcrypt_hashpw(passwd, hash, outhash);
 
@@ -139,20 +117,18 @@ int CryptClass::bcrypt_checkpw(const char *passwd, const char hash[BCRYPT_HASHSI
     return strcmp(hash, outhash);
 }
 
-
-/***********************************************************************************************
- *
- * \fn CryptClass::base64encode
- *
- * \brief Encode String using Base64 Encoder
- * \param - const char* textBuf
- * \param - int len
- * \param - char* encBuf
- * \return int
- *
- ***********************************************************************************************/
+/**
+ * @fn    CryptClass::base64encode
+ * @brief Encode a string using Base64.
+ * @param textBuf The input text buffer.
+ * @param len The length of the input text.
+ * @param encBuf The output encoded buffer.
+ * @return 0 on success, non-zero on failure.
+ */
 int CryptClass::base64encode(const char* textBuf, int len, char* encBuf)
 {
+    // Implementation of base64 encoding
+    //
     int   estLen = 4*((len+2)/3);
     int   outLen = EVP_EncodeBlock((unsigned char*) encBuf, (unsigned char*) textBuf, len);
     encBuf[outLen]=0;
@@ -163,17 +139,15 @@ int CryptClass::base64encode(const char* textBuf, int len, char* encBuf)
 }
 
 
-/***********************************************************************************************
+/**
+ * @fn     CryptClass::base64decode
+ * @brief  Decode String using Base64 Encoder
+ * @param  const char* encBuf
+ * @param  int len
+ * @param  char* textBuf
+ * @return int
  *
- * \fn CryptClass::base64encode
- *
- * \brief Decode String using Base64 Encoder
- * \param - const char* encBuf
- * \param - int len
- * \param - char* textBuf
- * \return int
- *
- ***********************************************************************************************/
+**/
 int CryptClass::base64decode(const char* encBuf, int len, char* textBuf)
 {
     int   estLen = 3*len/4;
@@ -189,46 +163,36 @@ int CryptClass::base64decode(const char* encBuf, int len, char* textBuf)
 // Setters for key256 & iv128
 //
 
-/***********************************************************************************************
- *
- * \fn CryptClass::setKey
- *
- * \brief Create Key (setter for key256)
- * \param - QString hexKeyString
- * \return void
- *
- ***********************************************************************************************/
+/**
+ * @fn     CryptClass::setKey
+ * @brief  Create Key (setter for key256)
+ * @param  QString hexKeyString
+ * @return void
+**/
 void CryptClass::setKey(QString hexKeyString) {
     memcpy(_key256, QByteArray::fromHex(hexKeyString.toStdString().c_str()).constData(), 256);
 }
 
 
-/***********************************************************************************************
- *
- * \fn CryptClass::setIv
- *
- * \brief Create iv128 (setter for iv128)
- * \param - QString hexIvString
- * \return void
- *
- ***********************************************************************************************/
+/**
+ * @fn     CryptClass::setIv
+ * @brief  Create iv128 (setter for iv128)
+ * @param  QString hexIvString
+ * @return void
+**/
 void CryptClass::setIv(QString hexIvString) {
     memcpy(_iv128, QByteArray::fromHex(hexIvString.toStdString().c_str()).constData(), 128);
 }
 
 
-
-/***********************************************************************************************
- *
- * \fn CryptClass::aes256encode
- *
- * \brief AES 256 Encoder
- * \param - const char* textBuf
- * \param - int textLen
- * \param - char* encBuf
- * \return int
- *
- ***********************************************************************************************/
+/**
+ * @fn     CryptClass::aes256encode
+ * @brief  AES 256 Encoder
+ * @param  const char* textBuf
+ * @param  int textLen
+ * @param  char* encBuf
+ * @return int
+**/
 int CryptClass::aes256encode(const char* textBuf, int textLen, char* encBuf)
 {
     EVP_CIPHER_CTX* ctx;
@@ -274,17 +238,14 @@ int CryptClass::aes256encode(const char* textBuf, int textLen, char* encBuf)
 }
 
 
-/***********************************************************************************************
- *
- * \fn CryptClass::aes256decode
- *
- * \brief AES 256 Decoder
- * \param - const char* encBuf
- * \param - int encLen
- * \param - char* textBuf
- * \return int
- *
- ***********************************************************************************************/
+/**
+ * @fn     CryptClass::aes256decode
+ * @brief  AES 256 Decoder
+ * @param  const char* encBuf
+ * @param  int encLen
+ * @param  char* textBuf
+ * @return int
+**/
 int CryptClass::aes256decode(const char* encBuf, int encLen, char* textBuf)
 {
     EVP_CIPHER_CTX *ctx;
@@ -329,16 +290,13 @@ int CryptClass::aes256decode(const char* encBuf, int encLen, char* textBuf)
 }
 
 
-/***********************************************************************************************
- *
- * \fn CryptClass::aes256toHexStr
- *
- * \brief AES 256 to Hex String
- * \param - const char* charBuf
- * \param - int len
- * \return int
- *
- ***********************************************************************************************/
+/**
+ * @fn     CryptClass::aes256toHexStr
+ * @brief  AES 256 to Hex String
+ * @param  const char* charBuf
+ * @param  int len
+ * @return int
+**/
 QString CryptClass::aes256toHexStr(const char* charBuf, int len)
 {
     QString ret = "";
@@ -348,16 +306,13 @@ QString CryptClass::aes256toHexStr(const char* charBuf, int len)
 }
 
 
-/***********************************************************************************************
- *
- * \fn CryptClass::aes256fromHexStr
- *
- * \brief AES 256 from Hex String
- * \param - const char* charBuf
- * \param - int len
- * \return int
- *
- ***********************************************************************************************/
+/**
+ * @fn     CryptClass::aes256fromHexStr
+ * @brief  AES 256 from Hex String
+ * @param  const char* charBuf
+ * @param  int len
+ * @return int
+**/
 QByteArray CryptClass::aes256fromHexStr(const QString qString)
 {
     QByteArray ret;
@@ -367,17 +322,13 @@ QByteArray CryptClass::aes256fromHexStr(const QString qString)
 }
 
 
-
-/***********************************************************************************************
- *
- * \fn CryptClass::aes256toBase64Str
- *
- * \brief AES 256 to Base64 String
- * \param - const char* charBuf
- * \param - int len
- * \return int
- *
- ***********************************************************************************************/
+/**
+ * @fn     CryptClass::aes256toBase64Str
+ * @brief  AES 256 to Base64 String
+ * @param  const char* charBuf
+ * @param  int len
+ * @return int
+**/
 QString CryptClass::aes256toBase64Str(const char* aes256buf, int len)
 {
     // Use base64 encoding to create a utf8 compliant string that can be stored in a QString.
@@ -389,17 +340,14 @@ QString CryptClass::aes256toBase64Str(const char* aes256buf, int len)
 }
 
 
-
-/***********************************************************************************************
+/**
+ * @fn     CryptClass::aes256fromBase64Str
+ * @brief  AES 256 from Base64 String
+ * @param  const char* charBuf
+ * @param  int len
+ * @return int
  *
- * \fn CryptClass::aes256fromBase64Str
- *
- * \brief AES 256 from Base64 String
- * \param - const char* charBuf
- * \param - int len
- * \return int
- *
- ***********************************************************************************************/
+**/
 QByteArray CryptClass::aes256fromBase64Str(const QString base64str)
 {
     // Decode the Base64 encoded AES string.
@@ -421,15 +369,13 @@ QByteArray CryptClass::aes256fromBase64Str(const QString base64str)
 }
 
 
-/***********************************************************************************************
+/**
+ * @fn     CryptClass::base64aes256encode
+ * @brief  base64 aes256 encode
+ * @param  QString textString
+ * @return int
  *
- * \fn CryptClass::base64aes256encode
- *
- * \brief base64 aes256 encode
- * \param - QString textString
- * \return int
- *
- ***********************************************************************************************/
+**/
 QString CryptClass::base64aes256encode(QString textString)
 {
     // Convert the text to a unicode/char16_t string to
@@ -464,16 +410,12 @@ QString CryptClass::base64aes256encode(QString textString)
 }
 
 
-
-/***********************************************************************************************
- *
- * \fn CryptClass::base64aes256decode
- *
- * \brief Base64 aes256 Decode
- * \param - QString textString
- * \return int
- *
- ***********************************************************************************************/
+/**
+ * @fn     CryptClass::base64aes256decode
+ * @brief  Base64 aes256 Decode
+ * @param  QString textString
+ * @return int
+**/
 QString CryptClass::base64aes256decode(QString textString)
 {
     // Recover the Base 64 encoded AES 256 unicode data

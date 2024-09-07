@@ -33,6 +33,8 @@ int main(int argc, char *argv[])
         []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
 
+    // Start the UI
+    //
     engine.loadFromModule("TicTacToe", "Main");
 
     return app.exec();
