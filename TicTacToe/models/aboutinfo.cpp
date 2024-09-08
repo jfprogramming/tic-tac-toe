@@ -53,9 +53,12 @@ void AboutInfo::load(QSettings &settings){
     // if no setting set default value
     //
     qInfo() << "AppName:"         << settings.value("AppSettings/AppName").toString();
+    qInfo() << "DataDir:"         << settings.value("AppSettings/DataDir").toString();
+
+    // TODO: convert to get data from database
+    //
     qInfo() << "SoftwarVersion:"  << settings.value("AppSettings/SoftwarVersion").toString();
     qInfo() << "DatabaseVersion:" << settings.value("AppSettings/DatabaseVersion").toString();
-    qInfo() << "DataDir:"         << settings.value("AppSettings/DataDir").toString();
 }
 
 /**

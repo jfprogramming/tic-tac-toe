@@ -1,12 +1,11 @@
 #!/bin/bash
 
-doxygen -g
 
 # Define the path to the Doxygen configuration file
 DOXYFILE_PATH="./Doxyfile"
 
 # Define the output directory
-OUTPUT_DIR="$HOME/Pojects/tic-tac-toe/TicTacToe/doxygen/"
+OUTPUT_DIR="doxygen/"
 
 # Check if the Doxygen configuration file exists
 if [ ! -f "$DOXYFILE_PATH" ]; then

@@ -22,10 +22,11 @@
 #define MAX_ROUNDS 31
 #define DEF_ROUNDS 12
 
+
 /**
- * \file CryptClass.h
+ * @file CryptClass.h
  *
- * \brief The CryptClass class Manges password encryption
+ * @brief The CryptClass class Manges password encryption
  *        Manges encrypting user data to database
  *        Manges decrypting user data from database
  *        Interfaces with dbcontroller

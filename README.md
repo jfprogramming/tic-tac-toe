@@ -12,7 +12,7 @@ tic-tac-toe
 	│ ├── Database (SQLite3 db) 
 	│ ├── Documents (project docs) 
 	│ ├── Images (graphics used by game) 
-	│ ├── Controllers (C++ M-V-V) 
+	│ ├── Controllers (C++ M-V-C) 
 	│ ├── QML (view) 
 	│ ├── Models (used by view) 
 	│ ├── JavaScript (functions used by view) 
