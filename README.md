@@ -116,7 +116,7 @@ Below is a list of features not yet complete:
   - Intergrate touch screen driver to Poky recipes.
   - Intergrate SSH capabilities for remote connections.
   - Deploy to RPI SD Card.
-  - Create boot up script.
+  - **Create boot up script.**
     -/etc/init.d/
     -ln -s /etc/init.d/TicTacToe /etc/rc3.d/S99TicTacToe
     -update-rc.d TicTacToe defaults
