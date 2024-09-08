@@ -12,6 +12,18 @@ Rectangle {
     property int player2Score: 0
     property alias scoreAlias: score
 
+    PlayerModel{
+        id: playerModel
+    }
+
+    function savePlayerHighScore(playerName, score) {
+        if (playerName === "Player1") {
+            playerModel.setPlayerHighScoreValue(1, score);
+        } else if (playerName === "Player2") {
+            playerModel.setPlayerHighScoreValue(2, score);
+        }
+    }
+
     Rectangle {
         id: title
         anchors.left: parent.left

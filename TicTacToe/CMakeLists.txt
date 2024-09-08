@@ -47,7 +47,7 @@ qt_add_qml_module(appTicTacToe
         qml/Main.qml
         qml/PlayArea.qml
         qml/PlayerManager.qml
-        qml/PlayerModel.qml
+        qml/PlayerListModel.qml
         qml/PlayerSelection.qml
         qml/About.qml
         qml/PopupMsg.qml

@@ -92,6 +92,15 @@ void PlayerModel::setPlayerName(const QString &newPlayerName)
 }
 
 /**
+ * @brief Sets the player's high score value.
+ * @param int score.
+ */
+void PlayerModel::setPlayerHighScoreValue(int playerId, int score)
+{
+    Controllers::dbManager.setPlayerHighScoreValue(playerId, score);
+}
+
+/**
  * @brief Saves the player's name and color to the database.
  * @param name The player's name.
  * @param color The player's color.

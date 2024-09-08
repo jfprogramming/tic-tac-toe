@@ -34,14 +34,22 @@ public:
 
     QList<int> getHighScoreList();
 
+    void fetchPlayerId(const QString &playerName);
+    bool setPlayerHighScoreValue(int playerId, int score);
+
+    int playerId() const;
+
 public slots:
 
     Q_INVOKABLE bool authenticateAdmin(const QString &username, const QString &password);
     Q_INVOKABLE void print(){qInfo() << "test***";};
 
 
+    void setPlayerId(int newPlayerId);
+
 private:
     bool m_isDatabaseInitialized;
+    int m_playerId;
     QSqlDatabase *m_db;
 };
 

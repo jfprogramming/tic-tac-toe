@@ -52,6 +52,10 @@ Item {
                         playerSelectionGridView.currentIndex = model.index;
                         console.log("item clicked... "+playerSelectionGridView.currentIndex)
 
+                        // TODO: Set the selected player ID
+                        //
+                        dbManager.setSelectedPlayerId(model.playerId);
+
                         stackView.push("PlayArea.qml")
 
                     }
@@ -75,7 +79,7 @@ Item {
         GridView{
             id:playerSelectionGridView
             anchors.fill: parent
-            model: PlayerModel {id:model}
+            model: PlayerListModel {id:model}
             highlight: highlight
             focus: true
             highlightFollowsCurrentItem: true

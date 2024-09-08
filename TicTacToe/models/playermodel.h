@@ -24,6 +24,7 @@ public:
 
     //Q_INVOKABLE void saveToDatabase(QString &name, QString &color);
 
+    void setPlayerHighScoreValue(int playerId, int score);
  signals:
     //void loginBtnClicked(QString username, QString password);
     void userNameChanged(QString &name);

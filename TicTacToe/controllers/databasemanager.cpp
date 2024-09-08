@@ -71,6 +71,41 @@ void DatabaseManager::closeDatabase()
 
 
 /**
+ * @fn    DatabaseManager::fetchPlayerId
+ * @brief Closes the database.
+ * @param int score
+ * @return bool.
+ */
+void DatabaseManager::fetchPlayerId(const QString &playerName) {
+    QSqlQuery query;
+    query.prepare("SELECT playerId FROM PlayerTable WHERE playerName = :playerName");
+    query.bindValue(":playerName", playerName);
+    if (query.exec() && query.next()) {
+        int playerId = query.value(0).toInt();
+        setPlayerId(playerId);
+    } else {
+        qWarning() << "Failed to fetch player ID:" << query.lastError();
+    }
+}
+
+/**
+ * @fn    DatabaseManager::setPlayerHighScoreValue
+ * @brief Closes the database.
+ * @param int score
+ * @return bool.
+ */
+bool DatabaseManager::setPlayerHighScoreValue(int playerId, int score) {
+    QSqlQuery query;
+    query.prepare("INSERT INTO HighScoreTable (playerId, highScore) VALUES (:playerId, :score)");
+    query.bindValue(":playerId", playerId);
+    query.bindValue(":score", score);
+    if (!query.exec()) {
+        qWarning() << "Failed to insert high score:" << query.lastError();
+    }
+}
+
+
+/**
  * @fn     DatabaseManager::getHighScoreList
  * @brief  Retrieves the high score list from the database.
  * @return A QList of high scores.
@@ -173,6 +208,26 @@ bool DatabaseManager::authenticateAdmin(const QString &username, const QString &
     }else{
         return false;
     }
+}
+
+/**
+ * @fn     DatabaseManager::playerId
+ * @brief  return the current playerId
+ * @return void
+ */
+int DatabaseManager::playerId() const
+{
+    return m_playerId;
+}
+
+/**
+ * @fn     DatabaseManager::setPlayerId
+ * @brief  set the current player id
+ * @return void
+ */
+void DatabaseManager::setPlayerId(int newPlayerId)
+{
+    m_playerId = newPlayerId;
 }
 
 
