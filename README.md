@@ -5,21 +5,22 @@ A simple Tic Tac Toe game developed using Qt, C++/QML, CMake, and SQLite3.
 
 ## Project Structure
 
+```plaintext
 tic-tac-toe 
-	├── Setup Directory 
-	│ └── package and dependencies script 
-	├── TicTacToe Game Directory 
-	│ ├── Database (SQLite3 db) 
-	│ ├── Documents (project docs) 
-	│ ├── Images (graphics used by game) 
-	│ ├── Controllers (C++ M-V-C) 
-	│ ├── QML (view) 
-	│ ├── Models (used by view) 
-	│ ├── JavaScript (functions used by view) 
-	│ └── CMakeLists.txt 
-	├── README.md 
-	├── .gitignore 
-	└── .git
+├── Setup Directory 
+│   └── package and dependencies script 
+├── TicTacToe Game Directory 
+│   ├── Database (SQLite3 db) 
+│   ├── Documents (project docs) 
+│   ├── Images (graphics used by game) 
+│   ├── Controllers (C++ M-V-C) 
+│   ├── QML (view) 
+│   ├── Models (used by view) 
+│   ├── JavaScript (functions used by view) 
+│   └── CMakeLists.txt 
+├── README.md 
+├── .gitignore 
+└── .git```
 
 
 ## Building and Running
