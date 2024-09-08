@@ -54,7 +54,7 @@ Item {
 
                         // TODO: Set the selected player ID
                         //
-                        dbManager.setSelectedPlayerId(model.playerId);
+                        //playerModel.setSelectedPlayerId(model.playerId);
 
                         stackView.push("PlayArea.qml")
 
