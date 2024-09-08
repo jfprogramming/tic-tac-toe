@@ -75,8 +75,5 @@ CMakeLists.txt.user*
 build/*
 *build/
 build*
-latex/*
-html*
-html/*
 doxygen/*
 

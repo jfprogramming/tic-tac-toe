@@ -1,0 +1,63 @@
+\hypertarget{cryptclass_8h}{}\doxysection{cryptclass.\+h File Reference}
+\label{cryptclass_8h}\index{cryptclass.h@{cryptclass.h}}
+
+
+The \mbox{\hyperlink{classCryptClass}{Crypt\+Class}} class Manges password encryption Manges encrypting user data to database Manges decrypting user data from database Interfaces with dbcontroller.  
+
+
+{\ttfamily \#include $<$crypt.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/conf.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/evp.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/err.\+h$>$}\newline
+{\ttfamily \#include $<$QString$>$}\newline
+Include dependency graph for cryptclass.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cryptclass_8h__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classCryptClass}{Crypt\+Class}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{cryptclass_8h_af6bd351b7874d8a75d0dcad9a5e9631e}\label{cryptclass_8h_af6bd351b7874d8a75d0dcad9a5e9631e}} 
+\#define {\bfseries BCRYPT\+\_\+\+HASHSIZE}~512
+\item 
+\mbox{\Hypertarget{cryptclass_8h_a23a7f79cbdf72ef71de5b112048fb1d7}\label{cryptclass_8h_a23a7f79cbdf72ef71de5b112048fb1d7}} 
+\#define {\bfseries RANDBYTES}~16
+\item 
+\mbox{\Hypertarget{cryptclass_8h_a0ccb93b3d730683eb88d46e6c00d9966}\label{cryptclass_8h_a0ccb93b3d730683eb88d46e6c00d9966}} 
+\#define {\bfseries MIN\+\_\+\+ROUNDS}~4
+\item 
+\mbox{\Hypertarget{cryptclass_8h_a6b412b9f1e10dd97d0b677b117d8fa48}\label{cryptclass_8h_a6b412b9f1e10dd97d0b677b117d8fa48}} 
+\#define {\bfseries MAX\+\_\+\+ROUNDS}~31
+\item 
+\mbox{\Hypertarget{cryptclass_8h_a87978fcccca837db005398f14958e016}\label{cryptclass_8h_a87978fcccca837db005398f14958e016}} 
+\#define {\bfseries DEF\+\_\+\+ROUNDS}~12
+\item 
+\mbox{\Hypertarget{cryptclass_8h_a950e51a310e770cabd9637b20218b83e}\label{cryptclass_8h_a950e51a310e770cabd9637b20218b83e}} 
+\#define {\bfseries BASE64\+ENCODED\+\_\+\+LEN}(text\+Len)~((4$\ast$((text\+Len+2)/3))+1)
+\item 
+\mbox{\Hypertarget{cryptclass_8h_a4cfcd6e73e0257c497ae07e34b9ae3dd}\label{cryptclass_8h_a4cfcd6e73e0257c497ae07e34b9ae3dd}} 
+\#define {\bfseries BASE64\+DECODED\+\_\+\+LEN}(text\+Len)~((3$\ast$text\+Len/4)+1)
+\item 
+\mbox{\Hypertarget{cryptclass_8h_a36ac5d41e4ef4b89f78a52a3f9d42284}\label{cryptclass_8h_a36ac5d41e4ef4b89f78a52a3f9d42284}} 
+\#define {\bfseries AES256\+ENCODED\+\_\+\+LEN}(text\+Len)~(((text\+Len/16)+1)$\ast$16)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \mbox{\hyperlink{classCryptClass}{Crypt\+Class}} class Manges password encryption Manges encrypting user data to database Manges decrypting user data from database Interfaces with dbcontroller. 
+
