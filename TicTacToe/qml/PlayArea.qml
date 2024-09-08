@@ -33,9 +33,17 @@ Item {
 
     function checkPlayerTurn(){
         if(currentPlayer == 1){
+            if(gameType == 1){
+                // disable player 1 input during computers turn
+                //
+                mainColumn.enabled = false
+            }
             currentPlayer = 2
         }
         else if(currentPlayer == 2){
+            if(gameType == 1){
+                mainColumn.enabled = true
+            }
             currentPlayer = 1
         }
         else{
@@ -248,6 +256,7 @@ Item {
         console.log("Checking for CatsCradle...");
 
         // Check if all cells are filled (assuming "X" and "O" images)
+        //
         if (row1rect1Img.source != "" &&
                 row1rect2Img.source != "" &&
                 row1rect3Img.source != "" &&
@@ -259,6 +268,7 @@ Item {
                 row3rect3Img.source != "") {
             console.log("CatsCradle! All squares filled without a winner.");
             // Handle the CatsCradle scenario (e.g., display a message or end the game)
+            //
             return true
         } else {
             console.log("No CatsCradle yet...");
@@ -266,7 +276,7 @@ Item {
         }
     }
 
-    // only used for 1Player games
+    // Only used for 1Player games
     //
     function playerTwoTurn() {
         checkPlayerTurn()
@@ -309,6 +319,9 @@ Item {
         else{
             console.log("not your turn computer... wait your turn!")
         }
+        // End of computers turn enable input again if no player has won
+        //
+        if(!playerWon){ mainColumn.enabled = true }
     }
 
     // only used for 1Player games
@@ -408,6 +421,7 @@ Item {
                                 delayTimer.start()
                             }
                             row1rect1.enabled = false
+                            mainColumn.enabled = false
                         }
                     }
                 }
@@ -444,6 +458,7 @@ Item {
                                 delayTimer.start()
                             }
                             row1rect2.enabled = false
+                            mainColumn.enabled = false
                         }
                     }
                 }
@@ -480,6 +495,7 @@ Item {
                                 delayTimer.start()
                             }
                             row1rect3.enabled = false
+                            mainColumn.enabled = false
                         }
                     }
                 }
@@ -525,6 +541,7 @@ Item {
                                 delayTimer.start()
                             }
                             row2rect1.enabled = false
+                            mainColumn.enabled = false
                         }
                     }
                 }
@@ -561,6 +578,7 @@ Item {
                                 delayTimer.start()
                             }
                             row2rect2.enabled = false
+                            mainColumn.enabled = false
                         }
                     }
                 }
@@ -597,6 +615,7 @@ Item {
                                 delayTimer.start()
                             }
                             row2rect3.enabled = false
+                            mainColumn.enabled = false
                         }
                     }
                 }
@@ -643,6 +662,7 @@ Item {
                                 delayTimer.start()
                             }
                             row3rect1.enabled = false
+                            mainColumn.enabled = false
                         }
                     }
                 }
@@ -679,6 +699,7 @@ Item {
                                 delayTimer.start()
                             }
                             row3rect2.enabled = false
+                            mainColumn.enabled = false
                         }
                     }
                 }
@@ -715,6 +736,7 @@ Item {
                                 delayTimer.start()
                             }
                             row3rect3.enabled = false
+                            mainColumn.enabled = false
                         }
                     }
                 }
@@ -783,6 +805,10 @@ Item {
             // Reset the current player
             //
             currentPlayer = 0
+
+            // Reset the win variable
+            //
+            playerWon = false;
 
         }
     }

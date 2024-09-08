@@ -1,0 +1,40 @@
+ TODO
+  - Clean up win graphics.
+  - Admin user login screen
+  	- pop up for invalid login
+  - Implement Player Management for Admin User.
+  	- capture data from user forms and save to Qsettings or database 
+  - Implement date/time settings for Admin User.
+  	- capture data from user forms and save to Qsettings or database 
+  - Implement 2 Player Game Mode logic.
+  	- set gametype - 1player or 2player game
+  - Finish High Score.
+  	- after each game complete add to the players high score in database
+  	- QML to trigger c++ function
+  	- lookup player high score value in db 
+  	- add to the players current high score and save back to database
+  - Finish integrating QSettings File example.
+  	- used for QML about info
+  	- capture data in c++ model to present to UI
+  - Convert javaScript to c++ where possible for improved performance. 
+  	- convert javaScript game logic to c++
+  - Improve threading with QMutex locking.
+  - Cross-threading signal/slot
+  - Improve class design by implementing common base class.
+  - Improve Object Oriented design by implementing smart pointers.
+  - Implement Export high score list feature.
+  - Create AWS web application to display high score table over the web.
+  - Integrate MQTT protocol and payload management.
+  - Create custom Poky build for RootFS.
+  - Build directory structure to include /data and /application directories.
+  - Integrate Qt into Poky recipes.
+  - Integrate cross-compiled RPI binary to Poky recipes.
+  - Integrate touch screen driver to Poky recipes.
+  - Integrate SSH capabilities for remote connections.
+  - Deploy to RPI SD Card.
+  - **Create boot up script.**
+  	- /etc/init.d/
+  	- ln -s /etc/init.d/TicTacToe /etc/rc3.d/S99TicTacToe
+  	- update-rc.d TicTacToe defaults
+  	- Implement sub project Connect 4.
+  - Implement sub project Battleships.
