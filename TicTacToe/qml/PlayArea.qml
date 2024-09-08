@@ -67,7 +67,7 @@ Item {
                 row1rect2Img.source == "qrc:/x_img.png" &&
                 row1rect3Img.source == "qrc:/x_img.png"){
             console.log("X Wins")
-            win1.visible = true
+            winVisual.winStrike1 = true
             p1Score +=1
             setWinVariables("Player1")
             return true
@@ -76,7 +76,7 @@ Item {
                 row1rect2Img.source == "qrc:/o_img.png" &&
                 row1rect3Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
-            win1.visible = true
+            winVisual.winStrike1 = true
             setWinVariables("Player2")
             p2Score +=1
             return true
@@ -87,7 +87,7 @@ Item {
                 row2rect2Img.source == "qrc:/x_img.png" &&
                 row2rect3Img.source == "qrc:/x_img.png"){
             console.log("Row 2 X Wins")
-            win2.visible = true
+            winVisual.winStrike2 = true
             setWinVariables("Player1")
             p2Score +=1
             return true
@@ -96,7 +96,7 @@ Item {
                 row2rect2Img.source == "qrc:/o_img.png" &&
                 row2rect3Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
-            win2.visible = true
+            winVisual.winStrike2 = true
             setWinVariables("Player2")
             p2Score +=1
             return true
@@ -107,7 +107,7 @@ Item {
                 row3rect2Img.source == "qrc:/x_img.png" &&
                 row3rect3Img.source == "qrc:/x_img.png"){
             console.log("X Wins")
-            win3.visible = true
+            winVisual.winStrike3 = true
             setWinVariables("Player1")
             p1Score +=1
             return true
@@ -116,7 +116,7 @@ Item {
                 row3rect2Img.source == "qrc:/o_img.png" &&
                 row3rect3Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
-            win3.visible = true
+            winVisual.winStrike3 = true
             setWinVariables("Player2")
             p2Score +=1
             return true
@@ -135,7 +135,7 @@ Item {
                 row2rect1Img.source == "qrc:/x_img.png" &&
                 row3rect1Img.source == "qrc:/x_img.png"){
             console.log("X Wins")
-            win4.visible = true
+            winVisual.winStrike4 = true
             setWinVariables("Player1")
             p1Score +=1
             return true
@@ -144,7 +144,7 @@ Item {
                 row2rect1Img.source == "qrc:/o_img.png" &&
                 row3rect1Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
-            win4.visible = true
+            winVisual.winStrike4.visible = true
             setWinVariables("Player2")
             p2Score +=1
             return true
@@ -155,7 +155,7 @@ Item {
                 row2rect2Img.source == "qrc:/x_img.png" &&
                 row3rect2Img.source == "qrc:/x_img.png"){
             console.log("X Wins")
-            win5.visible = true
+            winVisual.winStrike5 = true
             setWinVariables("Player1")
             p1Score +=1
             return true
@@ -164,7 +164,7 @@ Item {
                 row2rect2Img.source == "qrc:/o_img.png" &&
                 row3rect2Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
-            win5.visible = true
+            winVisual.winStrike5 = true
             setWinVariables("Player2")
             p2Score +=1
             return true
@@ -175,7 +175,7 @@ Item {
                 row2rect3Img.source == "qrc:/x_img.png" &&
                 row3rect3Img.source == "qrc:/x_img.png"){
             console.log("X Wins")
-            win6.visible = true
+            winVisual.winStrike6 = true
             setWinVariables("Player1")
             p1Score +=1
             return true
@@ -184,7 +184,7 @@ Item {
                 row2rect3Img.source == "qrc:/o_img.png" &&
                 row3rect3Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
-            win6.visible = true
+            winVisual.winStrike6 = true
             setWinVariables("Player1")
             p2Score +=1
             return true
@@ -203,7 +203,7 @@ Item {
                 row2rect2Img.source == "qrc:/x_img.png" &&
                 row3rect3Img.source == "qrc:/x_img.png"){
             console.log("X Wins")
-            win7.visible = true
+            winVisual.winStrike7 = true
             setWinVariables("Player1")
             p1Score +=1
             return true
@@ -212,7 +212,7 @@ Item {
                 row2rect2Img.source == "qrc:/o_img.png" &&
                 row3rect3Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
-            win7.visible = true
+            winVisual.winStrike7 = true
             setWinVariables("Player2")
             p2Score +=1
             return true
@@ -224,7 +224,7 @@ Item {
                 row2rect2Img.source == "qrc:/x_img.png" &&
                 row3rect1Img.source == "qrc:/x_img.png"){
             console.log("X Wins")
-            win8.visible = true
+            winVisual.winStrike8 = true
             setWinVariables("Player1")
             p1Score +=1
             return true
@@ -233,7 +233,7 @@ Item {
                 row2rect2Img.source == "qrc:/o_img.png" &&
                 row3rect1Img.source == "qrc:/o_img.png"){
             console.log("O Wins")
-            win8.visible = true
+            winVisual.winStrike8 = true
             setWinVariables("Player2")
             p2Score +=1
             return true
@@ -337,100 +337,9 @@ Item {
         anchors.bottom: playAreaFooter.top
         anchors.bottomMargin: 50
 
-        // win rectangles are used to display the
-        // visual cross out line for 3 in a row
-        //
-        Rectangle{
-            id: win1
-            visible: false
-            rotation: 0
-            width: parent.width
-            height: 20
-            anchors.top: parent.top
-            anchors.topMargin: 50
-            color: "red"
-            z:100
-        }
-
-        Rectangle{
-            id: win2
-            visible: false
-            rotation: 0
-            width: parent.width
-            height: 20
-            anchors.top: parent.top
-            anchors.topMargin: 185
-            color: "red"
-            z:100
-        }
-
-        Rectangle{
-            id: win3
-            visible: false
-            rotation: 0
-            width: parent.width
-            height: 20
-            anchors.top: parent.top
-            anchors.topMargin: 325
-            color: "red"
-            z:100
-        }
-
-        Rectangle{
-            id: win4
-            visible: false
-            rotation: 0
-            height: parent.height
-            width: 20
-            anchors.left: parent.left
-            anchors.leftMargin: 100
-            color: "red"
-            z:100
-        }
-
-        Rectangle{
-            id: win5
-            visible: false
-            rotation: 0
-            height: parent.height
-            width: 20
-            anchors.left: parent.left
-            anchors.leftMargin: 315
-            color: "red"
-            z:100
-        }
-
-        Rectangle{
-            id: win6
-            visible: false
-            rotation: 0
-            height: parent.height
-            width: 20
-            anchors.left: parent.left
-            anchors.leftMargin: 540
-            color: "red"
-            z:100
-        }
-
-        Rectangle{
-            id: win7
-            visible: false
-            rotation: 40
-            width: parent.width
-            height: 20
-            anchors.centerIn: boarder
-            color: "red"
-            z:100
-        }
-
-        Rectangle{
-            id: win8
-            visible: false
-            rotation: -40
-            width: parent.width
-            height: 20
-            anchors.centerIn: boarder
-            color: "red"
+        WinStrike{
+            id: winVisual
+            anchors.fill: parent
             z:100
         }
 
@@ -795,26 +704,30 @@ Item {
         restBtnTxt: "Rest"
         restBtn.visible: true
         restBtn.onClicked: {
-            // clear the board
-            //
+            /*** clear the board ***/
 
             // Row 1
+            //
             row1rect1Img.source = ""
             row1rect2Img.source = ""
             row1rect3Img.source = ""
             // Row 2
+            //
             row2rect1Img.source = ""
             row2rect2Img.source = ""
             row2rect3Img.source = ""
             // Row 3
+            //
             row3rect1Img.source = ""
             row3rect2Img.source = ""
             row3rect3Img.source = ""
 
             // Enable the play area
+            //
             mainColumn.enabled = true
 
             // Re-Enable and disabled squares
+            //
             row1rect1.enabled = true
             row1rect2.enabled = true
             row1rect3.enabled = true
@@ -828,17 +741,19 @@ Item {
             row3rect3.enabled = true
 
             // Reset Win Dispaly
-            winText.visible = false
-            win1.visible    = false
-            win2.visible    = false
-            win3.visible    = false
-            win4.visible    = false
-            win5.visible    = false
-            win6.visible    = false
-            win7.visible    = false
-            win8.visible    = false
+            //
+            winText.visible       = false
+            winVisual.winStrike1  = false
+            winVisual.winStrike2  = false
+            winVisual.winStrike3  = false
+            winVisual.winStrike4  = false
+            winVisual.winStrike5  = false
+            winVisual.winStrike6  = false
+            winVisual.winStrike7  = false
+            winVisual.winStrike8  = false
 
             // Reset the current player
+            //
             currentPlayer = 0
 
         }

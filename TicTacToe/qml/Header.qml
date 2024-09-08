@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 
-Rectangle{
+Rectangle {
     id: header
     anchors.top: parent.top
     height: 50
@@ -12,7 +12,7 @@ Rectangle{
     property int player2Score: 0
     property alias scoreAlias: score
 
-    Rectangle{
+    Rectangle {
         id: title
         anchors.left: parent.left
         anchors.leftMargin: 10
@@ -21,22 +21,33 @@ Rectangle{
             id: titleText
             text: qsTr("TicTacToe")
             anchors.verticalCenter: parent.verticalCenter
+            font.bold: true
+            font.pointSize: 16
+            color: "darkBlue"
         }
     }
 
-    Rectangle{
+    Rectangle {
         id: score
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
-        visible: false
+        visible: true
+        color: "white"
+        border.color: "black"
+        radius: 5
+        width: 300
+        height: 40
         Text {
-            id: scorText
-            text: qsTr("Score - Player 1: "+player1Score+"   Player 2: "+player2Score)
-            anchors.verticalCenter: parent.verticalCenter
+            id: scoreText
+            text: qsTr("Score - Player 1: " + player1Score + "   Player 2: " + player2Score)
+            anchors.centerIn: parent
+            font.bold: true
+            font.pointSize: 14
+            color: "red"
         }
     }
 
-    Rectangle{
+    Rectangle {
         id: dateTimeLabel
         anchors.right: parent.right
         anchors.rightMargin: 10
@@ -45,6 +56,8 @@ Rectangle{
             id: dateTimeText
             text: Qt.formatDateTime(new Date(), "yyyy-MM-dd hh:mm:ss")
             anchors.centerIn: parent
+            font.pointSize: 12
+            color: "darkGreen"
         }
     }
 }
