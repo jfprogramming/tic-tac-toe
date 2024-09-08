@@ -96,28 +96,29 @@ Below is a list of features not yet complete:
   - Housed in a separate repo.
 
 ## TODO
-- Clean up win graphics.
-- Implement Player Management for Admin User.
-- Implement date/time settings for Admin User.
-- Implement 2 Player Game Mode logic.
-- Finish High Score.
-- Finish integrating QSettings File examle.
-- Improve threading with qmutex locking.
-- Improve class design by implementing common base class.
-- Improve Object Oriented design by implementing smart pointers.
-- Implement Export high score list feature. 
-- Create AWS web application to display high score table over the web.
-- Itergrate Mqtt proctocl and payload mangement.
-- Creaet custom Poky build for RootFS.
-- Build Directory structure to include /data and /application directories 
-- Intergrate Qt into Poky recipess
-- Intergrate cross comiplied RPI binary to Poky recipes.
-- Intergrate touch screen driver to Poky recipes.
-- Intergrate SSH capabilities for remote connections.
-- Deploy to RPI SD Card.
-- Create boot up script.
-      -/etc/init.d/
-      -ln -s /etc/init.d/TicTacToe /etc/rc3.d/S99TicTacToe
-      -update-rc.d TicTacToe defaults
-- Implement sub project connect 4.
-- Implement sub project battleships.
+- **TOD List**
+  - Clean up win graphics.
+  - Implement Player Management for Admin User.
+  - Implement date/time settings for Admin User.
+  - Implement 2 Player Game Mode logic.
+  - Finish High Score.
+  - Finish integrating QSettings File examle.
+  - Improve threading with qmutex locking.
+  - Improve class design by implementing common base class.
+  - Improve Object Oriented design by implementing smart pointers.
+  - Implement Export high score list feature. 
+  - Create AWS web application to display high score table over the web.
+  - Itergrate Mqtt proctocl and payload mangement.
+  - Creaet custom Poky build for RootFS.
+  - Build Directory structure to include /data and /application directories 
+  - Intergrate Qt into Poky recipess
+  - Intergrate cross comiplied RPI binary to Poky recipes.
+  - Intergrate touch screen driver to Poky recipes.
+  - Intergrate SSH capabilities for remote connections.
+  - Deploy to RPI SD Card.
+  - Create boot up script.
+    -/etc/init.d/
+    -ln -s /etc/init.d/TicTacToe /etc/rc3.d/S99TicTacToe
+    -update-rc.d TicTacToe defaults
+  - Implement sub project connect 4.
+  - Implement sub project battleships.
