@@ -5,9 +5,9 @@
 
 
 /**
- * @file HighscoreModel.h
+ * \file HighscoreModel.h
  *
- * @brief The HighscoreModel class manages the high score data.
+ * \brief The HighscoreModel class manages the high score data.
  *        Implements the necessary methods for a list model.
  *        Provides interface for setting and retrieving high score details.
  */

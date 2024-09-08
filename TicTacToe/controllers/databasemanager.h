@@ -5,6 +5,12 @@
 #include <QThread>
 #include <QObject>
 
+/**
+ * \file databasemanager.h
+ *
+ * \brief The DatabaseManager class handles all database operations including initialization,
+ *        player management, and admin authentication.
+ */
 class DatabaseManager : public QObject
 {
     Q_OBJECT

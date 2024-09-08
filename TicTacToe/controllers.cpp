@@ -1,17 +1,19 @@
 #include "controllers.h"
 
+/**
+ * \namespace Controllers
+ * \brief Contains instances of various controllers used in the application.
+ */
 namespace Controllers
 {
-    // Instance of DatabaseManager initialized with dbManagerThread.
-    //
     DatabaseManager dbManager(&Threads::dbManagerThread);
 }
 
+/**
+ * \namespace Threads
+ * \brief Contains instances of QThread used for different managers.
+ */
 namespace Threads
 {
-    // Instance of QThread for the database manager.
-    //
     QThread dbManagerThread;
 }
-
-

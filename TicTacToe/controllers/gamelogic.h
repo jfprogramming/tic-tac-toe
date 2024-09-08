@@ -2,6 +2,12 @@
 
 #include <QObject>
 
+
+/**
+ * \file gamelogic.h
+ *
+ * \brief The GameLogic class manages the core game logic, including player modes and current player state.
+ */
 class GameLogic : public QObject
 {
     Q_OBJECT

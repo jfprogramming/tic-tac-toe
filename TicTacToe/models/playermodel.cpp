@@ -3,8 +3,8 @@
 #include <QDebug>
 
 /**
- * @brief Constructor for PlayerModel.
- * @param parent The parent QObject.
+ * \brief Constructor for PlayerModel.
+ * \param parent The parent QObject.
  */
 PlayerModel::PlayerModel(QObject* parent) : QObject(parent)
 {
@@ -12,10 +12,10 @@ PlayerModel::PlayerModel(QObject* parent) : QObject(parent)
 }
 
 /**
- * @brief Authenticates an admin user.
- * @param username The admin username.
- * @param password The admin password.
- * @return True if authentication is successful, false otherwise.
+ * \brief Authenticates an admin user.
+ * \param username The admin username.
+ * \param password The admin password.
+ * \return True if authentication is successful, false otherwise.
  */
 bool PlayerModel::onAdminLogin(const QString &username, const QString &password){
     if(Controllers::dbManager.authenticateAdmin(username, password)){
@@ -27,9 +27,9 @@ bool PlayerModel::onAdminLogin(const QString &username, const QString &password)
 }
 
 /**
- * @brief Handles form entry for player name and color.
- * @param name The player's name.
- * @param color The player's color.
+ * \brief Handles form entry for player name and color.
+ * \param name The player's name.
+ * \param color The player's color.
  */
 void PlayerModel::onFormEntry(QString& name, QString& color){
     if (m_playerName != name)
@@ -50,8 +50,8 @@ void PlayerModel::onFormEntry(QString& name, QString& color){
 }
 
 /**
- * @brief Gets the player's color.
- * @return The player's color.
+ * \brief Gets the player's color.
+ * \return The player's color.
  */
 QString PlayerModel::playerColor() const
 {
@@ -59,8 +59,8 @@ QString PlayerModel::playerColor() const
 }
 
 /**
- * @brief Sets the player's color.
- * @param newPlayerColor The new player color.
+ * \brief Sets the player's color.
+ * \param newPlayerColor The new player color.
  */
 void PlayerModel::setPlayerColor(QString& newPlayerColor)
 {
@@ -71,8 +71,8 @@ void PlayerModel::setPlayerColor(QString& newPlayerColor)
 }
 
 /**
- * @brief  Gets the player's name.
- * @return The player's name.
+ * \brief  Gets the player's name.
+ * \return The player's name.
  */
 QString PlayerModel::playerName() const
 {
@@ -80,8 +80,8 @@ QString PlayerModel::playerName() const
 }
 
 /**
- * @brief Sets the player's name.
- * @param newPlayerName The new player name.
+ * \brief Sets the player's name.
+ * \param newPlayerName The new player name.
  */
 void PlayerModel::setPlayerName(const QString &newPlayerName)
 {
@@ -92,8 +92,8 @@ void PlayerModel::setPlayerName(const QString &newPlayerName)
 }
 
 /**
- * @brief Sets the player's high score value.
- * @param int score.
+ * \brief Sets the player's high score value.
+ * \param int score.
  */
 void PlayerModel::setPlayerHighScoreValue(int playerId, int score)
 {
@@ -101,9 +101,9 @@ void PlayerModel::setPlayerHighScoreValue(int playerId, int score)
 }
 
 /**
- * @brief Saves the player's name and color to the database.
- * @param name The player's name.
- * @param color The player's color.
+ * \brief Saves the player's name and color to the database.
+ * \param name The player's name.
+ * \param color The player's color.
  */
 void PlayerModel::saveToDatabase(QString &name, QString &color){
     Controllers::dbManager.createNewPlayer(name, color);

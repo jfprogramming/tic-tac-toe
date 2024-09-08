@@ -4,9 +4,9 @@
 
 
 /**
- * @file AboutInfo.h
+ * \file AboutInfo.h
  *
- * @brief The AboutInfo class manages application information.
+ * \brief The AboutInfo class manages application information.
  *        Handles saving, loading, and displaying application settings.
  *        Provides interface for About screen details.
  */

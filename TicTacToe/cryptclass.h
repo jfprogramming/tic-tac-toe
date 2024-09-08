@@ -7,8 +7,6 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <errno.h>
-#include <assert.h>
 #include <time.h>
 #include <openssl/conf.h>
 #include <openssl/evp.h>
@@ -24,9 +22,9 @@
 
 
 /**
- * @file CryptClass.h
+ * \file cryptclass.h
  *
- * @brief The CryptClass class Manges password encryption
+ * \brief The CryptClass class Manges password encryption
  *        Manges encrypting user data to database
  *        Manges decrypting user data from database
  *        Interfaces with dbcontroller

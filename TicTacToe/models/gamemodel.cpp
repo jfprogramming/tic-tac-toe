@@ -1,23 +1,23 @@
 #include "gamemodel.h"
 
 /**
- * @brief Constructor for GameModel.
- * @param parent The parent QObject.
+ * \brief Constructor for GameModel.
+ * \param parent The parent QObject.
  */
 GameModel::GameModel(QObject *parent) : QObject(parent){
 
 }
 
 /**
- * @brief Destructor for GameModel.
+ * \brief Destructor for GameModel.
  */
 GameModel::~GameModel(){
 
 }
 
 /**
- * @brief Gets the game type.
- * @return The game type as a QString.
+ * \brief Gets the game type.
+ * \return The game type as a QString.
  */
 QString GameModel::getGameType() const
 {
@@ -25,8 +25,8 @@ QString GameModel::getGameType() const
 }
 
 /**
- * @brief Sets the game type.
- * @param newGameType The new game type as a QString.
+ * \brief Sets the game type.
+ * \param newGameType The new game type as a QString.
  */
 void GameModel::setGameType(const QString &newGameType)
 {
@@ -34,8 +34,8 @@ void GameModel::setGameType(const QString &newGameType)
 }
 
 /**
- * @brief Gets the name of player 1.
- * @return The name of player 1 as a QString.
+ * \brief Gets the name of player 1.
+ * \return The name of player 1 as a QString.
  */
 QString GameModel::getPlayer1() const
 {
@@ -43,8 +43,8 @@ QString GameModel::getPlayer1() const
 }
 
 /**
- * @brief Sets the name of player 1.
- * @param newPlayer1 The new name of player 1 as a QString.
+ * \brief Sets the name of player 1.
+ * \param newPlayer1 The new name of player 1 as a QString.
  */
 void GameModel::setPlayer1(const QString &newPlayer1)
 {
@@ -52,8 +52,8 @@ void GameModel::setPlayer1(const QString &newPlayer1)
 }
 
 /**
- * @brief Gets the name of player 2.
- * @return The name of player 2 as a QString.
+ * \brief Gets the name of player 2.
+ * \return The name of player 2 as a QString.
  */
 QString GameModel::getPlayer2() const
 {
@@ -61,8 +61,8 @@ QString GameModel::getPlayer2() const
 }
 
 /**
- * @brief Sets the name of player 2.
- * @param newPlayer2 The new name of player 2 as a QString.
+ * \brief Sets the name of player 2.
+ * \param newPlayer2 The new name of player 2 as a QString.
  */
 void GameModel::setPlayer2(const QString &newPlayer2)
 {

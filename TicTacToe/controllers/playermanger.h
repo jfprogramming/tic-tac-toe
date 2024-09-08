@@ -3,6 +3,12 @@
 #include <QSharedPointer>
 #include "models/playermodel.h"
 
+
+/**
+ * \file playermanger.h
+ *
+ * \brief The PlayerManger class manages player-related operations, including setting and retrieving player details such as name and color.
+ */
 class PlayerManger : public QThread
 {
     Q_OBJECT

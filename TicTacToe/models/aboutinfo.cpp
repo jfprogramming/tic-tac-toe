@@ -2,8 +2,8 @@
 #include "qsettings.h"
 
 /**
- * @brief Constructor for AboutInfo.
- * @param parent The parent QObject.
+ * \brief Constructor for AboutInfo.
+ * \param parent The parent QObject.
  */
 AboutInfo::AboutInfo(QObject* parent) : QObject(parent){
 
@@ -13,15 +13,15 @@ AboutInfo::AboutInfo(QObject* parent) : QObject(parent){
 }
 
 /**
- * @brief Destructor for AboutInfo.
+ * \brief Destructor for AboutInfo.
  */
 AboutInfo::~AboutInfo(){
 
 }
 
 /**
- * @brief Logs information about the QSettings object.
- * @param settings The QSettings object.
+ * \brief Logs information about the QSettings object.
+ * \param settings The QSettings object.
  */
 void AboutInfo::info(QSettings &settings){
     qInfo() << "settings" << settings.fileName();
@@ -29,8 +29,8 @@ void AboutInfo::info(QSettings &settings){
 }
 
 /**
- * @brief Saves application settings to the QSettings object.
- * @param settings The QSettings object.
+ * \brief Saves application settings to the QSettings object.
+ * \param settings The QSettings object.
  */
 void AboutInfo::save(QSettings &settings){
     settings.beginGroup("AppSettings");
@@ -45,8 +45,8 @@ void AboutInfo::save(QSettings &settings){
 }
 
 /**
- * @brief Loads application settings from the QSettings object.
- * @param settings The QSettings object.
+ * \brief Loads application settings from the QSettings object.
+ * \param settings The QSettings object.
  */
 void AboutInfo::load(QSettings &settings){
     // Pull the settings out of the settings file
@@ -62,8 +62,8 @@ void AboutInfo::load(QSettings &settings){
 }
 
 /**
- * @brief Gets the software version.
- * @return The software version as a QString.
+ * \brief Gets the software version.
+ * \return The software version as a QString.
  */
 QString AboutInfo::softwareVersion() const
 {
@@ -71,8 +71,8 @@ QString AboutInfo::softwareVersion() const
 }
 
 /**
- * @brief Sets the software version.
- * @param newSoftwareVersion The new software version as a QString.
+ * \brief Sets the software version.
+ * \param newSoftwareVersion The new software version as a QString.
  */
 void AboutInfo::setSoftwareVersion(const QString &newSoftwareVersion)
 {
@@ -80,8 +80,8 @@ void AboutInfo::setSoftwareVersion(const QString &newSoftwareVersion)
 }
 
 /**
- * @brief Gets the database version.
- * @return The database version as a QString.
+ * \brief Gets the database version.
+ * \return The database version as a QString.
  */
 QString AboutInfo::databaseVersion() const
 {
@@ -89,8 +89,8 @@ QString AboutInfo::databaseVersion() const
 }
 
 /**
- * @brief Sets the database version.
- * @param newDatabaseVersion The new database version as a QString.
+ * \brief Sets the database version.
+ * \param newDatabaseVersion The new database version as a QString.
  */
 void AboutInfo::setDatabaseVersion(const QString &newDatabaseVersion)
 {
@@ -98,8 +98,8 @@ void AboutInfo::setDatabaseVersion(const QString &newDatabaseVersion)
 }
 
 /**
- * @brief Gets the data directory.
- * @return The data directory as a QString.
+ * \brief Gets the data directory.
+ * \return The data directory as a QString.
  */
 QString AboutInfo::dataDir() const
 {
@@ -107,8 +107,8 @@ QString AboutInfo::dataDir() const
 }
 
 /**
- * @brief Sets the data directory.
- * @param newDataDir The new data directory as a QString.
+ * \brief Sets the data directory.
+ * \param newDataDir The new data directory as a QString.
  */
 void AboutInfo::setDataDir(const QString &newDataDir)
 {
@@ -116,8 +116,8 @@ void AboutInfo::setDataDir(const QString &newDataDir)
 }
 
 /**
- * @brief Gets the application name.
- * @return The application name as a QString.
+ * \brief Gets the application name.
+ * \return The application name as a QString.
  */
 QString AboutInfo::appName() const
 {
@@ -125,8 +125,8 @@ QString AboutInfo::appName() const
 }
 
 /**
- * @brief Sets the application name.
- * @param newAppName The new application name as a QString.
+ * \brief Sets the application name.
+ * \param newAppName The new application name as a QString.
  */
 void AboutInfo::setAppName(const QString &newAppName)
 {

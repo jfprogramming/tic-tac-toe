@@ -3,8 +3,8 @@
 #include "controllers/databasemanager.h"
 
 /**
- * @brief Constructor for HighscoreModel.
- * @param parent The parent QObject.
+ * \brief Constructor for HighscoreModel.
+ * \param parent The parent QObject.
  */
 HighscoreModel::HighscoreModel(QObject *parent) : QAbstractListModel{parent}
 {
@@ -16,15 +16,15 @@ HighscoreModel::HighscoreModel(QObject *parent) : QAbstractListModel{parent}
 }
 
 /**
- * @brief Destructor for HighscoreModel.
+ * \brief Destructor for HighscoreModel.
  */
 HighscoreModel::~HighscoreModel(){
 
 }
 
 /**
- * @brief Sets the high score list.
- * @param newHighScoreList The new list of high scores.
+ * \brief Sets the high score list.
+ * \param newHighScoreList The new list of high scores.
  */
 void HighscoreModel::setHighScoreList(const QList<int> &newHighScoreList)
 {
@@ -34,9 +34,9 @@ void HighscoreModel::setHighScoreList(const QList<int> &newHighScoreList)
 }
 
 /**
- * @brief Returns the number of rows in the model.
- * @param parent The parent QModelIndex.
- * @return The number of rows.
+ * \brief Returns the number of rows in the model.
+ * \param parent The parent QModelIndex.
+ * \return The number of rows.
  */
 int HighscoreModel::rowCount(const QModelIndex &parent) const
 {
@@ -46,10 +46,10 @@ int HighscoreModel::rowCount(const QModelIndex &parent) const
 }
 
 /**
- * @brief  Returns the data for a given index and role.
- * @param  index The QModelIndex.
- * @param  role The role for which data is requested.
- * @return The data as a QVariant.
+ * \brief  Returns the data for a given index and role.
+ * \param  index The QModelIndex.
+ * \param  role The role for which data is requested.
+ * \return The data as a QVariant.
  */
 QVariant HighscoreModel::data(const QModelIndex &index, int role) const
 {

@@ -1,9 +1,9 @@
 #include "gamelogic.h"
 
 /**
- * @fn    GameLogic::GameLogic
- * @brief Constructor for GameLogic.
- * @param parent The parent QObject.
+ * \fn    GameLogic::GameLogic
+ * \brief Constructor for GameLogic.
+ * \param parent The parent QObject.
  */
 GameLogic::GameLogic(QObject *parent)
     : QObject{parent}
@@ -11,9 +11,9 @@ GameLogic::GameLogic(QObject *parent)
 
 
 /**
- * @fn     GameLogic::getCurrent_player
- * @brief  Gets the current player.
- * @return The current player as a QString.
+ * \fn     GameLogic::getCurrent_player
+ * \brief  Gets the current player.
+ * \return The current player as a QString.
  */
 QString GameLogic::getCurrent_player() const
 {
@@ -22,10 +22,10 @@ QString GameLogic::getCurrent_player() const
 
 
 /**
- * @fn    GameLogic::setCurrent_player
- * @brief Sets the current player.
- * @param newCurrent_player The new current player.
- * @return void
+ * \fn    GameLogic::setCurrent_player
+ * \brief Sets the current player.
+ * \param newCurrent_player The new current player.
+ * \return void
  */
 void GameLogic::setCurrent_player(const QString &newCurrent_player)
 {
@@ -34,9 +34,9 @@ void GameLogic::setCurrent_player(const QString &newCurrent_player)
 
 
 /**
- * @fn     GameLogic::getIsOnePlayerMode
- * @brief  Checks if the game is in one-player mode.
- * @return True if the game is in one-player mode, false otherwise.
+ * \fn     GameLogic::getIsOnePlayerMode
+ * \brief  Checks if the game is in one-player mode.
+ * \return True if the game is in one-player mode, false otherwise.
  */
 bool GameLogic::getIsOnePlayerMode() const
 {
@@ -44,10 +44,10 @@ bool GameLogic::getIsOnePlayerMode() const
 }
 
 /**
- * @fn    GameLogic::setIsOnePlayerMode
- * @brief Sets the one-player mode.
- * @param newIsOnePlayerMode The new one-player mode status.
- * @return void
+ * \fn    GameLogic::setIsOnePlayerMode
+ * \brief Sets the one-player mode.
+ * \param newIsOnePlayerMode The new one-player mode status.
+ * \return void
  */
 void GameLogic::setIsOnePlayerMode(bool newIsOnePlayerMode)
 {
@@ -55,9 +55,9 @@ void GameLogic::setIsOnePlayerMode(bool newIsOnePlayerMode)
 }
 
 /**
- * @fn     GameLogic::getIsTwoPlayerMode
- * @brief  Checks if the game is in two-player mode.
- * @return True if the game is in two-player mode, false otherwise.
+ * \fn     GameLogic::getIsTwoPlayerMode
+ * \brief  Checks if the game is in two-player mode.
+ * \return True if the game is in two-player mode, false otherwise.
  */
 bool GameLogic::getIsTwoPlayerMode() const
 {
@@ -66,9 +66,9 @@ bool GameLogic::getIsTwoPlayerMode() const
 
 
 /**
- * @fn    GameLogic::setIsTwoPlayerMode
- * @brief Sets the two-player mode.
- * @param newIsTwoPlayerMode The new two-player mode status.
+ * \fn    GameLogic::setIsTwoPlayerMode
+ * \brief Sets the two-player mode.
+ * \param newIsTwoPlayerMode The new two-player mode status.
  */
 void GameLogic::setIsTwoPlayerMode(bool newIsTwoPlayerMode)
 {

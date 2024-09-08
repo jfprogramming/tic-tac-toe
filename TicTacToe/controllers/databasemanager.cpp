@@ -8,10 +8,10 @@
 
 
 /**
-*  @fn    DatabaseManager::DatabaseManager
- * @brief Constructor for DatabaseManager.
- * @param home The QThread object.
- * @param parent The parent QObject.
+*  \fn    DatabaseManager::DatabaseManager
+ * \brief Constructor for DatabaseManager.
+ * \param home The QThread object.
+ * \param parent The parent QObject.
  */
 DatabaseManager::DatabaseManager(QThread* home, QObject* parent) : QObject(parent)
 {
@@ -20,8 +20,8 @@ DatabaseManager::DatabaseManager(QThread* home, QObject* parent) : QObject(paren
 
 
 /**
- * @fn    DatabaseManager::~DatabaseManager
- * @brief Destructor for DatabaseManager.
+ * \fn    DatabaseManager::~DatabaseManager
+ * \brief Destructor for DatabaseManager.
  */
 DatabaseManager::~DatabaseManager(){
     closeDatabase();
@@ -29,9 +29,9 @@ DatabaseManager::~DatabaseManager(){
 
 
 /**
- * @fn     DatabaseManager::initializeDatabase
- * @brief  Initializes the database.
- * @return True if the database is successfully initialized, false otherwise.
+ * \fn     DatabaseManager::initializeDatabase
+ * \brief  Initializes the database.
+ * \return True if the database is successfully initialized, false otherwise.
  */
 bool DatabaseManager::initializeDatabase()
 {
@@ -59,9 +59,9 @@ bool DatabaseManager::initializeDatabase()
 
 
 /**
- * @fn    DatabaseManager::closeDatabase
- * @brief Closes the database.
- * @return void
+ * \fn    DatabaseManager::closeDatabase
+ * \brief Closes the database.
+ * \return void
  */
 void DatabaseManager::closeDatabase()
 {
@@ -71,10 +71,10 @@ void DatabaseManager::closeDatabase()
 
 
 /**
- * @fn    DatabaseManager::fetchPlayerId
- * @brief Closes the database.
- * @param int score
- * @return bool.
+ * \fn    DatabaseManager::fetchPlayerId
+ * \brief Closes the database.
+ * \param int score
+ * \return bool.
  */
 void DatabaseManager::fetchPlayerId(const QString &playerName) {
     QSqlQuery query;
@@ -89,10 +89,10 @@ void DatabaseManager::fetchPlayerId(const QString &playerName) {
 }
 
 /**
- * @fn    DatabaseManager::setPlayerHighScoreValue
- * @brief Closes the database.
- * @param int score
- * @return bool.
+ * \fn    DatabaseManager::setPlayerHighScoreValue
+ * \brief Closes the database.
+ * \param int score
+ * \return bool.
  */
 bool DatabaseManager::setPlayerHighScoreValue(int playerId, int score) {
     QSqlQuery query;
@@ -106,9 +106,9 @@ bool DatabaseManager::setPlayerHighScoreValue(int playerId, int score) {
 
 
 /**
- * @fn     DatabaseManager::getHighScoreList
- * @brief  Retrieves the high score list from the database.
- * @return A QList of high scores.
+ * \fn     DatabaseManager::getHighScoreList
+ * \brief  Retrieves the high score list from the database.
+ * \return A QList of high scores.
  */
 QList<int> DatabaseManager::getHighScoreList(){
     QList<int> highScores;
@@ -124,9 +124,9 @@ QList<int> DatabaseManager::getHighScoreList(){
 
 
 /**
- * @fn     DatabaseManager::getAdminUsername
- * @brief  Retrieves the admin username from the database.
- * @return The admin username as a QString.
+ * \fn     DatabaseManager::getAdminUsername
+ * \brief  Retrieves the admin username from the database.
+ * \return The admin username as a QString.
  */
 QString DatabaseManager::getAdminUsername()
 {
@@ -140,9 +140,9 @@ QString DatabaseManager::getAdminUsername()
 
 
 /**
- * @fn     DatabaseManager::getDecryptedAdminPassword
- * @brief  Retrieves and decrypts the admin password from the database.
- * @return The decrypted admin password as a QString.
+ * \fn     DatabaseManager::getDecryptedAdminPassword
+ * \brief  Retrieves and decrypts the admin password from the database.
+ * \return The decrypted admin password as a QString.
  */
 QString DatabaseManager::getDecryptedAdminPassword()
 {
@@ -164,11 +164,11 @@ QString DatabaseManager::getDecryptedAdminPassword()
 
 
 /**
- * @fn     DatabaseManager::authenticateAdmin
- * @brief  Authenticates the admin user.
- * @param  username The admin username.
- * @param  password The admin password.
- * @return True if authentication is successful, false otherwise.
+ * \fn     DatabaseManager::authenticateAdmin
+ * \brief  Authenticates the admin user.
+ * \param  username The admin username.
+ * \param  password The admin password.
+ * \return True if authentication is successful, false otherwise.
  */
 bool DatabaseManager::authenticateAdmin(const QString &username, const QString &password) {
     QSqlQuery query;
@@ -211,9 +211,9 @@ bool DatabaseManager::authenticateAdmin(const QString &username, const QString &
 }
 
 /**
- * @fn     DatabaseManager::playerId
- * @brief  return the current playerId
- * @return void
+ * \fn     DatabaseManager::playerId
+ * \brief  return the current playerId
+ * \return void
  */
 int DatabaseManager::playerId() const
 {
@@ -221,9 +221,9 @@ int DatabaseManager::playerId() const
 }
 
 /**
- * @fn     DatabaseManager::setPlayerId
- * @brief  set the current player id
- * @return void
+ * \fn     DatabaseManager::setPlayerId
+ * \brief  set the current player id
+ * \return void
  */
 void DatabaseManager::setPlayerId(int newPlayerId)
 {
@@ -232,9 +232,9 @@ void DatabaseManager::setPlayerId(int newPlayerId)
 
 
 /**
- * @fn     DatabaseManager::performDatabaseOperations
- * @brief  generic database operation place holder
- * @return void
+ * \fn     DatabaseManager::performDatabaseOperations
+ * \brief  generic database operation place holder
+ * \return void
  */
 void DatabaseManager::performDatabaseOperations()
 {
@@ -257,10 +257,10 @@ void DatabaseManager::performDatabaseOperations()
 }
 
 /**
- * @fn     DatabaseManager::getPlayerName
- * @brief  Retrieves the name of a player from the database.
- * @param  playerId The ID of the player.
- * @return QString The name of the player.
+ * \fn     DatabaseManager::getPlayerName
+ * \brief  Retrieves the name of a player from the database.
+ * \param  playerId The ID of the player.
+ * \return QString The name of the player.
  */
 QString DatabaseManager::getPlayerName(int playerId)
 {
@@ -275,10 +275,10 @@ QString DatabaseManager::getPlayerName(int playerId)
 
 
 /**
- * @fn     DatabaseManager::getPlayerColor
- * @brief  Retrieves the color associated with a player from the database.
- * @param  color The color to search for.
- * @return QString The color associated with the player.
+ * \fn     DatabaseManager::getPlayerColor
+ * \brief  Retrieves the color associated with a player from the database.
+ * \param  color The color to search for.
+ * \return QString The color associated with the player.
  */
 QString DatabaseManager::getPlayerColor(QString &color)
 {
@@ -293,10 +293,10 @@ QString DatabaseManager::getPlayerColor(QString &color)
 
 
 /**
- * @fn     DatabaseManager::getUserSelectedOption
- * @brief  Retrieves the selected option of a user from the database.
- * @param  userId The ID of the user.
- * @return QString The selected option of the user.
+ * \fn     DatabaseManager::getUserSelectedOption
+ * \brief  Retrieves the selected option of a user from the database.
+ * \param  userId The ID of the user.
+ * \return QString The selected option of the user.
  */
 QString DatabaseManager::getUserSelectedOption(int userId)
 {
@@ -311,11 +311,11 @@ QString DatabaseManager::getUserSelectedOption(int userId)
 
 
 /**
- * @fn    DatabaseManager::setPlayerName
- * @brief  Sets the name of a player in the database.
- * @param  playerId The ID of the player.
- * @param  newName The new name of the player.
- * @return bool True if the operation was successful, false otherwise.
+ * \fn    DatabaseManager::setPlayerName
+ * \brief  Sets the name of a player in the database.
+ * \param  playerId The ID of the player.
+ * \param  newName The new name of the player.
+ * \return bool True if the operation was successful, false otherwise.
  */
 bool DatabaseManager::setPlayerName(int playerId, QString &newName)
 {
@@ -336,11 +336,11 @@ bool DatabaseManager::setPlayerName(int playerId, QString &newName)
 
 
 /**
- * @fn     DatabaseManager::setPlayerColor
- * @brief  set the player color int the player table
- * @param  playerId
- * @param  color
- * @return bool
+ * \fn     DatabaseManager::setPlayerColor
+ * \brief  set the player color int the player table
+ * \param  playerId
+ * \param  color
+ * \return bool
  */
 bool DatabaseManager::setPlayerColor(int playerId, QString &color)
 {
@@ -362,11 +362,11 @@ bool DatabaseManager::setPlayerColor(int playerId, QString &color)
 
 
 /**
- * @fn      DatabaseManager::createNewPlayer
- * @brief   Inserts a new user int the player table
- * @param   playerName
- * @param   playerColor
- * @return  bool
+ * \fn      DatabaseManager::createNewPlayer
+ * \brief   Inserts a new user int the player table
+ * \param   playerName
+ * \param   playerColor
+ * \return  bool
  */
 bool DatabaseManager::createNewPlayer(QString &playerName, QString &playerColor)
 {

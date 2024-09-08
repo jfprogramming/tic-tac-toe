@@ -2,9 +2,9 @@
 #include <QObject>
 
 /**
- * @file PlayerModel.h
+ * \file PlayerModel.h
  *
- * @brief The PlayerModel class manages player data.
+ * \brief The PlayerModel class manages player data.
  *        Handles player name and color information.
  *        Provides interface for setting and retrieving player details.
  */

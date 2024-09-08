@@ -4,9 +4,9 @@
 
 
 /**
- * @file GameModel.h
+ * \file GameModel.h
  *
- * @brief The GameModel class manages game data.
+ * \brief The GameModel class manages game data.
  *        Handles game type and player information.
  *        Provides interface for setting and retrieving game details.
  */

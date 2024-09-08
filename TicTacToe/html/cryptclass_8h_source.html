@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: cryptclass.h Source File</title>
+<title>TicTacToe: cryptclass.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">TicTacToe
    </div>
   </td>
  </tr>
@@ -65,7 +65,7 @@ $(function() {
 <div class="title">cryptclass.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<a href="cryptclass_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;crypt.h&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
@@ -74,73 +74,72 @@ $(function() {
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;sys/stat.h&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;fcntl.h&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;errno.h&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;assert.h&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;time.h&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;openssl/conf.h&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;time.h&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;openssl/conf.h&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;openssl/evp.h&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;openssl/err.h&gt;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;openssl/evp.h&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;openssl/err.h&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;openssl/evp.h&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;QString&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define BCRYPT_HASHSIZE 512</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define RANDBYTES 16</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define MIN_ROUNDS 4</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#define MAX_ROUNDS 31</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#define DEF_ROUNDS 12</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classCryptClass.html">   33</a></span>&#160;<span class="keyword">class </span><a class="code" href="classCryptClass.html">CryptClass</a> {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="comment">// Bcrypt</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="classCryptClass.html#ae56c1a1db462d2488cd45478491bc5fc">rand_read</a>(<span class="keywordtype">int</span> fd, <span class="keywordtype">char</span> *out, <span class="keywordtype">size_t</span> count);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="classCryptClass.html#ae311bfb36a9e58a6fe7fc51dbbadd292">bcrypt_gensalt</a>(<span class="keywordtype">int</span> salt_rounds, <span class="keywordtype">char</span> salt[BCRYPT_HASHSIZE]);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="classCryptClass.html#ad34eb1050b6de1234766e055cad89007">bcrypt_hashpw</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *passwd, <span class="keyword">const</span> <span class="keywordtype">char</span> salt[BCRYPT_HASHSIZE], <span class="keywordtype">char</span> hash[BCRYPT_HASHSIZE]);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="classCryptClass.html#a9050997f13df8ce500fc21728c936d00">bcrypt_checkpw</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *passwd, <span class="keyword">const</span> <span class="keywordtype">char</span> hash[BCRYPT_HASHSIZE]);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">// Setters for key256 &amp; iv128</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classCryptClass.html#ab20e7cc37f661cb1ab2eeb5d14ec1821">setKey</a>(QString hexKeyString);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classCryptClass.html#a7c5f77c66f336b76da26ee304c858f76">setIv</a>(QString hexIvString);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="comment">// Getters for key256 &amp; iv128</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">static</span> QString getKey() {<span class="keywordflow">return</span> QString((<span class="keywordtype">char</span>*) _key256);}</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">static</span> QString getIv()  {<span class="keywordflow">return</span> QString((<span class="keywordtype">char</span>*) _iv128); }</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">// Base64</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#define BASE64ENCODED_LEN(textLen) ((4*((textLen+2)/3))+1)</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#define BASE64DECODED_LEN(textLen) ((3*textLen/4)+1)</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="classCryptClass.html#aff0090ce3728d0f803abba43bb543d11">base64encode</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* textBuf, <span class="keywordtype">int</span> textLen, <span class="keywordtype">char</span>* encBuf);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="classCryptClass.html#a4ad42e7ccf56ab9a286bd274124a0f65">base64decode</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* encBuf, <span class="keywordtype">int</span> encLen, <span class="keywordtype">char</span>* textBuf);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">// AES256</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#define AES256ENCODED_LEN(textLen) (((textLen/16)+1)*16)</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span>        <a class="code" href="classCryptClass.html#a271a7b5c4fb8c9d7b001415a3c2dff77">aes256encode</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* textBuf, <span class="keywordtype">int</span> textLen, <span class="keywordtype">char</span>* encBuf);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span>        <a class="code" href="classCryptClass.html#ade6ff851c1ca484609de18eba9b263da">aes256decode</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* encBuf, <span class="keywordtype">int</span> encLen, <span class="keywordtype">char</span>* textBuf);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">static</span> QString    <a class="code" href="classCryptClass.html#a2eabc0cd675ee7b34f2552faf30f4354">aes256toHexStr</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* charBuf, <span class="keywordtype">int</span> len);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">static</span> QByteArray <a class="code" href="classCryptClass.html#a2db2495aca71c21aeb1a428581316644">aes256fromHexStr</a>(<span class="keyword">const</span> QString qString);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">static</span> QString    <a class="code" href="classCryptClass.html#a3aae6961840d453e7d0692ad6d8cf846">aes256toBase64Str</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* aes2656Buf, <span class="keywordtype">int</span> len);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">static</span> QByteArray <a class="code" href="classCryptClass.html#a954fc05f64d62e9f053e21e4dd379c61">aes256fromBase64Str</a>(<span class="keyword">const</span> QString base64str);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">// Base64 representation of AES256 encoded data</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">static</span> QString <a class="code" href="classCryptClass.html#a576902c500d81cf3cfef795772aa19e2">base64aes256encode</a>(QString textString);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">static</span> QString <a class="code" href="classCryptClass.html#a1b08460b5f7fe46a7e9cec41baf9b055">base64aes256decode</a>(QString textString);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;QString&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#define BCRYPT_HASHSIZE 512</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#define RANDBYTES 16</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define MIN_ROUNDS 4</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define MAX_ROUNDS 31</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define DEF_ROUNDS 12</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classCryptClass.html">   32</a></span>&#160;<span class="keyword">class </span><a class="code" href="classCryptClass.html">CryptClass</a> {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="comment">// Bcrypt</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="classCryptClass.html#ae56c1a1db462d2488cd45478491bc5fc">rand_read</a>(<span class="keywordtype">int</span> fd, <span class="keywordtype">char</span> *out, <span class="keywordtype">size_t</span> count);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="classCryptClass.html#ae311bfb36a9e58a6fe7fc51dbbadd292">bcrypt_gensalt</a>(<span class="keywordtype">int</span> salt_rounds, <span class="keywordtype">char</span> salt[BCRYPT_HASHSIZE]);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="classCryptClass.html#ad34eb1050b6de1234766e055cad89007">bcrypt_hashpw</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *passwd, <span class="keyword">const</span> <span class="keywordtype">char</span> salt[BCRYPT_HASHSIZE], <span class="keywordtype">char</span> hash[BCRYPT_HASHSIZE]);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="classCryptClass.html#a9050997f13df8ce500fc21728c936d00">bcrypt_checkpw</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *passwd, <span class="keyword">const</span> <span class="keywordtype">char</span> hash[BCRYPT_HASHSIZE]);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">// Setters for key256 &amp; iv128</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classCryptClass.html#ab20e7cc37f661cb1ab2eeb5d14ec1821">setKey</a>(QString hexKeyString);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classCryptClass.html#a7c5f77c66f336b76da26ee304c858f76">setIv</a>(QString hexIvString);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="comment">// Getters for key256 &amp; iv128</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">static</span> QString getKey() {<span class="keywordflow">return</span> QString((<span class="keywordtype">char</span>*) _key256);}</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">static</span> QString getIv()  {<span class="keywordflow">return</span> QString((<span class="keywordtype">char</span>*) _iv128); }</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">// Base64</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#define BASE64ENCODED_LEN(textLen) ((4*((textLen+2)/3))+1)</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#define BASE64DECODED_LEN(textLen) ((3*textLen/4)+1)</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="classCryptClass.html#aff0090ce3728d0f803abba43bb543d11">base64encode</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* textBuf, <span class="keywordtype">int</span> textLen, <span class="keywordtype">char</span>* encBuf);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="classCryptClass.html#a4ad42e7ccf56ab9a286bd274124a0f65">base64decode</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* encBuf, <span class="keywordtype">int</span> encLen, <span class="keywordtype">char</span>* textBuf);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">// AES256</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#define AES256ENCODED_LEN(textLen) (((textLen/16)+1)*16)</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span>        <a class="code" href="classCryptClass.html#a271a7b5c4fb8c9d7b001415a3c2dff77">aes256encode</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* textBuf, <span class="keywordtype">int</span> textLen, <span class="keywordtype">char</span>* encBuf);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span>        <a class="code" href="classCryptClass.html#ade6ff851c1ca484609de18eba9b263da">aes256decode</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* encBuf, <span class="keywordtype">int</span> encLen, <span class="keywordtype">char</span>* textBuf);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">static</span> QString    <a class="code" href="classCryptClass.html#a2eabc0cd675ee7b34f2552faf30f4354">aes256toHexStr</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* charBuf, <span class="keywordtype">int</span> len);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">static</span> QByteArray <a class="code" href="classCryptClass.html#a2db2495aca71c21aeb1a428581316644">aes256fromHexStr</a>(<span class="keyword">const</span> QString qString);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">static</span> QString    <a class="code" href="classCryptClass.html#a3aae6961840d453e7d0692ad6d8cf846">aes256toBase64Str</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* aes2656Buf, <span class="keywordtype">int</span> len);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">static</span> QByteArray <a class="code" href="classCryptClass.html#a954fc05f64d62e9f053e21e4dd379c61">aes256fromBase64Str</a>(<span class="keyword">const</span> QString base64str);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="comment">// Base64 representation of AES256 encoded data</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">static</span> QString <a class="code" href="classCryptClass.html#a576902c500d81cf3cfef795772aa19e2">base64aes256encode</a>(QString textString);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">static</span> QString <a class="code" href="classCryptClass.html#a1b08460b5f7fe46a7e9cec41baf9b055">base64aes256decode</a>(QString textString);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">//256 bit AES key</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> _key256[256];</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="comment">// 128 bit AES initialization vector</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> _iv128[128];</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;};</div>
-<div class="ttc" id="aclassCryptClass_html"><div class="ttname"><a href="classCryptClass.html">CryptClass</a></div><div class="ttdef"><b>Definition:</b> cryptclass.h:33</div></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="comment">//256 bit AES key</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> _key256[256];</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="comment">// 128 bit AES initialization vector</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> _iv128[128];</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;};</div>
+<div class="ttc" id="aclassCryptClass_html"><div class="ttname"><a href="classCryptClass.html">CryptClass</a></div><div class="ttdef"><b>Definition:</b> cryptclass.h:32</div></div>
 <div class="ttc" id="aclassCryptClass_html_a1b08460b5f7fe46a7e9cec41baf9b055"><div class="ttname"><a href="classCryptClass.html#a1b08460b5f7fe46a7e9cec41baf9b055">CryptClass::base64aes256decode</a></div><div class="ttdeci">static QString base64aes256decode(QString textString)</div><div class="ttdoc">Base64 aes256 Decode.</div><div class="ttdef"><b>Definition:</b> cryptclass.cpp:419</div></div>
 <div class="ttc" id="aclassCryptClass_html_a271a7b5c4fb8c9d7b001415a3c2dff77"><div class="ttname"><a href="classCryptClass.html#a271a7b5c4fb8c9d7b001415a3c2dff77">CryptClass::aes256encode</a></div><div class="ttdeci">static int aes256encode(const char *textBuf, int textLen, char *encBuf)</div><div class="ttdoc">AES 256 Encoder.</div><div class="ttdef"><b>Definition:</b> cryptclass.cpp:196</div></div>
 <div class="ttc" id="aclassCryptClass_html_a2db2495aca71c21aeb1a428581316644"><div class="ttname"><a href="classCryptClass.html#a2db2495aca71c21aeb1a428581316644">CryptClass::aes256fromHexStr</a></div><div class="ttdeci">static QByteArray aes256fromHexStr(const QString qString)</div><div class="ttdoc">AES 256 from Hex String.</div><div class="ttdef"><b>Definition:</b> cryptclass.cpp:316</div></div>

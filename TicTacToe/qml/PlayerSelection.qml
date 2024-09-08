@@ -12,6 +12,7 @@ Item {
     }
 
     //Highlighter
+    //
     Component {
         id: highlight
         Rectangle {
@@ -37,7 +38,8 @@ Item {
         }
     }
 
-    //Player slist delegate
+    //Players list delegate
+    //
     Component {
         id:playerListdelegate
         Column {
@@ -87,6 +89,7 @@ Item {
             cellHeight: 150
             delegate: playerListdelegate
             // Clear the highlight (set current item to null)
+            //
             Component.onCompleted: {
                 playerSelectionGridView.currentIndex = -1;
                 console.log("1current index: "+playerSelectionGridView.currentIndex)

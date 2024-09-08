@@ -3,9 +3,9 @@
 #include "controllers/databasemanager.h"
 
 /**
- * @file dbmanager.h
+ * \file controllers.h
  *
- * @brief Contains declarations for database manager and related threads.
+ * \brief Contains declarations for database manager and related threads.
  *        Provides external linkage for DatabaseManager and QThread instances.
  */
 

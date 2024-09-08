@@ -2,9 +2,9 @@
 
 
 /**
- * @fn PlayerManger::PlayerManger
- * @brief Constructor for PlayerManger.
- * @param parent The parent QThread.
+ * \fn PlayerManger::PlayerManger
+ * \brief Constructor for PlayerManger.
+ * \param parent The parent QThread.
  */
 PlayerManger::PlayerManger(QThread *parent) : QThread{parent}
 {
@@ -14,9 +14,9 @@ PlayerManger::PlayerManger(QThread *parent) : QThread{parent}
 
 
 /**
- * @fn PlayerManger::getPlayerName
- * @brief Gets the player name.
- * @return The player name as a QString.
+ * \fn PlayerManger::getPlayerName
+ * \brief Gets the player name.
+ * \return The player name as a QString.
  */
 QString PlayerManger::getPlayerName() const
 {
@@ -25,10 +25,10 @@ QString PlayerManger::getPlayerName() const
 
 
 /**
- * @fn PlayerManger::setPlayerName
- * @brief Sets the player name.
- * @param newPlayerName The new player name.
- * @return void
+ * \fn PlayerManger::setPlayerName
+ * \brief Sets the player name.
+ * \param newPlayerName The new player name.
+ * \return void
  */
 void PlayerManger::setPlayerName(const QString &newPlayerName)
 {
@@ -37,9 +37,9 @@ void PlayerManger::setPlayerName(const QString &newPlayerName)
 
 
 /**
- * @fn PlayerManger::getPlayerColor
- * @brief Gets the player color.
- * @return The player color as a QString.
+ * \fn PlayerManger::getPlayerColor
+ * \brief Gets the player color.
+ * \return The player color as a QString.
  */
 QString PlayerManger::getPlayerColor() const
 {
@@ -48,9 +48,9 @@ QString PlayerManger::getPlayerColor() const
 
 
 /**
- * @fn PlayerManger::setPlayerColor
- * @brief Sets the player color.
- * @param newPlayerColor The new player color.
+ * \fn PlayerManger::setPlayerColor
+ * \brief Sets the player color.
+ * \param newPlayerColor The new player color.
  */
 void PlayerManger::setPlayerColor(const QString &newPlayerColor)
 {
@@ -59,10 +59,10 @@ void PlayerManger::setPlayerColor(const QString &newPlayerColor)
 
 
 /**
- * @fn PlayerManger::savePlayer
- * @brief Saves the player information.
- * @param playerName The name of the player.
- * @param playerColor The color of the player.
+ * \fn PlayerManger::savePlayer
+ * \brief Saves the player information.
+ * \param playerName The name of the player.
+ * \param playerColor The color of the player.
  */
 void PlayerManger::savePlayer(const QString &playerName, const QString &playerColor)
 {
