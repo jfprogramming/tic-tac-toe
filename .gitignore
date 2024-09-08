@@ -56,4 +56,5 @@ compile_commands.json
 build/*
 *build/
 build*
-TicTacToe/doxygen/*
+TicTacToe/doxygen/html/*
+TicTacToe/doxygen/latex/*
