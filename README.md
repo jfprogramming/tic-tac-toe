@@ -104,6 +104,7 @@ Below is a list of features not yet complete:
   - Implement 2 Player Game Mode logic.
   - Finish High Score.
   - Finish integrating QSettings File example.
+  - Convert javaScript to c++ where possible for improved performance. 
   - Improve threading with QMutex locking.
   - Improve class design by implementing common base class.
   - Improve Object Oriented design by implementing smart pointers.
