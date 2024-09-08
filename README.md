@@ -20,7 +20,7 @@ tic-tac-toe
 │   └── CMakeLists.txt 
 ├── README.md 
 ├── .gitignore 
-└── .git```
+└── .git
 
 
 ## Building and Running
