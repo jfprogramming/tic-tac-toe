@@ -17,6 +17,6 @@ mkdir -p "$OUTPUT_DIR"
 # Run Doxygen
 doxygen "$DOXYFILE_PATH"
 
-cp doxygen/latex/refman.pdf doxygen/
+sudo cp doxygen/latex/refman.pdf doxygen/refman.pdf
 
 echo "Doxygen Command Complete..."
