@@ -85,9 +85,9 @@
   exit 0
   ```
 
- 
- - **meta-custom/conf/layer.conf**
-   ```
+## meta-custom/conf/layer.conf  
+ - Added in `styhead` to `LAYERSERIES_COMPAT_meta`
+  ```
   # We have a conf and classes directory, add to BBPATH
   BBPATH .= ":${LAYERDIR}"
 
@@ -101,13 +101,11 @@
   LAYERSERIES_COMPAT_meta-custom = "dunfell gatesgarth hardknott honister kirkstone langdale styhead"
   ```
 
-  
 
-- In `meta-custom` directory there is `qt-recipes` and `recipes-core` directory 
+- In `meta-custom` directory there is `recipes-qt` and `recipes-core` directory 
   - `recipes-core` is for adding in the filesystem changes to add in `/data`
-- **NOTE**: in the `recipes-core` directory I had a sub directory `init-scirpts` that had the tictactoe start up script and bb file `tictactoe_1.0.bb`
-- I have not assigned a licenses to the init script in the `recipes-core` directory 
-- I did assign a licenses file in the inits script in the `qt-recipes` directory 
+- **NOTE**: in the `recipes-core` directory I had a sub directory `init-scirpts` that had the tictactoe start up script and bb file `tictactoe_1.0.bb` but have since removed them. 
+- Assigned a licenses file md5 value in the recipes in the `recipes-qt` directory 
 
 
 ## Cloned meta-qt6 repo 
@@ -116,7 +114,8 @@
 - Adedd in `styhead` to ```LAYERSERIES_COMPAT_qt6-layer = "dunfell gatesgarth hardknott honister styhead"```
 
 
-- Removed the changes to add in qt5 
+- Removed the changes to add in qt5
+- Only adding in qt6 now
 - **Note**: build issue with qt6 
 
 - In tictactoe.bb `inherit qt6` line is throwing a build error
