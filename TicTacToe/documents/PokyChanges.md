@@ -47,7 +47,8 @@
   SOFTWARE.
   ```
 
-- **meta-custom/recipes-qt/tictactoe/tictactoe_1.0.bb**
+- **Created tictactoe_1.0.bb recipe file**
+  - meta-custom/recipes-qt/tictactoe/tictactoe_1.0.bb**
   - Added in start up script 
   - Added in reference to start up script stored in -> meta-custom/recipes-qt/tictactoe/files/tictactoe 
   - `inherit qt6` 
