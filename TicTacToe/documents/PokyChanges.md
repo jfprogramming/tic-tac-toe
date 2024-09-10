@@ -23,8 +23,7 @@
 
 ## Created meta-custom directory
   - **Created MIT License file md5 checksum value**
-  - `jfinn@jfinn-virtual-machine:~/Projects/poky/poky/meta-custom/recipes-qt/tictactoe$ ls`
-    `files  LICENSE  tictactoe_1.0.bb`
+  - `jfinn@jfinn-virtual-machine:~/Projects/poky/poky$ cat meta-custom/recipes-qt/tictactoe/LICENSE `
 
   ```
   Copyright (c) [2024] [Jesse Finneman]
