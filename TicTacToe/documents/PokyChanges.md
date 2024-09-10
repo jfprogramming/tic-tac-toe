@@ -48,7 +48,7 @@
   ```
 
 - **Created tictactoe_1.0.bb recipe file**
-  - meta-custom/recipes-qt/tictactoe/tictactoe_1.0.bb**
+  - **meta-custom/recipes-qt/tictactoe/tictactoe_1.0.bb**
   - Added in start up script 
   - Added in reference to start up script stored in -> meta-custom/recipes-qt/tictactoe/files/tictactoe 
   - `inherit qt6` 
@@ -57,7 +57,7 @@
 ## Startup Script 
 - Added in start up script -> **meta-custom/recipes-qt/tictactoe/files/tictactoe**
    ```sh
-   #!/bin/sh
+  #!/bin/sh
   # /etc/init.d/tictactoe
   #
   # chkconfig: 345 99 10
