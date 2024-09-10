@@ -4,7 +4,8 @@
 - git clone git://git.yoctoproject.org/poky.git
 
 ## build/conf/local.conf
-- IMAGE_INSTALL:append = " qtbase qtdeclarative qtmultimedia tictactoe"
+- Added in tictactoe application to the `IMAGE_INSTALL` List:
+  - IMAGE_INSTALL:append = " qtbase qtdeclarative qtmultimedia tictactoe"
  
  
 ## build/conf/bblayers.conf
