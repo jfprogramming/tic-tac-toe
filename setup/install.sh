@@ -15,12 +15,42 @@ sudo apt-get install libxcb-cursor0
 sudo apt-get install libssl-dev
 sudo apt-get install doxygen
 sudo apt-get install graphviz
+
 echo "run install apt-get install texlive-full manullay as hitting enter on the keyboard \n
-      several times to get the commands to progress is a known issue"
+      several times to get the commands to progress is a known issue"     
 # sudo apt-get install texlive-full
 
+# packages to assist in building Poky
+sudo apt install gawk \
+                 wget \
+                 git \
+                 diffstat \
+                 unzip \
+                 texinfo \
+                 gcc \
+                 build-essential \
+                 chrpath \
+                 socat \
+                 cpio \
+                 python3 \
+                 python3-pip \
+                 python3-pexpect \
+                 xz-utils \
+                 debianutils \
+                 iputils-ping \
+                 python3-git \
+                 python3-jinja2 \
+                 python3-subunit \
+                 zstd liblz4-tool \
+                 file \
+                 locales \
+                 libacl1
+                 
+sudo locale-gen en_US.UTF-8
+
+
 # Install the encryption library 
-pip install bcrpyt 
+pip install bcrypt
 
 #setup data directory
 sudo mkdir /data

@@ -358,6 +358,7 @@ Item {
         }
 
         // Win Text only shown if a player wins
+        //
         Text {
             id: winText
             text: currentPlayer == 1 ? "Player 1 Wins!" : "Player 2 Wins"
