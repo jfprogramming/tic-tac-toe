@@ -4,7 +4,7 @@
 - git clone git://git.yoctoproject.org/poky.git
 
 ## build/conf/local.conf
-- Added in tictactoe application to the `IMAGE_INSTALL` List:
+- Added in `tictactoe` application to the `IMAGE_INSTALL` List:
   - IMAGE_INSTALL:append = " qtbase qtdeclarative qtmultimedia tictactoe"
  
  
@@ -53,6 +53,23 @@
   - Added in reference to start up script stored in -> meta-custom/recipes-qt/tictactoe/files/tictactoe 
   - `inherit qt6` 
   - set license md5 checksum value
+  - `jfinn@jfinn-virtual-machine:~/Projects/poky/poky$ cat meta-custom/recipes-qt/tictactoe/tictactoe_1.0.bb`
+    ```    
+    SUMMARY = "TicTacToe init script"
+    LICENSE = "MIT"
+    LIC_FILES_CHKSUM = "file://LICENSE;md5=466e2618bf1f61e8911284dd5a172b6c"
+    
+    SRC_URI = "file://tictactoe"
+    
+    inherit qt6
+    
+    do_install() {
+        install -d ${D}${sysconfdir}/init.d
+        install -m 0755 ${WORKDIR}/tictactoe ${D}${sysconfdir}/init.d/tictactoe
+    }
+
+    FILES_${PN} += "${sysconfdir}/init.d/tictactoe"
+    ```
  
 ## Startup Script 
 - Added in start up script -> **meta-custom/recipes-qt/tictactoe/files/tictactoe**
