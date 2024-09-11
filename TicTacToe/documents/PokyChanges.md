@@ -170,5 +170,36 @@ ERROR: Parsing halted due to errors, see error messages above
   - adjust/edit kernel module to do this... 
 
 
+## Cleaned up tictactoe_1.0.bb file
+  - Update `inherit qt6` to `inherit qt6-qmkae`
+  - Added in `do_compile()` statement
+	```
+	jfinn@jfinn-virtual-machine:~/Projects/poky/poky$ cat meta-custom/recipes-qt/tictactoe/tictactoe_1.0.bb
+	SUMMARY = "TicTacToe init script"
+	LICENSE = "MIT"
+	LIC_FILES_CHKSUM = "file://LICENSE;md5=466e2618bf1f61e8911284dd5a172b6c"
+
+	SRC_URI = "file://tictactoe"
+
+	inherit qt6-qmake
+
+	do_compile() {
+	    qmake6
+	    make
+	}
+
+	do_install() {
+	    install -d ${D}${sysconfdir}/init.d
+	    install -m 0755 ${WORKDIR}/tictactoe ${D}${sysconfdir}/init.d/tictactoe
+	}
+
+	FILES_${PN} += "${sysconfdir}/init.d/tictactoe"
+	```
+
+
+
+## Cloned Down RPI 4 repo for sdk cross comipler setup for virtual machine Qt Creator 
+- cd /path/to/yocto/poky
+- **git clone https://github.com/agherzan/meta-raspberrypi.git**
 
 
