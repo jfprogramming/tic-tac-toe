@@ -54,7 +54,7 @@
   - `inherit qt6` 
   - set license md5 checksum value
   - `jfinn@jfinn-virtual-machine:~/Projects/poky/poky$ cat meta-custom/recipes-qt/tictactoe/tictactoe_1.0.bb`
-    ```    
+    ```
     SUMMARY = "TicTacToe init script"
     LICENSE = "MIT"
     LIC_FILES_CHKSUM = "file://LICENSE;md5=466e2618bf1f61e8911284dd5a172b6c"
