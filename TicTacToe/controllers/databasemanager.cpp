@@ -101,7 +101,9 @@ bool DatabaseManager::setPlayerHighScoreValue(int playerId, int score) {
     query.bindValue(":score", score);
     if (!query.exec()) {
         qWarning() << "Failed to insert high score:" << query.lastError();
+        return false;
     }
+    return true;
 }
 
 

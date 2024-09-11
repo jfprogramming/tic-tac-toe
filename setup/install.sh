@@ -28,6 +28,7 @@ sudo apt install gawk \
                  unzip \
                  texinfo \
                  gcc \
+                 cmake \
                  build-essential \
                  chrpath \
                  socat \
@@ -44,7 +45,15 @@ sudo apt install gawk \
                  zstd liblz4-tool \
                  file \
                  locales \
-                 libacl1
+                 libacl1 \
+                 libgtest-dev
+
+echo "done installing packages..."
+                 
+# Un-comment to compile gtest framework
+# cd /usr/src/gtest
+# sudo cmake CMakeLists.txt
+# sudo make
                  
 sudo locale-gen en_US.UTF-8
 
