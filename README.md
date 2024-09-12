@@ -21,7 +21,7 @@ tic-tac-toe
 ├── README.md 
 ├── .gitignore 
 └── .git
-
+```
 
 ## Building and Running
 - **Currently compiled and tested on Ubuntu 22.04**
