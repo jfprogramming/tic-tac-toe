@@ -23,21 +23,16 @@ public:
     explicit PlayerModel(QObject* parent = nullptr);
 
     // Get Player info (name, color)
-    //
-    QString getPlayerName(){return m_playerName;};
-    QString getPlayerColor(){return m_playerColor;};
+    QString getPlayerName() const { return m_playerName; }
+    QString getPlayerColor() const { return m_playerColor; }
 
     // Set Game-play player names selected
-    //
-    QString getPlayer1(){return m_player1;};
-    QString getPlayer2(){return m_player2;};
+    QString getPlayer1() const { return m_player1; }
+    QString getPlayer2() const { return m_player2; }
 
     void setPlayerHighScoreValue(int playerId, int score);
 
 signals:
-    void userNameChanged(QString &name);
-    void userAgeChanged(QString &age);
-
     void playerNameChanged(const QString &playerName);
     void playerColorChanged(const QString &playerColor);
 
@@ -59,9 +54,9 @@ public slots:
     void setPlayer2(const QString &newPlayer2);
 
 private:
-    QString m_playerName="";
-    QString m_playerColor="";
+    QString m_playerName = "";
+    QString m_playerColor = "";
 
-    QString m_player1="";
-    QString m_player2="";
+    QString m_player1 = "";
+    QString m_player2 = "";
 };
