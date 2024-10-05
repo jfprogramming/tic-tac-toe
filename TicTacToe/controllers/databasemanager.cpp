@@ -372,13 +372,24 @@ bool DatabaseManager::setPlayerColor(int playerId, QString &color)
 bool DatabaseManager::createNewPlayer(const QString &playerName, const QString &playerColor)
 {
     QSqlQuery query;
-
-    // Create new player
-    //
-    query.prepare("INSERT INTO PlayerTable (playerName, playerColor, dateTime) VALUES(:playerName, :playerColor, :dateTime)");
+    query.prepare("SELECT playerId FROM PlayerTable WHERE playerName = :playerName");
     query.bindValue(":playerName", playerName);
-    query.bindValue(":playerColor", playerColor);
-    query.bindValue(":dateTime", QDateTime::currentDateTime());
+
+    if (query.exec() && query.next()) {
+        // Player exists, update the playerColor
+        //
+        int playerId = query.value(0).toInt();
+        query.prepare("UPDATE PlayerTable SET playerColor = :playerColor WHERE playerId = :playerId");
+        query.bindValue(":playerColor", playerColor);
+        query.bindValue(":playerId", playerId);
+    } else {
+        // Player does not exist, create a new player
+        //
+        query.prepare("INSERT INTO PlayerTable (playerName, playerColor, dateTime) VALUES(:playerName, :playerColor, :dateTime)");
+        query.bindValue(":playerName", playerName);
+        query.bindValue(":playerColor", playerColor);
+        query.bindValue(":dateTime", QDateTime::currentDateTime());
+    }
 
     return query.exec();
 }

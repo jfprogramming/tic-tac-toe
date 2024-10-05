@@ -53,8 +53,8 @@ Item {
                 text: "Lookup"
                 onClicked: {
                     playerModel.lookupPlayer(playerNameTextInput.text)
-                    //playerColorTextInput.text = playerModel.getPlayerName
-                    //playerNameTextInput.text = playerModel.getPlayerColor
+                    playerNameTextInput.text = playerModel.playerName
+                    playerColorTextInput.text = playerModel.playerColor
                 }
             }
         }
