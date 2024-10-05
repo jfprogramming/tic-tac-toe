@@ -30,11 +30,8 @@ Item {
                 id:dateTimeSettingsBtn
                 icon.source: "qrc:///settings.png" // Material icon source
                 icon.color: "#0078D4"
-                Text{
-                    id: dateTimeSettingsBtnTxt
-                    text: "Date Time"
-                    anchors.centerIn: parent
-                }
+                text: qsTr("Date and Time")
+                width: 200
                 onClicked: {
                     console.log("Date Time Setting Selected...")
                     // Display date time settings page
@@ -47,11 +44,8 @@ Item {
                 id:managePlayersBtn
                 icon.source: "qrc:///twoPlayer.png" // Material icon source
                 icon.color: "#0078D4"
-                Text{
-                    id: managePlayersBtnTxt
-                    text: "Manage Players"
-                    anchors.centerIn: parent
-                }
+                text: qsTr("Manage Players")
+                width: 200
                 onClicked: {
                     console.log("Manage Players Setting Selected...")
                     // Display Player Manager page
@@ -64,11 +58,8 @@ Item {
                 id:aboutBtn
                 icon.source: "qrc:///about.png" // Material icon source
                 icon.color: "#0078D4"
-                Text{
-                    id: aboutBtnTxt
-                    text: "About"
-                    anchors.centerIn: parent
-                }
+                text: qsTr("About")
+                width: 200
                 onClicked: {
                     console.log("About Setting Selected...")
                     // Display the About page

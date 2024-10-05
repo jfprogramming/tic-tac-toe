@@ -1,8 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file alias="x_img.png">images/x_img.png</file>
-        <file alias="o_img.png">images/o_img.png</file>
-        <file alias="profile.png">images/profile_8747415.png</file>
         <file alias="onePlayerMode.js">javaScript/onePlayerMode.js</file>
         <file alias="twoPlayer.png">images/twoPalyer.png</file>
         <file alias="settings.png">images/settings.png</file>
@@ -15,5 +12,7 @@
         <file alias="backArrow.png">images/backArrow.png</file>
         <file alias="reset.png">images/reset.png</file>
         <file alias="about.png">images/about.png</file>
+        <file alias="playerTwoIcon.png">images/playerTwo.png</file>
+        <file alias="playerOneIcon.png">images/playerOne.png</file>
     </qresource>
 </RCC>

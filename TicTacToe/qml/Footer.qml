@@ -42,7 +42,7 @@ Rectangle{
         icon.source: "qrc:///backArrow.png" // Material icon name
         icon.color: "#0078D4"
         visible: false
-        text: "Back"
+        text: qsTr("Back")
         onClicked: {
             console.log("back button clicked...")
         }
@@ -56,7 +56,7 @@ Rectangle{
         icon.source: "qrc:///reset.png" // Material icon name
         icon.color: "#0078D4"
         visible: false
-        text: "Reset"
+        text: qsTr("Reset")
         onClicked: {
             console.log("reset button clicked...")
         }
@@ -69,7 +69,7 @@ Rectangle{
         anchors.verticalCenter: parent.verticalCenter
         icon.source: "qrc:///home.png" // Material icon name
         icon.color: "#0078D4"
-        text: "Home"
+        text: qsTr("Home")
         onClicked: {
             console.log("home button clicked...")
         }

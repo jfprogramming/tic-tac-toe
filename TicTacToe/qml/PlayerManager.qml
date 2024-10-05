@@ -32,7 +32,7 @@ Item {
 
             Label{
                 id: playerNameLabel
-                text: "Enter Player Name"
+                text: qsTr("Enter Player Name")
             }
             TextField{
                 id: playerNameTextInput
@@ -43,7 +43,7 @@ Item {
 
             Label{
                 id: playerColorLabel
-                text: "Enter Player Color"
+                text: qsTr("Enter Player Color")
             }
             TextField{
                 id: playerColorTextInput
@@ -53,14 +53,14 @@ Item {
             }
             Button{
                 id: saveButton
-                text: "Save"
+                text: qsTr("Save")
                 onClicked: {
                     playerModel.savePlayerToDatabase(playerNameTextInput.text, playerColorTextInput.text)
                 }
             }
             Button{
                 id: lookupButton
-                text: "Lookup"
+                text: qsTr("Lookup")
                 onClicked: {
                     playerModel.lookupPlayer(playerNameTextInput.text)
                     playerNameTextInput.text = playerModel.playerName

@@ -28,7 +28,7 @@ Item {
                 id:onePlayerBtn
                 icon.source: "qrc:///onePlayer.png" // Material icon source
                 icon.color: "#0078D4"
-                text: "1 Player Game"
+                text: qsTr("1 Player Game")
                 width: 200
                 onClicked: {
                     console.log("One Player Game Selected...")
@@ -42,7 +42,7 @@ Item {
                 id:twoPlayerBtn
                 icon.source: "qrc:///twoPlayer.png" // Material icon source
                 icon.color: "#0078D4"
-                text: "2 Player Game"
+                text: qsTr("2 Player Game")
                 width: 200
                 onClicked: {
                     console.log("Two Player Game Selected...")
@@ -55,7 +55,7 @@ Item {
                 id:highScoreBtn
                 icon.source: "qrc:///highScore.png" // Material icon source
                 icon.color: "#0078D4"
-                text: "High Score"
+                text: qsTr("High Score")
                 width: 200
                 onClicked: {
                     stackView.push("HighScore.qml")

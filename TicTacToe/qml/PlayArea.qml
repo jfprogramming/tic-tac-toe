@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Controls
-import "qrc:/onePlayerMode.js" as JavaScript
+import "qrc:///onePlayerMode.js" as JavaScript
 
 
 Item {
@@ -72,18 +72,18 @@ Item {
         console.log("check for a horizontal win")
         // Row 1 Horizontal win
         //
-        if(row1rect1Img.source == "qrc:/x_img.png" &&
-                row1rect2Img.source == "qrc:/x_img.png" &&
-                row1rect3Img.source == "qrc:/x_img.png"){
+        if(row1rect1Img.source == "qrc:///playerOneIcon.png" &&
+                row1rect2Img.source == "qrc:///playerOneIcon.png" &&
+                row1rect3Img.source == "qrc:///playerOneIcon.png"){
             console.log("X Wins")
             winVisual.winStrike1 = true
             p1Score +=1
             setWinVariables("Player1")
             return true
         }
-        else if(row1rect1Img.source == "qrc:/o_img.png" &&
-                row1rect2Img.source == "qrc:/o_img.png" &&
-                row1rect3Img.source == "qrc:/o_img.png"){
+        else if(row1rect1Img.source == "qrc:///playerTwoIcon.png" &&
+                row1rect2Img.source == "qrc:///playerTwoIcon.png" &&
+                row1rect3Img.source == "qrc:///playerTwoIcon.png"){
             console.log("O Wins")
             winVisual.winStrike1 = true
             setWinVariables("Player2")
@@ -92,18 +92,18 @@ Item {
         }
         // Row 2 Horizontal win
         //
-        else if(row2rect1Img.source == "qrc:/x_img.png" &&
-                row2rect2Img.source == "qrc:/x_img.png" &&
-                row2rect3Img.source == "qrc:/x_img.png"){
+        else if(row2rect1Img.source == "qrc:///playerOneIcon.png" &&
+                row2rect2Img.source == "qrc:///playerOneIcon.png" &&
+                row2rect3Img.source == "qrc:///playerOneIcon.png"){
             console.log("Row 2 X Wins")
             winVisual.winStrike2 = true
             setWinVariables("Player1")
             p2Score +=1
             return true
         }
-        else if(row2rect1Img.source == "qrc:/o_img.png" &&
-                row2rect2Img.source == "qrc:/o_img.png" &&
-                row2rect3Img.source == "qrc:/o_img.png"){
+        else if(row2rect1Img.source == "qrc:///playerTwoIcon.png" &&
+                row2rect2Img.source == "qrc:///playerTwoIcon.png" &&
+                row2rect3Img.source == "qrc:///playerTwoIcon.png"){
             console.log("O Wins")
             winVisual.winStrike2 = true
             setWinVariables("Player2")
@@ -112,18 +112,18 @@ Item {
         }
         // Row 3 Horizontal win
         //
-        else if(row3rect1Img.source == "qrc:/x_img.png" &&
-                row3rect2Img.source == "qrc:/x_img.png" &&
-                row3rect3Img.source == "qrc:/x_img.png"){
+        else if(row3rect1Img.source == "qrc:///playerOneIcon.png" &&
+                row3rect2Img.source == "qrc:///playerOneIcon.png" &&
+                row3rect3Img.source == "qrc:///playerOneIcon.png"){
             console.log("X Wins")
             winVisual.winStrike3 = true
             setWinVariables("Player1")
             p1Score +=1
             return true
         }
-        else if(row3rect1Img.source == "qrc:/o_img.png" &&
-                row3rect2Img.source == "qrc:/o_img.png" &&
-                row3rect3Img.source == "qrc:/o_img.png"){
+        else if(row3rect1Img.source == "qrc:///playerTwoIcon.png" &&
+                row3rect2Img.source == "qrc:///playerTwoIcon.png" &&
+                row3rect3Img.source == "qrc:///playerTwoIcon.png"){
             console.log("O Wins")
             winVisual.winStrike3 = true
             setWinVariables("Player2")
@@ -140,18 +140,18 @@ Item {
         console.log("check for a vertical win")
         // Colum 1 Vertical win
         //
-        if(row1rect1Img.source == "qrc:/x_img.png" &&
-                row2rect1Img.source == "qrc:/x_img.png" &&
-                row3rect1Img.source == "qrc:/x_img.png"){
+        if(row1rect1Img.source == "qrc:///playerOneIcon.png" &&
+                row2rect1Img.source == "qrc:///playerOneIcon.png" &&
+                row3rect1Img.source == "qrc:///playerOneIcon.png"){
             console.log("X Wins")
             winVisual.winStrike4 = true
             setWinVariables("Player1")
             p1Score +=1
             return true
         }
-        else if(row1rect1Img.source == "qrc:/o_img.png" &&
-                row2rect1Img.source == "qrc:/o_img.png" &&
-                row3rect1Img.source == "qrc:/o_img.png"){
+        else if(row1rect1Img.source == "qrc:///playerTwoIcon.png" &&
+                row2rect1Img.source == "qrc:///playerTwoIcon.png" &&
+                row3rect1Img.source == "qrc:///playerTwoIcon.png"){
             console.log("O Wins")
             winVisual.winStrike4.visible = true
             setWinVariables("Player2")
@@ -160,18 +160,18 @@ Item {
         }
         // Colum 2 Vertical win
         //
-        else if(row1rect2Img.source == "qrc:/x_img.png" &&
-                row2rect2Img.source == "qrc:/x_img.png" &&
-                row3rect2Img.source == "qrc:/x_img.png"){
+        else if(row1rect2Img.source == "qrc:///playerOneIcon.png" &&
+                row2rect2Img.source == "qrc:///playerOneIcon.png" &&
+                row3rect2Img.source == "qrc:///playerOneIcon.png"){
             console.log("X Wins")
             winVisual.winStrike5 = true
             setWinVariables("Player1")
             p1Score +=1
             return true
         }
-        else if(row1rect2Img.source == "qrc:/o_img.png" &&
-                row2rect2Img.source == "qrc:/o_img.png" &&
-                row3rect2Img.source == "qrc:/o_img.png"){
+        else if(row1rect2Img.source == "qrc:///playerTwoIcon.png" &&
+                row2rect2Img.source == "qrc:///playerTwoIcon.png" &&
+                row3rect2Img.source == "qrc:///playerTwoIcon.png"){
             console.log("O Wins")
             winVisual.winStrike5 = true
             setWinVariables("Player2")
@@ -180,18 +180,18 @@ Item {
         }
         // Colum 3 Vertical win
         //
-        else if(row1rect3Img.source == "qrc:/x_img.png" &&
-                row2rect3Img.source == "qrc:/x_img.png" &&
-                row3rect3Img.source == "qrc:/x_img.png"){
+        else if(row1rect3Img.source == "qrc:///playerOneIcon.png" &&
+                row2rect3Img.source == "qrc:///playerOneIcon.png" &&
+                row3rect3Img.source == "qrc:///playerOneIcon.png"){
             console.log("X Wins")
             winVisual.winStrike6 = true
             setWinVariables("Player1")
             p1Score +=1
             return true
         }
-        else if(row1rect3Img.source == "qrc:/o_img.png" &&
-                row2rect3Img.source == "qrc:/o_img.png" &&
-                row3rect3Img.source == "qrc:/o_img.png"){
+        else if(row1rect3Img.source == "qrc:///playerTwoIcon.png" &&
+                row2rect3Img.source == "qrc:///playerTwoIcon.png" &&
+                row3rect3Img.source == "qrc:///playerTwoIcon.png"){
             console.log("O Wins")
             winVisual.winStrike6 = true
             setWinVariables("Player1")
@@ -208,18 +208,18 @@ Item {
         console.log("check for a diagonal win")
         // Diagonal Win 1
         //
-        if(row1rect1Img.source == "qrc:/x_img.png" &&
-                row2rect2Img.source == "qrc:/x_img.png" &&
-                row3rect3Img.source == "qrc:/x_img.png"){
+        if(row1rect1Img.source == "qrc:///playerOneIcon.png" &&
+                row2rect2Img.source == "qrc:///playerOneIcon.png" &&
+                row3rect3Img.source == "qrc:///playerOneIcon.png"){
             console.log("X Wins")
             winVisual.winStrike7 = true
             setWinVariables("Player1")
             p1Score +=1
             return true
         }
-        else if(row1rect1Img.source == "qrc:/o_img.png" &&
-                row2rect2Img.source == "qrc:/o_img.png" &&
-                row3rect3Img.source == "qrc:/o_img.png"){
+        else if(row1rect1Img.source == "qrc:///playerTwoIcon.png" &&
+                row2rect2Img.source == "qrc:///playerTwoIcon.png" &&
+                row3rect3Img.source == "qrc:///playerTwoIcon.png"){
             console.log("O Wins")
             winVisual.winStrike7 = true
             setWinVariables("Player2")
@@ -229,18 +229,18 @@ Item {
 
         // Diagonal Win 2
         //
-        else if(row1rect3Img.source == "qrc:/x_img.png" &&
-                row2rect2Img.source == "qrc:/x_img.png" &&
-                row3rect1Img.source == "qrc:/x_img.png"){
+        else if(row1rect3Img.source == "qrc:///playerOneIcon.png" &&
+                row2rect2Img.source == "qrc:///playerOneIcon.png" &&
+                row3rect1Img.source == "qrc:///playerOneIcon.png"){
             console.log("X Wins")
             winVisual.winStrike8 = true
             setWinVariables("Player1")
             p1Score +=1
             return true
         }
-        else if(row1rect3Img.source == "qrc:/o_img.png" &&
-                row2rect2Img.source == "qrc:/o_img.png" &&
-                row3rect1Img.source == "qrc:/o_img.png"){
+        else if(row1rect3Img.source == "qrc:///playerTwoIcon.png" &&
+                row2rect2Img.source == "qrc:///playerTwoIcon.png" &&
+                row3rect1Img.source == "qrc:///playerTwoIcon.png"){
             console.log("O Wins")
             winVisual.winStrike8 = true
             setWinVariables("Player2")
@@ -279,7 +279,7 @@ Item {
 
     // Only used for 1Player games
     //
-    function playerTwoTurn() {
+    function playerTwoIconTurn() {
         checkPlayerTurn()
         var selectedSquare = null
         const emptySquares = []
@@ -300,7 +300,7 @@ Item {
                 console.log("randomIndex: "+randomIndex)
                 selectedSquare = emptySquares[randomIndex]
                 console.log("Selected square ID:", selectedSquare.objectName)
-                selectedSquare.source = "qrc:/o_img.png"
+                selectedSquare.source = "qrc:///playerTwoIcon.png"
                 selectedSquare.visible = true
                 //selectedSquare.parent.endabled = false
 
@@ -332,7 +332,7 @@ Item {
         interval: 1000 // 1 second
         onTriggered: {
             console.log("timer triggered...")
-            playerTwoTurn() // Call playerTwoTurn after the delay
+            playerTwoIconTurn() // Call playerTwoIconTurn after the delay
         }
     }
 
@@ -410,7 +410,7 @@ Item {
                             row1rect1Img.visible = true
                             checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
-                            row1rect1Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
+                            row1rect1Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             console.log("source:"+row1rect1Img.source)
                             // check for a winner
                             //
@@ -448,7 +448,7 @@ Item {
                             row1rect2Img.visible = true
                             checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
-                            row1rect2Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
+                            row1rect2Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
                             //
                             if(!checkForHorizontalWin()
@@ -485,7 +485,7 @@ Item {
                             row1rect3Img.visible = true
                             checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
-                            row1rect3Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
+                            row1rect3Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
                             //
                             if(!checkForHorizontalWin()
@@ -531,7 +531,7 @@ Item {
                             row2rect1Img.visible = true
                             checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
-                            row2rect1Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
+                            row2rect1Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
                             //
                             if(!checkForHorizontalWin()
@@ -568,7 +568,7 @@ Item {
                             row2rect2Img.visible = true
                             checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
-                            row2rect2Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
+                            row2rect2Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
                             //
                             if(!checkForHorizontalWin()
@@ -605,7 +605,7 @@ Item {
                             row2rect3Img.visible = true
                             checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
-                            row2rect3Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
+                            row2rect3Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
                             //
                             if(!checkForHorizontalWin()
@@ -652,7 +652,7 @@ Item {
                             row3rect1Img.visible = true
                             checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
-                            row3rect1Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
+                            row3rect1Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
                             //
                             if(!checkForHorizontalWin()
@@ -689,7 +689,7 @@ Item {
                             row3rect2Img.visible = true
                             checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
-                            row3rect2Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
+                            row3rect2Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
                             //
                             if(!checkForHorizontalWin()
@@ -726,7 +726,7 @@ Item {
                             row3rect3Img.visible = true
                             checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
-                            row3rect3Img.source = currentPlayer == 1 ? "qrc:/x_img.png" : "qrc:/o_img.png"
+                            row3rect3Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
                             //
                             if(!checkForHorizontalWin()
@@ -753,9 +753,9 @@ Item {
         }
         homeBtnTxt: "Back"
 
-        restBtnTxt: "Rest"
-        restBtn.visible: true
-        restBtn.onClicked: {
+        resetBtnTxt: "Rest"
+        resetBtn.visible: true
+        resetBtn.onClicked: {
             /*** clear the board ***/
 
             // Row 1
