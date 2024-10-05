@@ -1,30 +1,37 @@
 #pragma once
 #include <QObject>
+#include <QString>
+#include <QVector>
 
 class GameLogic : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString currentPlayer READ getCurrentPlayer WRITE setCurrentPlayer NOTIFY playerChanged)
+    Q_PROPERTY(bool playerWon READ getPlayerWon WRITE setPlayerWon NOTIFY playerWonChanged)
 public:
     explicit GameLogic(QObject *parent = nullptr);
 
-    QString getCurrent_player() const;
-    bool getIsOnePlayerMode() const;
-    bool getIsTwoPlayerMode() const;
+    QString getCurrentPlayer() const;
+    void setCurrentPlayer(const QString &newCurrentPlayer);
 
-public slots:
-    void setCurrent_player(const QString &newCurrent_player);
-    void setIsOnePlayerMode(bool newIsOnePlayerMode);
-    void setIsTwoPlayerMode(bool newIsTwoPlayerMode);
-    void nextTurn();
-    void checkWinner();
+    bool getPlayerWon() const;
+    void setPlayerWon(bool won);
+
+    Q_INVOKABLE void checkPlayerTurn();
+    Q_INVOKABLE void checkForHorizontalWin();
+    Q_INVOKABLE void checkForVerticalWin();
+    Q_INVOKABLE void checkForDiagonalWin();
+    Q_INVOKABLE void checkForCatsCradle();
+    Q_INVOKABLE void playerTwoIconTurn();
+    Q_INVOKABLE void resetGame();
 
 signals:
     void playerChanged(const QString &player);
+    void playerWonChanged(bool won);
     void gameWon(const QString &winner);
 
 private:
-    QString current_player;
-    bool isOnePlayerMode;
-    bool isTwoPlayerMode;
-    bool threeiInARow=false;
+    QString currentPlayer;
+    bool playerWon;
+    QVector<QString> board;
 };

@@ -1,111 +1,102 @@
 #include "gamelogic.h"
 #include "controllers.h"
+#include <QRandomGenerator>
 
-/**
- * \fn    GameLogic::GameLogic
- * \brief Constructor for GameLogic.
- * \param parent The parent QObject.
- */
 GameLogic::GameLogic(QObject *parent)
-    : QObject{parent}, current_player{"Player1"}, isOnePlayerMode{false}, isTwoPlayerMode{false}
+    : QObject{parent}, currentPlayer{"Player1"}, playerWon{false}
 {
+    // Initialize the board with empty strings
+    board.fill("", 9);
 }
 
-
-/**
- * \fn    GameLogic::setCurrent_player
- * \brief Sets the current player.
- * \param newCurrent_player The new current player.
- * \return void
- */
-QString GameLogic::getCurrent_player() const
+QString GameLogic::getCurrentPlayer() const
 {
-    return current_player;
+    return currentPlayer;
 }
 
-
-/**
- * \fn    GameLogic::setCurrent_player
- * \brief Sets the current player.
- * \param newCurrent_player The new current player.
- * \return void
- */
-void GameLogic::setCurrent_player(const QString &newCurrent_player)
+void GameLogic::setCurrentPlayer(const QString &newCurrentPlayer)
 {
-    current_player = newCurrent_player;
-    emit playerChanged(current_player);
+    currentPlayer = newCurrentPlayer;
+    emit playerChanged(currentPlayer);
 }
 
-/**
- * \fn     GameLogic::getIsOnePlayerMode
- * \brief  Checks if the game is in one-player mode.
- * \return True if the game is in one-player mode, false otherwise.
- */
-bool GameLogic::getIsOnePlayerMode() const
+bool GameLogic::getPlayerWon() const
 {
-    return isOnePlayerMode;
+    return playerWon;
 }
 
-/**
- * \fn    GameLogic::setIsOnePlayerMode
- * \brief Sets the one-player mode.
- * \param newIsOnePlayerMode The new one-player mode status.
- * \return void
- */
-void GameLogic::setIsOnePlayerMode(bool newIsOnePlayerMode)
+void GameLogic::setPlayerWon(bool won)
 {
-    isOnePlayerMode = newIsOnePlayerMode;
+    playerWon = won;
+    emit playerWonChanged(won);
 }
 
-/**
- * \fn     GameLogic::getIsTwoPlayerMode
- * \brief  Checks if the game is in two-player mode.
- * \return True if the game is in two-player mode, false otherwise.
- */
-bool GameLogic::getIsTwoPlayerMode() const
+void GameLogic::checkPlayerTurn()
 {
-    return isTwoPlayerMode;
-}
-
-
-/**
- * \fn    GameLogic::setIsTwoPlayerMode
- * \brief Sets the two-player mode.
- * \param newIsTwoPlayerMode The new two-player mode status.
- */
-void GameLogic::setIsTwoPlayerMode(bool newIsTwoPlayerMode)
-{
-    isTwoPlayerMode = newIsTwoPlayerMode;
-}
-
-
-/**
- * \fn    GameLogic::checkWinner
- * \brief Checks for game winner.
- *        adds 1 to the player's highscore.
- */
-void GameLogic::nextTurn()
-{
-    if (current_player == "Player1")
-        setCurrent_player("Player2");
-    else
-        setCurrent_player("Player1");
-}
-
-
-/**
- * \fn    GameLogic::checkWinner
- * \brief Checks for game winner.
- *        adds 1 to the player's highscore.
- */
-void GameLogic::checkWinner()
-{
-    // Implement your winning logic here
-    // If a player wins, emit the gameWon signal
-
-    if (threeiInARow) {
-        emit gameWon(current_player);
-        // Update high score
-        Controllers::dbManager.updatePlayerHighScore(current_player, 1);
+    if (currentPlayer == "Player1") {
+        currentPlayer = "Player2";
+    } else {
+        currentPlayer = "Player1";
     }
+    emit playerChanged(currentPlayer);
+}
+
+void GameLogic::checkForHorizontalWin()
+{
+    // Implement horizontal win logic
+    // If there is a win, call setPlayerWon(true) and emit gameWon(currentPlayer)
+}
+
+void GameLogic::checkForVerticalWin()
+{
+    // Implement vertical win logic
+    // If there is a win, call setPlayerWon(true) and emit gameWon(currentPlayer)
+}
+
+void GameLogic::checkForDiagonalWin()
+{
+    // Implement diagonal win logic
+    // If there is a win, call setPlayerWon(true) and emit gameWon(currentPlayer)
+}
+
+void GameLogic::checkForCatsCradle()
+{
+    bool allFilled = true;
+    for (const auto &cell : board) {
+        if (cell.isEmpty()) {
+            allFilled = false;
+            break;
+        }
+    }
+    if (allFilled) {
+        // Handle the CatsCradle scenario
+    }
+}
+
+void GameLogic::playerTwoIconTurn()
+{
+    if (currentPlayer == "Player2") {
+        QVector<int> emptySquares;
+        for (int i = 0; i < board.size(); ++i) {
+            if (board[i].isEmpty()) {
+                emptySquares.append(i);
+            }
+        }
+        if (!emptySquares.isEmpty()) {
+            int randomIndex = QRandomGenerator::global()->bounded(emptySquares.size());
+            int selectedSquare = emptySquares[randomIndex];
+            board[selectedSquare] = "Player2";
+            checkForHorizontalWin();
+            checkForVerticalWin();
+            checkForDiagonalWin();
+            checkForCatsCradle();
+        }
+    }
+}
+
+void GameLogic::resetGame()
+{
+    board.fill("");
+    setCurrentPlayer("Player1");
+    setPlayerWon(false);
 }
