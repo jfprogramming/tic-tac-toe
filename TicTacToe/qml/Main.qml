@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Controls.Material 2.15
+import GameLogic 1.0
 
 Window {
     width: 640
@@ -40,7 +41,7 @@ Window {
         modal: true
         Text {
             id: gameWonText
-            text: gameLogic.current_player
+            //text: gameLogic.current_player + " Won"
         }
     }
 

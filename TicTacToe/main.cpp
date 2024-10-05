@@ -1,15 +1,20 @@
-#include "controllers.h"
-#include "controllers/gamelogic.h"
+#include "controllers/databasemanager.h"
 #include "models/highscoremodel.h"
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include <QtCore>
+#include "controllers.h"
 #include "models/playermodel.h"
-#include "qguiapplication.h"
-#include "qqmlapplicationengine.h"
-#include "qqmlcontext.h"
+#include "controllers/gamelogic.h"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
+
+    // Register GameLogic with QML
+    qmlRegisterType<GameLogic>("GameLogic", 1, 0, "GameLogic");
 
     // Setup DB
     Controllers::dbManager.initializeDatabase();
