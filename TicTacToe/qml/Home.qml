@@ -71,5 +71,6 @@ Item {
             stackView.push("AdminLogin.qml")
         }
         homeBtnTxt: "Admin Login"
+        homeIcon: "qrc:///adminAccount.png"
     }
 }

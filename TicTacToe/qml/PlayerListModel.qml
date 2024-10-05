@@ -3,6 +3,7 @@ import QtQuick
 
 ListModel {
     id: playerListModel
+    objectName: "playerListModel"
     ListElement {
         name: "Player 1"
         portrait: "qrc:///profile.png"

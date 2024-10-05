@@ -2,6 +2,9 @@ import QtQuick
 import QtQuick.Controls
 
 Item {
+    id:playerManagerPageItem
+    objectName: "playerManagerPage"
+
     Header{
         id:homePageHeader
     }

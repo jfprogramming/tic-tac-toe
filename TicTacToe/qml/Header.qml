@@ -3,6 +3,7 @@ import QtQuick.Controls
 
 Rectangle {
     id: header
+    objectName: "header"
     anchors.top: parent.top
     height: 50
     width: parent.width

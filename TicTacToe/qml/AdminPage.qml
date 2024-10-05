@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Controls.Material
 
 Item {
     id:adminPageItem
@@ -27,7 +28,7 @@ Item {
 
             Button{
                 id:dateTimeSettingsBtn
-                icon.name: "qrc:///settings.png" // Material icon name
+                icon.source: "qrc:///settings.png" // Material icon source
                 icon.color: "#0078D4"
                 Text{
                     id: dateTimeSettingsBtnTxt
@@ -44,7 +45,7 @@ Item {
 
             Button{
                 id:managePlayersBtn
-                icon.name: "qrc:///twoPlayer.png" // Material icon name
+                icon.source: "qrc:///twoPlayer.png" // Material icon source
                 icon.color: "#0078D4"
                 Text{
                     id: managePlayersBtnTxt
@@ -61,7 +62,7 @@ Item {
 
             Button{
                 id:aboutBtn
-                icon.name: "qrc:///about.png" // Material icon name
+                icon.source: "qrc:///about.png" // Material icon source
                 icon.color: "#0078D4"
                 Text{
                     id: aboutBtnTxt

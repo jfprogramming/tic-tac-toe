@@ -1,21 +1,26 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Controls.Material
 
 Rectangle{
     id: footer
+    objectName: "footer"
     anchors.bottom: parent.bottom
     height: 50
     width: parent.width
     color: "lightBlue"
 
     property alias homeBtn: homeButton
-    property alias homeBtnTxt: homeButtonText.text
+    property alias homeBtnTxt: homeButton.text
+    property alias homeIcon: homeButton.icon.source
 
-    property alias restBtn: restButton
-    property alias restBtnTxt: restButtonText.text
+    property alias resetBtn: resetButton
+    property alias resetBtnTxt: resetButton.text
+    property alias resetIcon: resetButton.icon.source
 
     property alias backBtn: backButton
-    property alias backBtnTxt: backButtonText.text
+    property alias backBtnTxt: backButton.text
+    property alias backIcon: backButton.icon.source
 
     Rectangle{
         id: copyRight
@@ -37,31 +42,21 @@ Rectangle{
         icon.source: "qrc:///backArrow.png" // Material icon name
         icon.color: "#0078D4"
         visible: false
-        Text {
-            id: backButtonText
-            text: qsTr("Back")
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
-        }
+        text: "Back"
         onClicked: {
             console.log("back button clicked...")
         }
     }
 
     Button{
-        id: restButton
+        id: resetButton
         anchors.right: parent.right
         anchors.rightMargin: homeButton.width+20
         anchors.verticalCenter: parent.verticalCenter
         icon.source: "qrc:///reset.png" // Material icon name
         icon.color: "#0078D4"
         visible: false
-        Text {
-            id: restButtonText
-            text: qsTr("Rest")
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
-        }
+        text: "Reset"
         onClicked: {
             console.log("reset button clicked...")
         }
@@ -74,12 +69,7 @@ Rectangle{
         anchors.verticalCenter: parent.verticalCenter
         icon.source: "qrc:///home.png" // Material icon name
         icon.color: "#0078D4"
-        Text {
-            id: homeButtonText
-            text: qsTr("Home")
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
-        }
+        text: "Home"
         onClicked: {
             console.log("home button clicked...")
         }

@@ -3,6 +3,7 @@ import QtQuick.Controls
 
 Popup {
     id: popupMsgItem
+    objectName: "popupMsgItem"
     width: 200
     height: 150
     modal: true

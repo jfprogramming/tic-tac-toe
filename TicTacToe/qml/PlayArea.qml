@@ -5,6 +5,7 @@ import "qrc:/onePlayerMode.js" as JavaScript
 
 Item {
     id: playArea
+    objectName: "playArea"
 
     property string player1: "player1"
     property string player2: "player2"

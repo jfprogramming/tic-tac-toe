@@ -2,6 +2,7 @@ import QtQuick
 
 Item {
     id:playerSelectionItem
+    objectName: "playerSelectionPage"
 
     property int gameMode: 1 // 1 for 1 Player mode | 2 for 2 Player mode
 
