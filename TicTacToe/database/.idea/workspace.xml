@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c4a013bb-8cd7-40fd-ab30-3dcfadad489b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMakeLists.txt.user" beforeDir="false" afterPath="$PROJECT_DIR$/../CMakeLists.txt.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../content/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../content/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../content/MainPage.qml" beforeDir="false" afterPath="$PROJECT_DIR$/../content/MainPage.qml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../content/UserInputForm.qml" beforeDir="false" afterPath="$PROJECT_DIR$/../content/UserInputForm.qml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/models/usermodel.h" beforeDir="false" afterPath="$PROJECT_DIR$/../src/models/usermodel.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,12 +14,13 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
   <component name="ProjectId" id="2jUO42hvbykETGKkeKieZBVPzuJ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -33,14 +29,15 @@
   &quot;keyToString&quot;: {
     &quot;Python.db_creator.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;jf/get__user__input&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/jfinn/Projects/qt-qml-app/database&quot;
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/jfinn/Projects/tic-tac-toe/TicTacToe/database&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
   }
 }</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-5b207ade9991-746f403e7f0c-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.17890.14" />
+        <option value="bundled-python-sdk-98f27166c754-ba05f1cad1b1-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.21829.153" />
       </set>
     </attachedChunks>
   </component>
@@ -54,5 +51,10 @@
       <updated>1721437993943</updated>
     </task>
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/.." />
+    </ignored-roots>
   </component>
 </project>

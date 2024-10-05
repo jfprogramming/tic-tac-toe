@@ -28,6 +28,7 @@ Item {
                 id: playerNameTextInput
                 width: 300
                 height: 50
+                //text: playerModel.playerName == "" ? "" : playerModel.player
             }
 
             Label{
@@ -38,18 +39,26 @@ Item {
                 id: playerColorTextInput
                 width: 300
                 height: 50
+                //text: playerModel.playerColor == "" ? "": playerModel.playerColor
             }
             Button{
                 id: saveButton
                 text: "Save"
                 onClicked: {
-                    // TODO implement save feature
-                    console.log("save player information... "+playerNameTextInput.text+" "+playerColorTextInput.text)
+                    playerModel.savePlayerToDatabase(playerNameTextInput.text, playerColorTextInput.text)
+                }
+            }
+            Button{
+                id: lookupButton
+                text: "Lookup"
+                onClicked: {
+                    playerModel.lookupPlayer(playerNameTextInput.text)
+                    playerColorTextInput = playerModel.getPlayerName
+                    playerNameTextInput = playerModel.getPlayerColor
                 }
             }
         }
     }
-
 
     Footer{
         id: homePagefooter

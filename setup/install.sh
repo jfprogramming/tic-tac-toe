@@ -16,6 +16,10 @@ sudo apt-get install libssl-dev
 sudo apt-get install doxygen
 sudo apt-get install graphviz
 
+sudo add-apt-repository ppa:neovim-ppa/stable
+sudo add-apt-repository ppa:jonathonf/vim
+sudo apt update
+
 echo "run install apt-get install texlive-full manullay as hitting enter on the keyboard \n
       several times to get the commands to progress is a known issue"     
 # sudo apt-get install texlive-full
@@ -46,7 +50,13 @@ sudo apt install gawk \
                  file \
                  locales \
                  libacl1 \
-                 libgtest-dev
+                 libgtest-dev \
+                 nodejs \
+                 vim \
+                 neovim \
+                 curl 
+                              
+                 
 
 echo "done installing packages..."
                  
@@ -57,6 +67,12 @@ echo "done installing packages..."
                  
 sudo locale-gen en_US.UTF-8
 
+
+# Setup GTest Libs
+sudo apt-get install libgtest-dev
+cd /usr/src/gtest
+sudo cmake CMakeLists.txt
+sudo make
 
 # Install the encryption library 
 pip install bcrypt

@@ -6,7 +6,6 @@
 #include "databasemanager.h"
 #include "cryptclass.h"
 
-
 /**
 *  \fn    DatabaseManager::DatabaseManager
  * \brief Constructor for DatabaseManager.
@@ -370,13 +369,13 @@ bool DatabaseManager::setPlayerColor(int playerId, QString &color)
  * \param   playerColor
  * \return  bool
  */
-bool DatabaseManager::createNewPlayer(QString &playerName, QString &playerColor)
+bool DatabaseManager::createNewPlayer(const QString &playerName, const QString &playerColor)
 {
     QSqlQuery query;
 
     // Create new player
     //
-    query.prepare("INSERT INTO UserTable (userName, userAge, userOptionSelected, dateTime) VALUES(:userName, :userAge, :userOptionSelected, :dateTime)");
+    query.prepare("INSERT INTO PlayerTable (playerName, playerColor, dateTime) VALUES(:playerName, :playerColor, :dateTime)");
     query.bindValue(":playerName", playerName);
     query.bindValue(":playerColor", playerColor);
     query.bindValue(":dateTime", QDateTime::currentDateTime());
@@ -384,3 +383,20 @@ bool DatabaseManager::createNewPlayer(QString &playerName, QString &playerColor)
     return query.exec();
 }
 
+
+QMap<QString, QString> DatabaseManager::getPlayerByName(const QString &name) {
+    QSqlQuery query;
+    query.prepare("SELECT playerName, playerColor FROM PlayerTable WHERE playerName = :name");
+    query.bindValue(":name", name);
+
+    QMap<QString, QString> playerInfo;
+    if (query.exec() && query.next()) {
+        playerInfo["playerName"] = query.value(0).toString();
+        playerInfo["playerColor"] = query.value(1).toString();
+    } else {
+        qWarning() << "Failed to fetch player by name:" << query.lastError();
+        playerInfo["playerName"] = "DNE";
+        playerInfo["playerColor"] = "DNE";
+    }
+    return playerInfo;
+}

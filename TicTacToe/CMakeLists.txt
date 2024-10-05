@@ -28,8 +28,6 @@ qt_add_qml_module(appTicTacToe
     SOURCES
         controllers/gamelogic.h
         controllers/gamelogic.cpp
-        controllers/playermanger.h
-        controllers/playermanger.cpp
         controllers/databasemanager.h
         controllers/databasemanager.cpp
         models/playermodel.h

@@ -61,11 +61,6 @@ Item {
         }
     }
 
-    // PlayerModel{
-    //     id:playerModel
-    //     signal loginBtnClicked(string username, string password)
-    // }
-
     Footer{
         id: adminLoginPagefooter
         homeBtnTxt: "Login"

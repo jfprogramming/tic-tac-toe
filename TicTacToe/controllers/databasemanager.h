@@ -31,7 +31,8 @@ public:
 
     bool setPlayerName(int playerId, QString &newName);
     bool setPlayerColor(int playerId, QString &color);
-    bool createNewPlayer(QString &playerName, QString &playerColor);
+    bool createNewPlayer(const QString &playerName, const QString &playerColor);
+    QMap<QString, QString> getPlayerByName(const QString &name);
 
     // Admin Login
     //
@@ -46,10 +47,7 @@ public:
     int playerId() const;
 
 public slots:
-
-    Q_INVOKABLE bool authenticateAdmin(const QString &username, const QString &password);
-    Q_INVOKABLE void print(){qInfo() << "test***";};
-
+    bool authenticateAdmin(const QString &username, const QString &password);
 
     void setPlayerId(int newPlayerId);
 
