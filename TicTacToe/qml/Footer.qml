@@ -8,7 +8,7 @@ Rectangle{
     anchors.bottom: parent.bottom
     height: 50
     width: parent.width
-    color: "lightBlue"
+    color: "#0078D4"
 
     property alias homeBtn: homeButton
     property alias homeBtnTxt: homeButton.text

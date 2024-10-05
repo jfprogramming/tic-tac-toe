@@ -1,5 +1,6 @@
-import QtQuick
-import QtQuick.Controls
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Controls.Material 2.15
 
 Rectangle {
     id: header
@@ -7,14 +8,14 @@ Rectangle {
     anchors.top: parent.top
     height: 50
     width: parent.width
-    color: "lightBlue"
+    color: "#0078D4" // Matching button color
+    //radius: 10 // Rounded corners for consistency
 
     property int player1Score: 0
     property int player2Score: 0
     property alias scoreAlias: score
 
     // TODO: save players score to database
-    //
     function savePlayerHighScore(playerName, score) {
         if (playerName === "Player1") {
             playerModel.setPlayerHighScoreValue(1, score);
@@ -28,13 +29,14 @@ Rectangle {
         anchors.left: parent.left
         anchors.leftMargin: 10
         anchors.verticalCenter: parent.verticalCenter
+        color: "transparent"
         Text {
             id: titleText
             text: qsTr("TicTacToe")
             anchors.verticalCenter: parent.verticalCenter
             font.bold: true
-            font.pointSize: 16
-            color: "darkBlue"
+            font.pointSize: 20
+            color: "white" // Consistent text color
         }
     }
 
@@ -44,8 +46,8 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         visible: true
         color: "white"
-        border.color: "black"
-        radius: 5
+        border.color: "#0078D4"
+        radius: 10
         width: 300
         height: 40
         Text {
@@ -53,8 +55,8 @@ Rectangle {
             text: qsTr("Score - Player 1: " + player1Score + "   Player 2: " + player2Score)
             anchors.centerIn: parent
             font.bold: true
-            font.pointSize: 14
-            color: "red"
+            font.pointSize: 16
+            color: "#0078D4" // Matching text color
         }
     }
 
@@ -63,12 +65,13 @@ Rectangle {
         anchors.right: parent.right
         anchors.rightMargin: 10
         anchors.verticalCenter: parent.verticalCenter
+        color: "transparent"
         Text {
             id: dateTimeText
             text: Qt.formatDateTime(new Date(), "yyyy-MM-dd hh:mm:ss")
             anchors.centerIn: parent
-            font.pointSize: 12
-            color: "darkGreen"
+            font.pointSize: 14
+            color: "white" // Consistent text color
         }
     }
 }
