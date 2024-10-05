@@ -27,10 +27,8 @@ Item {
 
             Button{
                 id:dateTimeSettingsBtn
-                flat: true
-                highlighted: true
-                height: 100
-                width: 200
+                icon.name: "qrc:///settings.png" // Material icon name
+                icon.color: "#0078D4"
                 Text{
                     id: dateTimeSettingsBtnTxt
                     text: "Date Time"
@@ -46,10 +44,8 @@ Item {
 
             Button{
                 id:managePlayersBtn
-                flat: true
-                highlighted: true
-                height: 100
-                width: 200
+                icon.name: "qrc:///twoPlayer.png" // Material icon name
+                icon.color: "#0078D4"
                 Text{
                     id: managePlayersBtnTxt
                     text: "Manage Players"
@@ -65,10 +61,8 @@ Item {
 
             Button{
                 id:aboutBtn
-                flat: true
-                highlighted: true
-                height: 100
-                width: 200
+                icon.name: "qrc:///about.png" // Material icon name
+                icon.color: "#0078D4"
                 Text{
                     id: aboutBtnTxt
                     text: "About"

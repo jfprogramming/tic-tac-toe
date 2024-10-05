@@ -19,59 +19,47 @@ Item {
         anchors.bottom: homePagefooter.top
         anchors.bottomMargin: 50
 
-        Button{
-            id:onePlayerBtn
-            anchors.top: parent.top
-            anchors.topMargin: 10
+        Column{
+            id:btnColumn
             anchors.horizontalCenter: parent.horizontalCenter
-            icon.name: "onePlayer" // Material icon name
-            Material.icon.color: "#0078D4"
-            Text{
-                id: onePlayerBtnTxt
-                text: "1 Player Game"
-                anchors.centerIn: parent
-            }
-            onClicked: {
-                console.log("One Player Game Selected...")
-                //display play area
-                //
-                stackView.push("PlayerSelection.qml")
-            }
-        }
+            spacing: 30
 
-        Button{
-            id:twoPlayerBtn
-            anchors.top: onePlayerBtn.bottom
-            anchors.topMargin: 10
-            anchors.horizontalCenter: parent.horizontalCenter
-            icon.name: "twoPlayer" // Material icon name
-            Material.icon.color: "#0078D4"
-            Text{
-                id: twoPlayerBtnTxt
+            Button{
+                id:onePlayerBtn
+                icon.source: "qrc:///onePlayer.png" // Material icon source
+                icon.color: "#0078D4"
+                text: "1 Player Game"
+                width: 200
+                onClicked: {
+                    console.log("One Player Game Selected...")
+                    //display play area
+                    //
+                    stackView.push("PlayerSelection.qml")
+                }
+            }
+
+            Button{
+                id:twoPlayerBtn
+                icon.source: "qrc:///twoPlayer.png" // Material icon source
+                icon.color: "#0078D4"
                 text: "2 Player Game"
-                anchors.centerIn: parent
+                width: 200
+                onClicked: {
+                    console.log("Two Player Game Selected...")
+                    //display play area
+                    //
+                    stackView.push("PlayerSelection.qml")
+                }
             }
-            onClicked: {
-                console.log("Two Player Game Selected...")
-                //display play area
-                //
-                stackView.push("PlayerSelection.qml")
-            }
-        }
-        Button{
-            id:highScoreBtn
-            anchors.top: twoPlayerBtn.bottom
-            anchors.topMargin: 10
-            anchors.horizontalCenter: parent.horizontalCenter
-            icon.name: "highScore" // Material icon name
-            Material.icon.color: "#0078D4"
-            Text{
-                id: highScoreBtnTxt
+            Button{
+                id:highScoreBtn
+                icon.source: "qrc:///highScore.png" // Material icon source
+                icon.color: "#0078D4"
                 text: "High Score"
-                anchors.centerIn: parent
-            }
-            onClicked: {
-                stackView.push("HighScore.qml")
+                width: 200
+                onClicked: {
+                    stackView.push("HighScore.qml")
+                }
             }
         }
     }
