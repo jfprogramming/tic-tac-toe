@@ -1,4 +1,5 @@
 #include "gamelogic.h"
+#include "controllers.h"
 
 /**
  * \fn    GameLogic::GameLogic
@@ -6,14 +7,16 @@
  * \param parent The parent QObject.
  */
 GameLogic::GameLogic(QObject *parent)
-    : QObject{parent}
-{}
+    : QObject{parent}, current_player{"Player1"}, isOnePlayerMode{false}, isTwoPlayerMode{false}
+{
+}
 
 
 /**
- * \fn     GameLogic::getCurrent_player
- * \brief  Gets the current player.
- * \return The current player as a QString.
+ * \fn    GameLogic::setCurrent_player
+ * \brief Sets the current player.
+ * \param newCurrent_player The new current player.
+ * \return void
  */
 QString GameLogic::getCurrent_player() const
 {
@@ -30,8 +33,8 @@ QString GameLogic::getCurrent_player() const
 void GameLogic::setCurrent_player(const QString &newCurrent_player)
 {
     current_player = newCurrent_player;
+    emit playerChanged(current_player);
 }
-
 
 /**
  * \fn     GameLogic::getIsOnePlayerMode
@@ -73,4 +76,36 @@ bool GameLogic::getIsTwoPlayerMode() const
 void GameLogic::setIsTwoPlayerMode(bool newIsTwoPlayerMode)
 {
     isTwoPlayerMode = newIsTwoPlayerMode;
+}
+
+
+/**
+ * \fn    GameLogic::checkWinner
+ * \brief Checks for game winner.
+ *        adds 1 to the player's highscore.
+ */
+void GameLogic::nextTurn()
+{
+    if (current_player == "Player1")
+        setCurrent_player("Player2");
+    else
+        setCurrent_player("Player1");
+}
+
+
+/**
+ * \fn    GameLogic::checkWinner
+ * \brief Checks for game winner.
+ *        adds 1 to the player's highscore.
+ */
+void GameLogic::checkWinner()
+{
+    // Implement your winning logic here
+    // If a player wins, emit the gameWon signal
+
+    if (threeiInARow) {
+        emit gameWon(current_player);
+        // Update high score
+        Controllers::dbManager.updatePlayerHighScore(current_player, 1);
+    }
 }

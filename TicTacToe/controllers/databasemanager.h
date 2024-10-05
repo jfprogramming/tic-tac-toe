@@ -44,12 +44,14 @@ public:
     void fetchPlayerId(const QString &playerName);
     bool setPlayerHighScoreValue(int playerId, int score);
 
+
     int playerId() const;
 
 public slots:
     bool authenticateAdmin(const QString &username, const QString &password);
-
-    void setPlayerId(int newPlayerId);
+    void setPlayerOneId(int playerOneId);
+    void setPlayerTwoId(int playerTwoId);
+    bool updatePlayerHighScore(const QString &playerName, int score);
 
 private:
     bool m_isDatabaseInitialized;

@@ -81,7 +81,7 @@ void DatabaseManager::fetchPlayerId(const QString &playerName) {
     query.bindValue(":playerName", playerName);
     if (query.exec() && query.next()) {
         int playerId = query.value(0).toInt();
-        setPlayerId(playerId);
+        setPlayerOneId(playerId);
     } else {
         qWarning() << "Failed to fetch player ID:" << query.lastError();
     }
@@ -100,6 +100,25 @@ bool DatabaseManager::setPlayerHighScoreValue(int playerId, int score) {
     query.bindValue(":score", score);
     if (!query.exec()) {
         qWarning() << "Failed to insert high score:" << query.lastError();
+        return false;
+    }
+    return true;
+}
+
+/**
+ * \fn    DatabaseManager::setPlayerHighScoreValue
+ * \brief Closes the database.
+ * \param int score
+ * \return bool.
+ */
+bool DatabaseManager::updatePlayerHighScore(const QString &playerName, int score)
+{
+    QSqlQuery query;
+    query.prepare("UPDATE PlayerTable SET highScore = highScore + :score WHERE playerName = :playerName");
+    query.bindValue(":score", score);
+    query.bindValue(":playerName", playerName);
+    if (!query.exec()) {
+        qWarning() << "Failed to update high score:" << query.lastError();
         return false;
     }
     return true;
@@ -222,13 +241,23 @@ int DatabaseManager::playerId() const
 }
 
 /**
- * \fn     DatabaseManager::setPlayerId
+ * \fn     DatabaseManager::setPlayerOneId
  * \brief  set the current player id
  * \return void
  */
-void DatabaseManager::setPlayerId(int newPlayerId)
+void DatabaseManager::setPlayerOneId(int playerOneId)
 {
-    m_playerId = newPlayerId;
+    m_playerId = playerOneId;
+}
+
+/**
+ * \fn     DatabaseManager::setPlayerTwoId
+ * \brief  set the current player id
+ * \return void
+ */
+void DatabaseManager::setPlayerTwoId(int playerTwoId)
+{
+    m_playerId = playerTwoId;
 }
 
 

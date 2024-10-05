@@ -1,13 +1,6 @@
 #pragma once
-
 #include <QObject>
 
-
-/**
- * \file gamelogic.h
- *
- * \brief The GameLogic class manages the core game logic, including player modes and current player state.
- */
 class GameLogic : public QObject
 {
     Q_OBJECT
@@ -22,12 +15,16 @@ public slots:
     void setCurrent_player(const QString &newCurrent_player);
     void setIsOnePlayerMode(bool newIsOnePlayerMode);
     void setIsTwoPlayerMode(bool newIsTwoPlayerMode);
+    void nextTurn();
+    void checkWinner();
 
 signals:
+    void playerChanged(const QString &player);
+    void gameWon(const QString &winner);
 
 private:
     QString current_player;
     bool isOnePlayerMode;
     bool isTwoPlayerMode;
-
+    bool threeiInARow=false;
 };
