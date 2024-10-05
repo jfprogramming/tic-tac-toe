@@ -36,7 +36,7 @@ void PlayerModel::setPlayerColor(const QString& newPlayerColor)
     if (m_playerColor == newPlayerColor)
         return;
     m_playerColor = newPlayerColor;
-    emit playerColorChanged();
+    emit playerColorChanged(m_playerColor);
 }
 
 
@@ -49,7 +49,7 @@ void PlayerModel::setPlayerName(const QString &newPlayerName)
     if (m_playerName == newPlayerName)
         return;
     m_playerName = newPlayerName;
-    emit playerNameChanged(m_playerName, m_playerColor);
+    emit playerNameChanged(m_playerName);
 }
 
 

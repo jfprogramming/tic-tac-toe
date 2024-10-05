@@ -24,8 +24,8 @@ public:
 
     // Get Player info (name, color)
     //
-    QString getPlayerColor(){return m_playerColor;};
     QString getPlayerName(){return m_playerName;};
+    QString getPlayerColor(){return m_playerColor;};
 
     // Set Game-play player names selected
     //
@@ -38,8 +38,8 @@ signals:
     void userNameChanged(QString &name);
     void userAgeChanged(QString &age);
 
-    void playerColorChanged();
-    void playerNameChanged(const QString &playerName, const QString &playerColor);
+    void playerNameChanged(const QString &playerName);
+    void playerColorChanged(const QString &playerColor);
 
     void player1Changed();
     void player2Changed();
