@@ -28,7 +28,7 @@ Item {
                 id: playerNameTextInput
                 width: 300
                 height: 50
-                //text: playerModel.playerName == "" ? "" : playerModel.player
+                text: playerModel.getPlayerName
             }
 
             Label{
@@ -39,7 +39,7 @@ Item {
                 id: playerColorTextInput
                 width: 300
                 height: 50
-                //text: playerModel.playerColor == "" ? "": playerModel.playerColor
+                text: playerModel.getPlayerColor
             }
             Button{
                 id: saveButton
@@ -53,8 +53,8 @@ Item {
                 text: "Lookup"
                 onClicked: {
                     playerModel.lookupPlayer(playerNameTextInput.text)
-                    playerColorTextInput = playerModel.getPlayerName
-                    playerNameTextInput = playerModel.getPlayerColor
+                    //playerColorTextInput.text = playerModel.getPlayerName
+                    //playerNameTextInput.text = playerModel.getPlayerColor
                 }
             }
         }

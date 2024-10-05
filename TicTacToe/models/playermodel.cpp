@@ -36,7 +36,7 @@ void PlayerModel::setPlayerColor(const QString& newPlayerColor)
     if (m_playerColor == newPlayerColor)
         return;
     m_playerColor = newPlayerColor;
-    //emit playerColorChanged();
+    emit playerColorChanged();
 }
 
 
@@ -49,7 +49,7 @@ void PlayerModel::setPlayerName(const QString &newPlayerName)
     if (m_playerName == newPlayerName)
         return;
     m_playerName = newPlayerName;
-    //emit playerNameChanged(m_playerName, m_playerColor);
+    emit playerNameChanged(m_playerName, m_playerColor);
 }
 
 
@@ -105,10 +105,11 @@ void PlayerModel::lookupPlayer(const QString &name) {
     qDebug() << "player lookup...";
     QMap<QString, QString> player = Controllers::dbManager.getPlayerByName(name);
     if (player.contains("playerName") && player.contains("playerColor")) {
+        qDebug() << "Player found...";
         setPlayerName(player["playerName"]);
         setPlayerColor(player["playerColor"]);
     } else {
         setPlayerName("DNE");
-        setPlayerColor(QString("DNE"));
+        setPlayerColor("DNE");
     }
 }
