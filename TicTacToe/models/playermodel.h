@@ -12,8 +12,11 @@ class PlayerModel : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString m_player1 READ getPlayer1 WRITE setPlayer1 NOTIFY player1Changed FINAL)
-    Q_PROPERTY(QString m_player2 READ getPlayer2 WRITE setPlayer2 NOTIFY player2Changed FINAL)
+    Q_PROPERTY(QString playerName READ getPlayerName WRITE setPlayerName NOTIFY playerNameChanged)
+    Q_PROPERTY(QString playerColor READ getPlayerColor WRITE setPlayerColor NOTIFY playerColorChanged)
+
+    Q_PROPERTY(QString player1 READ getPlayer1 WRITE setPlayer1 NOTIFY player1Changed FINAL)
+    Q_PROPERTY(QString player2 READ getPlayer2 WRITE setPlayer2 NOTIFY player2Changed FINAL)
 
 
 public:
