@@ -34,6 +34,8 @@ Rectangle{
         anchors.right: parent.right
         anchors.rightMargin: homeButton.width+20
         anchors.verticalCenter: parent.verticalCenter
+        icon.name: "backArrow.png" // Material icon name
+        Material.icon.color: "#0078D4"
         visible: false
         Text {
             id: backButtonText
@@ -51,6 +53,8 @@ Rectangle{
         anchors.right: parent.right
         anchors.rightMargin: homeButton.width+20
         anchors.verticalCenter: parent.verticalCenter
+        icon.name: "reset.png" // Material icon name
+        Material.icon.color: "#0078D4"
         visible: false
         Text {
             id: restButtonText
@@ -68,6 +72,8 @@ Rectangle{
         anchors.right: parent.right
         anchors.rightMargin: 10
         anchors.verticalCenter: parent.verticalCenter
+        icon.name: "home.png" // Material icon name
+        Material.icon.color: "#0078D4"
         Text {
             id: homeButtonText
             text: qsTr("Home")
@@ -76,7 +82,6 @@ Rectangle{
         }
         onClicked: {
             console.log("home button clicked...")
-            //stackView.pop(homePage)
         }
     }
 }

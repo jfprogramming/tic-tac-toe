@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Controls.Material
 
 Item {
     id: homePage
@@ -23,9 +24,8 @@ Item {
             anchors.top: parent.top
             anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
-            highlighted: true
-            height: 100
-            width: 200
+            icon.name: "onePlayer" // Material icon name
+            Material.icon.color: "#0078D4"
             Text{
                 id: onePlayerBtnTxt
                 text: "1 Player Game"
@@ -44,10 +44,8 @@ Item {
             anchors.top: onePlayerBtn.bottom
             anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
-            //flat: true
-            highlighted: true
-            height: 100
-            width: 200
+            icon.name: "twoPlayer" // Material icon name
+            Material.icon.color: "#0078D4"
             Text{
                 id: twoPlayerBtnTxt
                 text: "2 Player Game"
@@ -65,9 +63,8 @@ Item {
             anchors.top: twoPlayerBtn.bottom
             anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
-            highlighted: true
-            height: 100
-            width: 200
+            icon.name: "highScore" // Material icon name
+            Material.icon.color: "#0078D4"
             Text{
                 id: highScoreBtnTxt
                 text: "High Score"
