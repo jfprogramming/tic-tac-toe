@@ -53,8 +53,13 @@ Item {
                 console.log("admin login slot")
                 if(playerModel.onAdminLogin(username, password)){
                     stackView.push("AdminPage.qml")
+                    // Clear the text fields on succesful login
+                    //
+                    userNameTextInput.text = ""
+                    passwordTextInput.text = ""
                 }else{
                     // TODO display popup message
+                    //
                     console.log("error authenticating....");
                 }
             }

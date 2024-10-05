@@ -6,6 +6,13 @@ Item {
         id:homePageHeader
     }
 
+    Component.onCompleted: {
+        // Clear text fields on entry
+        //
+        playerNameTextInput.text = ""
+        playerColorTextInput.text = ""
+    }
+
     Rectangle{
         id: mainArea
         anchors.fill: parent
