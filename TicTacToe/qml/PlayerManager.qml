@@ -28,7 +28,7 @@ Item {
                 id: playerNameTextInput
                 width: 300
                 height: 50
-                text: playerModel.getPlayerName
+                text: playerModel.playerName
             }
 
             Label{
@@ -39,7 +39,7 @@ Item {
                 id: playerColorTextInput
                 width: 300
                 height: 50
-                text: playerModel.getPlayerColor
+                text: playerModel.playerColor
             }
             Button{
                 id: saveButton
