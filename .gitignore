@@ -59,3 +59,4 @@ build*
 TicTacToe/doxygen/html/*
 TicTacToe/doxygen/latex/*
 TicTacToe/database/*.idea*
+TicTacToe/database/.idea/*
