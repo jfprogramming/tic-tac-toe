@@ -15,7 +15,7 @@ Item {
         model: highscoreModel // Use the registered model
 
         delegate: Item {
-            width: parent.width
+            //width: parent.width
             height: 40
             Row {
                 spacing: 30

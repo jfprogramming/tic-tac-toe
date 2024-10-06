@@ -79,12 +79,12 @@ Item {
                         checkGameType()
 
                         if (player1Selection) {
-                            playerModel.setPlayer1(model.playerId);
+                            playerModel.setPlayer1(model.name);
                             player1Selection = false
                             player2Selection = true
                             player2Popup.open()
                         } else if (player2Selection) {
-                            playerModel.setPlayer2(model.playerId);
+                            playerModel.setPlayer2(model.name);
                             player2Selection = false
                         }
 

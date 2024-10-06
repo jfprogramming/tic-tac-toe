@@ -22,6 +22,11 @@ public:
     bool initializeDatabase();
     void closeDatabase();
 
+    // High Score Mngt
+    //
+    int getPlayerIdByName(const QString &name);
+    int getHighScoreForPlayer(int playerId);
+
     // Player Management
     //
     QString getPlayerName(int userId);
@@ -42,7 +47,6 @@ public:
 
     void fetchPlayerId(const QString &playerName);
     bool setPlayerHighScoreValue(int playerId, int score);
-
 
     int playerId() const;
 

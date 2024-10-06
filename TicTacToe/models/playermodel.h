@@ -61,4 +61,7 @@ private:
 
     QString m_player1 = "";
     QString m_player2 = "";
+
+    int m_player1Id;
+    int m_player2Id;
 };

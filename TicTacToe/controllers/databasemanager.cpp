@@ -458,3 +458,24 @@ QMap<QString, QString> DatabaseManager::getPlayerByName(const QString &name) {
     }
     return playerInfo;
 }
+
+
+int DatabaseManager::getPlayerIdByName(const QString &name) {
+    QSqlQuery query;
+    query.prepare("SELECT playerId FROM PlayerTable WHERE playerName = :name");
+    query.bindValue(":name", name);
+    if (query.exec() && query.next())
+        return query.value(0).toInt();
+    else
+        return -1;
+}
+
+int DatabaseManager::getHighScoreForPlayer(int playerId) {
+    QSqlQuery query;
+    query.prepare("SELECT highScore FROM PlayerTable WHERE playerId = :id");
+    query.bindValue(":id", playerId);
+    if (query.exec() && query.next())
+        return query.value(0).toInt();
+    else
+        return 0;
+}

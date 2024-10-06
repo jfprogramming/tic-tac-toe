@@ -57,11 +57,23 @@ void PlayerModel::setPlayerName(const QString &newPlayerName)
  * \brief Sets the first player's name.
  * \param newPlayer1 The new player name.
  */
-void PlayerModel::setPlayer1(const QString &newPlayer1)
-{
-    if (m_player1 == newPlayer1)
+void PlayerModel::setPlayer1(const QString &newPlayer1) {
+    qDebug() << __FUNCTION__ << "setting player1...";
+    QString trimmedPlayer1 = newPlayer1;
+    trimmedPlayer1 = trimmedPlayer1.remove(' ');
+
+    if (m_player1 == trimmedPlayer1)
         return;
-    m_player1 = newPlayer1;
+    m_player1 = trimmedPlayer1;
+    emit player1Changed();
+
+    // Look up player by name and set highscore
+    lookupPlayer(m_player1);
+    m_player1Id = Controllers::dbManager.getPlayerIdByName(m_player1);
+    if (m_player1Id != -1) {
+        int highscore = Controllers::dbManager.getHighScoreForPlayer(m_player1Id);
+        setPlayerHighScoreValue(m_player1Id, highscore);
+    }
     emit player1Changed();
 }
 
@@ -71,9 +83,22 @@ void PlayerModel::setPlayer1(const QString &newPlayer1)
  */
 void PlayerModel::setPlayer2(const QString &newPlayer2)
 {
-    if (m_player2 == newPlayer2)
+    qDebug() << __FUNCTION__ << "setting player2...";
+    QString trimmedPlayer2 = newPlayer2;
+    trimmedPlayer2 = trimmedPlayer2.remove(' ');
+
+    if (m_player2 == trimmedPlayer2)
         return;
-    m_player2 = newPlayer2;
+    m_player2 = trimmedPlayer2;
+    emit player1Changed();
+
+    // Look up player by name and set highscore
+    lookupPlayer(m_player2);
+    m_player2Id = Controllers::dbManager.getPlayerIdByName(m_player2);
+    if (m_player2Id != -1) {
+        int highscore = Controllers::dbManager.getHighScoreForPlayer(m_player2Id);
+        setPlayerHighScoreValue(m_player2Id, highscore);
+    }
     emit player2Changed();
 }
 
