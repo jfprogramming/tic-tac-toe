@@ -130,10 +130,10 @@ bool DatabaseManager::updatePlayerHighScore(const QString &playerName, int score
     qDebug() << __FUNCTION__ << "Updating high score for player:" << playerName << " score:" << score;
 
     QSqlQuery query;
-    query.prepare("UPDATE HighScoreTable SET highScore = :score WHERE playerId = (SELECT playerId FROM Players WHERE playerName = :playerName)");
+    query.prepare("UPDATE HighScoreTable SET highScore = :score, dateTime = :dateTime WHERE playerId = (SELECT playerId FROM PlayerTable WHERE playerName = :playerName)");
     query.bindValue(":score", score);
+    query.bindValue(":dateTime", QDateTime::currentDateTime().toString(Qt::ISODate));
     query.bindValue(":playerName", playerName);
-    query.bindValue(":dateTime", QDateTime::currentDateTime());
     qDebug() << "Query:" << query.lastQuery();
     if (!query.exec()) {
         qWarning() << "Failed to update high score:" << query.lastError();
