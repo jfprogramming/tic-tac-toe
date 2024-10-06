@@ -25,13 +25,23 @@ Popup {
     }
 
     // Animation for fade-in and fade-out
+    //
     NumberAnimation {
         id: popupAnimation
-        target: popup
+        target: popupMsgItem
         property: "opacity"
         from: 0
         to: 1
-        duration: 500 // Adjust duration as needed
+        duration: 500
+    }
+
+    Button {
+        text: "OK"
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        onClicked: {
+            popupMsg.close()
+        }
     }
 
 }

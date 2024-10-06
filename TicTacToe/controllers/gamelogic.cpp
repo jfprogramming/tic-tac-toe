@@ -61,6 +61,7 @@ void GameLogic::setPlayerWon(bool won)
     emit playerWonChanged(won);
 }
 
+
 /**
  * \fn GameLogic::checkPlayerTurn()
  * \brief Checks and switches the player turn.
@@ -68,7 +69,10 @@ void GameLogic::setPlayerWon(bool won)
  */
 void GameLogic::checkPlayerTurn()
 {
-    if (currentPlayer == "Player1") {
+    if(currentPlayer == ""){
+        currentPlayer = "Player1";
+    }
+    else if (currentPlayer == "Player1") {
         currentPlayer = "Player2";
     } else {
         currentPlayer = "Player1";

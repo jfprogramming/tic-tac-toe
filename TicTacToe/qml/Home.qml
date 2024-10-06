@@ -1,13 +1,17 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
-
+import GameLogic 1.0
 Item {
     id: homePage
     objectName: "homePage"
 
     Header{
         id:homePageHeader
+    }
+
+    GameLogic {
+        id: gameLogic
     }
 
     Rectangle{

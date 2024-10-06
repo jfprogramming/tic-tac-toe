@@ -11,7 +11,7 @@ Item {
     property string player1: "player1"
     property string player2: "player2"
 
-    property string currentPlayer: "player1"
+    property string currentPlayer: ""
     property bool playerWon: false
 
     property int p1Score: 0
@@ -34,11 +34,33 @@ Item {
     //
     GameLogic {
         id: gameLogic
+        onPlayerChanged: {
+            if(gameType == "2Player"){
+                nextPlayerPopup.open()
+            }
+        }
+        onGameTypeChanged: {
+            gameType = gameLogic.gameType
+            console.log("Game type changed to: " + gameType)
+        }
+        onGameWon: {
+            gameWonPopup.text = winner + " wins!";
+            gameWonPopup.open();
+        }
     }
 
     Component.onCompleted: {
-        gameType = gameLogic.getGameType()
+        console.log("gameType:" + gameType);
+        checkPlayerTurn()
     }
+
+    // Display popup message for the next player
+    //
+    PopupMsg{
+        id: nextPlayerPopup
+    }
+
+
 
     function getCurrentPlayer() {
         return gameLogic.currentPlayer
@@ -102,7 +124,7 @@ Item {
     // Only used for 1Player games
     //
     function playerTwoTurn() {
-        checkPlayerTurn()
+        //checkPlayerTurn()
         var selectedSquare = null
         const emptySquares = []
 

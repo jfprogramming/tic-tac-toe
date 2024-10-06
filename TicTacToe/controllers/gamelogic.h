@@ -16,14 +16,6 @@ class GameLogic : public QObject
 public:
     explicit GameLogic(QObject *parent = nullptr);
 
-    // Setters and Getters
-    //
-    QString getCurrentPlayer() const;
-    bool getPlayerWon() const;
-
-    void setCurrentPlayer(const QString &newCurrentPlayer);
-    void setPlayerWon(bool won);
-
     // Win Logic Functions
     //
     Q_INVOKABLE void checkForHorizontalWin();
@@ -42,14 +34,19 @@ public:
     Q_INVOKABLE void resetPlayerWon();
     Q_INVOKABLE void resetGameType();
 
-    // Setters and Getters for QML
-    //
-    Q_INVOKABLE QString getGameType() const;
-    Q_INVOKABLE void setGameType(const QString &newGameType);
-
-    Q_INVOKABLE bool getCatsCradle() const;
-
 public slots:
+    // Setters and Getters
+    //
+    QString getCurrentPlayer() const;
+    bool getPlayerWon() const;
+
+    void setCurrentPlayer(const QString &newCurrentPlayer);
+    void setPlayerWon(bool won);
+
+    QString getGameType() const;
+    void setGameType(const QString &newGameType);
+
+    bool getCatsCradle() const;
     void setCatsCradle(bool newCatsCradle);
     void resetCatsCradle();
 
@@ -61,7 +58,7 @@ signals:
     void gameTypeChanged(const QString &gameType);
 
 private:
-    QString currentPlayer;
+    QString currentPlayer="";
     bool playerWon=false;
     bool catsCradle=false;
     QString gameType;
