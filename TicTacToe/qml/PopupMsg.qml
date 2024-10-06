@@ -10,12 +10,14 @@ Popup {
     focus: true
     anchors.centerIn: parent
 
-
+    // Expose properties to other QML files
+    //
     property alias popupMsgtxt: popupMsgText.text
+    property alias popupMsgColor: popupMsgRect.color
 
     Rectangle {
         id: popupMsgRect
-        anchors.fill: parent.fill
+        anchors.fill: parent
         anchors.centerIn: parent
         color: "#0078D4"
 
@@ -35,7 +37,7 @@ Popup {
         property: "opacity"
         from: 0
         to: 1
-        duration: 500
+        duration: 1000
     }
 
     Button {
