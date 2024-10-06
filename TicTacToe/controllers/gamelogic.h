@@ -60,9 +60,9 @@ signals:
 
 
 private:
-    QString m_currentPlayer="";
-    bool m_playerWon=false;
-    bool m_catsCradle=false;
+    QString m_currentPlayer;
+    bool m_playerWon;
+    bool m_catsCradle;
     QString m_gameType;
     QMap<QString, bool> m_ticTacToeBoard;
 };

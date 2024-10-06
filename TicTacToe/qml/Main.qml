@@ -16,32 +16,20 @@ Window {
     //
     GameLogic {
         id: gameLogic
+        onGameTypeChanged: {
+            console.log("Game type changed to: "+gameLogic.gameType)
+        }
+        onPlayerChanged: {
+            console.log("Player changed to: "+gameLogic.player)
+        }
+        onPlayerWonChanged: {
+            console.log("Player won changed to: "+gameLogic.playerWon)
+        }
     }
 
     StackView {
         id: stackView
         anchors.fill: parent
         initialItem: "Home.qml"
-    }
-
-    Home {
-        id: homePage
-        visible: false
-        enabled: false
-        gameLogic: gameLogic
-    }
-
-    PlayArea {
-        id: playArea
-        visible: false
-        enabled: false
-        gameLogic: gameLogic
-    }
-
-    Footer {
-        id: footer
-        visible: false
-        enabled: false
-        gameLogic: gameLogic
     }
 }

@@ -8,7 +8,7 @@
  * \param parent The parent QObject.
  */
 GameLogic::GameLogic(QObject *parent)
-    : QObject{parent}, m_currentPlayer{"Player1"}, m_playerWon{false}, m_catsCradle{false}
+    : QObject{parent}, m_currentPlayer{""}, m_playerWon{false}, m_catsCradle{false}, m_gameType{""}
 {
     qDebug() << __FUNCTION__ << "GameLogic constructor";
 
@@ -80,15 +80,19 @@ void GameLogic::setPlayerWon(bool won)
  */
 void GameLogic::checkPlayerTurn()
 {
-    qDebug() << __FUNCTION__ << "Checking player turn";
+    qDebug() << __FUNCTION__ << "Checking player turn" << m_currentPlayer;
 
     if(m_currentPlayer == ""){
         m_currentPlayer = "Player1";
     }
     else if (m_currentPlayer == "Player1") {
         m_currentPlayer = "Player2";
-    } else {
+    }
+    else if (m_currentPlayer == "Player2") {
         m_currentPlayer = "Player1";
+    }
+    else{
+        qWarning() << "Invalid player";
     }
     emit playerChanged();
 }

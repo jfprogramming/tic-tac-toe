@@ -1,8 +1,6 @@
 import QtQuick
 import QtQuick.Controls
 import "qrc:///onePlayerMode.js" as JavaScript
-import GameLogic 1.0
-
 
 Item {
     id: playArea
@@ -30,31 +28,33 @@ Item {
     property alias row1Id: row1
     property alias row1Rect1ImgAlias: row1rect1Img
 
-    // Reference the gameLogic instance
-    property var gameLogic
-
-    // Create an instance of GameLogic
+    // Get the current gameMode, currentPlayer, and playerWon
     //
-    GameLogic {
-        id: gameLogic
-        onPlayerChanged: {
-            if(gameMode == "2Player"){
-                nextPlayerPopup.open()
-            }
+    function update(){
+        gameMode = gameLogic.gameType
+        playerWon = gameLogic.playerWon
+
+        if(currentPlayer != gameLogic.currentPlayer && gameMode == "2Player" && !playerWon){
+            curentPlayer = getCurrentPlayer()
+            nextPlayerPopup.open()
         }
-        onGameTypeChanged: {
-            gameMode = gameLogic.gameType
-            console.log("Game type changed to: " + gameMode)
+        if(playerWon){
+            gameWonPopup.text = gameLogic.winner + " wins!"
+            gameWonPopup.open()
         }
-        onGameWon: {
-            gameWonPopup.text = winner + " wins!";
-            gameWonPopup.open();
+    }
+
+    onVisibleChanged: {
+        console.log("playArea visibility:", visible)
+        if(visible){
+            update()
         }
     }
 
     Component.onCompleted: {
+        update();
         console.log("gameMode:" + gameMode);
-        checkPlayerTurn()
+        //checkPlayerTurn()
     }
 
     // Display popup message for the next player

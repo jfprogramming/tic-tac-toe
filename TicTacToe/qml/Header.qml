@@ -15,6 +15,7 @@ Rectangle {
     property alias scoreAlias: score
 
     // TODO: save players score to database
+    //
     function savePlayerHighScore(playerName, score) {
         if (playerName === "Player1") {
             playerModel.setPlayerHighScoreValue(1, score);
