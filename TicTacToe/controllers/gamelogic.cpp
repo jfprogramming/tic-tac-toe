@@ -7,7 +7,7 @@
  * \param parent The parent QObject.
  */
 GameLogic::GameLogic(QObject *parent)
-    : QObject{parent}, currentPlayer{"Player1"}, playerWon{false}
+    : QObject{parent}, currentPlayer{"Player1"}, playerWon{false}, catsCradle{false}
 {
     // Initialize the ticTacToeBoard with open squares
     ticTacToeBoard = {
@@ -39,7 +39,6 @@ void GameLogic::setCurrentPlayer(const QString &newCurrentPlayer)
     emit playerChanged(currentPlayer);
 }
 
-
 /**
  * \fn GameLogic::getPlayerWon()
  * \brief Gets the player won status.
@@ -49,7 +48,6 @@ bool GameLogic::getPlayerWon() const
 {
     return playerWon;
 }
-
 
 /**
  * \fn GameLogic::setPlayerWon()
@@ -62,7 +60,6 @@ void GameLogic::setPlayerWon(bool won)
     playerWon = won;
     emit playerWonChanged(won);
 }
-
 
 /**
  * \fn GameLogic::checkPlayerTurn()
@@ -81,6 +78,30 @@ void GameLogic::checkPlayerTurn()
 
 
 /**
+ * \fn GameLogic::getGameType()
+ * \brief
+ * \return QString
+ */
+QString GameLogic::getGameType() const
+{
+    return gameType;
+}
+
+
+/**
+ * \fn GameLogic::setGameType()
+ * \brief
+ * \return void
+ */
+void GameLogic::setGameType(const QString &newGameType)
+{
+    if (gameType != newGameType) {
+        gameType = newGameType;
+        emit gameTypeChanged(gameType);
+    }
+}
+
+/**
  * \fn GameLogic::checkForHorizontalWin()
  * \brief Checks for a horizontal win.
  * \return void
@@ -96,7 +117,6 @@ void GameLogic::checkForHorizontalWin()
         }
     }
 }
-
 
 /**
  * \brief Checks for a vertical win.
@@ -115,7 +135,6 @@ void GameLogic::checkForVerticalWin()
     }
 }
 
-
 /**
  * \fn GameLogic::checkForDiagonalWin()
  * \brief Checks for a diagonal win.
@@ -130,7 +149,6 @@ void GameLogic::checkForDiagonalWin()
     }
 }
 
-
 /**
  * \fn GameLogic::checkForCatsCradle()
  * \brief Checks for a tie (CatsCradle).
@@ -140,7 +158,7 @@ void GameLogic::checkForCatsCradle()
 {
     bool allFilled = true;
     for (const auto &cell : ticTacToeBoard) {
-        if (cell.isEmpty()) {
+        if (!cell) {
             allFilled = false;
             break;
         }
@@ -150,13 +168,11 @@ void GameLogic::checkForCatsCradle()
     }
 }
 
-
 /**
  * \fn GameLogic::playerTwoIconTurn()
  * \brief Handles the turn for player two in one-player mode.
  * \return void
  */
-
 void GameLogic::playerTwoIconTurn()
 {
     if (currentPlayer == "Player2") {
@@ -192,8 +208,8 @@ void GameLogic::resetGame()
     };
     setCurrentPlayer("Player1");
     setPlayerWon(false);
+    resetCatsCradle();
 }
-
 
 /**
  * \fn GameLogic::getCatsCradle()
@@ -205,11 +221,11 @@ bool GameLogic::getCatsCradle() const
     return catsCradle;
 }
 
-
 /**
  * \fn GameLogic::setCatsCradle()
- * \brief Returns member variable catsCradle.
- * \return bool
+ * \brief Sets the member variable catsCradle.
+ * \param newCatsCradle The new value for catsCradle.
+ * \return void
  */
 void GameLogic::setCatsCradle(bool newCatsCradle)
 {
@@ -219,10 +235,9 @@ void GameLogic::setCatsCradle(bool newCatsCradle)
     emit catsCradleMatch();
 }
 
-
 /**
  * \fn GameLogic::resetCatsCradle()
- * \brief Reset member variable catsCradle back to false'
+ * \brief Resets the member variable catsCradle to false.
  * \return void
  */
 void GameLogic::resetCatsCradle()

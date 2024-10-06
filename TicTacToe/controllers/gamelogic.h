@@ -11,6 +11,7 @@ class GameLogic : public QObject
     Q_PROPERTY(QString currentPlayer READ getCurrentPlayer WRITE setCurrentPlayer NOTIFY playerChanged)
     Q_PROPERTY(bool playerWon READ getPlayerWon WRITE setPlayerWon NOTIFY playerWonChanged)
     Q_PROPERTY(bool catsCradle READ getCatsCradle WRITE setCatsCradle RESET resetCatsCradle NOTIFY catsCradleMatch FINAL)
+    Q_PROPERTY(QString gameType READ getGameType WRITE setGameType NOTIFY gameTypeChanged)
 
 public:
     explicit GameLogic(QObject *parent = nullptr);
@@ -21,8 +22,10 @@ public:
     bool getPlayerWon() const;
     void setPlayerWon(bool won);
 
+    QString getGameType() const; // New getter
+    void setGameType(const QString &newGameType); // New setter
+
     // Exposed Functions to QML
-    //
     Q_INVOKABLE void checkPlayerTurn();
     Q_INVOKABLE void checkForHorizontalWin();
     Q_INVOKABLE void checkForVerticalWin();
@@ -42,11 +45,12 @@ signals:
     void playerWonChanged(bool won);
     void gameWon(const QString &winner);
     void catsCradleMatch();
+    void gameTypeChanged(const QString &gameType);
 
 private:
     QString currentPlayer;
     bool playerWon=false;
     bool catsCradle=false;
+    QString gameType;
     QMap<QString, bool> ticTacToeBoard;
-
 };

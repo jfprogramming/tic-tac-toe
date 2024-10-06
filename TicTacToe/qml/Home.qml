@@ -35,6 +35,7 @@ Item {
                     //display play area
                     //
                     stackView.push("PlayerSelection.qml")
+                    gameLogic.gameType = "1Player"
                 }
             }
 
@@ -49,6 +50,7 @@ Item {
                     //display play area
                     //
                     stackView.push("PlayerSelection.qml")
+                    gameLogic.gameType = "2Player"
                 }
             }
             Button{

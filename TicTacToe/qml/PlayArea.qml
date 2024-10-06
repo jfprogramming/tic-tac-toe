@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import "qrc:///onePlayerMode.js" as JavaScript
+import GameLogic 1.0
 
 
 Item {
@@ -10,15 +11,18 @@ Item {
     property string player1: "player1"
     property string player2: "player2"
 
-    property int currentPlayer: 0
+    property string currentPlayer: "player1"
     property bool playerWon: false
 
     property int p1Score: 0
     property int p2Score: 0
 
-    property string gameType: "1Player" //getGameType()
+    // Set the game type to 1Player or 2Player
+    //
+    property string gameType: ""
 
     // Create an array to store item IDs
+    //
     property var itemIds: []
     property var emptyImgs: []
 
@@ -26,260 +30,78 @@ Item {
     property alias row1Id: row1
     property alias row1Rect1ImgAlias: row1rect1Img
 
-
-    // *** JavaScript Function Section *** //
-    function getCurrentPlayer(){
-        // TODO call Q_INVOKABLE Function to get current player turn
+    Component.onCompleted: {
+        gameType = gameLogic.getGameType()
     }
 
-    function checkPlayerTurn(){
-        if(currentPlayer == 1){
-            if(gameType == 1){
-                // disable player 1 input during computers turn
-                //
-                mainColumn.enabled = false
-            }
-            currentPlayer = 2
-        }
-        else if(currentPlayer == 2){
-            if(gameType == 1){
-                mainColumn.enabled = true
-            }
-            currentPlayer = 1
-        }
-        else{
-            // set the first player at start of game
-            currentPlayer = 1
-        }
+    // Create an instance of GameLogic
+    //
+    GameLogic {
+        id: gameLogic
+    }
+
+    function getCurrentPlayer() {
+        return gameLogic.currentPlayer
+    }
+
+    function checkPlayerTurn() {
+        gameLogic.checkPlayerTurn()
+        currentPlayer = gameLogic.currentPlayer
         console.log("set player turn to: " + currentPlayer)
     }
 
     function setWinVariables(player) {
-        winText.visible    = true
+        winText.visible = true
         mainColumn.enabled = false
-        playerWon          = true
+        playerWon = true
 
-        // Create an instance of the custom popup
         var popupComponent = Qt.createComponent("PopupMSg.qml")
         if (popupComponent.status === Component.Ready) {
             var popupInstance = popupComponent.createObject(root)
-            //popupComponent.popupMsgText = player+" is The Winner"
             popupInstance.open()
         }
     }
 
-    function checkForHorizontalWin(){
-        console.log("check for a horizontal win")
-        // Row 1 Horizontal win
-        //
-        if(row1rect1Img.source == "qrc:///playerOneIcon.png" &&
-                row1rect2Img.source == "qrc:///playerOneIcon.png" &&
-                row1rect3Img.source == "qrc:///playerOneIcon.png"){
-            console.log("X Wins")
-            winVisual.winStrike1 = true
-            p1Score +=1
-            setWinVariables("Player1")
+    function checkForHorizontalWin() {
+        gameLogic.checkForHorizontalWin()
+        if (gameLogic.playerWon) {
+            setWinVariables(gameLogic.currentPlayer)
             return true
         }
-        else if(row1rect1Img.source == "qrc:///playerTwoIcon.png" &&
-                row1rect2Img.source == "qrc:///playerTwoIcon.png" &&
-                row1rect3Img.source == "qrc:///playerTwoIcon.png"){
-            console.log("O Wins")
-            winVisual.winStrike1 = true
-            setWinVariables("Player2")
-            p2Score +=1
-            return true
-        }
-        // Row 2 Horizontal win
-        //
-        else if(row2rect1Img.source == "qrc:///playerOneIcon.png" &&
-                row2rect2Img.source == "qrc:///playerOneIcon.png" &&
-                row2rect3Img.source == "qrc:///playerOneIcon.png"){
-            console.log("Row 2 X Wins")
-            winVisual.winStrike2 = true
-            setWinVariables("Player1")
-            p2Score +=1
-            return true
-        }
-        else if(row2rect1Img.source == "qrc:///playerTwoIcon.png" &&
-                row2rect2Img.source == "qrc:///playerTwoIcon.png" &&
-                row2rect3Img.source == "qrc:///playerTwoIcon.png"){
-            console.log("O Wins")
-            winVisual.winStrike2 = true
-            setWinVariables("Player2")
-            p2Score +=1
-            return true
-        }
-        // Row 3 Horizontal win
-        //
-        else if(row3rect1Img.source == "qrc:///playerOneIcon.png" &&
-                row3rect2Img.source == "qrc:///playerOneIcon.png" &&
-                row3rect3Img.source == "qrc:///playerOneIcon.png"){
-            console.log("X Wins")
-            winVisual.winStrike3 = true
-            setWinVariables("Player1")
-            p1Score +=1
-            return true
-        }
-        else if(row3rect1Img.source == "qrc:///playerTwoIcon.png" &&
-                row3rect2Img.source == "qrc:///playerTwoIcon.png" &&
-                row3rect3Img.source == "qrc:///playerTwoIcon.png"){
-            console.log("O Wins")
-            winVisual.winStrike3 = true
-            setWinVariables("Player2")
-            p2Score +=1
-            return true
-        }
-        else{
-            console.log("no horizontal win...")
-            return checkForCatsCradle()
-        }
+        return false
     }
 
-    function checkForVerticalWin(){
-        console.log("check for a vertical win")
-        // Colum 1 Vertical win
-        //
-        if(row1rect1Img.source == "qrc:///playerOneIcon.png" &&
-                row2rect1Img.source == "qrc:///playerOneIcon.png" &&
-                row3rect1Img.source == "qrc:///playerOneIcon.png"){
-            console.log("X Wins")
-            winVisual.winStrike4 = true
-            setWinVariables("Player1")
-            p1Score +=1
+    function checkForVerticalWin() {
+        gameLogic.checkForVerticalWin()
+        if (gameLogic.playerWon) {
+            setWinVariables(gameLogic.currentPlayer)
             return true
         }
-        else if(row1rect1Img.source == "qrc:///playerTwoIcon.png" &&
-                row2rect1Img.source == "qrc:///playerTwoIcon.png" &&
-                row3rect1Img.source == "qrc:///playerTwoIcon.png"){
-            console.log("O Wins")
-            winVisual.winStrike4.visible = true
-            setWinVariables("Player2")
-            p2Score +=1
-            return true
-        }
-        // Colum 2 Vertical win
-        //
-        else if(row1rect2Img.source == "qrc:///playerOneIcon.png" &&
-                row2rect2Img.source == "qrc:///playerOneIcon.png" &&
-                row3rect2Img.source == "qrc:///playerOneIcon.png"){
-            console.log("X Wins")
-            winVisual.winStrike5 = true
-            setWinVariables("Player1")
-            p1Score +=1
-            return true
-        }
-        else if(row1rect2Img.source == "qrc:///playerTwoIcon.png" &&
-                row2rect2Img.source == "qrc:///playerTwoIcon.png" &&
-                row3rect2Img.source == "qrc:///playerTwoIcon.png"){
-            console.log("O Wins")
-            winVisual.winStrike5 = true
-            setWinVariables("Player2")
-            p2Score +=1
-            return true
-        }
-        // Colum 3 Vertical win
-        //
-        else if(row1rect3Img.source == "qrc:///playerOneIcon.png" &&
-                row2rect3Img.source == "qrc:///playerOneIcon.png" &&
-                row3rect3Img.source == "qrc:///playerOneIcon.png"){
-            console.log("X Wins")
-            winVisual.winStrike6 = true
-            setWinVariables("Player1")
-            p1Score +=1
-            return true
-        }
-        else if(row1rect3Img.source == "qrc:///playerTwoIcon.png" &&
-                row2rect3Img.source == "qrc:///playerTwoIcon.png" &&
-                row3rect3Img.source == "qrc:///playerTwoIcon.png"){
-            console.log("O Wins")
-            winVisual.winStrike6 = true
-            setWinVariables("Player1")
-            p2Score +=1
-            return true
-        }
-        else{
-            console.log("no vertical win...")
-            return checkForCatsCradle()
-        }
+        return false
     }
 
-    function checkFordiagonalWin(){
-        console.log("check for a diagonal win")
-        // Diagonal Win 1
-        //
-        if(row1rect1Img.source == "qrc:///playerOneIcon.png" &&
-                row2rect2Img.source == "qrc:///playerOneIcon.png" &&
-                row3rect3Img.source == "qrc:///playerOneIcon.png"){
-            console.log("X Wins")
-            winVisual.winStrike7 = true
-            setWinVariables("Player1")
-            p1Score +=1
+    function checkForDiagonalWin() {
+        gameLogic.checkForDiagonalWin()
+        if (gameLogic.playerWon) {
+            setWinVariables(gameLogic.currentPlayer)
             return true
         }
-        else if(row1rect1Img.source == "qrc:///playerTwoIcon.png" &&
-                row2rect2Img.source == "qrc:///playerTwoIcon.png" &&
-                row3rect3Img.source == "qrc:///playerTwoIcon.png"){
-            console.log("O Wins")
-            winVisual.winStrike7 = true
-            setWinVariables("Player2")
-            p2Score +=1
-            return true
-        }
-
-        // Diagonal Win 2
-        //
-        else if(row1rect3Img.source == "qrc:///playerOneIcon.png" &&
-                row2rect2Img.source == "qrc:///playerOneIcon.png" &&
-                row3rect1Img.source == "qrc:///playerOneIcon.png"){
-            console.log("X Wins")
-            winVisual.winStrike8 = true
-            setWinVariables("Player1")
-            p1Score +=1
-            return true
-        }
-        else if(row1rect3Img.source == "qrc:///playerTwoIcon.png" &&
-                row2rect2Img.source == "qrc:///playerTwoIcon.png" &&
-                row3rect1Img.source == "qrc:///playerTwoIcon.png"){
-            console.log("O Wins")
-            winVisual.winStrike8 = true
-            setWinVariables("Player2")
-            p2Score +=1
-            return true
-        }
-        else{
-            console.log("no diagonal win...")
-            return checkForCatsCradle()
-        }
+        return false
     }
 
-    function checkForCatsCradle(){
-        console.log("Checking for CatsCradle...");
-
-        // Check if all cells are filled (assuming "X" and "O" images)
-        //
-        if (row1rect1Img.source != "" &&
-                row1rect2Img.source != "" &&
-                row1rect3Img.source != "" &&
-                row2rect1Img.source != "" &&
-                row2rect2Img.source != "" &&
-                row2rect3Img.source != "" &&
-                row3rect1Img.source != "" &&
-                row3rect2Img.source != "" &&
-                row3rect3Img.source != "") {
-            console.log("CatsCradle! All squares filled without a winner.");
-            // Handle the CatsCradle scenario (e.g., display a message or end the game)
-            //
+    function checkForCatsCradle() {
+        gameLogic.checkForCatsCradle()
+        if (gameLogic.catsCradle) {
+            console.log("CatsCradle! All squares filled without a winner.")
             return true
-        } else {
-            console.log("No CatsCradle yet...");
-            return false
         }
+        console.log("No CatsCradle yet...")
+        return false
     }
 
     // Only used for 1Player games
     //
-    function playerTwoIconTurn() {
+    function playerTwoTurn() {
         checkPlayerTurn()
         var selectedSquare = null
         const emptySquares = []
@@ -319,11 +141,17 @@ Item {
         }
         else{
             console.log("not your turn computer... wait your turn!")
+            gameLogic.playerTwoIconTurn()
+            checkForHorizontalWin()
+            checkForVerticalWin()
+            checkForDiagonalWin()
+            checkForCatsCradle()
         }
         // End of computers turn enable input again if no player has won
         //
         if(!playerWon){ mainColumn.enabled = true }
     }
+
 
     // only used for 1Player games
     //
@@ -332,7 +160,7 @@ Item {
         interval: 1000 // 1 second
         onTriggered: {
             console.log("timer triggered...")
-            playerTwoIconTurn() // Call playerTwoIconTurn after the delay
+            playerTwoTurn() // Call playerTwoIconTurn after the delay
         }
     }
 
@@ -416,7 +244,7 @@ Item {
                             //
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
-                                    && !checkFordiagonalWin()
+                                    && !checkForDiagonalWin()
                                     && gameType  == "1Player"){
                                 // Start the timer after the click
                                 //
@@ -453,7 +281,7 @@ Item {
                             //
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
-                                    && !checkFordiagonalWin()
+                                    && !checkForDiagonalWin()
                                     && gameType  == "1Player"){
                                 // Start the timer after the click
                                 //
@@ -490,7 +318,7 @@ Item {
                             //
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
-                                    && !checkFordiagonalWin()
+                                    && !checkForDiagonalWin()
                                     && gameType  == "1Player"){
                                 // Start the timer after the click
                                 //
@@ -536,7 +364,7 @@ Item {
                             //
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
-                                    && !checkFordiagonalWin()
+                                    && !checkForDiagonalWin()
                                     && gameType  == "1Player"){
                                 // Start the timer after the click
                                 //
@@ -573,7 +401,7 @@ Item {
                             //
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
-                                    && !checkFordiagonalWin()
+                                    && !checkForDiagonalWin()
                                     && gameType  == "1Player"){
                                 // Start the timer after the click
                                 //
@@ -610,7 +438,7 @@ Item {
                             //
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
-                                    && !checkFordiagonalWin()
+                                    && !checkForDiagonalWin()
                                     && gameType  == "1Player"){
                                 // Start the timer after the click
                                 //
@@ -657,7 +485,7 @@ Item {
                             //
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
-                                    && !checkFordiagonalWin()
+                                    && !checkForDiagonalWin()
                                     && gameType  == "1Player"){
                                 // Start the timer after the click
                                 //
@@ -694,7 +522,7 @@ Item {
                             //
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
-                                    && !checkFordiagonalWin()
+                                    && !checkForDiagonalWin()
                                     && gameType  == "1Player"){
                                 // Start the timer after the click
                                 //
@@ -731,7 +559,7 @@ Item {
                             //
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
-                                    && !checkFordiagonalWin()
+                                    && !checkForDiagonalWin()
                                     && gameType  == "1Player"){
                                 // Start the timer after the click
                                 //
