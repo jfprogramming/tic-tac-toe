@@ -169,11 +169,11 @@ void GameLogic::checkForCatsCradle()
 }
 
 /**
- * \fn GameLogic::playerTwoIconTurn()
+ * \fn GameLogic::playerTwoTurn()
  * \brief Handles the turn for player two in one-player mode.
  * \return void
  */
-void GameLogic::playerTwoIconTurn()
+void GameLogic::playerTwoTurn()
 {
     if (currentPlayer == "Player2") {
         QStringList emptySquares;
@@ -195,11 +195,11 @@ void GameLogic::playerTwoIconTurn()
 }
 
 /**
- * \fn GameLogic::resetGame()
+ * \fn GameLogic::resetTicTacToeBoard()
  * \brief Resets the game to the initial state.
  * \return void
  */
-void GameLogic::resetGame()
+void GameLogic::resetTicTacToeBoard()
 {
     ticTacToeBoard = {
         {"A1", false}, {"A2", false}, {"A3", false},
@@ -209,6 +209,16 @@ void GameLogic::resetGame()
     setCurrentPlayer("Player1");
     setPlayerWon(false);
     resetCatsCradle();
+}
+
+void GameLogic::resetPlayerWon()
+{
+
+}
+
+void GameLogic::resetGameType()
+{
+
 }
 
 /**

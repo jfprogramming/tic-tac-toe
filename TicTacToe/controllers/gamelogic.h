@@ -26,13 +26,19 @@ public:
     void setGameType(const QString &newGameType); // New setter
 
     // Exposed Functions to QML
+    //
     Q_INVOKABLE void checkPlayerTurn();
     Q_INVOKABLE void checkForHorizontalWin();
     Q_INVOKABLE void checkForVerticalWin();
     Q_INVOKABLE void checkForDiagonalWin();
     Q_INVOKABLE void checkForCatsCradle();
-    Q_INVOKABLE void playerTwoIconTurn();
-    Q_INVOKABLE void resetGame();
+    Q_INVOKABLE void playerTwoTurn();
+
+    // Reset functions
+    //
+    Q_INVOKABLE void resetTicTacToeBoard();
+    Q_INVOKABLE void resetPlayerWon();
+    Q_INVOKABLE void resetGameType();
 
     bool getCatsCradle() const;
 
