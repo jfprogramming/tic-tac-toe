@@ -40,7 +40,7 @@ jobs:
     - name: Install dependencies on Ubuntu
       if: matrix.os == 'ubuntu-latest'
       run: |
-        sudo add-apt-repository ppa:canonical-qt6-team/ppa
+        sudo sh -c 'echo "deb [trusted=yes] https://download.qt.io/stable/linux_releases/6.x/ qt6-stable main" > /etc/apt/sources.list.d/qt6.list'
         sudo apt-get update
         sudo apt-get install -y qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools qt6-declarative-dev
 
