@@ -127,6 +127,18 @@ void GameLogic::setGameType(const QString &newGameType)
     }
 }
 
+
+/**
+ * \fn GameLogic::setSquareSelected()
+ * \brief
+ * \return void
+ */
+void GameLogic::setSquareSelected(const QString &square) {
+    if (m_ticTacToeBoard.contains(square)) {
+        m_ticTacToeBoard[square] = true;
+    }
+}
+
 /**
  * \fn GameLogic::checkForHorizontalWin()
  * \brief Checks for a horizontal win.
@@ -139,6 +151,7 @@ void GameLogic::checkForHorizontalWin()
     const QStringList rows = {"A", "B", "C"};
     for (const auto& row : rows) {
         if (m_ticTacToeBoard[row + "1"] && m_ticTacToeBoard[row + "2"] && m_ticTacToeBoard[row + "3"]) {
+            qDebug() << __FUNCTION__ << "player won:" << m_currentPlayer;
             setPlayerWon(true);
             emit gameWon();
             return;
@@ -158,6 +171,7 @@ void GameLogic::checkForVerticalWin()
     const QStringList cols = {"1", "2", "3"};
     for (const auto& col : cols) {
         if (m_ticTacToeBoard["A" + col] && m_ticTacToeBoard["B" + col] && m_ticTacToeBoard["C" + col]) {
+            qDebug() << __FUNCTION__ << "player won:" << m_currentPlayer;
             setPlayerWon(true);
             emit gameWon();
             return;
@@ -176,6 +190,7 @@ void GameLogic::checkForDiagonalWin()
 
     if ((m_ticTacToeBoard["A1"] && m_ticTacToeBoard["B2"] && m_ticTacToeBoard["C3"]) ||
         (m_ticTacToeBoard["A3"] && m_ticTacToeBoard["B2"] && m_ticTacToeBoard["C1"])) {
+        qDebug() << __FUNCTION__ << "player won:" << m_currentPlayer;
         setPlayerWon(true);
         emit gameWon();
     }

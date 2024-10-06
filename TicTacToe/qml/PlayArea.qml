@@ -55,6 +55,70 @@ Item {
         checkPlayerTurn()
     }
 
+    function resetBoard() {
+        console.log("reseting the game board...")
+
+        // Re-Enable Board Items
+        //
+        for (const item of itemIds) {
+            item.source = ""
+            item.visible = false
+            item.enabled = true
+        }
+        mainColumn.enabled = true
+
+        /*** clear the board ***/
+
+        // Row 1
+        //
+        row1rect1Img.source = ""
+        row1rect2Img.source = ""
+        row1rect3Img.source = ""
+        // Row 2
+        //
+        row2rect1Img.source = ""
+        row2rect2Img.source = ""
+        row2rect3Img.source = ""
+        // Row 3
+        //
+        row3rect1Img.source = ""
+        row3rect2Img.source = ""
+        row3rect3Img.source = ""
+
+        // Enable the play area
+        //
+        mainColumn.enabled = true
+
+        // Re-Enable and disabled squares
+        //
+        row1rect1.enabled = true
+        row1rect2.enabled = true
+        row1rect3.enabled = true
+
+        row2rect1.enabled = true
+        row2rect2.enabled = true
+        row2rect3.enabled = true
+
+        row3rect1.enabled = true
+        row3rect2.enabled = true
+        row3rect3.enabled = true
+
+        // Reset the current player
+        //
+        currentPlayer = 1
+
+        // Reset the win variable
+        //
+        playerWon = false;
+
+        // Reset C++ objects
+        //
+        gameLogic.resetCatsCradle()
+        gameLogic.resetPlayerWon()
+        gameLogic.resetTicTacToeBoard()
+    }
+
+
     // Display popup message for the next player
     //
     PopupMsg {
@@ -71,6 +135,10 @@ Item {
         id: gameWonPopup
         modal: true
         popupMsgtxt: "Player" + gameLogic.currentPlayer + " Won"
+        onClosed: {
+            console.log("Win popup closed")
+            resetBoard()
+        }
     }
 
 
@@ -100,7 +168,22 @@ Item {
         gameLogic.playerWon = true
         playerWon = true
 
+        if(currentPlayer == 1){
+            p1Score = p1Score + 1
+            playerModel.player1Score = p1Score
+        }
+        if(currentPlayer == 2){
+            p2Score = p2Score + 1
+            playerModel.player2Score = p2Score
+        }
+
+
+
         gameWonPopup.open()
+    }
+
+    function playerSelectSquare(squareKey) {
+        gameLogic.setSquareSelected(squareKey)
     }
 
     function checkForHorizontalWin() {
@@ -202,7 +285,6 @@ Item {
         checkPlayerTurn()
     }
 
-
     // only used for 1Player games
     //
     Timer {
@@ -235,6 +317,7 @@ Item {
             spacing: 10
             anchors.fill: parent
 
+            // Row 1
             Row{
                 id: row1
                 spacing: 10
@@ -263,16 +346,17 @@ Item {
                             //
                             row1rect1Img.visible = true
                             row1rect1Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                            playerSelectSquare("A1")  // This should be the key for this specific square
                             // check for a winner
                             //
-                            if(!checkForHorizontalWin()
-                                    && !checkForVerticalWin()
-                                    && !checkForDiagonalWin()
-                                    && gameMode  == "1Player"){
-                                // Start the timer after the click
-                                //
-                                delayTimer.start()
-                            }
+                            if(!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin())
+                                if(gameMode  == "1Player"){
+                                    // Start the timer after the click
+                                    //
+                                    delayTimer.start()
+                                }
+                            // No Wins next player
+                            //
                             row1rect1.enabled = false
                             mainColumn.enabled = false
                             checkPlayerTurn()
@@ -299,19 +383,21 @@ Item {
                         onClicked:{
                             row1rect2Img.visible = true
                             row1rect2Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                            playerSelectSquare("A2")
                             // check for a winner
                             //
-                            if(!checkForHorizontalWin()
-                                    && !checkForVerticalWin()
-                                    && !checkForDiagonalWin()
-                                    && gameMode  == "1Player"){
-                                // Start the timer after the click
+                            if(!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()){
+                                if(gameMode  == "1Player"){
+                                    // Start the timer after the click
+                                    //
+                                    delayTimer.start()
+                                }
+                                // No Wins next player
                                 //
-                                delayTimer.start()
+                                row1rect2.enabled = false
+                                mainColumn.enabled = false
+                                checkPlayerTurn()
                             }
-                            row1rect2.enabled = false
-                            mainColumn.enabled = false
-                            checkPlayerTurn()
                         }
                     }
                 }
@@ -335,19 +421,21 @@ Item {
                         onClicked:{
                             row1rect3Img.visible = true
                             row1rect3Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                            playerSelectSquare("A3")
                             // check for a winner
                             //
-                            if(!checkForHorizontalWin()
-                                    && !checkForVerticalWin()
-                                    && !checkForDiagonalWin()
-                                    && gameMode  == "1Player"){
-                                // Start the timer after the click
+                            if(!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()){
+                                if(gameMode  == "1Player"){
+                                    // Start the timer after the click
+                                    //
+                                    delayTimer.start()
+                                }
+                                // No Wins next player
                                 //
-                                delayTimer.start()
+                                row1rect3.enabled = false
+                                mainColumn.enabled = false
+                                checkPlayerTurn()
                             }
-                            row1rect3.enabled = false
-                            mainColumn.enabled = false
-                            checkPlayerTurn()
                         }
                     }
                 }
@@ -380,19 +468,21 @@ Item {
                         onClicked:{
                             row2rect1Img.visible = true
                             row2rect1Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                            playerSelectSquare("B1")
                             // check for a winner
                             //
-                            if(!checkForHorizontalWin()
-                                    && !checkForVerticalWin()
-                                    && !checkForDiagonalWin()
-                                    && gameMode  == "1Player"){
-                                // Start the timer after the click
+                            if(!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()){
+                                if(gameMode  == "1Player"){
+                                    // Start the timer after the click
+                                    //
+                                    delayTimer.start()
+                                }
+                                // No Wins next player
                                 //
-                                delayTimer.start()
+                                row2rect1.enabled = false
+                                mainColumn.enabled = false
+                                checkPlayerTurn()
                             }
-                            row2rect1.enabled = false
-                            mainColumn.enabled = false
-                            checkPlayerTurn()
                         }
                     }
                 }
@@ -416,19 +506,21 @@ Item {
                         onClicked:{
                             row2rect2Img.visible = true
                             row2rect2Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                            playerSelectSquare("B2")
                             // check for a winner
                             //
-                            if(!checkForHorizontalWin()
-                                    && !checkForVerticalWin()
-                                    && !checkForDiagonalWin()
-                                    && gameMode  == "1Player"){
-                                // Start the timer after the click
+                            if(!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()){
+                                if(gameMode  == "1Player"){
+                                    // Start the timer after the click
+                                    //
+                                    delayTimer.start()
+                                }
+                                // No Wins next player
                                 //
-                                delayTimer.start()
+                                row2rect2.enabled = false
+                                mainColumn.enabled = false
+                                checkPlayerTurn()
                             }
-                            row2rect2.enabled = false
-                            mainColumn.enabled = false
-                            checkPlayerTurn()
                         }
                     }
                 }
@@ -452,19 +544,21 @@ Item {
                         onClicked:{
                             row2rect3Img.visible = true
                             row2rect3Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                            playerSelectSquare("B3")
                             // check for a winner
                             //
-                            if(!checkForHorizontalWin()
-                                    && !checkForVerticalWin()
-                                    && !checkForDiagonalWin()
-                                    && gameMode  == "1Player"){
-                                // Start the timer after the click
+                            if(!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()){
+                                if(gameMode  == "1Player"){
+                                    // Start the timer after the click
+                                    //
+                                    delayTimer.start()
+                                }
+                                // No Wins next player
                                 //
-                                delayTimer.start()
+                                row2rect3.enabled = false
+                                mainColumn.enabled = false
+                                checkPlayerTurn()
                             }
-                            row2rect3.enabled = false
-                            mainColumn.enabled = false
-                            checkPlayerTurn()
                         }
                     }
                 }
@@ -498,19 +592,21 @@ Item {
                         onClicked:{
                             row3rect1Img.visible = true
                             row3rect1Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                            playerSelectSquare("C1")
                             // check for a winner
                             //
-                            if(!checkForHorizontalWin()
-                                    && !checkForVerticalWin()
-                                    && !checkForDiagonalWin()
-                                    && gameMode  == "1Player"){
-                                // Start the timer after the click
+                            if(!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()){
+                                if(gameMode  == "1Player"){
+                                    // Start the timer after the click
+                                    //
+                                    delayTimer.start()
+                                }
+                                // No Wins next player
                                 //
-                                delayTimer.start()
+                                row3rect1.enabled = false
+                                mainColumn.enabled = false
+                                checkPlayerTurn()
                             }
-                            row3rect1.enabled = false
-                            mainColumn.enabled = false
-                            checkPlayerTurn()
                         }
                     }
                 }
@@ -534,19 +630,21 @@ Item {
                         onClicked:{
                             row3rect2Img.visible = true
                             row3rect2Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                            playerSelectSquare("C2")
                             // check for a winner
                             //
-                            if(!checkForHorizontalWin()
-                                    && !checkForVerticalWin()
-                                    && !checkForDiagonalWin()
-                                    && gameMode  == "1Player"){
-                                // Start the timer after the click
+                            if(!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()){
+                                if(gameMode  == "1Player"){
+                                    // Start the timer after the click
+                                    //
+                                    delayTimer.start()
+                                }
+                                // No Wins next player
                                 //
-                                delayTimer.start()
+                                row3rect2.enabled = false
+                                mainColumn.enabled = false
+                                checkPlayerTurn()
                             }
-                            row3rect2.enabled = false
-                            mainColumn.enabled = false
-                            checkPlayerTurn()
                         }
                     }
                 }
@@ -570,25 +668,27 @@ Item {
                         onClicked:{
                             row3rect3Img.visible = true
                             row3rect3Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                            playerSelectSquare("C3")
                             // check for a winner
                             //
-                            if(!checkForHorizontalWin()
-                                    && !checkForVerticalWin()
-                                    && !checkForDiagonalWin()
-                                    && gameMode  == "1Player"){
-                                // Start the timer after the click
+                            if(!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()){
+                                if(gameMode  == "1Player"){
+                                    // Start the timer after the click
+                                    //
+                                    delayTimer.start()
+                                }
+                                // No Wins next player
                                 //
-                                delayTimer.start()
+                                row3rect3.enabled = false
+                                mainColumn.enabled = false
+                                checkPlayerTurn()
                             }
-                            row3rect3.enabled = false
-                            mainColumn.enabled = false
-                            checkPlayerTurn()
                         }
                     }
                 }
-            }
-        }
-    }
+            }//end row3
+        }// end column
+    }// end rectangle
 
     Footer{
         id:playAreaFooter
@@ -600,50 +700,7 @@ Item {
         resetBtnTxt: "Rest"
         resetBtn.visible: true
         resetBtn.onClicked: {
-            /*** clear the board ***/
-
-            // Row 1
-            //
-            row1rect1Img.source = ""
-            row1rect2Img.source = ""
-            row1rect3Img.source = ""
-            // Row 2
-            //
-            row2rect1Img.source = ""
-            row2rect2Img.source = ""
-            row2rect3Img.source = ""
-            // Row 3
-            //
-            row3rect1Img.source = ""
-            row3rect2Img.source = ""
-            row3rect3Img.source = ""
-
-            // Enable the play area
-            //
-            mainColumn.enabled = true
-
-            // Re-Enable and disabled squares
-            //
-            row1rect1.enabled = true
-            row1rect2.enabled = true
-            row1rect3.enabled = true
-
-            row2rect1.enabled = true
-            row2rect2.enabled = true
-            row2rect3.enabled = true
-
-            row3rect1.enabled = true
-            row3rect2.enabled = true
-            row3rect3.enabled = true
-
-            // Reset the current player
-            //
-            currentPlayer = 1
-
-            // Reset the win variable
-            //
-            playerWon = false;
-
+            reset()
         }
     }
 }

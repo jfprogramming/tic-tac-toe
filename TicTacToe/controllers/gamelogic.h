@@ -48,6 +48,10 @@ public:
     Q_INVOKABLE void resetPlayerWon();
     Q_INVOKABLE void resetGameType();
 
+    // Set square selected
+    //
+    Q_INVOKABLE void setSquareSelected(const QString &square);
+
 public slots:
     void resetCatsCradle();
 
