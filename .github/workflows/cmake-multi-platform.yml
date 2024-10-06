@@ -37,6 +37,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Install dependencies on Ubuntu
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y qt6-base-dev
+
     - name: Set reusable strings
       id: strings
       shell: bash
