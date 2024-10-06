@@ -97,13 +97,10 @@ Item {
         console.log("setWinVariables player: "+player)
 
         mainColumn.enabled = false
+        gameLogic.playerWon = true
         playerWon = true
 
-        var popupComponent = Qt.createComponent("PopupMSg.qml")
-        if (popupComponent.status === Component.Ready) {
-            var popupInstance = popupComponent.createObject(root)
-            popupInstance.open()
-        }
+        gameWonPopup.open()
     }
 
     function checkForHorizontalWin() {
