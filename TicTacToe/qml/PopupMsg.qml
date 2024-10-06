@@ -8,13 +8,16 @@ Popup {
     height: 150
     modal: true
     focus: true
+    anchors.centerIn: parent
 
-    property alias popupMsg: popupMsgText
+
+    property alias popupMsgtxt: popupMsgText.text
 
     Rectangle {
         id: popupMsgRect
-        color: "white"
         anchors.fill: parent.fill
+        anchors.centerIn: parent
+        color: "#0078D4"
 
         Text {
             id: popupMsgText
@@ -40,7 +43,7 @@ Popup {
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         onClicked: {
-            popupMsg.close()
+            popupMsgItem.close()
         }
     }
 

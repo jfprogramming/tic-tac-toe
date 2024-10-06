@@ -34,10 +34,10 @@ Item {
         gameMode = gameLogic.gameType
         playerWon = gameLogic.playerWon
         var player = getCurrentPlayer()
-        if(player == "player1"){
-            currentPlayer = 1
+        if(player == 1){
+            currentPlayer = 2
         }
-        else if(player == "player1"){
+        else if(player == 2){
             currentPlayer = 2
         }
     }
@@ -57,37 +57,41 @@ Item {
 
     // Display popup message for the next player
     //
-    Popup {
+    PopupMsg {
         id: nextPlayerPopup
         modal: true
-        Text {
-            text: "Next turn: " + gameLogic.current_player
-        }
+        popupMsgtxt: "Next turn: Player" + gameLogic.currentPlayer
     }
 
-    Popup {
+    PopupMsg {
         id: gameWonPopup
         modal: true
-        Text {
-            id: gameWonText
-            //text: gameLogic.current_player + " Won"
-        }
+        popupMsgtxt: "Player" + gameLogic.currentPlayer + " Won"
     }
 
 
     // JavaScript Functions interface with C++ GameLogic
     //
     function getCurrentPlayer() {
+        console.log("getCurrentPlayer currentPlayer"+gameLogic.currentPlayer)
+
         return gameLogic.currentPlayer
     }
 
     function checkPlayerTurn() {
+        console.log("checkPlayerTurn currentPlayer"+gameLogic.currentPlayer)
+
         gameLogic.checkPlayerTurn()
         currentPlayer = gameLogic.currentPlayer
         console.log("set player turn to: " + currentPlayer)
+        if(gameMode == "2Player"){
+            nextPlayerPopup.open()
+        }
     }
 
     function setWinVariables(player) {
+        console.log("setWinVariables player: "+player)
+
         winText.visible = true
         mainColumn.enabled = false
         playerWon = true
@@ -100,6 +104,8 @@ Item {
     }
 
     function checkForHorizontalWin() {
+        console.log("checkForHorizontalWin")
+
         gameLogic.checkForHorizontalWin()
         if (gameLogic.playerWon) {
             setWinVariables(gameLogic.currentPlayer)
@@ -109,6 +115,8 @@ Item {
     }
 
     function checkForVerticalWin() {
+        console.log("checkForVerticalWin")
+
         gameLogic.checkForVerticalWin()
         if (gameLogic.playerWon) {
             setWinVariables(gameLogic.currentPlayer)
@@ -118,6 +126,8 @@ Item {
     }
 
     function checkForDiagonalWin() {
+        console.log("checkForDiagonalWin")
+
         gameLogic.checkForDiagonalWin()
         if (gameLogic.playerWon) {
             setWinVariables(gameLogic.currentPlayer)
@@ -127,6 +137,7 @@ Item {
     }
 
     function checkForCatsCradle() {
+        console.log("checkForCatsCradle")
         gameLogic.checkForCatsCradle()
         if (gameLogic.catsCradle) {
             console.log("CatsCradle! All squares filled without a winner.")
@@ -139,6 +150,8 @@ Item {
     // Only used for 1Player games
     //
     function playerTwoTurn() {
+        console.log("playerTwoTurn")
+
         var selectedSquare = null
         const emptySquares = []
 
@@ -272,10 +285,9 @@ Item {
                         anchors.fill: parent
                         onClicked:{
                             // set X or O based of player 1 or player 2
+                            //
                             row1rect1Img.visible = true
-                            console.log("current player turn: "+currentPlayer)
                             row1rect1Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
-                            console.log("source:"+row1rect1Img.source)
                             // check for a winner
                             //
                             if(!checkForHorizontalWin()
@@ -311,7 +323,6 @@ Item {
                         anchors.fill: parent
                         onClicked:{
                             row1rect2Img.visible = true
-                            console.log("current player turn: "+currentPlayer)
                             row1rect2Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
                             //
@@ -348,7 +359,6 @@ Item {
                         anchors.fill: parent
                         onClicked:{
                             row1rect3Img.visible = true
-                            console.log("current player turn: "+currentPlayer)
                             row1rect3Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
                             //
@@ -394,7 +404,6 @@ Item {
                         anchors.fill: parent
                         onClicked:{
                             row2rect1Img.visible = true
-                            console.log("current player turn: "+currentPlayer)
                             row2rect1Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
                             //
@@ -431,7 +440,6 @@ Item {
                         anchors.fill: parent
                         onClicked:{
                             row2rect2Img.visible = true
-                            console.log("current player turn: "+currentPlayer)
                             row2rect2Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
                             //
@@ -468,7 +476,6 @@ Item {
                         anchors.fill: parent
                         onClicked:{
                             row2rect3Img.visible = true
-                            console.log("current player turn: "+currentPlayer)
                             row2rect3Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
                             //
@@ -515,7 +522,6 @@ Item {
                         anchors.fill: parent
                         onClicked:{
                             row3rect1Img.visible = true
-                            console.log("current player turn: "+currentPlayer)
                             row3rect1Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
                             //
@@ -552,7 +558,6 @@ Item {
                         anchors.fill: parent
                         onClicked:{
                             row3rect2Img.visible = true
-                            console.log("current player turn: "+currentPlayer)
                             row3rect2Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
                             //
@@ -589,7 +594,6 @@ Item {
                         anchors.fill: parent
                         onClicked:{
                             row3rect3Img.visible = true
-                            console.log("current player turn: "+currentPlayer)
                             row3rect3Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
                             //
