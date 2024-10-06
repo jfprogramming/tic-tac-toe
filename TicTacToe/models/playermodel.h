@@ -23,10 +23,12 @@ public:
     explicit PlayerModel(QObject* parent = nullptr);
 
     // Get Player info (name, color)
+    //
     QString getPlayerName() const { return m_playerName; }
     QString getPlayerColor() const { return m_playerColor; }
 
     // Set Game-play player names selected
+    //
     QString getPlayer1() const { return m_player1; }
     QString getPlayer2() const { return m_player2; }
 

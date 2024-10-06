@@ -7,10 +7,10 @@
  * \param parent The parent QObject.
  */
 GameLogic::GameLogic(QObject *parent)
-    : QObject{parent}, currentPlayer{"Player1"}, playerWon{false}, catsCradle{false}
+    : QObject{parent}, m_currentPlayer{"Player1"}, m_playerWon{false}, m_catsCradle{false}
 {
     // Initialize the ticTacToeBoard with open squares
-    ticTacToeBoard = {
+    m_ticTacToeBoard = {
         {"A1", false}, {"A2", false}, {"A3", false},
         {"B1", false}, {"B2", false}, {"B3", false},
         {"C1", false}, {"C2", false}, {"C3", false}
@@ -24,7 +24,7 @@ GameLogic::GameLogic(QObject *parent)
  */
 QString GameLogic::getCurrentPlayer() const
 {
-    return currentPlayer;
+    return m_currentPlayer;
 }
 
 /**
@@ -35,8 +35,8 @@ QString GameLogic::getCurrentPlayer() const
  */
 void GameLogic::setCurrentPlayer(const QString &newCurrentPlayer)
 {
-    currentPlayer = newCurrentPlayer;
-    emit playerChanged(currentPlayer);
+    m_currentPlayer = newCurrentPlayer;
+    emit playerChanged(m_currentPlayer);
 }
 
 /**
@@ -46,7 +46,7 @@ void GameLogic::setCurrentPlayer(const QString &newCurrentPlayer)
  */
 bool GameLogic::getPlayerWon() const
 {
-    return playerWon;
+    return m_playerWon;
 }
 
 /**
@@ -57,7 +57,7 @@ bool GameLogic::getPlayerWon() const
  */
 void GameLogic::setPlayerWon(bool won)
 {
-    playerWon = won;
+    m_playerWon = won;
     emit playerWonChanged(won);
 }
 
@@ -69,15 +69,15 @@ void GameLogic::setPlayerWon(bool won)
  */
 void GameLogic::checkPlayerTurn()
 {
-    if(currentPlayer == ""){
-        currentPlayer = "Player1";
+    if(m_currentPlayer == ""){
+        m_currentPlayer = "Player1";
     }
-    else if (currentPlayer == "Player1") {
-        currentPlayer = "Player2";
+    else if (m_currentPlayer == "Player1") {
+        m_currentPlayer = "Player2";
     } else {
-        currentPlayer = "Player1";
+        m_currentPlayer = "Player1";
     }
-    emit playerChanged(currentPlayer);
+    emit playerChanged(m_currentPlayer);
 }
 
 
@@ -88,7 +88,7 @@ void GameLogic::checkPlayerTurn()
  */
 QString GameLogic::getGameType() const
 {
-    return gameType;
+    return m_gameType;
 }
 
 
@@ -99,9 +99,9 @@ QString GameLogic::getGameType() const
  */
 void GameLogic::setGameType(const QString &newGameType)
 {
-    if (gameType != newGameType) {
-        gameType = newGameType;
-        emit gameTypeChanged(gameType);
+    if (m_gameType != newGameType) {
+        m_gameType = newGameType;
+        emit gameTypeChanged(m_gameType);
     }
 }
 
@@ -114,9 +114,9 @@ void GameLogic::checkForHorizontalWin()
 {
     const QStringList rows = {"A", "B", "C"};
     for (const auto& row : rows) {
-        if (ticTacToeBoard[row + "1"] && ticTacToeBoard[row + "2"] && ticTacToeBoard[row + "3"]) {
+        if (m_ticTacToeBoard[row + "1"] && m_ticTacToeBoard[row + "2"] && m_ticTacToeBoard[row + "3"]) {
             setPlayerWon(true);
-            emit gameWon(currentPlayer);
+            emit gameWon(m_currentPlayer);
             return;
         }
     }
@@ -131,9 +131,9 @@ void GameLogic::checkForVerticalWin()
 {
     const QStringList cols = {"1", "2", "3"};
     for (const auto& col : cols) {
-        if (ticTacToeBoard["A" + col] && ticTacToeBoard["B" + col] && ticTacToeBoard["C" + col]) {
+        if (m_ticTacToeBoard["A" + col] && m_ticTacToeBoard["B" + col] && m_ticTacToeBoard["C" + col]) {
             setPlayerWon(true);
-            emit gameWon(currentPlayer);
+            emit gameWon(m_currentPlayer);
             return;
         }
     }
@@ -146,10 +146,10 @@ void GameLogic::checkForVerticalWin()
  */
 void GameLogic::checkForDiagonalWin()
 {
-    if ((ticTacToeBoard["A1"] && ticTacToeBoard["B2"] && ticTacToeBoard["C3"]) ||
-        (ticTacToeBoard["A3"] && ticTacToeBoard["B2"] && ticTacToeBoard["C1"])) {
+    if ((m_ticTacToeBoard["A1"] && m_ticTacToeBoard["B2"] && m_ticTacToeBoard["C3"]) ||
+        (m_ticTacToeBoard["A3"] && m_ticTacToeBoard["B2"] && m_ticTacToeBoard["C1"])) {
         setPlayerWon(true);
-        emit gameWon(currentPlayer);
+        emit gameWon(m_currentPlayer);
     }
 }
 
@@ -161,7 +161,7 @@ void GameLogic::checkForDiagonalWin()
 void GameLogic::checkForCatsCradle()
 {
     bool allFilled = true;
-    for (const auto &cell : ticTacToeBoard) {
+    for (const auto &cell : m_ticTacToeBoard) {
         if (!cell) {
             allFilled = false;
             break;
@@ -179,9 +179,9 @@ void GameLogic::checkForCatsCradle()
  */
 void GameLogic::playerTwoTurn()
 {
-    if (currentPlayer == "Player2") {
+    if (m_currentPlayer == "Player2") {
         QStringList emptySquares;
-        for (auto it = ticTacToeBoard.begin(); it != ticTacToeBoard.end(); ++it) {
+        for (auto it = m_ticTacToeBoard.begin(); it != m_ticTacToeBoard.end(); ++it) {
             if (!it.value()) {
                 emptySquares.append(it.key());
             }
@@ -189,7 +189,7 @@ void GameLogic::playerTwoTurn()
         if (!emptySquares.isEmpty()) {
             int randomIndex = QRandomGenerator::global()->bounded(emptySquares.size());
             QString selectedSquare = emptySquares[randomIndex];
-            ticTacToeBoard[selectedSquare] = true;
+            m_ticTacToeBoard[selectedSquare] = true;
             checkForHorizontalWin();
             checkForVerticalWin();
             checkForDiagonalWin();
@@ -206,7 +206,7 @@ void GameLogic::playerTwoTurn()
  */
 void GameLogic::resetTicTacToeBoard()
 {
-    ticTacToeBoard = {
+    m_ticTacToeBoard = {
         {"A1", false}, {"A2", false}, {"A3", false},
         {"B1", false}, {"B2", false}, {"B3", false},
         {"C1", false}, {"C2", false}, {"C3", false}
@@ -239,25 +239,25 @@ void GameLogic::resetGameType()
 
 /**
  * \fn GameLogic::getCatsCradle()
- * \brief Returns member variable catsCradle.
- * \return bool - catsCradle
+ * \brief Returns member variable m_catsCradle.
+ * \return bool - m_catsCradle
  */
 bool GameLogic::getCatsCradle() const
 {
-    return catsCradle;
+    return m_catsCradle;
 }
 
 /**
  * \fn GameLogic::setCatsCradle()
- * \brief Sets the member variable catsCradle.
- * \param newCatsCradle The new value for catsCradle.
+ * \brief Sets the member variable m_catsCradle.
+ * \param newCatsCradle The new value for m_catsCradle.
  * \return void
  */
 void GameLogic::setCatsCradle(bool newCatsCradle)
 {
-    if (catsCradle == newCatsCradle)
+    if (m_catsCradle == newCatsCradle)
         return;
-    catsCradle = newCatsCradle;
+    m_catsCradle = newCatsCradle;
     emit catsCradleMatch();
 }
 
