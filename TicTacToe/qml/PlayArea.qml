@@ -30,14 +30,14 @@ Item {
     property alias row1Id: row1
     property alias row1Rect1ImgAlias: row1rect1Img
 
-    Component.onCompleted: {
-        gameType = gameLogic.getGameType()
-    }
-
     // Create an instance of GameLogic
     //
     GameLogic {
         id: gameLogic
+    }
+
+    Component.onCompleted: {
+        gameType = gameLogic.getGameType()
     }
 
     function getCurrentPlayer() {

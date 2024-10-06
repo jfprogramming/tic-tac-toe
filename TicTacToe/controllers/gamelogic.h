@@ -16,24 +16,25 @@ class GameLogic : public QObject
 public:
     explicit GameLogic(QObject *parent = nullptr);
 
+    // Setters and Getters
+    //
     QString getCurrentPlayer() const;
-    void setCurrentPlayer(const QString &newCurrentPlayer);
-
     bool getPlayerWon() const;
+
+    void setCurrentPlayer(const QString &newCurrentPlayer);
     void setPlayerWon(bool won);
 
-    QString getGameType() const;
-    void setGameType(const QString &newGameType);
-
-    // Exposed Functions to QML
+    // Win Logic Functions
     //
-    Q_INVOKABLE void checkPlayerTurn();
     Q_INVOKABLE void checkForHorizontalWin();
     Q_INVOKABLE void checkForVerticalWin();
     Q_INVOKABLE void checkForDiagonalWin();
     Q_INVOKABLE void checkForCatsCradle();
+
+    // Player turn functions
+    //
+    Q_INVOKABLE void checkPlayerTurn();
     Q_INVOKABLE void playerTwoTurn();
-    Q_INVOKABLE void checkGameType();
 
     // Reset functions
     //
@@ -41,7 +42,12 @@ public:
     Q_INVOKABLE void resetPlayerWon();
     Q_INVOKABLE void resetGameType();
 
-    bool getCatsCradle() const;
+    // Setters and Getters for QML
+    //
+    Q_INVOKABLE QString getGameType() const;
+    Q_INVOKABLE void setGameType(const QString &newGameType);
+
+    Q_INVOKABLE bool getCatsCradle() const;
 
 public slots:
     void setCatsCradle(bool newCatsCradle);
