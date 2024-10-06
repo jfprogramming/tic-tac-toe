@@ -8,7 +8,7 @@
  * \param parent The parent QObject.
  */
 GameLogic::GameLogic(QObject *parent)
-    : QObject{parent}, m_currentPlayer{""}, m_playerWon{false}, m_catsCradle{false}, m_gameType{""}
+    : QObject{parent}, m_currentPlayer{0}, m_playerWon{false}, m_catsCradle{false}, m_gameType{""}
 {
     qDebug() << __FUNCTION__ << "GameLogic constructor";
 
@@ -25,7 +25,7 @@ GameLogic::GameLogic(QObject *parent)
  * \brief Gets the current player.
  * \return The current player.
  */
-QString GameLogic::getCurrentPlayer() const
+int GameLogic::getCurrentPlayer() const
 {
     qDebug() << __FUNCTION__ << "current player:" << m_currentPlayer;
 
@@ -38,7 +38,7 @@ QString GameLogic::getCurrentPlayer() const
  * \param newCurrentPlayer The new current player.
  * \return void
  */
-void GameLogic::setCurrentPlayer(const QString &newCurrentPlayer)
+void GameLogic::setCurrentPlayer(int newCurrentPlayer)
 {
     qDebug() << __FUNCTION__ << "current player:" << m_currentPlayer << "new player:" << newCurrentPlayer;
 
@@ -82,14 +82,14 @@ void GameLogic::checkPlayerTurn()
 {
     qDebug() << __FUNCTION__ << "Checking player turn" << m_currentPlayer;
 
-    if(m_currentPlayer == ""){
-        m_currentPlayer = "Player1";
+    if(m_currentPlayer == 0){
+        m_currentPlayer = 1;
     }
-    else if (m_currentPlayer == "Player1") {
-        m_currentPlayer = "Player2";
+    else if (m_currentPlayer == 1) {
+        m_currentPlayer = 2;
     }
-    else if (m_currentPlayer == "Player2") {
-        m_currentPlayer = "Player1";
+    else if (m_currentPlayer == 2) {
+        m_currentPlayer = 1;
     }
     else{
         qWarning() << "Invalid player";
@@ -211,7 +211,7 @@ void GameLogic::playerTwoTurn()
 {
     qDebug() << __FUNCTION__ << "Player two turn";
 
-    if (m_currentPlayer == "Player2") {
+    if (m_currentPlayer == 2) {
         QStringList emptySquares;
         for (auto it = m_ticTacToeBoard.begin(); it != m_ticTacToeBoard.end(); ++it) {
             if (!it.value()) {
@@ -245,7 +245,7 @@ void GameLogic::resetTicTacToeBoard()
         {"B1", false}, {"B2", false}, {"B3", false},
         {"C1", false}, {"C2", false}, {"C3", false}
     };
-    setCurrentPlayer("Player1");
+    setCurrentPlayer(0);
     setPlayerWon(false);
     resetCatsCradle();
 }

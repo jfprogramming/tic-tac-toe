@@ -8,7 +8,7 @@ class GameLogic : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString currentPlayer READ getCurrentPlayer WRITE setCurrentPlayer NOTIFY playerChanged)
+    Q_PROPERTY(int currentPlayer READ getCurrentPlayer WRITE setCurrentPlayer NOTIFY playerChanged)
     Q_PROPERTY(bool playerWon READ getPlayerWon WRITE setPlayerWon NOTIFY playerWonChanged)
     Q_PROPERTY(bool catsCradle READ getCatsCradle WRITE setCatsCradle RESET resetCatsCradle NOTIFY catsCradleMatch FINAL)
     Q_PROPERTY(QString gameType READ getGameType WRITE setGameType NOTIFY gameTypeChanged)
@@ -18,10 +18,10 @@ public:
 
     // Setters and Getters
     //
-    QString getCurrentPlayer() const;
+    int getCurrentPlayer() const;
     bool getPlayerWon() const;
 
-    void setCurrentPlayer(const QString &newCurrentPlayer);
+    void setCurrentPlayer(int newCurrentPlayer);
     void setPlayerWon(bool won);
 
     QString getGameType() const;
@@ -60,7 +60,7 @@ signals:
 
 
 private:
-    QString m_currentPlayer;
+    int m_currentPlayer;
     bool m_playerWon;
     bool m_catsCradle;
     QString m_gameType;

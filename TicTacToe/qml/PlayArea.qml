@@ -9,7 +9,7 @@ Item {
     property string player1: "player1"
     property string player2: "player2"
 
-    property string currentPlayer: ""
+    property int currentPlayer: 0
     property bool playerWon: false
 
     property int p1Score: 0
@@ -33,14 +33,12 @@ Item {
     function update(){
         gameMode = gameLogic.gameType
         playerWon = gameLogic.playerWon
-
-        if(currentPlayer != gameLogic.currentPlayer && gameMode == "2Player" && !playerWon){
-            curentPlayer = getCurrentPlayer()
-            nextPlayerPopup.open()
+        var player = getCurrentPlayer()
+        if(player == "player1"){
+            currentPlayer = 1
         }
-        if(playerWon){
-            gameWonPopup.text = gameLogic.winner + " wins!"
-            gameWonPopup.open()
+        else if(player == "player1"){
+            currentPlayer = 2
         }
     }
 
@@ -54,7 +52,7 @@ Item {
     Component.onCompleted: {
         update();
         console.log("gameMode:" + gameMode);
-        //checkPlayerTurn()
+        checkPlayerTurn()
     }
 
     // Display popup message for the next player
@@ -169,7 +167,7 @@ Item {
                 //
                 if(!checkForHorizontalWin()
                         && !checkForVerticalWin()
-                        && !checkFordiagonalWin()){
+                        && !checkForDiagonalWin()){
                     // if no winner check for a Tie Game
                     checkForCatsCradle()
                 }
@@ -180,7 +178,7 @@ Item {
         }
         else{
             console.log("not your turn computer... wait your turn!")
-            gameLogic.playerTwoIconTurn()
+            gameLogic.playerTwoTurn()
             checkForHorizontalWin()
             checkForVerticalWin()
             checkForDiagonalWin()
@@ -199,7 +197,7 @@ Item {
         interval: 1000 // 1 second
         onTriggered: {
             console.log("timer triggered...")
-            playerTwoTurn() // Call playerTwoIconTurn after the delay
+            playerTwoTurn() // Call playerTwoTurn after the delay
         }
     }
 
