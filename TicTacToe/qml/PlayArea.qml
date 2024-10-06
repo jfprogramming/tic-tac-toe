@@ -176,9 +176,6 @@ Item {
             p2Score = p2Score + 1
             playerModel.player2Score = p2Score
         }
-
-
-
         gameWonPopup.open()
     }
 
