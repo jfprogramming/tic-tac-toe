@@ -19,7 +19,7 @@ Item {
 
     // Set the game type to 1Player or 2Player
     //
-    property string gameType: ""
+    property string uiGameType: ""
 
     // Create an array to store item IDs
     //
@@ -35,13 +35,13 @@ Item {
     GameLogic {
         id: gameLogic
         onPlayerChanged: {
-            if(gameType == "2Player"){
+            if(uiGameType == "2Player"){
                 nextPlayerPopup.open()
             }
         }
         onGameTypeChanged: {
-            gameType = gameLogic.gameType
-            console.log("Game type changed to: " + gameType)
+            uiGameType = gameLogic.gameType
+            console.log("Game type changed to: " + uiGameType)
         }
         onGameWon: {
             gameWonPopup.text = winner + " wins!";
@@ -50,7 +50,7 @@ Item {
     }
 
     Component.onCompleted: {
-        console.log("gameType:" + gameType);
+        console.log("uiGameType:" + uiGameType);
         checkPlayerTurn()
     }
 
@@ -128,7 +128,7 @@ Item {
         var selectedSquare = null
         const emptySquares = []
 
-        if (gameType == "1Player" && currentPlayer == 2) {
+        if (uiGameType == "1Player" && currentPlayer == 2) {
             // find the empty squars
             //
             for (const item of itemIds) {
@@ -267,7 +267,7 @@ Item {
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
                                     && !checkForDiagonalWin()
-                                    && gameType  == "1Player"){
+                                    && uiGameType  == "1Player"){
                                 // Start the timer after the click
                                 //
                                 delayTimer.start()
@@ -304,7 +304,7 @@ Item {
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
                                     && !checkForDiagonalWin()
-                                    && gameType  == "1Player"){
+                                    && uiGameType  == "1Player"){
                                 // Start the timer after the click
                                 //
                                 delayTimer.start()
@@ -341,7 +341,7 @@ Item {
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
                                     && !checkForDiagonalWin()
-                                    && gameType  == "1Player"){
+                                    && uiGameType  == "1Player"){
                                 // Start the timer after the click
                                 //
                                 delayTimer.start()
@@ -387,7 +387,7 @@ Item {
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
                                     && !checkForDiagonalWin()
-                                    && gameType  == "1Player"){
+                                    && uiGameType  == "1Player"){
                                 // Start the timer after the click
                                 //
                                 delayTimer.start()
@@ -424,7 +424,7 @@ Item {
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
                                     && !checkForDiagonalWin()
-                                    && gameType  == "1Player"){
+                                    && uiGameType  == "1Player"){
                                 // Start the timer after the click
                                 //
                                 delayTimer.start()
@@ -461,7 +461,7 @@ Item {
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
                                     && !checkForDiagonalWin()
-                                    && gameType  == "1Player"){
+                                    && uiGameType  == "1Player"){
                                 // Start the timer after the click
                                 //
                                 delayTimer.start()
@@ -508,7 +508,7 @@ Item {
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
                                     && !checkForDiagonalWin()
-                                    && gameType  == "1Player"){
+                                    && uiGameType  == "1Player"){
                                 // Start the timer after the click
                                 //
                                 delayTimer.start()
@@ -545,7 +545,7 @@ Item {
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
                                     && !checkForDiagonalWin()
-                                    && gameType  == "1Player"){
+                                    && uiGameType  == "1Player"){
                                 // Start the timer after the click
                                 //
                                 delayTimer.start()
@@ -582,7 +582,7 @@ Item {
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
                                     && !checkForDiagonalWin()
-                                    && gameType  == "1Player"){
+                                    && uiGameType  == "1Player"){
                                 // Start the timer after the click
                                 //
                                 delayTimer.start()

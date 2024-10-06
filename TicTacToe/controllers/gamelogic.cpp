@@ -1,4 +1,5 @@
 #include "gamelogic.h"
+#include "qdebug.h"
 #include <QRandomGenerator>
 
 /**
@@ -9,6 +10,8 @@
 GameLogic::GameLogic(QObject *parent)
     : QObject{parent}, m_currentPlayer{"Player1"}, m_playerWon{false}, m_catsCradle{false}
 {
+    qDebug() << __FUNCTION__ << "GameLogic constructor";
+
     // Initialize the ticTacToeBoard with open squares
     m_ticTacToeBoard = {
         {"A1", false}, {"A2", false}, {"A3", false},
@@ -24,6 +27,8 @@ GameLogic::GameLogic(QObject *parent)
  */
 QString GameLogic::getCurrentPlayer() const
 {
+    qDebug() << __FUNCTION__ << "current player:" << m_currentPlayer;
+
     return m_currentPlayer;
 }
 
@@ -35,6 +40,8 @@ QString GameLogic::getCurrentPlayer() const
  */
 void GameLogic::setCurrentPlayer(const QString &newCurrentPlayer)
 {
+    qDebug() << __FUNCTION__ << "current player:" << m_currentPlayer << "new player:" << newCurrentPlayer;
+
     m_currentPlayer = newCurrentPlayer;
     emit playerChanged();
 }
@@ -46,6 +53,8 @@ void GameLogic::setCurrentPlayer(const QString &newCurrentPlayer)
  */
 bool GameLogic::getPlayerWon() const
 {
+    qDebug() << __FUNCTION__ << "get player won:" << m_playerWon;
+
     return m_playerWon;
 }
 
@@ -57,6 +66,8 @@ bool GameLogic::getPlayerWon() const
  */
 void GameLogic::setPlayerWon(bool won)
 {
+    qDebug() << __FUNCTION__ << "player: " << m_currentPlayer << " won:" << won;
+
     m_playerWon = won;
     emit playerWonChanged();
 }
@@ -69,6 +80,8 @@ void GameLogic::setPlayerWon(bool won)
  */
 void GameLogic::checkPlayerTurn()
 {
+    qDebug() << __FUNCTION__ << "Checking player turn";
+
     if(m_currentPlayer == ""){
         m_currentPlayer = "Player1";
     }
@@ -88,6 +101,8 @@ void GameLogic::checkPlayerTurn()
  */
 QString GameLogic::getGameType() const
 {
+    qDebug() << __FUNCTION__ << "game type:" << m_gameType;
+
     return m_gameType;
 }
 
@@ -99,6 +114,8 @@ QString GameLogic::getGameType() const
  */
 void GameLogic::setGameType(const QString &newGameType)
 {
+    qDebug() << __FUNCTION__ << "new game type: " << newGameType;
+
     if (m_gameType != newGameType) {
         m_gameType = newGameType;
         emit gameTypeChanged();
@@ -112,6 +129,8 @@ void GameLogic::setGameType(const QString &newGameType)
  */
 void GameLogic::checkForHorizontalWin()
 {
+    qDebug() << __FUNCTION__ << "Checking for Horizontal Win";
+
     const QStringList rows = {"A", "B", "C"};
     for (const auto& row : rows) {
         if (m_ticTacToeBoard[row + "1"] && m_ticTacToeBoard[row + "2"] && m_ticTacToeBoard[row + "3"]) {
@@ -129,6 +148,8 @@ void GameLogic::checkForHorizontalWin()
  */
 void GameLogic::checkForVerticalWin()
 {
+    qDebug() << __FUNCTION__ << "Checking for Vertical Win";
+
     const QStringList cols = {"1", "2", "3"};
     for (const auto& col : cols) {
         if (m_ticTacToeBoard["A" + col] && m_ticTacToeBoard["B" + col] && m_ticTacToeBoard["C" + col]) {
@@ -146,6 +167,8 @@ void GameLogic::checkForVerticalWin()
  */
 void GameLogic::checkForDiagonalWin()
 {
+    qDebug() << __FUNCTION__ << "Checking for Diagonal Win";
+
     if ((m_ticTacToeBoard["A1"] && m_ticTacToeBoard["B2"] && m_ticTacToeBoard["C3"]) ||
         (m_ticTacToeBoard["A3"] && m_ticTacToeBoard["B2"] && m_ticTacToeBoard["C1"])) {
         setPlayerWon(true);
@@ -160,6 +183,8 @@ void GameLogic::checkForDiagonalWin()
  */
 void GameLogic::checkForCatsCradle()
 {
+    qDebug() << __FUNCTION__ << "Checking for Cats Cradle";
+
     bool allFilled = true;
     for (const auto &cell : m_ticTacToeBoard) {
         if (!cell) {
@@ -179,6 +204,8 @@ void GameLogic::checkForCatsCradle()
  */
 void GameLogic::playerTwoTurn()
 {
+    qDebug() << __FUNCTION__ << "Player two turn";
+
     if (m_currentPlayer == "Player2") {
         QStringList emptySquares;
         for (auto it = m_ticTacToeBoard.begin(); it != m_ticTacToeBoard.end(); ++it) {
@@ -206,6 +233,8 @@ void GameLogic::playerTwoTurn()
  */
 void GameLogic::resetTicTacToeBoard()
 {
+    qDebug() << __FUNCTION__ << "Resetting Tic Tac Toe Board";
+
     m_ticTacToeBoard = {
         {"A1", false}, {"A2", false}, {"A3", false},
         {"B1", false}, {"B2", false}, {"B3", false},
@@ -223,6 +252,8 @@ void GameLogic::resetTicTacToeBoard()
  */
 void GameLogic::resetPlayerWon()
 {
+    qDebug() << __FUNCTION__ << "Resetting player won";
+
     setPlayerWon(false);
 }
 
@@ -234,6 +265,8 @@ void GameLogic::resetPlayerWon()
  */
 void GameLogic::resetGameType()
 {
+    qDebug() << __FUNCTION__ << "Resetting game type";
+
     setGameType("");
 }
 
@@ -244,6 +277,8 @@ void GameLogic::resetGameType()
  */
 bool GameLogic::getCatsCradle() const
 {
+    qDebug() << __FUNCTION__ << "cats cradle:" << m_catsCradle;
+
     return m_catsCradle;
 }
 
@@ -255,6 +290,8 @@ bool GameLogic::getCatsCradle() const
  */
 void GameLogic::setCatsCradle(bool newCatsCradle)
 {
+    qDebug() << __FUNCTION__ << "cats cradle:" << m_catsCradle << "new cats cradle:" << newCatsCradle;
+
     if (m_catsCradle == newCatsCradle)
         return;
     m_catsCradle = newCatsCradle;
@@ -268,5 +305,7 @@ void GameLogic::setCatsCradle(bool newCatsCradle)
  */
 void GameLogic::resetCatsCradle()
 {
+    qDebug() << __FUNCTION__ << "Resetting Cats Cradle";
+
     setCatsCradle(false);
 }

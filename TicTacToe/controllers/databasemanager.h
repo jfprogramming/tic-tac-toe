@@ -20,7 +20,6 @@ public:
     ~DatabaseManager();
 
     bool initializeDatabase();
-    void performDatabaseOperations();
     void closeDatabase();
 
     // Player Management

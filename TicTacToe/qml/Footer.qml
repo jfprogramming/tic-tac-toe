@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
+import GameLogic 1.0
 
 Rectangle{
     id: footer
@@ -21,6 +22,10 @@ Rectangle{
     property alias backBtn: backButton
     property alias backBtnTxt: backButton.text
     property alias backIcon: backButton.icon.source
+
+    GameLogic {
+        id: gameLogic
+    }
 
     Rectangle{
         id: copyRight

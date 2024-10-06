@@ -14,6 +14,8 @@
  */
 DatabaseManager::DatabaseManager(QThread* home, QObject* parent) : QObject(parent)
 {
+    qDebug() << __FUNCTION__ << "DatabaseManager constructor";
+
     m_isDatabaseInitialized = false;
 }
 
@@ -23,6 +25,8 @@ DatabaseManager::DatabaseManager(QThread* home, QObject* parent) : QObject(paren
  * \brief Destructor for DatabaseManager.
  */
 DatabaseManager::~DatabaseManager(){
+    qDebug() << __FUNCTION__ << "DatabaseManager destructor";
+
     closeDatabase();
 }
 
@@ -51,7 +55,7 @@ bool DatabaseManager::initializeDatabase()
         return false;
     } else {
         // Set the flag to true after successful initialization
-        // m_isDatabaseInitialized = true;
+        m_isDatabaseInitialized = true;
         return true;
     }
 }
@@ -64,6 +68,8 @@ bool DatabaseManager::initializeDatabase()
  */
 void DatabaseManager::closeDatabase()
 {
+    qDebug() << __FUNCTION__ << "Closing database...";
+
     m_isDatabaseInitialized = false;
     QSqlDatabase::database().close();
 }
@@ -75,7 +81,10 @@ void DatabaseManager::closeDatabase()
  * \param int score
  * \return bool.
  */
-void DatabaseManager::fetchPlayerId(const QString &playerName) {
+void DatabaseManager::fetchPlayerId(const QString &playerName)
+{
+    qDebug() << __FUNCTION__ << "Fetching player ID for player:" << playerName;
+
     QSqlQuery query;
     query.prepare("SELECT playerId FROM PlayerTable WHERE playerName = :playerName");
     query.bindValue(":playerName", playerName);
@@ -93,7 +102,10 @@ void DatabaseManager::fetchPlayerId(const QString &playerName) {
  * \param int score
  * \return bool.
  */
-bool DatabaseManager::setPlayerHighScoreValue(int playerId, int score) {
+bool DatabaseManager::setPlayerHighScoreValue(int playerId, int score)
+{
+    qDebug() << __FUNCTION__ << "Setting high score for player:" << playerId << " score:" << score;
+
     QSqlQuery query;
     query.prepare("INSERT INTO HighScoreTable (playerId, highScore) VALUES (:playerId, :score)");
     query.bindValue(":playerId", playerId);
@@ -113,6 +125,8 @@ bool DatabaseManager::setPlayerHighScoreValue(int playerId, int score) {
  */
 bool DatabaseManager::updatePlayerHighScore(const QString &playerName, int score)
 {
+    qDebug() << __FUNCTION__ << "Updating high score for player:" << playerName << " score:" << score;
+
     QSqlQuery query;
     query.prepare("UPDATE PlayerTable SET highScore = highScore + :score WHERE playerName = :playerName");
     query.bindValue(":score", score);
@@ -131,6 +145,8 @@ bool DatabaseManager::updatePlayerHighScore(const QString &playerName, int score
  * \return A QList of high scores.
  */
 QList<int> DatabaseManager::getHighScoreList(){
+    qDebug() << __FUNCTION__ << "Fetching high score list...";
+
     QList<int> highScores;
 
     QSqlQuery query("SELECT highScore FROM HighScoreTable");
@@ -150,6 +166,8 @@ QList<int> DatabaseManager::getHighScoreList(){
  */
 QString DatabaseManager::getAdminUsername()
 {
+    qDebug() << __FUNCTION__ << "Fetching admin username...";
+
     QSqlQuery query;
     query.prepare("SELECT adminName FROM AdminTable");
     if (query.exec() && query.next())
@@ -166,6 +184,8 @@ QString DatabaseManager::getAdminUsername()
  */
 QString DatabaseManager::getDecryptedAdminPassword()
 {
+    qDebug() << __FUNCTION__ << "Fetching and decrypting admin password...";
+
     QString decryptedPassword;
     QSqlQuery query;
     query.prepare("SELECT adminPassword FROM AdminTable");
@@ -190,7 +210,10 @@ QString DatabaseManager::getDecryptedAdminPassword()
  * \param  password The admin password.
  * \return True if authentication is successful, false otherwise.
  */
-bool DatabaseManager::authenticateAdmin(const QString &username, const QString &password) {
+bool DatabaseManager::authenticateAdmin(const QString &username, const QString &password)
+{
+    qDebug() << __FUNCTION__ << "Authenticating admin...";
+
     QSqlQuery query;
     QString   adminName;
     QString   adminPassword;
@@ -237,6 +260,8 @@ bool DatabaseManager::authenticateAdmin(const QString &username, const QString &
  */
 int DatabaseManager::playerId() const
 {
+    qDebug() << __FUNCTION__ << "current player id:" << m_playerId;
+
     return m_playerId;
 }
 
@@ -247,6 +272,8 @@ int DatabaseManager::playerId() const
  */
 void DatabaseManager::setPlayerOneId(int playerOneId)
 {
+    qDebug() << __FUNCTION__ << "Setting player id:" << playerOneId;
+
     m_playerId = playerOneId;
 }
 
@@ -257,34 +284,11 @@ void DatabaseManager::setPlayerOneId(int playerOneId)
  */
 void DatabaseManager::setPlayerTwoId(int playerTwoId)
 {
+    qDebug() << __FUNCTION__ << "Setting player id:" << playerTwoId;
+
     m_playerId = playerTwoId;
 }
 
-
-/**
- * \fn     DatabaseManager::performDatabaseOperations
- * \brief  generic database operation place holder
- * \return void
- */
-void DatabaseManager::performDatabaseOperations()
-{
-    // TODO: fill in when needed.
-    //
-    QSqlQuery query;
-    if (query.exec("SELECT * FROM PlayerTable"))
-    {
-        while (query.next())
-        {
-            QString value = query.value("column_name").toString();
-            // Process the retrieved data (e.g., display it or use it in your application)
-        }
-    }
-    else
-    {
-        qDebug() << "Error executing query:" << query.lastError().text();
-        // Handle the query error
-    }
-}
 
 /**
  * \fn     DatabaseManager::getPlayerName
@@ -294,6 +298,8 @@ void DatabaseManager::performDatabaseOperations()
  */
 QString DatabaseManager::getPlayerName(int playerId)
 {
+    qDebug() << __FUNCTION__ << "Fetching player name for player:" << playerId;
+
     QSqlQuery query;
     query.prepare("SELECT palyerName FROM PlayerTable WHERE playerId = :id");
     query.bindValue(":playerId", playerId);
@@ -312,6 +318,8 @@ QString DatabaseManager::getPlayerName(int playerId)
  */
 QString DatabaseManager::getPlayerColor(QString &color)
 {
+    qDebug() << __FUNCTION__ << "Fetching player color for player:" << color;
+
     QSqlQuery query;
     query.prepare("SELECT playerColor FROM PlayerTable WHERE userId = :id");
     query.bindValue(":color", color);
@@ -330,6 +338,8 @@ QString DatabaseManager::getPlayerColor(QString &color)
  */
 QString DatabaseManager::getUserSelectedOption(int userId)
 {
+    qDebug() << __FUNCTION__ << "Fetching user selected option for user:" << userId;
+
     QSqlQuery query;
     query.prepare("SELECT userSelectedOption FROM UserTable WHERE userId = :id");
     query.bindValue(":id", userId);
@@ -349,6 +359,8 @@ QString DatabaseManager::getUserSelectedOption(int userId)
  */
 bool DatabaseManager::setPlayerName(int playerId, QString &newName)
 {
+    qDebug() << __FUNCTION__ << "Setting player name for player:" << playerId << " new name:" << newName;
+
     QSqlQuery query;
 
     if(playerId == 1){
@@ -374,6 +386,8 @@ bool DatabaseManager::setPlayerName(int playerId, QString &newName)
  */
 bool DatabaseManager::setPlayerColor(int playerId, QString &color)
 {
+    qDebug() << __FUNCTION__ << "Setting player color for player:" << playerId << " new color:" << color;
+
     QSqlQuery query;
 
     if(playerId ==1){
@@ -400,6 +414,8 @@ bool DatabaseManager::setPlayerColor(int playerId, QString &color)
  */
 bool DatabaseManager::createNewPlayer(const QString &playerName, const QString &playerColor)
 {
+    qDebug() << __FUNCTION__ << "Creating new player:" << playerName << " color:" << playerColor;
+
     QSqlQuery query;
     query.prepare("SELECT playerId FROM PlayerTable WHERE playerName = :playerName");
     query.bindValue(":playerName", playerName);
@@ -425,6 +441,8 @@ bool DatabaseManager::createNewPlayer(const QString &playerName, const QString &
 
 
 QMap<QString, QString> DatabaseManager::getPlayerByName(const QString &name) {
+    qDebug() << __FUNCTION__ << "Fetching player by name:" << name;
+
     QSqlQuery query;
     query.prepare("SELECT playerName, playerColor FROM PlayerTable WHERE playerName = :name");
     query.bindValue(":name", name);
