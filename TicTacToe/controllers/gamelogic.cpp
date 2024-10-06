@@ -114,11 +114,12 @@ QString GameLogic::getGameType() const
  */
 void GameLogic::setGameType(const QString &newGameType)
 {
-    qDebug() << __FUNCTION__ << "new game type: " << newGameType;
+    qDebug() << __FUNCTION__ << "1 - new game type: " << newGameType;
 
     if (m_gameType != newGameType) {
         m_gameType = newGameType;
         emit gameTypeChanged();
+        qDebug() << "2 - setGameType new game type: " << m_gameType;
     }
 }
 

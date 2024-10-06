@@ -19,7 +19,7 @@ Item {
 
     // Set the game type to 1Player or 2Player
     //
-    property string uiGameType: ""
+    property string gameMode: ""
 
     // Create an array to store item IDs
     //
@@ -30,18 +30,21 @@ Item {
     property alias row1Id: row1
     property alias row1Rect1ImgAlias: row1rect1Img
 
+    // Reference the gameLogic instance
+    property var gameLogic
+
     // Create an instance of GameLogic
     //
     GameLogic {
         id: gameLogic
         onPlayerChanged: {
-            if(uiGameType == "2Player"){
+            if(gameMode == "2Player"){
                 nextPlayerPopup.open()
             }
         }
         onGameTypeChanged: {
-            uiGameType = gameLogic.gameType
-            console.log("Game type changed to: " + uiGameType)
+            gameMode = gameLogic.gameType
+            console.log("Game type changed to: " + gameMode)
         }
         onGameWon: {
             gameWonPopup.text = winner + " wins!";
@@ -50,7 +53,7 @@ Item {
     }
 
     Component.onCompleted: {
-        console.log("uiGameType:" + uiGameType);
+        console.log("gameMode:" + gameMode);
         checkPlayerTurn()
     }
 
@@ -74,7 +77,8 @@ Item {
     }
 
 
-
+    // JavaScript Functions interface with C++ GameLogic
+    //
     function getCurrentPlayer() {
         return gameLogic.currentPlayer
     }
@@ -141,7 +145,7 @@ Item {
         var selectedSquare = null
         const emptySquares = []
 
-        if (uiGameType == "1Player" && currentPlayer == 2) {
+        if (gameMode == "1Player" && currentPlayer == 2) {
             // find the empty squars
             //
             for (const item of itemIds) {
@@ -280,7 +284,7 @@ Item {
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
                                     && !checkForDiagonalWin()
-                                    && uiGameType  == "1Player"){
+                                    && gameMode  == "1Player"){
                                 // Start the timer after the click
                                 //
                                 delayTimer.start()
@@ -317,7 +321,7 @@ Item {
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
                                     && !checkForDiagonalWin()
-                                    && uiGameType  == "1Player"){
+                                    && gameMode  == "1Player"){
                                 // Start the timer after the click
                                 //
                                 delayTimer.start()
@@ -354,7 +358,7 @@ Item {
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
                                     && !checkForDiagonalWin()
-                                    && uiGameType  == "1Player"){
+                                    && gameMode  == "1Player"){
                                 // Start the timer after the click
                                 //
                                 delayTimer.start()
@@ -400,7 +404,7 @@ Item {
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
                                     && !checkForDiagonalWin()
-                                    && uiGameType  == "1Player"){
+                                    && gameMode  == "1Player"){
                                 // Start the timer after the click
                                 //
                                 delayTimer.start()
@@ -437,7 +441,7 @@ Item {
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
                                     && !checkForDiagonalWin()
-                                    && uiGameType  == "1Player"){
+                                    && gameMode  == "1Player"){
                                 // Start the timer after the click
                                 //
                                 delayTimer.start()
@@ -474,7 +478,7 @@ Item {
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
                                     && !checkForDiagonalWin()
-                                    && uiGameType  == "1Player"){
+                                    && gameMode  == "1Player"){
                                 // Start the timer after the click
                                 //
                                 delayTimer.start()
@@ -521,7 +525,7 @@ Item {
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
                                     && !checkForDiagonalWin()
-                                    && uiGameType  == "1Player"){
+                                    && gameMode  == "1Player"){
                                 // Start the timer after the click
                                 //
                                 delayTimer.start()
@@ -558,7 +562,7 @@ Item {
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
                                     && !checkForDiagonalWin()
-                                    && uiGameType  == "1Player"){
+                                    && gameMode  == "1Player"){
                                 // Start the timer after the click
                                 //
                                 delayTimer.start()
@@ -595,7 +599,7 @@ Item {
                             if(!checkForHorizontalWin()
                                     && !checkForVerticalWin()
                                     && !checkForDiagonalWin()
-                                    && uiGameType  == "1Player"){
+                                    && gameMode  == "1Player"){
                                 // Start the timer after the click
                                 //
                                 delayTimer.start()

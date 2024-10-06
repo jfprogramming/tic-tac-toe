@@ -23,9 +23,8 @@ Rectangle{
     property alias backBtnTxt: backButton.text
     property alias backIcon: backButton.icon.source
 
-    // GameLogic {
-    //     id: gameLogic
-    // }
+    // Reference the gameLogic instance
+    property var gameLogic
 
     Rectangle{
         id: copyRight
