@@ -9,8 +9,12 @@
 GameLogic::GameLogic(QObject *parent)
     : QObject{parent}, currentPlayer{"Player1"}, playerWon{false}
 {
-    // Initialize the board with empty strings
-    board.fill("", 9);
+    // Initialize the ticTacToeBoard with open squares
+    ticTacToeBoard = {
+        {"A1", false}, {"A2", false}, {"A3", false},
+        {"B1", false}, {"B2", false}, {"B3", false},
+        {"C1", false}, {"C2", false}, {"C3", false}
+    };
 }
 
 /**
@@ -83,8 +87,14 @@ void GameLogic::checkPlayerTurn()
  */
 void GameLogic::checkForHorizontalWin()
 {
-    // Implement horizontal win logic
-    // If there is a win, call setPlayerWon(true) and emit gameWon(currentPlayer)
+    const QStringList rows = {"A", "B", "C"};
+    for (const auto& row : rows) {
+        if (ticTacToeBoard[row + "1"] && ticTacToeBoard[row + "2"] && ticTacToeBoard[row + "3"]) {
+            setPlayerWon(true);
+            emit gameWon(currentPlayer);
+            return;
+        }
+    }
 }
 
 
@@ -95,8 +105,14 @@ void GameLogic::checkForHorizontalWin()
  */
 void GameLogic::checkForVerticalWin()
 {
-    // Implement vertical win logic
-    // If there is a win, call setPlayerWon(true) and emit gameWon(currentPlayer)
+    const QStringList cols = {"1", "2", "3"};
+    for (const auto& col : cols) {
+        if (ticTacToeBoard["A" + col] && ticTacToeBoard["B" + col] && ticTacToeBoard["C" + col]) {
+            setPlayerWon(true);
+            emit gameWon(currentPlayer);
+            return;
+        }
+    }
 }
 
 
@@ -107,8 +123,11 @@ void GameLogic::checkForVerticalWin()
  */
 void GameLogic::checkForDiagonalWin()
 {
-    // Implement diagonal win logic
-    // If there is a win, call setPlayerWon(true) and emit gameWon(currentPlayer)
+    if ((ticTacToeBoard["A1"] && ticTacToeBoard["B2"] && ticTacToeBoard["C3"]) ||
+        (ticTacToeBoard["A3"] && ticTacToeBoard["B2"] && ticTacToeBoard["C1"])) {
+        setPlayerWon(true);
+        emit gameWon(currentPlayer);
+    }
 }
 
 
@@ -120,14 +139,14 @@ void GameLogic::checkForDiagonalWin()
 void GameLogic::checkForCatsCradle()
 {
     bool allFilled = true;
-    for (const auto &cell : board) {
+    for (const auto &cell : ticTacToeBoard) {
         if (cell.isEmpty()) {
             allFilled = false;
             break;
         }
     }
     if (allFilled) {
-        // Handle the CatsCradle scenario
+        emit catsCradleMatch();
     }
 }
 
@@ -141,15 +160,15 @@ void GameLogic::playerTwoIconTurn()
 {
     if (currentPlayer == "Player2") {
         QVector<int> emptySquares;
-        for (int i = 0; i < board.size(); ++i) {
-            if (board[i].isEmpty()) {
+        for (int i = 0; i < ticTacToeBoard.size(); ++i) {
+            if (ticTacToeBoard[i].isEmpty()) {
                 emptySquares.append(i);
             }
         }
         if (!emptySquares.isEmpty()) {
             int randomIndex = QRandomGenerator::global()->bounded(emptySquares.size());
             int selectedSquare = emptySquares[randomIndex];
-            board[selectedSquare] = "Player2";
+            ticTacToeBoard[selectedSquare] = "Player2";
             checkForHorizontalWin();
             checkForVerticalWin();
             checkForDiagonalWin();
@@ -166,7 +185,7 @@ void GameLogic::playerTwoIconTurn()
  */
 void GameLogic::resetGame()
 {
-    board.fill("");
+    ticTacToeBoard.fill("");
     setCurrentPlayer("Player1");
     setPlayerWon(false);
 }

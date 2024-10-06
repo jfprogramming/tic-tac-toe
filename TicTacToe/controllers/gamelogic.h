@@ -2,6 +2,7 @@
 #include <QObject>
 #include <QString>
 #include <QVector>
+#include <QMap>
 
 class GameLogic : public QObject
 {
@@ -9,7 +10,7 @@ class GameLogic : public QObject
 
     Q_PROPERTY(QString currentPlayer READ getCurrentPlayer WRITE setCurrentPlayer NOTIFY playerChanged)
     Q_PROPERTY(bool playerWon READ getPlayerWon WRITE setPlayerWon NOTIFY playerWonChanged)
-    Q_PROPERTY(bool catsCradle READ getCatsCradle WRITE setCatsCradle RESET resetCatsCradle NOTIFY catsCradleChanged FINAL)
+    Q_PROPERTY(bool catsCradle READ getCatsCradle WRITE setCatsCradle RESET resetCatsCradle NOTIFY catsCradleMatch FINAL)
 
 public:
     explicit GameLogic(QObject *parent = nullptr);
@@ -40,13 +41,12 @@ signals:
     void playerChanged(const QString &player);
     void playerWonChanged(bool won);
     void gameWon(const QString &winner);
-
-    void catsCradleChanged();
+    void catsCradleMatch();
 
 private:
     QString currentPlayer;
     bool playerWon=false;
     bool catsCradle=false;
-    QVector<QString> board;
+    QMap<QString, bool> ticTacToeBoard;
 
 };
