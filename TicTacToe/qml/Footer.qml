@@ -23,9 +23,9 @@ Rectangle{
     property alias backBtnTxt: backButton.text
     property alias backIcon: backButton.icon.source
 
-    GameLogic {
-        id: gameLogic
-    }
+    // GameLogic {
+    //     id: gameLogic
+    // }
 
     Rectangle{
         id: copyRight

@@ -56,8 +56,21 @@ Item {
 
     // Display popup message for the next player
     //
-    PopupMsg{
+    Popup {
         id: nextPlayerPopup
+        modal: true
+        Text {
+            text: "Next turn: " + gameLogic.current_player
+        }
+    }
+
+    Popup {
+        id: gameWonPopup
+        modal: true
+        Text {
+            id: gameWonText
+            //text: gameLogic.current_player + " Won"
+        }
     }
 
 

@@ -8,8 +8,7 @@ Rectangle {
     anchors.top: parent.top
     height: 50
     width: parent.width
-    color: "#0078D4" // Matching button color
-    //radius: 10 // Rounded corners for consistency
+    color: "#0078D4" // Matching icon color
 
     property int player1Score: 0
     property int player2Score: 0

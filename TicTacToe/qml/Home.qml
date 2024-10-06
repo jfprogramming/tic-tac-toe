@@ -10,9 +10,9 @@ Item {
         id:homePageHeader
     }
 
-    GameLogic {
-        id: gameLogic
-    }
+    // GameLogic {
+    //     id: gameLogic
+    // }
 
     Rectangle{
         id: mainArea

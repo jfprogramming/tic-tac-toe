@@ -10,40 +10,11 @@ Window {
     title: qsTr("TicTacToe")
     Material.theme: Material.Light
     Material.accent: Material.Blue
-
-    GameLogic {
-        id: gameLogic
-        onPlayerChanged: {
-            nextPlayerPopup.open();
-        }
-        onGameWon: {
-            gameWonPopup.text = winner + " wins!";
-            gameWonPopup.open();
-        }
-    }
+    Material.primary: Material.BlueGrey
 
     StackView {
         id: stackView
         anchors.fill: parent
         initialItem: "Home.qml"
     }
-
-    Popup {
-        id: nextPlayerPopup
-        modal: true
-        Text {
-            text: "Next turn: " + gameLogic.current_player
-        }
-    }
-
-    Popup {
-        id: gameWonPopup
-        modal: true
-        Text {
-            id: gameWonText
-            //text: gameLogic.current_player + " Won"
-        }
-    }
-
-    // Add logic to handle button clicks and update the game state
 }
