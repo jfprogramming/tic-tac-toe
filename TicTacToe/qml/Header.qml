@@ -33,6 +33,7 @@ Rectangle {
         Text {
             id: titleText
             text: qsTr("TicTacToe")
+            anchors.verticalCenter: parent.verticalCenter
             font.bold: true
             font.pointSize: 20
             color: "white" // Consistent text color
