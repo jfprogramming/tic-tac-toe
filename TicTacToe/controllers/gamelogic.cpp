@@ -146,7 +146,7 @@ void GameLogic::checkForCatsCradle()
         }
     }
     if (allFilled) {
-        emit catsCradleMatch();
+        setCatsCradle(true);
     }
 }
 
@@ -156,19 +156,20 @@ void GameLogic::checkForCatsCradle()
  * \brief Handles the turn for player two in one-player mode.
  * \return void
  */
+
 void GameLogic::playerTwoIconTurn()
 {
     if (currentPlayer == "Player2") {
-        QVector<int> emptySquares;
-        for (int i = 0; i < ticTacToeBoard.size(); ++i) {
-            if (ticTacToeBoard[i].isEmpty()) {
-                emptySquares.append(i);
+        QStringList emptySquares;
+        for (auto it = ticTacToeBoard.begin(); it != ticTacToeBoard.end(); ++it) {
+            if (!it.value()) {
+                emptySquares.append(it.key());
             }
         }
         if (!emptySquares.isEmpty()) {
             int randomIndex = QRandomGenerator::global()->bounded(emptySquares.size());
-            int selectedSquare = emptySquares[randomIndex];
-            ticTacToeBoard[selectedSquare] = "Player2";
+            QString selectedSquare = emptySquares[randomIndex];
+            ticTacToeBoard[selectedSquare] = true;
             checkForHorizontalWin();
             checkForVerticalWin();
             checkForDiagonalWin();
@@ -177,7 +178,6 @@ void GameLogic::playerTwoIconTurn()
     }
 }
 
-
 /**
  * \fn GameLogic::resetGame()
  * \brief Resets the game to the initial state.
@@ -185,7 +185,11 @@ void GameLogic::playerTwoIconTurn()
  */
 void GameLogic::resetGame()
 {
-    ticTacToeBoard.fill("");
+    ticTacToeBoard = {
+        {"A1", false}, {"A2", false}, {"A3", false},
+        {"B1", false}, {"B2", false}, {"B3", false},
+        {"C1", false}, {"C2", false}, {"C3", false}
+    };
     setCurrentPlayer("Player1");
     setPlayerWon(false);
 }
@@ -212,7 +216,7 @@ void GameLogic::setCatsCradle(bool newCatsCradle)
     if (catsCradle == newCatsCradle)
         return;
     catsCradle = newCatsCradle;
-    emit catsCradleChanged();
+    emit catsCradleMatch();
 }
 
 
