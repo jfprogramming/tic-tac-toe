@@ -700,7 +700,7 @@ Item {
         resetBtnTxt: "Rest"
         resetBtn.visible: true
         resetBtn.onClicked: {
-            reset()
+            resetBoard()
         }
     }
 }

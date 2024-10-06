@@ -4,9 +4,31 @@ Item {
     id:playerSelectionItem
     objectName: "playerSelectionPage"
 
-    property int gameMode: 1 // 1 for 1 Player mode | 2 for 2 Player mode
+    property string gameMode: ""
+    property bool player1Selction: true
+    property bool player2Selction: false
 
-    // TODO setup logic to get game mode selected
+    function player1Selected(playerName) {
+        console.log("player1Selected: "+playerName)
+        playerModel.setPlayer1(playerName)
+        showPlayer2Popup()
+    }
+
+    function player2Selected(playerName) {
+        console.log("player2Selected: "+playerName)
+        playerModel.setPlayer2(playerName)
+    }
+
+    Component.onCompleted: {
+        gameMode = gameLogic.gameType
+        console.log("gameMode: "+gameMode)
+    }
+
+    PopupMsg{
+        id: player2Popup
+        popupMsgtxt: "Player 2 select"
+    }
+
 
     Header{
         id:playerSelectionHeader
@@ -55,11 +77,24 @@ Item {
                         playerSelectionGridView.currentIndex = model.index;
                         console.log("item clicked... "+playerSelectionGridView.currentIndex)
 
-                        // TODO: Set the selected player ID
+                        // Set player id
                         //
-                        //playerModel.setSelectedPlayerId(model.playerId);
-
-                        stackView.push("PlayArea.qml")
+                        if(player1Selction){
+                            playerModel.setPlayer1(model.playerId);
+                            player1Selction = false
+                            player2Popup.open()
+                        }
+                        if(player2Selction){
+                            playerModel.setPlayer2(model.playerId);
+                            player2Selction = false
+                        }
+                        console.log(gameMode + " " + player1Selction + " " + player2Selction)
+                        if(gameMode == "1Player" && !player1Selction){
+                            stackView.push("PlayArea.qml")
+                        }
+                        if(gameMode == "2Player" && !player1Selction && !player2Selction){
+                            stackView.push("PlayArea.qml")
+                        }
 
                     }
                 }
