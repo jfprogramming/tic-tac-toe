@@ -22,8 +22,8 @@ public:
     bool getPlayerWon() const;
     void setPlayerWon(bool won);
 
-    QString getGameType() const; // New getter
-    void setGameType(const QString &newGameType); // New setter
+    QString getGameType() const;
+    void setGameType(const QString &newGameType);
 
     // Exposed Functions to QML
     //

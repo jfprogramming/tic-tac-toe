@@ -195,11 +195,6 @@ void GameLogic::playerTwoTurn()
 }
 
 
-void GameLogic::checkGameType()
-{
-
-}
-
 /**
  * \fn GameLogic::resetTicTacToeBoard()
  * \brief Resets the game to the initial state.
@@ -217,14 +212,25 @@ void GameLogic::resetTicTacToeBoard()
     resetCatsCradle();
 }
 
+/**
+ * \fn GameLogic::resetPlayerWon()
+ * \brief
+ * \return void
+ */
 void GameLogic::resetPlayerWon()
 {
-
+    setPlayerWon(false);
 }
 
+
+/**
+ * \fn GameLogic::resetGameType()
+ * \brief
+ * \return void
+ */
 void GameLogic::resetGameType()
 {
-
+    setGameType("");
 }
 
 /**
