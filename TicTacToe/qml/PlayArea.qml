@@ -139,7 +139,6 @@ Item {
     // Only used for 1Player games
     //
     function playerTwoTurn() {
-        //checkPlayerTurn()
         var selectedSquare = null
         const emptySquares = []
 
@@ -187,6 +186,7 @@ Item {
         // End of computers turn enable input again if no player has won
         //
         if(!playerWon){ mainColumn.enabled = true }
+        checkPlayerTurn()
     }
 
 
@@ -273,7 +273,6 @@ Item {
                         onClicked:{
                             // set X or O based of player 1 or player 2
                             row1rect1Img.visible = true
-                            checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
                             row1rect1Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             console.log("source:"+row1rect1Img.source)
@@ -289,6 +288,7 @@ Item {
                             }
                             row1rect1.enabled = false
                             mainColumn.enabled = false
+                            checkPlayerTurn()
                         }
                     }
                 }
@@ -311,7 +311,6 @@ Item {
                         anchors.fill: parent
                         onClicked:{
                             row1rect2Img.visible = true
-                            checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
                             row1rect2Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
@@ -326,6 +325,7 @@ Item {
                             }
                             row1rect2.enabled = false
                             mainColumn.enabled = false
+                            checkPlayerTurn()
                         }
                     }
                 }
@@ -348,7 +348,6 @@ Item {
                         anchors.fill: parent
                         onClicked:{
                             row1rect3Img.visible = true
-                            checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
                             row1rect3Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
@@ -363,6 +362,7 @@ Item {
                             }
                             row1rect3.enabled = false
                             mainColumn.enabled = false
+                            checkPlayerTurn()
                         }
                     }
                 }
@@ -394,7 +394,6 @@ Item {
                         anchors.fill: parent
                         onClicked:{
                             row2rect1Img.visible = true
-                            checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
                             row2rect1Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
@@ -409,6 +408,7 @@ Item {
                             }
                             row2rect1.enabled = false
                             mainColumn.enabled = false
+                            checkPlayerTurn()
                         }
                     }
                 }
@@ -431,7 +431,6 @@ Item {
                         anchors.fill: parent
                         onClicked:{
                             row2rect2Img.visible = true
-                            checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
                             row2rect2Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
@@ -446,6 +445,7 @@ Item {
                             }
                             row2rect2.enabled = false
                             mainColumn.enabled = false
+                            checkPlayerTurn()
                         }
                     }
                 }
@@ -468,7 +468,6 @@ Item {
                         anchors.fill: parent
                         onClicked:{
                             row2rect3Img.visible = true
-                            checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
                             row2rect3Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
@@ -483,6 +482,7 @@ Item {
                             }
                             row2rect3.enabled = false
                             mainColumn.enabled = false
+                            checkPlayerTurn()
                         }
                     }
                 }
@@ -515,7 +515,6 @@ Item {
                         anchors.fill: parent
                         onClicked:{
                             row3rect1Img.visible = true
-                            checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
                             row3rect1Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
@@ -530,6 +529,7 @@ Item {
                             }
                             row3rect1.enabled = false
                             mainColumn.enabled = false
+                            checkPlayerTurn()
                         }
                     }
                 }
@@ -552,7 +552,6 @@ Item {
                         anchors.fill: parent
                         onClicked:{
                             row3rect2Img.visible = true
-                            checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
                             row3rect2Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
@@ -567,6 +566,7 @@ Item {
                             }
                             row3rect2.enabled = false
                             mainColumn.enabled = false
+                            checkPlayerTurn()
                         }
                     }
                 }
@@ -589,7 +589,6 @@ Item {
                         anchors.fill: parent
                         onClicked:{
                             row3rect3Img.visible = true
-                            checkPlayerTurn()
                             console.log("current player turn: "+currentPlayer)
                             row3rect3Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             // check for a winner
@@ -604,6 +603,7 @@ Item {
                             }
                             row3rect3.enabled = false
                             mainColumn.enabled = false
+                            checkPlayerTurn()
                         }
                     }
                 }
@@ -671,7 +671,7 @@ Item {
 
             // Reset the current player
             //
-            currentPlayer = 0
+            currentPlayer = 1
 
             // Reset the win variable
             //
