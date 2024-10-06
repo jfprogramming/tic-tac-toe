@@ -1,41 +1,42 @@
 import QtQuick
 
 Item {
-    id:playerSelectionItem
+    id: playerSelectionItem
     objectName: "playerSelectionPage"
 
     property string gameMode: ""
-    property bool player1Selction: true
-    property bool player2Selction: false
+    property bool player1Selection: true
+    property bool player2Selection: false
 
     function player1Selected(playerName) {
-        console.log("player1Selected: "+playerName)
+        console.log("player1Selected: " + playerName)
         playerModel.setPlayer1(playerName)
         showPlayer2Popup()
     }
 
     function player2Selected(playerName) {
-        console.log("player2Selected: "+playerName)
+        console.log("player2Selected: " + playerName)
         playerModel.setPlayer2(playerName)
     }
 
-    Component.onCompleted: {
-        gameMode = gameLogic.gameType
-        console.log("gameMode: "+gameMode)
+    function checkGameType() {
+        playerSelectionItem.gameMode = gameLogic.gameType
     }
 
-    PopupMsg{
+    Component.onCompleted: {
+        checkGameType()
+        console.log("gameMode: " + gameLogic.gameType)
+    }
+
+    PopupMsg {
         id: player2Popup
         popupMsgtxt: "Player 2 select"
     }
 
-
-    Header{
-        id:playerSelectionHeader
+    Header {
+        id: playerSelectionHeader
     }
 
-    //Highlighter
-    //
     Component {
         id: highlight
         Rectangle {
@@ -61,10 +62,8 @@ Item {
         }
     }
 
-    //Players list delegate
-    //
     Component {
-        id:playerListdelegate
+        id: playerListdelegate
         Column {
             Image {
                 source: portrait
@@ -75,27 +74,27 @@ Item {
                     anchors.fill: parent
                     onClicked: {
                         playerSelectionGridView.currentIndex = model.index;
-                        console.log("item clicked... "+playerSelectionGridView.currentIndex)
+                        console.log("item clicked... " + playerSelectionGridView.currentIndex)
 
-                        // Set player id
-                        //
-                        if(player1Selction){
+                        checkGameType()
+
+                        if (player1Selection) {
                             playerModel.setPlayer1(model.playerId);
-                            player1Selction = false
+                            player1Selection = false
+                            player2Selection = true
                             player2Popup.open()
-                        }
-                        if(player2Selction){
+                        } else if (player2Selection) {
                             playerModel.setPlayer2(model.playerId);
-                            player2Selction = false
-                        }
-                        console.log(gameMode + " " + player1Selction + " " + player2Selction)
-                        if(gameMode == "1Player" && !player1Selction){
-                            stackView.push("PlayArea.qml")
-                        }
-                        if(gameMode == "2Player" && !player1Selction && !player2Selction){
-                            stackView.push("PlayArea.qml")
+                            player2Selection = false
                         }
 
+                        console.log(gameMode + " " + player1Selection + " " + player2Selection)
+                        if (gameMode === "1Player" && !player1Selection) {
+                            stackView.push("PlayArea.qml")
+                        }
+                        if (gameMode === "2Player" && !player1Selection && !player2Selection) {
+                            stackView.push("PlayArea.qml")
+                        }
                     }
                 }
             }
@@ -106,34 +105,32 @@ Item {
         }
     }
 
-    Rectangle{
-        id: playerSlectionMainArea
+    Rectangle {
+        id: playerSelectionMainArea
         anchors.fill: parent
         color: "white"
         anchors.top: playerSelectionHeader.bottom
         anchors.topMargin: 50
         anchors.bottom: playerSelectionHeader.top
         anchors.bottomMargin: 50
-        GridView{
-            id:playerSelectionGridView
+        GridView {
+            id: playerSelectionGridView
             anchors.fill: parent
-            model: PlayerListModel {id:model}
+            model: PlayerListModel { id: model }
             highlight: highlight
             focus: true
             highlightFollowsCurrentItem: true
             cellWidth: 150
             cellHeight: 150
             delegate: playerListdelegate
-            // Clear the highlight (set current item to null)
-            //
             Component.onCompleted: {
                 playerSelectionGridView.currentIndex = -1;
-                console.log("1current index: "+playerSelectionGridView.currentIndex)
+                console.log("1current index: " + playerSelectionGridView.currentIndex)
             }
         }
     }
 
-    Footer{
+    Footer {
         id: playerSelectionfooter
         homeBtn.onClicked: {
             stackView.pop()
