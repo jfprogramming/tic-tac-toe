@@ -61,6 +61,10 @@ Item {
         id: nextPlayerPopup
         modal: true
         popupMsgtxt: "Next turn: Player" + gameLogic.currentPlayer
+        onClosed: {
+            console.log("Next player popup closed")
+            mainColumn.enabled = true
+        }
     }
 
     PopupMsg {
@@ -92,7 +96,6 @@ Item {
     function setWinVariables(player) {
         console.log("setWinVariables player: "+player)
 
-        winText.visible = true
         mainColumn.enabled = false
         playerWon = true
 
@@ -229,31 +232,6 @@ Item {
         anchors.topMargin: 50
         anchors.bottom: playAreaFooter.top
         anchors.bottomMargin: 50
-
-        WinStrike{
-            id: winVisual
-            anchors.fill: parent
-            z:100
-        }
-
-        // Win Text only shown if a player wins
-        //
-        Text {
-            id: winText
-            text: currentPlayer == 1 ? "Player 1 Wins!" : "Player 2 Wins"
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
-            font.pointSize: 56
-            color: "red"
-            visible: false
-            z:100
-            onVisibleChanged: {
-                console.log("winText visibility:", visible)
-            }
-            Component.onCompleted: {
-                console.log("winText visibility:", visible)
-            }
-        }
 
         Column{
             id: mainColumn
@@ -660,18 +638,6 @@ Item {
             row3rect1.enabled = true
             row3rect2.enabled = true
             row3rect3.enabled = true
-
-            // Reset Win Dispaly
-            //
-            winText.visible       = false
-            winVisual.winStrike1  = false
-            winVisual.winStrike2  = false
-            winVisual.winStrike3  = false
-            winVisual.winStrike4  = false
-            winVisual.winStrike5  = false
-            winVisual.winStrike6  = false
-            winVisual.winStrike7  = false
-            winVisual.winStrike8  = false
 
             // Reset the current player
             //
