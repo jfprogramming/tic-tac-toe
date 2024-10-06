@@ -194,6 +194,12 @@ void GameLogic::playerTwoTurn()
     }
 }
 
+
+void GameLogic::checkGameType()
+{
+
+}
+
 /**
  * \fn GameLogic::resetTicTacToeBoard()
  * \brief Resets the game to the initial state.

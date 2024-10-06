@@ -33,6 +33,7 @@ public:
     Q_INVOKABLE void checkForDiagonalWin();
     Q_INVOKABLE void checkForCatsCradle();
     Q_INVOKABLE void playerTwoTurn();
+    Q_INVOKABLE void checkGameType();
 
     // Reset functions
     //
