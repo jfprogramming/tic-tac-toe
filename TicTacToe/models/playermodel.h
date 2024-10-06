@@ -30,9 +30,7 @@ public:
     // Set Game-play player names selected
     //
     QString getPlayer1() const { return m_player1; }
-    QString getPlayer2() const { return m_player2; }
-
-    void setPlayerHighScoreValue(int playerId, int score);
+    QString getPlayer2() const { return m_player2; }    
 
 signals:
     void playerNameChanged(const QString &playerName);
@@ -54,6 +52,8 @@ public slots:
 
     void setPlayer1(const QString &newPlayer1);
     void setPlayer2(const QString &newPlayer2);
+
+    void setPlayerHighScoreValue(int playerId, int score);
 
 private:
     QString m_playerName = "";

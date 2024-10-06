@@ -171,11 +171,14 @@ Item {
         if(currentPlayer == 1){
             p1Score = p1Score + 1
             playerModel.player1Score = p1Score
+            playAreaHeader.savePlayerHighScore("Player1", p1Score)  // Save to database
         }
         if(currentPlayer == 2){
             p2Score = p2Score + 1
             playerModel.player2Score = p2Score
+            playAreaHeader.savePlayerHighScore("Player2", p2Score)  // Save to database
         }
+
         gameWonPopup.open()
     }
 
