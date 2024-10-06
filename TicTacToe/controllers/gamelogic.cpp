@@ -36,7 +36,7 @@ QString GameLogic::getCurrentPlayer() const
 void GameLogic::setCurrentPlayer(const QString &newCurrentPlayer)
 {
     m_currentPlayer = newCurrentPlayer;
-    emit playerChanged(m_currentPlayer);
+    emit playerChanged();
 }
 
 /**
@@ -58,7 +58,7 @@ bool GameLogic::getPlayerWon() const
 void GameLogic::setPlayerWon(bool won)
 {
     m_playerWon = won;
-    emit playerWonChanged(won);
+    emit playerWonChanged();
 }
 
 
@@ -77,7 +77,7 @@ void GameLogic::checkPlayerTurn()
     } else {
         m_currentPlayer = "Player1";
     }
-    emit playerChanged(m_currentPlayer);
+    emit playerChanged();
 }
 
 
@@ -101,7 +101,7 @@ void GameLogic::setGameType(const QString &newGameType)
 {
     if (m_gameType != newGameType) {
         m_gameType = newGameType;
-        emit gameTypeChanged(m_gameType);
+        emit gameTypeChanged();
     }
 }
 
@@ -116,7 +116,7 @@ void GameLogic::checkForHorizontalWin()
     for (const auto& row : rows) {
         if (m_ticTacToeBoard[row + "1"] && m_ticTacToeBoard[row + "2"] && m_ticTacToeBoard[row + "3"]) {
             setPlayerWon(true);
-            emit gameWon(m_currentPlayer);
+            emit gameWon();
             return;
         }
     }
@@ -133,7 +133,7 @@ void GameLogic::checkForVerticalWin()
     for (const auto& col : cols) {
         if (m_ticTacToeBoard["A" + col] && m_ticTacToeBoard["B" + col] && m_ticTacToeBoard["C" + col]) {
             setPlayerWon(true);
-            emit gameWon(m_currentPlayer);
+            emit gameWon();
             return;
         }
     }
@@ -149,7 +149,7 @@ void GameLogic::checkForDiagonalWin()
     if ((m_ticTacToeBoard["A1"] && m_ticTacToeBoard["B2"] && m_ticTacToeBoard["C3"]) ||
         (m_ticTacToeBoard["A3"] && m_ticTacToeBoard["B2"] && m_ticTacToeBoard["C1"])) {
         setPlayerWon(true);
-        emit gameWon(m_currentPlayer);
+        emit gameWon();
     }
 }
 

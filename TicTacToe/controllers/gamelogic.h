@@ -52,11 +52,12 @@ public slots:
     void resetCatsCradle();
 
 signals:
-    void playerChanged(const QString &player);
-    void playerWonChanged(bool won);
-    void gameWon(const QString &winner);
+    void playerChanged();
+    void playerWonChanged();
+    void gameWon();
     void catsCradleMatch();
-    void gameTypeChanged(const QString &gameType);
+    void gameTypeChanged();
+
 
 private:
     QString m_currentPlayer="";
