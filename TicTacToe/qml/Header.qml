@@ -15,10 +15,11 @@ Rectangle {
     property alias scoreAlias: score
 
     function savePlayerHighScore(playerName, score) {
+        console.log("save player high score: " + playerName + " score: " + score)
         if (playerName === "Player1") {
-            playerModel.setPlayerHighScoreValue(1, score);
+            playerModel.setPlayerHighScoreValue(playerName, score);
         } else if (playerName === "Player2") {
-            playerModel.setPlayerHighScoreValue(2, score);
+            playerModel.setPlayerHighScoreValue(playerName, score);
         }
     }
 

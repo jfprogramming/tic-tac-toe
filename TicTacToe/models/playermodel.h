@@ -53,7 +53,7 @@ public slots:
     void setPlayer1(const QString &newPlayer1);
     void setPlayer2(const QString &newPlayer2);
 
-    void setPlayerHighScoreValue(int playerId, int score);
+    void setPlayerHighScoreValue(QString playerName, int score);
 
 private:
     QString m_playerName = "";

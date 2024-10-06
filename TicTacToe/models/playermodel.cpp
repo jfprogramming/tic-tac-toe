@@ -70,10 +70,7 @@ void PlayerModel::setPlayer1(const QString &newPlayer1) {
     // Look up player by name and set highscore
     lookupPlayer(m_player1);
     m_player1Id = Controllers::dbManager.getPlayerIdByName(m_player1);
-    if (m_player1Id != -1) {
-        int highscore = Controllers::dbManager.getHighScoreForPlayer(m_player1Id);
-        setPlayerHighScoreValue(m_player1Id, highscore);
-    }
+
     emit player1Changed();
 }
 
@@ -84,6 +81,7 @@ void PlayerModel::setPlayer1(const QString &newPlayer1) {
 void PlayerModel::setPlayer2(const QString &newPlayer2)
 {
     qDebug() << __FUNCTION__ << "setting player2...";
+
     QString trimmedPlayer2 = newPlayer2;
     trimmedPlayer2 = trimmedPlayer2.remove(' ');
 
@@ -95,10 +93,7 @@ void PlayerModel::setPlayer2(const QString &newPlayer2)
     // Look up player by name and set highscore
     lookupPlayer(m_player2);
     m_player2Id = Controllers::dbManager.getPlayerIdByName(m_player2);
-    if (m_player2Id != -1) {
-        int highscore = Controllers::dbManager.getHighScoreForPlayer(m_player2Id);
-        setPlayerHighScoreValue(m_player2Id, highscore);
-    }
+
     emit player2Changed();
 }
 
@@ -107,9 +102,13 @@ void PlayerModel::setPlayer2(const QString &newPlayer2)
  * \brief Sets the player's high score value.
  * \param int score.
  */
-void PlayerModel::setPlayerHighScoreValue(int playerId, int score)
+void PlayerModel::setPlayerHighScoreValue(QString playerName, int score)
 {
-    Controllers::dbManager.setPlayerHighScoreValue(playerId, score);
+    int playerId = Controllers::dbManager.getPlayerIdByName(playerName);
+    int highscore = Controllers::dbManager.getHighScoreForPlayer(playerId);
+    int newScore = highscore + score;
+
+    Controllers::dbManager.updatePlayerHighScore(playerName, newScore);
 }
 
 /**
