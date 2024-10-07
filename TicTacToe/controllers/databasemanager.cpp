@@ -320,17 +320,25 @@ QString DatabaseManager::getPlayerName(int playerId)
  * \param  color The color to search for.
  * \return QString The color associated with the player.
  */
-QString DatabaseManager::getPlayerColor(const QString &color)
+QString DatabaseManager::getPlayerColor(const QString &playerName)
 {
-    qDebug() << __FUNCTION__ << "Fetching player color for player:" << color;
+    qDebug() << __FUNCTION__ << "Fetching color for playerName:" << playerName;
+
+    int playerId = getPlayerIdByName(playerName);
 
     QSqlQuery query;
-    query.prepare("SELECT playerColor FROM PlayerTable WHERE userId = :id");
-    query.bindValue(":color", color);
-    if (query.exec() && query.next())
+    query.prepare("SELECT playerColor FROM PlayerTable WHERE playerId = :playerId");
+    query.bindValue(":playerId", playerId);
+
+    qDebug() << __FUNCTION__ << "query:" << query.lastQuery();
+
+    if (query.exec() && query.next()){
+        qDebug() << __FUNCTION__ << "query.value(0).toString():" << query.value(0).toString();
         return query.value(0).toString();
-    else
+    }
+    else{
         return "";
+    }
 }
 
 
@@ -347,10 +355,12 @@ QString DatabaseManager::getUserSelectedOption(int userId)
     QSqlQuery query;
     query.prepare("SELECT userSelectedOption FROM UserTable WHERE userId = :id");
     query.bindValue(":id", userId);
-    if (query.exec() && query.next())
+    if (query.exec() && query.next()) {
         return query.value(0).toString();
-    else
+    }
+    else {
         return "";
+    }
 }
 
 

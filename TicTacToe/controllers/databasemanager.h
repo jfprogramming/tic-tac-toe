@@ -30,7 +30,7 @@ public:
     // Player Management
     //
     QString getPlayerName(int userId);
-    QString getPlayerColor(const QString &color);
+    QString getPlayerColor(const QString &playerName);
     QString getUserSelectedOption(int userId);
 
     bool setPlayerName(int playerId, QString &newName);

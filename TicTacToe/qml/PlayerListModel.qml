@@ -6,27 +6,27 @@ ListModel {
     objectName: "playerListModel"
 
     ListElement {
-        name: "Player 1"
+        name: "Player1"
         portrait: "qrc:///onePlayer.png"
     }
     ListElement {
-        name: "Player 2"
+        name: "Player2"
         portrait: "qrc:///onePlayer.png"
     }
     ListElement {
-        name: "Player 3"
+        name: "Player3"
         portrait: "qrc:///onePlayer.png"
     }
     ListElement {
-        name: "Player 4"
+        name: "Player4"
         portrait: "qrc:///onePlayer.png"
     }
     ListElement {
-        name: "Player 5"
+        name: "Player5"
         portrait: "qrc:///onePlayer.png"
     }
     ListElement {
-        name: "Player 6"
+        name: "Player6"
         portrait: "qrc:///onePlayer.png"
     }
     ListElement {
@@ -38,11 +38,11 @@ ListModel {
         portrait: "qrc:///onePlayer.png"
     }
     ListElement {
-        name: "Player 9"
+        name: "Player9"
         portrait: "qrc:///onePlayer.png"
     }
     ListElement {
-        name: "Player 10"
+        name: "Player10"
         portrait: "qrc:///onePlayer.png"
     }
 }
