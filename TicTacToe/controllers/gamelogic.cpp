@@ -206,7 +206,9 @@ void GameLogic::checkForHorizontalWin()
 
     const QStringList rows = {"A", "B", "C"};
     for (const auto& row : rows) {
-        if (m_ticTacToeBoard[row + "1"] && m_ticTacToeBoard[row + "2"] && m_ticTacToeBoard[row + "3"]) {
+        if (m_ticTacToeBoard[row + "1"] != ' ' &&
+            m_ticTacToeBoard[row + "1"] == m_ticTacToeBoard[row + "2"] &&
+            m_ticTacToeBoard[row + "2"] == m_ticTacToeBoard[row + "3"]) {
             qDebug() << __FUNCTION__ << "player won:" << m_currentPlayer;
             setPlayerWon(true);
             emit playerWonChanged("horizontal", row);  // Emit row (A, B, or C) that won
@@ -214,6 +216,7 @@ void GameLogic::checkForHorizontalWin()
         }
     }
 }
+
 
 /**
  * \brief Checks for a vertical win.
@@ -226,7 +229,9 @@ void GameLogic::checkForVerticalWin()
 
     const QStringList cols = {"1", "2", "3"};
     for (const auto& col : cols) {
-        if (m_ticTacToeBoard["A" + col] && m_ticTacToeBoard["B" + col] && m_ticTacToeBoard["C" + col]) {
+        if (m_ticTacToeBoard["A" + col] != ' ' &&
+            m_ticTacToeBoard["A" + col] == m_ticTacToeBoard["B" + col] &&
+            m_ticTacToeBoard["B" + col] == m_ticTacToeBoard["C" + col]) {
             qDebug() << __FUNCTION__ << "player won:" << m_currentPlayer;
             setPlayerWon(true);
             emit playerWonChanged("vertical", col);  // Emit column (1, 2, or 3)
@@ -234,6 +239,7 @@ void GameLogic::checkForVerticalWin()
         }
     }
 }
+
 
 /**
  * \fn GameLogic::checkForDiagonalWin()
@@ -244,16 +250,17 @@ void GameLogic::checkForDiagonalWin()
 {
     qDebug() << __FUNCTION__ << "Checking for Diagonal Win";
 
-    if ((m_ticTacToeBoard["A1"] && m_ticTacToeBoard["B2"] && m_ticTacToeBoard["C3"])) {
+    if (m_ticTacToeBoard["A1"] != ' ' && m_ticTacToeBoard["A1"] == m_ticTacToeBoard["B2"] && m_ticTacToeBoard["B2"] == m_ticTacToeBoard["C3"]) {
         setPlayerWon(true);
         emit playerWonChanged("diagonal", "1");  // Emit diagonal type
         return;
-    } else if ((m_ticTacToeBoard["A3"] && m_ticTacToeBoard["B2"] && m_ticTacToeBoard["C1"])) {
+    } else if (m_ticTacToeBoard["A3"] != ' ' && m_ticTacToeBoard["A3"] == m_ticTacToeBoard["B2"] && m_ticTacToeBoard["B2"] == m_ticTacToeBoard["C1"]) {
         setPlayerWon(true);
         emit playerWonChanged("diagonal", "2");  // Emit diagonal type
         return;
     }
 }
+
 
 /**
  * \fn GameLogic::checkForCatsCradle()
@@ -275,6 +282,7 @@ void GameLogic::checkForCatsCradle()
         setCatsCradle(true);
     }
 }
+
 
 /**
  * \fn GameLogic::playerTwoTurn()
@@ -304,9 +312,11 @@ void GameLogic::playerTwoTurn()
     }
 }
 
+
 //
 // Q_INVOKABLE RESET functions
 //
+
 
 /**
  * \fn GameLogic::resetTicTacToeBoard()
@@ -329,6 +339,7 @@ void GameLogic::resetTicTacToeBoard()
     setPlayerWon(false);
     resetCatsCradle();
 }
+
 
 /**
  * \fn GameLogic::resetPlayerWon()
