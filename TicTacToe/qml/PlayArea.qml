@@ -133,6 +133,7 @@ Item {
     function setWinVariables(player) {
         console.log("setWinVariables player: " + player)
 
+
         mainColumn.enabled = false
         gameLogic.playerWon = true
         playerWon = true
@@ -271,6 +272,12 @@ Item {
         anchors.topMargin: 50
         anchors.bottom: playAreaFooter.top
         anchors.bottomMargin: 50
+
+        WinStrike{
+            id: winVisual
+            anchors.fill: parent
+            z:100
+        }
 
         Column {
             id: mainColumn

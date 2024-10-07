@@ -153,7 +153,7 @@ void GameLogic::checkForHorizontalWin()
         if (m_ticTacToeBoard[row + "1"] && m_ticTacToeBoard[row + "2"] && m_ticTacToeBoard[row + "3"]) {
             qDebug() << __FUNCTION__ << "player won:" << m_currentPlayer;
             setPlayerWon(true);
-            emit gameWon();
+            emit gameWon(row);
             return;
         }
     }
