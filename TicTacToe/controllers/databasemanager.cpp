@@ -320,7 +320,7 @@ QString DatabaseManager::getPlayerName(int playerId)
  * \param  color The color to search for.
  * \return QString The color associated with the player.
  */
-QString DatabaseManager::getPlayerColor(QString &color)
+QString DatabaseManager::getPlayerColor(const QString &color)
 {
     qDebug() << __FUNCTION__ << "Fetching player color for player:" << color;
 
@@ -444,6 +444,12 @@ bool DatabaseManager::createNewPlayer(const QString &playerName, const QString &
 }
 
 
+/**
+ * \fn      DatabaseManager::getPlayerByName
+ * \brief   Gets a player by their name
+ * \param   QString name
+ * \return  bool
+ */
 QMap<QString, QString> DatabaseManager::getPlayerByName(const QString &name) {
     qDebug() << __FUNCTION__ << "Fetching player by name:" << name;
 
@@ -464,6 +470,13 @@ QMap<QString, QString> DatabaseManager::getPlayerByName(const QString &name) {
 }
 
 
+/**
+ * \fn      DatabaseManager::getPlayerIdByName
+ * \brief   Gets a player by their ID
+ * \param   QString name
+
+ * \return  bool
+ */
 int DatabaseManager::getPlayerIdByName(const QString &name) {
     QSqlQuery query;
     query.prepare("SELECT playerId FROM PlayerTable WHERE playerName = :name");
@@ -474,6 +487,13 @@ int DatabaseManager::getPlayerIdByName(const QString &name) {
         return -1;
 }
 
+
+/**
+ * \fn      DatabaseManager::getHighScoreForPlayer
+ * \brief   Gets a high score asscoated with a player
+ * \param   int playerId
+ * \return  int
+ */
 int DatabaseManager::getHighScoreForPlayer(int playerId) {
     QSqlQuery query;
     query.prepare("SELECT highScore FROM PlayerTable WHERE playerId = :id");

@@ -3,6 +3,7 @@
 #include <QDebug>
 
 /**
+ * \fn PlayerModel::PlayerModel(QObject* parent) : QObject(parent)
  * \brief Constructor for PlayerModel.
  * \param parent The parent QObject.
  */
@@ -12,6 +13,7 @@ PlayerModel::PlayerModel(QObject* parent) : QObject(parent)
 }
 
 /**
+ * \fn PlayerModel::onAdminLogin(const QString &username, const QString &password){
  * \brief Authenticates an admin user.
  * \param username The admin username.
  * \param password The admin password.
@@ -28,6 +30,7 @@ bool PlayerModel::onAdminLogin(const QString &username, const QString &password)
 
 
 /**
+ * \fn PlayerModel::setPlayerColor(const QString &newPlayerColor)
  * \brief Sets the player's color.
  * \param newPlayerColor The new player color.
  */
@@ -41,6 +44,7 @@ void PlayerModel::setPlayerColor(const QString& newPlayerColor)
 
 
 /**
+ * \fn PlayerModel::setPlayerName(const QString &newPlayerName)
  * \brief Sets the player's name.
  * \param newPlayerName The new player name.
  */
@@ -54,6 +58,7 @@ void PlayerModel::setPlayerName(const QString &newPlayerName)
 
 
 /**
+ * \fn PlayerModel::setPlayer1(const QString &newPlayer1)
  * \brief Sets the first player's name.
  * \param newPlayer1 The new player name.
  */
@@ -74,7 +79,9 @@ void PlayerModel::setPlayer1(const QString &newPlayer1) {
     emit player1Changed();
 }
 
+
 /**
+ * \fn PlayerModel::setPlayer2(const QString &newPlayer2)
  * \brief Sets the second player's name.
  * \param newPlayer2 The new player name.
  */
@@ -99,6 +106,7 @@ void PlayerModel::setPlayer2(const QString &newPlayer2)
 
 
 /**
+ * \fn PlayerModel::setPlayerHighScoreValue(QString playerName, int score)
  * \brief Sets the player's high score value.
  * \param int score.
  */
@@ -112,6 +120,7 @@ void PlayerModel::setPlayerHighScoreValue(QString playerName, int score)
 }
 
 /**
+ * \fn PlayerModel::savePlayerToDatabase(const QString &name, const QString &color)
  * \brief Saves the player's name and color to the database.
  * \param name The player's name.
  * \param color The player's color.
@@ -122,6 +131,7 @@ void PlayerModel::savePlayerToDatabase(const QString &name, const QString &color
 
 
 /**
+ * \fn PlayerModel::lookupPlayer(const QString &name)
  * \brief Looks up the player's name and color in the database.
  * \param name The player's name.
  */
@@ -136,4 +146,14 @@ void PlayerModel::lookupPlayer(const QString &name) {
         setPlayerName("DNE");
         setPlayerColor("DNE");
     }
+}
+
+
+/**
+ * \fn PlayerModel::getPlayerColor(const QString &playerName)
+ * \brief Looks up the player's name and color in the database.
+ * \param name The player's name.
+ */
+QString PlayerModel::getPlayerColor(const QString &playerName) {
+    return Controllers::dbManager.getPlayerColor(playerName);
 }

@@ -27,10 +27,12 @@ public:
     QString getPlayerName() const { return m_playerName; }
     QString getPlayerColor() const { return m_playerColor; }
 
-    // Set Game-play player names selected
+    // Set Game-play player names selected and color associated with player
     //
     QString getPlayer1() const { return m_player1; }
-    QString getPlayer2() const { return m_player2; }    
+    QString getPlayer2() const { return m_player2; }
+
+    QString getPlayerColor(const QString &playerName);
 
 signals:
     void playerNameChanged(const QString &playerName);

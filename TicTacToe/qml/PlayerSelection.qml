@@ -12,13 +12,16 @@ Item {
     function player1Selected(playerName) {
         console.log("player1Selected: " + playerName)
         playerModel.setPlayer1(playerName)
+        playerOneIcon.color = playerModel.getPlayerColor(playerName)
         showPlayer2Popup()
     }
 
     function player2Selected(playerName) {
         console.log("player2Selected: " + playerName)
         playerModel.setPlayer2(playerName)
+        playerTwoIcon.color = playerModel.getPlayerColor(playerName)
     }
+
 
     function checkGameType() {
         playerSelectionItem.gameMode = gameLogic.gameType
