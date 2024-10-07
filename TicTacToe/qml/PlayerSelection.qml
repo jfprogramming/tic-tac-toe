@@ -9,6 +9,9 @@ Item {
     property bool player1Selection: true
     property bool player2Selection: false
 
+    signal player1SelectionComplete
+    signal player2SelectionComplete
+
     // Property to hold reference to PlayArea
     //
     property Item playArea
@@ -106,9 +109,14 @@ Item {
                                 player2Selection = true
                                 player2Popup.open()
                             }
-                        } else if (player2Selection) {
+                            else if (gameMode === "1Player") {
+                                emit player1SelectionComplete()
+                            }
+                        }
+                        else if (player2Selection) {
                             player2Selected(model.name)
                             player2Selection = false
+                            emit player2SelectionComplete()
                         }
 
                         console.log(gameMode + " " + player1Selection + " " + player2Selection)

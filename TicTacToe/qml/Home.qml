@@ -34,7 +34,7 @@ Item {
                     console.log("One Player Game Selected...")
                     //display play area
                     //
-                    stackView.push("PlayerSelection.qml")
+                    stackView.push("TicTacToeBoard.qml")
                     gameLogic.gameType = "1Player"
                 }
             }
@@ -49,7 +49,7 @@ Item {
                     console.log("Two Player Game Selected...")
                     //display play area
                     //
-                    stackView.push("PlayerSelection.qml")
+                    stackView.push("TicTacToeBoard.qml")
                     gameLogic.gameType = "2Player"
                 }
             }
