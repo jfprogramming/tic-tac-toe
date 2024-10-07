@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Controls
 import PlayerModel 1.0
 
 Item {
@@ -110,10 +111,10 @@ Item {
 
                         console.log(gameMode + " " + player1Selection + " " + player2Selection)
                         if (gameMode === "1Player" && !player1Selection) {
-                            stackView.push("PlayArea.qml")
+                            stackView.push("PlayArea.qml" , StackView.PushTransition)
                         }
                         if (gameMode === "2Player" && !player1Selection && !player2Selection) {
-                            stackView.push("PlayArea.qml")
+                            stackView.push("PlayArea.qml" , StackView.PushTransition)
                         }
                     }
                 }
@@ -153,7 +154,7 @@ Item {
     Footer {
         id: playerSelectionfooter
         homeBtn.onClicked: {
-            stackView.pop()
+            stackView.pop(StackView.PushTransition)
         }
         homeBtnTxt: "Back"
     }

@@ -52,7 +52,7 @@ Item {
             function onLoginBtnClicked(username, password) {
                 console.log("admin login slot")
                 if(playerModel.onAdminLogin(username, password)){
-                    stackView.push("AdminPage.qml")
+                    stackView.push("AdminPage.qml", StackView.PushTransition)
                     // Clear the text fields on succesful login
                     //
                     userNameTextInput.text = ""
@@ -77,7 +77,7 @@ Item {
 
         backBtn.visible: true
         backBtn.onClicked: {
-            stackView.pop()
+            stackView.pop(StackView.PushTransition)
         }
     }
 }

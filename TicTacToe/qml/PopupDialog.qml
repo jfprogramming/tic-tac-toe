@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls 2.15
+import QtQuick.Controls
 
 Dialog {
     id: popupMsgItem
@@ -10,7 +10,7 @@ Dialog {
     focus: true
     anchors.centerIn: parent
     standardButtons: Dialog.Ok
-    closePolicy: Qt.PopupClosePolicy.NoPopupClose // This disables Popup.CloseOnPressOutside
+    closePolicy: Dialog.NoAutoClose // This disables Popup.CloseOnPressOutside
 
     // Expose properties to other QML files
     //

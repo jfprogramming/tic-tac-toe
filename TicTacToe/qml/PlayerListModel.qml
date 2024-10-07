@@ -1,6 +1,5 @@
 import QtQuick
 
-
 ListModel {
     id: playerListModel
     objectName: "playerListModel"

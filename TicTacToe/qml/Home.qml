@@ -40,7 +40,7 @@ Item {
                     console.log("One Player Game Selected...")
                     //display play area
                     //
-                    stackView.push("PlayerSelection.qml")
+                    stackView.push("PlayerSelection.qml", StackView.PushTransition)
                     gameLogic.gameType = "1Player"
                 }
             }
@@ -55,7 +55,7 @@ Item {
                     console.log("Two Player Game Selected...")
                     //display play area
                     //
-                    stackView.push("PlayerSelection.qml")
+                    stackView.push("PlayerSelection.qml", StackView.PushTransition)
                     gameLogic.gameType = "2Player"
                 }
             }
@@ -66,7 +66,7 @@ Item {
                 text: qsTr("High Score")
                 width: 200
                 onClicked: {
-                    stackView.push("HighScore.qml")
+                    stackView.push("HighScore.qml", StackView.PushTransition)
                 }
             }
         }
@@ -76,7 +76,7 @@ Item {
         id: homePagefooter
         homeBtn.width: 200
         homeBtn.onClicked: {
-            stackView.push("AdminLogin.qml")
+            stackView.push("AdminLogin.qml", StackView.PushTransition)
         }
         homeBtnTxt: "Admin Login"
         homeIcon: "qrc:///adminAccount.png"

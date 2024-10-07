@@ -22,7 +22,7 @@ Item {
         }
         backBtn.visible: true
         backBtn.onClicked: {
-            stackView.pop()
+            stackView.pop(StackView.PushTransition)
         }
     }
 }

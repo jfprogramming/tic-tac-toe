@@ -608,7 +608,7 @@ Item {
     Footer {
         id: playAreaFooter
         homeBtn.onClicked: {
-            stackView.pop()
+            stackView.pop(StackView.PushTransition)
         }
         homeBtnTxt: "Back"
         resetBtnTxt: "Reset"

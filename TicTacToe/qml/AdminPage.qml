@@ -36,7 +36,7 @@ Item {
                     console.log("Date Time Setting Selected...")
                     // Display date time settings page
                     //
-                    stackView.push("DateTimeSetting.qml")
+                    stackView.push("DateTimeSetting.qml", StackView.PushTransition)
                 }
             }
 
@@ -50,7 +50,7 @@ Item {
                     console.log("Manage Players Setting Selected...")
                     // Display Player Manager page
                     //
-                    stackView.push("PlayerManager.qml")
+                    stackView.push("PlayerManager.qml", StackView.PushTransition)
                 }
             }
 
@@ -64,7 +64,7 @@ Item {
                     console.log("About Setting Selected...")
                     // Display the About page
                     //
-                    stackView.push("About.qml")
+                    stackView.push("About.qml", StackView.PushTransition)
                 }
             }
         }
@@ -80,7 +80,7 @@ Item {
         }
         backBtn.visible: true
         backBtn.onClicked: {
-            stackView.pop()
+            stackView.pop(StackView.PushTransition)
         }
     }
 }

@@ -63,8 +63,8 @@ Item {
                 text: qsTr("Lookup")
                 onClicked: {
                     playerModel.lookupPlayer(playerNameTextInput.text)
-                    playerNameTextInput.text = playerModel.playerName
-                    playerColorTextInput.text = playerModel.playerColor
+                    playerNameTextInput.text = playerModel.player1Name
+                    playerColorTextInput.text = playerModel.player1Color
                 }
             }
         }
@@ -74,7 +74,10 @@ Item {
         id: homePagefooter
         backBtn.visible: true
         backBtn.onClicked: {
-            stackView.pop()
+            stackView.pop(StackView.PushTransition)
+        }
+        homeBtn.onClicked: {
+            stackView.push("Home.qml", StackView.PushTransition)
         }
     }
 }

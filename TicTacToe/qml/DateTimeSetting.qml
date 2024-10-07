@@ -65,10 +65,10 @@ Item {
         id: dateTimePagefooter
         backBtn.visible: true
         backBtn.onClicked: {
-            stackView.pop()
+            stackView.pop(StackView.PushTransition)
         }
-        //homeBtn.onClicked: {
-            //stackView.pop(homePage)
-        //}
+        homeBtn.onClicked: {
+            stackView.push("Home.qml", StackView.PushTransition)
+        }
     }
 }

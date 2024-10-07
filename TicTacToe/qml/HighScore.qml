@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Controls
 
 Item {
     Header{
@@ -15,7 +16,6 @@ Item {
         model: highscoreModel // Use the registered model
 
         delegate: Item {
-            //width: parent.width
             height: 40
             Row {
                 spacing: 30
@@ -34,8 +34,7 @@ Item {
     Footer{
         id:highScoreFooter
         homeBtn.onClicked: {
-            stackView.pop()
+            stackView.pop(StackView.PushTransition)
         }
     }
-
 }
