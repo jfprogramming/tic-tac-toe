@@ -17,7 +17,9 @@ Item {
         console.log("player1Selected: " + playerName)
         playerModel.setPlayer1(playerName)
         // Set player1 color in the PlayArea.qml file
-        playArea.player1Color = playerModel.getPlayerColor(playerName)
+        var p1Color = playerModel.getPlayerColor(playerName)
+        console.log("p1Color:"+p1Color)
+        playArea.player1Color = p1Color
         showPlayer2Popup()
     }
 

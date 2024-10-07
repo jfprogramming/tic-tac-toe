@@ -155,6 +155,7 @@ void PlayerModel::lookupPlayer(const QString &name) {
  * \param name The player's name.
  */
 QString PlayerModel::getPlayerColor(const QString &playerName) {
-    qDebug() << __FUNCTION__ << "playerName: " << playerName;
+    qDebug() << __PRETTY_FUNCTION__ << "playerName:" << playerName;
+    qDebug() << __PRETTY_FUNCTION__ << "returned value:" << Controllers::dbManager.getPlayerColor(playerName);
     return Controllers::dbManager.getPlayerColor(playerName);
 }
