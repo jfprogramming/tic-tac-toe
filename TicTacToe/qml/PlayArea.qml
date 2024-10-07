@@ -6,15 +6,15 @@ Item {
     id: playArea
     objectName: "playArea"
 
-    property string player1: "player1"
-    property string player2: "player2"
+    property string currentP1: playerModel.player1
+    property string currentP2: playerModel.player2
 
     // Defualt player colors for the game
     // Player 1 is blue and Player 2 is red
     // These colors are used to set the icon color in the game
     //
-    property string player1Color: "#0078D4"
-    property string player2Color: "#FF0000"
+    property string player1Color: playerModel.getPlayerColor(currentP1)
+    property string player2Color: playerModel.getPlayerColor(currentP2)
 
     property int currentPlayer: 0
     property bool playerWon: false
@@ -48,8 +48,9 @@ Item {
 
     Component.onCompleted: {
         update()
-        console.log("gameMode:" + gameMode)
+        console.log("gameMode:" + gameMode + ", enabled:" + mainColumn.enabled)
         checkPlayerTurn()
+
     }
 
     function resetBoard() {
@@ -128,6 +129,7 @@ Item {
             playAreaHeader.savePlayerHighScore("Player2", p2Score)
         }
 
+        // Show the winning pop up message and reset the game boarder//
         gameWonPopup.open()
     }
 
@@ -266,11 +268,13 @@ Item {
                         icon.source: ""
                         icon.color: "#0078D4"
                         visible: false
+                        enabled: true
                         anchors.fill: parent
                         Component.onCompleted: {
                             itemIds.push(row1rect1Btn)
                         }
                         onClicked: {
+                            console.log("row1rect1Btn clicked")
                             row1rect1Btn.visible = true
                             row1rect1Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             playerSelectSquare("A1")

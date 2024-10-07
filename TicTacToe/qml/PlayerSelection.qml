@@ -9,28 +9,22 @@ Item {
     property bool player1Selection: true
     property bool player2Selection: false
 
-    signal player1SelectionComplete
-    signal player2SelectionComplete
-
     // Property to hold reference to PlayArea
     //
-    property Item playArea
+    //property Item playArea
 
     function player1Selected(playerName) {
         console.log("player1Selected: " + playerName)
-        playerModel.setPlayer1(playerName)
-        // Set player1 color in the PlayArea.qml file
-        var p1Color = playerModel.getPlayerColor(playerName)
-        console.log("p1Color:"+p1Color)
-        playArea.player1Color = p1Color
-        showPlayer2Popup()
+        playerModel.player1 = playerName
+        playerModel.player1Color = playerModel.getPlayerColor(playerName)
+
     }
 
     function player2Selected(playerName) {
         console.log("player2Selected: " + playerName)
         playerModel.setPlayer2(playerName)
-        // Set player2 color in the PlayArea.qml file
-        playArea.player2Color = playerModel.getPlayerColor(playerName)
+        playerModel.player2 = playerName
+        playerModel.player2Color = playerModel.getPlayerColor(playerName)
     }
 
     function checkGameType() {
@@ -109,21 +103,16 @@ Item {
                                 player2Selection = true
                                 player2Popup.open()
                             }
-                            else if (gameMode === "1Player") {
-                                emit player1SelectionComplete()
-                            }
-                        }
-                        else if (player2Selection) {
+                        } else if (player2Selection) {
                             player2Selected(model.name)
                             player2Selection = false
-                            emit player2SelectionComplete()
                         }
 
                         console.log(gameMode + " " + player1Selection + " " + player2Selection)
-                        if (gameMode === "1Player" && !player1Selection) {
+                        if (gameMode === "1Player" && player1Selection) {
                             stackView.push("PlayArea.qml")
                         }
-                        if (gameMode === "2Player" && !player1Selection && !player2Selection) {
+                        if (gameMode === "2Player" && player1Selection && player2Selection) {
                             stackView.push("PlayArea.qml")
                         }
                     }

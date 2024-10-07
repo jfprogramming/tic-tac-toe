@@ -31,29 +31,57 @@ bool PlayerModel::onAdminLogin(const QString &username, const QString &password)
 
 /**
  * \fn PlayerModel::setPlayerColor(const QString &newPlayerColor)
- * \brief Sets the player's color.
+ * \brief Sets the player1's color.
  * \param newPlayerColor The new player color.
  */
-void PlayerModel::setPlayerColor(const QString& newPlayerColor)
+void PlayerModel::setPlayer1Color(const QString& newPlayer1Color)
 {
-    if (m_playerColor == newPlayerColor)
+    if (m_player1Color == newPlayer1Color)
         return;
-    m_playerColor = newPlayerColor;
-    emit playerColorChanged(m_playerColor);
+    m_player1Color = newPlayer1Color;
+    emit player1ColorChanged(m_player1Color);
 }
 
 
 /**
  * \fn PlayerModel::setPlayerName(const QString &newPlayerName)
- * \brief Sets the player's name.
+ * \brief Sets the player1's name.
  * \param newPlayerName The new player name.
  */
-void PlayerModel::setPlayerName(const QString &newPlayerName)
+void PlayerModel::setPlayer1Name(const QString &newPlayer1Name)
 {
-    if (m_playerName == newPlayerName)
+    if (m_player1Name == newPlayer1Name)
         return;
-    m_playerName = newPlayerName;
-    emit playerNameChanged(m_playerName);
+    m_player1Name = newPlayer1Name;
+    emit player1NameChanged(m_player1Name);
+}
+
+
+/**
+ * \fn PlayerModel::setPlayer2Color(const QString &newPlayerColor)
+ * \brief Sets the player'2s color.
+ * \param newPlayerColor The new player color.
+ */
+void PlayerModel::setPlayer2Color(const QString& newPlayer2Color)
+{
+    if (m_player2Color == newPlayer2Color)
+        return;
+    m_player2Color = newPlayer2Color;
+    emit player2ColorChanged(m_player2Color);
+}
+
+
+/**
+ * \fn PlayerModel::setPlayer2Name(const QString &newPlayerName)
+ * \brief Sets the player2's name.
+ * \param newPlayerName The new player name.
+ */
+void PlayerModel::setPlayer2Name(const QString &newPlayer2Name)
+{
+    if (m_player2Name == newPlayer2Name)
+        return;
+    m_player2Name = newPlayer2Name;
+    emit player2NameChanged(m_player2Name);
 }
 
 
@@ -132,7 +160,7 @@ void PlayerModel::savePlayerToDatabase(const QString &name, const QString &color
 
 /**
  * \fn PlayerModel::lookupPlayer(const QString &name)
- * \brief Looks up the player's name and color in the database.
+ * \brief Admin Function  - Looks up the player's name and color in the database.
  * \param name The player's name.
  */
 void PlayerModel::lookupPlayer(const QString &name) {
@@ -140,11 +168,12 @@ void PlayerModel::lookupPlayer(const QString &name) {
     QMap<QString, QString> player = Controllers::dbManager.getPlayerByName(name);
     if (player.contains("playerName") && player.contains("playerColor")) {
         qDebug() << "Player found...";
-        setPlayerName(player["playerName"]);
-        setPlayerColor(player["playerColor"]);
+        // TOOD come up with new variablse for player look up
+        setPlayer1Name(player["playerName"]);
+        setPlayer1Color(player["playerColor"]);
     } else {
-        setPlayerName("DNE");
-        setPlayerColor("DNE");
+        setPlayer1Name("DNE");
+        setPlayer1Color("DNE");
     }
 }
 
