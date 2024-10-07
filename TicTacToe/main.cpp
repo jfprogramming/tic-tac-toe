@@ -7,6 +7,7 @@
 #include "controllers.h"
 #include "models/playermodel.h"
 #include "controllers/gamelogic.h"
+#include "controllers/systemsettings.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,15 +15,19 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     // Register GameLogic with QML
+    //
     qmlRegisterType<GameLogic>("GameLogic", 1, 0, "GameLogic");
 
     // Register PlayerModel with QML
+    //
     qmlRegisterType<PlayerModel>("PlayerModel", 1, 0, "PlayerModel");
 
     // Setup DB
+    //
     Controllers::dbManager.initializeDatabase();
 
     // Setup models for QML
+    //
     PlayerModel playerModel;
     engine.rootContext()->setContextProperty("playerModel", &playerModel);
 
@@ -30,8 +35,15 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("highscoreModel", &highscoreModel);
 
     // Setup game logic for QML
+    //
     GameLogic gameLogic;
     engine.rootContext()->setContextProperty("gameLogic", &gameLogic);
+
+    // System setttings for QML
+    //
+    SystemSettings settingsController;
+    engine.rootContext()->setContextProperty("settingsController", &settingsController);
+    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
     QObject::connect(
         &engine,
@@ -41,6 +53,7 @@ int main(int argc, char *argv[])
         Qt::QueuedConnection);
 
     // Start the UI
+    //
     engine.loadFromModule("TicTacToe", "Main");
 
     return app.exec();

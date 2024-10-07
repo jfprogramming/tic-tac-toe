@@ -77,6 +77,7 @@ Item {
             stackView.pop(StackView.PushTransition)
         }
         homeBtn.onClicked: {
+            stackView.clear()
             stackView.push("Home.qml", StackView.PushTransition)
         }
     }
