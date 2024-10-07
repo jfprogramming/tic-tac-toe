@@ -12,14 +12,16 @@ Item {
     function player1Selected(playerName) {
         console.log("player1Selected: " + playerName)
         playerModel.setPlayer1(playerName)
-        playerOneIcon.color = playerModel.getPlayerColor(playerName)
+        // TODO set player1 color in the PlayArea.qml file
+        playArea.player1Color.color = playerModel.getPlayerColor(playerName)
         showPlayer2Popup()
     }
 
     function player2Selected(playerName) {
         console.log("player2Selected: " + playerName)
         playerModel.setPlayer2(playerName)
-        playerTwoIcon.color = playerModel.getPlayerColor(playerName)
+        // TODO set player2 color in the PlayArea.qml file
+        playArea.player2Color.color = playerModel.getPlayerColor(playerName)
     }
 
 

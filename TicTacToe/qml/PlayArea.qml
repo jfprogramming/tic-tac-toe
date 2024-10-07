@@ -9,6 +9,13 @@ Item {
     property string player1: "player1"
     property string player2: "player2"
 
+    // Defualt player colors for the game
+    // Player 1 is blue and Player 2 is red
+    // These colors are used to set the icon color in the game
+    //
+    property string player1Color: "#0078D4"
+    property string player2Color: "#FF0000"
+
     property int currentPlayer: 0
     property bool playerWon: false
 
