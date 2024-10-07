@@ -274,7 +274,7 @@ void GameLogic::checkForCatsCradle()
 
     bool allFilled = true;
     for (const auto &cell : m_ticTacToeBoard) {
-        if (!cell) {
+        if (cell.second == ' ') {
             allFilled = false;
             break;
         }
@@ -297,14 +297,14 @@ void GameLogic::playerTwoTurn()
     if (m_currentPlayer == 2) {
         QStringList emptySquares;
         for (auto it = m_ticTacToeBoard.begin(); it != m_ticTacToeBoard.end(); ++it) {
-            if (!it.value()) {
+            if (it->second == ' ') {
                 emptySquares.append(it.key());
             }
         }
         if (!emptySquares.isEmpty()) {
             int randomIndex = QRandomGenerator::global()->bounded(emptySquares.size());
             QString selectedSquare = emptySquares[randomIndex];
-            m_ticTacToeBoard[selectedSquare] = true;
+            m_ticTacToeBoard[selectedSquare] = 'O'; // Assuming 'O' for player 2
             checkForHorizontalWin();
             checkForVerticalWin();
             checkForDiagonalWin();
