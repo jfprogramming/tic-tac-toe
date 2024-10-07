@@ -18,21 +18,35 @@ Item {
     property bool verticalWin: false
     property bool diagonalWin: false
 
-    function showHorizontalWin(row) {
+    function showHorizontalWin(row, color) {
         if (row === "A") win1.visible = true;
         else if (row === "B") win2.visible = true;
         else if (row === "C") win3.visible = true;
+        setColor(color);
     }
 
-    function showVerticalWin(col) {
+    function showVerticalWin(col, color) {
         if (col === "1") win4.visible = true;
         else if (col === "2") win5.visible = true;
         else if (col === "3") win6.visible = true;
+        setColor(color);
     }
 
-    function showDiagonalWin(diag) {
+    function showDiagonalWin(diag, color) {
         if (diag === "1") win7.visible = true;
         else if (diag === "2") win8.visible = true;
+        setColor(color);
+    }
+
+    function setColor(color) {
+        win1.color = color;
+        win2.color = color;
+        win3.color = color;
+        win4.color = color;
+        win5.color = color;
+        win6.color = color;
+        win7.color = color;
+        win8.color = color;
     }
 
     function resetWinStrikes() {

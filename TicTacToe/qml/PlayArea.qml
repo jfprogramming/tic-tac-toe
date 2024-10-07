@@ -150,22 +150,28 @@ Item {
     function setWinVariables(player) {
         console.log("setWinVariables player: " + player)
 
-
         mainColumn.enabled = false
         gameLogic.playerWon = true
         playerWon = true
 
-        if(currentPlayer == 1){
+        let playerColor = currentPlayer == 1 ? player1Color : player2Color
+
+        // Set the win strike color based on the player
+        //
+        winVisual.winStrikeColor = playerColor
+
+        if (currentPlayer == 1) {
             p1Score++
             playerModel.player1Score = p1Score
             playAreaHeader.savePlayerHighScore("Player1", p1Score)
-        } else if(currentPlayer == 2){
+        } else if (currentPlayer == 2) {
             p2Score++
             playerModel.player2Score = p2Score
             playAreaHeader.savePlayerHighScore("Player2", p2Score)
         }
 
-        // Show the winning pop up message and reset the game boarder//
+        // Show the winning pop up message and reset the game board
+        //
         gameWonPopup.open()
     }
 

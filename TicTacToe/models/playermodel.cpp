@@ -2,6 +2,7 @@
 #include "controllers.h"
 #include <QDebug>
 
+
 /**
  * \fn PlayerModel::PlayerModel(QObject* parent) : QObject(parent)
  * \brief Constructor for PlayerModel.
@@ -9,7 +10,7 @@
  */
 PlayerModel::PlayerModel(QObject* parent) : QObject(parent)
 {
-
+    qDebug() << __FUNCTION__ << "PlayerModel constructor";
 }
 
 /**
@@ -20,6 +21,8 @@ PlayerModel::PlayerModel(QObject* parent) : QObject(parent)
  * \return True if authentication is successful, false otherwise.
  */
 bool PlayerModel::onAdminLogin(const QString &username, const QString &password){
+    qDebug() << __FUNCTION__ << "Admin login...";
+
     if(Controllers::dbManager.authenticateAdmin(username, password)){
         return true;
     }
@@ -36,6 +39,8 @@ bool PlayerModel::onAdminLogin(const QString &username, const QString &password)
  */
 void PlayerModel::setPlayer1Color(const QString& newPlayer1Color)
 {
+    qDebug() << __FUNCTION__ << "setting player1Color...";
+
     if (m_player1Color == newPlayer1Color)
         return;
     m_player1Color = newPlayer1Color;
@@ -50,6 +55,8 @@ void PlayerModel::setPlayer1Color(const QString& newPlayer1Color)
  */
 void PlayerModel::setPlayer1Name(const QString &newPlayer1Name)
 {
+    qDebug() << __FUNCTION__ << "setting player1Name...";
+
     if (m_player1Name == newPlayer1Name)
         return;
     m_player1Name = newPlayer1Name;
@@ -64,6 +71,8 @@ void PlayerModel::setPlayer1Name(const QString &newPlayer1Name)
  */
 void PlayerModel::setPlayer2Color(const QString& newPlayer2Color)
 {
+    qDebug() << __FUNCTION__ << "setting player2Color...";
+
     if (m_player2Color == newPlayer2Color)
         return;
     m_player2Color = newPlayer2Color;
@@ -78,6 +87,8 @@ void PlayerModel::setPlayer2Color(const QString& newPlayer2Color)
  */
 void PlayerModel::setPlayer2Name(const QString &newPlayer2Name)
 {
+    qDebug() << __FUNCTION__ << "setting player2Name...";
+
     if (m_player2Name == newPlayer2Name)
         return;
     m_player2Name = newPlayer2Name;
@@ -92,17 +103,19 @@ void PlayerModel::setPlayer2Name(const QString &newPlayer2Name)
  */
 void PlayerModel::setPlayer1(const QString &newPlayer1) {
     qDebug() << __FUNCTION__ << "setting player1...";
+
     QString trimmedPlayer1 = newPlayer1;
     trimmedPlayer1 = trimmedPlayer1.remove(' ');
 
     if (m_player1 == trimmedPlayer1)
         return;
     m_player1 = trimmedPlayer1;
-    emit player1Changed();
 
-    // Look up player by name and set highscore
+    // Look up player by name
+    //
     lookupPlayer(m_player1);
     m_player1Id = Controllers::dbManager.getPlayerIdByName(m_player1);
+    m_player1Color = getPlayerColor(m_player1);
 
     emit player1Changed();
 }
@@ -123,11 +136,12 @@ void PlayerModel::setPlayer2(const QString &newPlayer2)
     if (m_player2 == trimmedPlayer2)
         return;
     m_player2 = trimmedPlayer2;
-    emit player1Changed();
 
-    // Look up player by name and set highscore
+    // Look up player by name
+    //
     lookupPlayer(m_player2);
     m_player2Id = Controllers::dbManager.getPlayerIdByName(m_player2);
+    m_player2Color = getPlayerColor(m_player2);
 
     emit player2Changed();
 }
@@ -184,7 +198,6 @@ void PlayerModel::lookupPlayer(const QString &name) {
  * \param name The player's name.
  */
 QString PlayerModel::getPlayerColor(const QString &playerName) {
-    qDebug() << __PRETTY_FUNCTION__ << "playerName:" << playerName;
-    qDebug() << __PRETTY_FUNCTION__ << "returned value:" << Controllers::dbManager.getPlayerColor(playerName);
+    qDebug() << __PRETTY_FUNCTION__ << "playerNumber:" << playerName;
     return Controllers::dbManager.getPlayerColor(playerName);
 }
