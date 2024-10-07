@@ -16,6 +16,9 @@ int main(int argc, char *argv[])
     // Register GameLogic with QML
     qmlRegisterType<GameLogic>("GameLogic", 1, 0, "GameLogic");
 
+    // Register PlayerModel with QML
+    qmlRegisterType<PlayerModel>("PlayerModel", 1, 0, "PlayerModel");
+
     // Setup DB
     Controllers::dbManager.initializeDatabase();
 

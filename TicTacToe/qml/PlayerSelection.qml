@@ -1,4 +1,5 @@
 import QtQuick
+import PlayerModel 1.0
 
 Item {
     id: playerSelectionItem
@@ -26,6 +27,16 @@ Item {
     Component.onCompleted: {
         checkGameType()
         console.log("gameMode: " + gameLogic.gameType)
+    }
+
+    PlayerModel {
+        id: playerModel
+        onPlayer1Changed: {
+            console.log("player1 changed: " + playerModel.player1)
+        }
+        onPlayer2Changed: {
+            console.log("player2 changed: " + playerModel.player2)
+        }
     }
 
     PopupMsg {
