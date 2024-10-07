@@ -158,13 +158,14 @@ Item {
         console.log("playerColor: " + playerColor)
 
         // Update win strike items with the player's color
-        if (gameLogic.horizontalWin) {
-            winVisual.showHorizontalWin(gameLogic.winRow, playerColor)
-        } else if (gameLogic.verticalWin) {
-            winVisual.showVerticalWin(gameLogic.winCol, playerColor)
-        } else if (gameLogic.diagonalWin) {
-            winVisual.showDiagonalWin(gameLogic.winDiag, playerColor)
-        }
+        //
+        // if (gameLogic.horizontalWin) {
+        //     winVisual.showHorizontalWin(gameLogic.winRow, playerColor)
+        // } else if (gameLogic.verticalWin) {
+        //     winVisual.showVerticalWin(gameLogic.winCol, playerColor)
+        // } else if (gameLogic.diagonalWin) {
+        //     winVisual.showDiagonalWin(gameLogic.winDiag, playerColor)
+        // }
 
         if (currentPlayer == 1) {
             p1Score++
@@ -646,12 +647,13 @@ Item {
     Connections {
         target: gameLogic
         function onPlayerWonChanged(winType, winLocation) {
+            var playerColor = currentPlayer == 1 ? player1Color : player2Color;
             if (winType === "horizontal") {
-                winVisual.showHorizontalWin(winLocation);
+                winVisual.showHorizontalWin(winLocation, playerColor);
             } else if (winType === "vertical") {
-                winVisual.showVerticalWin(winLocation);
+                winVisual.showVerticalWin(winLocation, playerColor);
             } else if (winType === "diagonal") {
-                winVisual.showDiagonalWin(winLocation);
+                winVisual.showDiagonalWin(winLocation, playerColor);
             }
         }
     }
