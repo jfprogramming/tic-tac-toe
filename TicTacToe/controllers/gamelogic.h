@@ -15,6 +15,7 @@ class GameLogic : public QObject
 
 public:
     explicit GameLogic(QObject *parent = nullptr);
+    ~GameLogic();
 
     // Setters and Getters
     //
