@@ -16,11 +16,9 @@ Item {
     property int p2Score: 0
 
     // Set the game type to 1Player or 2Player
-    //
     property string gameMode: ""
 
     // Create an array to store item IDs
-    //
     property var itemIds: []
     property var emptyImgs: []
 
@@ -28,18 +26,10 @@ Item {
     property alias row1Id: row1
     property alias row1Rect1ImgAlias: row1rect1Btn
 
-    // Get the current gameMode, currentPlayer, and playerWon
-    //
     function update(){
         gameMode = gameLogic.gameType
         playerWon = gameLogic.playerWon
-        var player = getCurrentPlayer()
-        if(player == 1){
-            currentPlayer = 2
-        }
-        else if(player == 2){
-            currentPlayer = 2
-        }
+        currentPlayer = getCurrentPlayer()
     }
 
     onVisibleChanged: {
@@ -50,77 +40,34 @@ Item {
     }
 
     Component.onCompleted: {
-        update();
-        console.log("gameMode:" + gameMode);
+        update()
+        console.log("gameMode:" + gameMode)
         checkPlayerTurn()
     }
 
     function resetBoard() {
-        console.log("reseting the game board...")
+        console.log("resetting the game board...")
 
         // Re-Enable Board Items
-        //
         for (const item of itemIds) {
-            item.source = ""
+            item.icon.source = ""
             item.visible = false
             item.enabled = true
         }
         mainColumn.enabled = true
 
-        /*** clear the board ***/
-
-        // Row 1
-        //
-        row1rect1Btn.source = ""
-        row1rect2Img.source = ""
-        row1rect3Img.source = ""
-        // Row 2
-        //
-        row2rect1Img.source = ""
-        row2rect2Img.source = ""
-        row2rect3Img.source = ""
-        // Row 3
-        //
-        row3rect1Img.source = ""
-        row3rect2Img.source = ""
-        row3rect3Img.source = ""
-
-        // Enable the play area
-        //
-        mainColumn.enabled = true
-
-        // Re-Enable and disabled squares
-        //
-        row1rect1.enabled = true
-        row1rect2.enabled = true
-        row1rect3.enabled = true
-
-        row2rect1.enabled = true
-        row2rect2.enabled = true
-        row2rect3.enabled = true
-
-        row3rect1.enabled = true
-        row3rect2.enabled = true
-        row3rect3.enabled = true
-
         // Reset the current player
-        //
         currentPlayer = 1
 
         // Reset the win variable
-        //
-        playerWon = false;
+        playerWon = false
 
         // Reset C++ objects
-        //
         gameLogic.resetCatsCradle()
         gameLogic.resetPlayerWon()
         gameLogic.resetTicTacToeBoard()
     }
 
-
-    // Display popup message for the next player
-    //
     PopupMsg {
         id: nextPlayerPopup
         modal: true
@@ -141,17 +88,13 @@ Item {
         }
     }
 
-
-    // JavaScript Functions interface with C++ GameLogic
-    //
     function getCurrentPlayer() {
-        console.log("getCurrentPlayer currentPlayer"+gameLogic.currentPlayer)
-
+        console.log("getCurrentPlayer currentPlayer" + gameLogic.currentPlayer)
         return gameLogic.currentPlayer
     }
 
     function checkPlayerTurn() {
-        console.log("checkPlayerTurn currentPlayer"+gameLogic.currentPlayer)
+        console.log("checkPlayerTurn currentPlayer" + gameLogic.currentPlayer)
 
         gameLogic.checkPlayerTurn()
         currentPlayer = gameLogic.currentPlayer
@@ -162,21 +105,20 @@ Item {
     }
 
     function setWinVariables(player) {
-        console.log("setWinVariables player: "+player)
+        console.log("setWinVariables player: " + player)
 
         mainColumn.enabled = false
         gameLogic.playerWon = true
         playerWon = true
 
         if(currentPlayer == 1){
-            p1Score = p1Score + 1
+            p1Score++
             playerModel.player1Score = p1Score
-            playAreaHeader.savePlayerHighScore("Player1", p1Score)  // Save to database
-        }
-        if(currentPlayer == 2){
-            p2Score = p2Score + 1
+            playAreaHeader.savePlayerHighScore("Player1", p1Score)
+        } else if(currentPlayer == 2){
+            p2Score++
             playerModel.player2Score = p2Score
-            playAreaHeader.savePlayerHighScore("Player2", p2Score)  // Save to database
+            playAreaHeader.savePlayerHighScore("Player2", p2Score)
         }
 
         gameWonPopup.open()
@@ -230,8 +172,6 @@ Item {
         return false
     }
 
-    // Only used for 1Player games
-    //
     function playerTwoTurn() {
         console.log("playerTwoTurn")
 
@@ -239,39 +179,26 @@ Item {
         const emptySquares = []
 
         if (gameMode == "1Player" && currentPlayer == 2) {
-            // find the empty squars
-            //
             for (const item of itemIds) {
-                console.log("Item ID:", item.objectName, "Source:", item.source)
-                if (item.source == "") {
-                    console.log("add item")
+                console.log("Item ID:", item.objectName, "Source:", item.icon.source)
+                if (item.icon.source == "") {
                     emptySquares.push(item)
                 }
             }
 
             if (emptySquares.length > 0) {
                 var randomIndex = Math.floor(Math.random() * emptySquares.length)
-                console.log("randomIndex: "+randomIndex)
                 selectedSquare = emptySquares[randomIndex]
-                console.log("Selected square ID:", selectedSquare.objectName)
-                selectedSquare.source = "qrc:///playerTwoIcon.png"
+                selectedSquare.icon.source = "qrc:///playerTwoIcon.png"
                 selectedSquare.visible = true
-                //selectedSquare.parent.endabled = false
 
-                // check for a winner
-                //
-                if(!checkForHorizontalWin()
-                        && !checkForVerticalWin()
-                        && !checkForDiagonalWin()){
-                    // if no winner check for a Tie Game
+                if(!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()){
                     checkForCatsCradle()
                 }
-            }
-            else {
+            } else {
                 console.log("No empty squares available.")
             }
-        }
-        else{
+        } else {
             console.log("not your turn computer... wait your turn!")
             gameLogic.playerTwoTurn()
             checkForHorizontalWin()
@@ -279,25 +206,22 @@ Item {
             checkForDiagonalWin()
             checkForCatsCradle()
         }
-        // End of computers turn enable input again if no player has won
-        //
+
         if(!playerWon){ mainColumn.enabled = true }
         checkPlayerTurn()
     }
 
-    // only used for 1Player games
-    //
     Timer {
         id: delayTimer
         interval: 1000 // 1 second
         onTriggered: {
             console.log("timer triggered...")
-            playerTwoTurn() // Call playerTwoTurn after the delay
+            playerTwoTurn()
         }
     }
 
-    Header{
-        id:playAreaHeader
+    Header {
+        id: playAreaHeader
         scoreAlias.visible: true
         player1Score: p1Score
         player2Score: p2Score
@@ -312,7 +236,7 @@ Item {
         anchors.bottom: playAreaFooter.top
         anchors.bottomMargin: 50
 
-        Column{
+        Column {
             id: mainColumn
             spacing: 10
             anchors.fill: parent
@@ -340,17 +264,13 @@ Item {
                             itemIds.push(row1rect1Btn)
                         }
                         onClicked: {
-                            // set X or O based on player 1 or player 2
                             row1rect1Btn.visible = true
                             row1rect1Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
-                            playerSelectSquare("A1")  // This should be the key for this specific square
-                            // check for a winner
+                            playerSelectSquare("A1")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
                                 if (gameMode == "1Player") {
-                                    // Start the timer after the click
                                     delayTimer.start()
                                 }
-                                // No Wins next player
                                 row1rect1.enabled = false
                                 mainColumn.enabled = false
                                 checkPlayerTurn()
@@ -378,13 +298,10 @@ Item {
                             row1rect2Btn.visible = true
                             row1rect2Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             playerSelectSquare("A2")
-                            // check for a winner
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
                                 if (gameMode == "1Player") {
-                                    // Start the timer after the click
                                     delayTimer.start()
                                 }
-                                // No Wins next player
                                 row1rect2.enabled = false
                                 mainColumn.enabled = false
                                 checkPlayerTurn()
@@ -412,13 +329,10 @@ Item {
                             row1rect3Btn.visible = true
                             row1rect3Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             playerSelectSquare("A3")
-                            // check for a winner
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
                                 if (gameMode == "1Player") {
-                                    // Start the timer after the click
                                     delayTimer.start()
                                 }
-                                // No Wins next player
                                 row1rect3.enabled = false
                                 mainColumn.enabled = false
                                 checkPlayerTurn()
@@ -451,17 +365,13 @@ Item {
                             itemIds.push(row2rect1Btn)
                         }
                         onClicked: {
-                            // set X or O based on player 1 or player 2
                             row2rect1Btn.visible = true
                             row2rect1Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             playerSelectSquare("B1")
-                            // check for a winner
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
                                 if (gameMode == "1Player") {
-                                    // Start the timer after the click
                                     delayTimer.start()
                                 }
-                                // No Wins next player
                                 row2rect1.enabled = false
                                 mainColumn.enabled = false
                                 checkPlayerTurn()
@@ -489,13 +399,10 @@ Item {
                             row2rect2Btn.visible = true
                             row2rect2Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             playerSelectSquare("B2")
-                            // check for a winner
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
                                 if (gameMode == "1Player") {
-                                    // Start the timer after the click
                                     delayTimer.start()
                                 }
-                                // No Wins next player
                                 row2rect2.enabled = false
                                 mainColumn.enabled = false
                                 checkPlayerTurn()
@@ -523,13 +430,10 @@ Item {
                             row2rect3Btn.visible = true
                             row2rect3Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             playerSelectSquare("B3")
-                            // check for a winner
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
                                 if (gameMode == "1Player") {
-                                    // Start the timer after the click
                                     delayTimer.start()
                                 }
-                                // No Wins next player
                                 row2rect3.enabled = false
                                 mainColumn.enabled = false
                                 checkPlayerTurn()
@@ -557,18 +461,15 @@ Item {
                         width: parent.width
                         height: parent.height
                         icon.source: ""
-                        icon.visible: false
+                        visible: false
                         onClicked: {
                             row3rect1Btn.icon.visible = true
                             row3rect1Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             playerSelectSquare("C1")
-                            // check for a winner
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
                                 if (gameMode == "1Player") {
-                                    // Start the timer after the click
                                     delayTimer.start()
                                 }
-                                // No Wins next player
                                 row3rect1.enabled = false
                                 mainColumn.enabled = false
                                 checkPlayerTurn()
@@ -587,18 +488,15 @@ Item {
                         width: parent.width
                         height: parent.height
                         icon.source: ""
-                        icon.visible: false
+                        visible: false
                         onClicked: {
                             row3rect2Btn.icon.visible = true
                             row3rect2Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             playerSelectSquare("C2")
-                            // check for a winner
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
                                 if (gameMode == "1Player") {
-                                    // Start the timer after the click
                                     delayTimer.start()
                                 }
-                                // No Wins next player
                                 row3rect2.enabled = false
                                 mainColumn.enabled = false
                                 checkPlayerTurn()
@@ -617,18 +515,15 @@ Item {
                         width: parent.width
                         height: parent.height
                         icon.source: ""
-                        icon.visible: false
+                        visible: false
                         onClicked: {
                             row3rect3Btn.icon.visible = true
                             row3rect3Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             playerSelectSquare("C3")
-                            // check for a winner
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
                                 if (gameMode == "1Player") {
-                                    // Start the timer after the click
                                     delayTimer.start()
                                 }
-                                // No Wins next player
                                 row3rect3.enabled = false
                                 mainColumn.enabled = false
                                 checkPlayerTurn()
@@ -637,17 +532,16 @@ Item {
                     }
                 }
             } // end row3
-        }// end column
-    }// end rectangle
+        } // end column
+    } // end rectangle
 
-    Footer{
-        id:playAreaFooter
+    Footer {
+        id: playAreaFooter
         homeBtn.onClicked: {
             stackView.pop()
         }
         homeBtnTxt: "Back"
-
-        resetBtnTxt: "Rest"
+        resetBtnTxt: "Reset"
         resetBtn.visible: true
         resetBtn.onClicked: {
             resetBoard()
