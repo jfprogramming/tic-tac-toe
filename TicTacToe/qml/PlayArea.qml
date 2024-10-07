@@ -611,6 +611,7 @@ Item {
             stackView.pop(StackView.PushTransition)
         }
         homeBtnTxt: "Back"
+        homeIcon: "qrc:///backArrow.png"
         resetBtnTxt: "Reset"
         resetBtn.visible: true
         resetBtn.onClicked: {

@@ -69,6 +69,7 @@ Item {
     Footer{
         id: adminLoginPagefooter
         homeBtnTxt: "Login"
+        homeIcon: "qrc:///login.png"
         signal loginBtnClicked(string username, string password)
         homeBtn.onClicked: {
             console.log("admin login signal")
