@@ -130,6 +130,12 @@ Item {
         }
     }
 
+    // Reset logic
+    //
+    function resetWinStrikes() {
+        winVisual.resetWinStrikes();
+    }
+
     function setWinVariables(player) {
         console.log("setWinVariables player: " + player)
 
@@ -612,6 +618,22 @@ Item {
         } // end column
     } // end rectangle
 
+
+    // WinStrike Connections
+    //
+    Connections {
+        target: gameLogic
+        function onPlayerWonChanged(winType, winLocation) {
+            if (winType === "horizontal") {
+                winVisual.showHorizontalWin(winLocation);
+            } else if (winType === "vertical") {
+                winVisual.showVerticalWin(winLocation);
+            } else if (winType === "diagonal") {
+                winVisual.showDiagonalWin(winLocation);
+            }
+        }
+    }
+
     Footer {
         id: playAreaFooter
         homeBtn.onClicked: {
@@ -624,6 +646,7 @@ Item {
         resetBtn.visible: true
         resetBtn.onClicked: {
             resetBoard()
+            resetWinStrikes();
         }
     }
 }

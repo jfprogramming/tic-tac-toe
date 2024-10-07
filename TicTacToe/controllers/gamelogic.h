@@ -57,8 +57,8 @@ public slots:
 
 signals:
     void playerChanged();
-    void playerWonChanged();
-    void gameWon();
+    //void playerWonChanged();
+    void playerWonChanged(QString winType, QString winLocation);  // Updated signal
     void catsCradleMatch();
     void gameTypeChanged();
 

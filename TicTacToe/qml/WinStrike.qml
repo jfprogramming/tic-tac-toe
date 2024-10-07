@@ -14,6 +14,38 @@ Item {
     property alias winStrike7: win7.visible
     property alias winStrike8: win8.visible
 
+    property bool horizontalWin: false
+    property bool verticalWin: false
+    property bool diagonalWin: false
+
+    function showHorizontalWin(row) {
+        if (row === "A") win1.visible = true;
+        else if (row === "B") win2.visible = true;
+        else if (row === "C") win3.visible = true;
+    }
+
+    function showVerticalWin(col) {
+        if (col === "1") win4.visible = true;
+        else if (col === "2") win5.visible = true;
+        else if (col === "3") win6.visible = true;
+    }
+
+    function showDiagonalWin(diag) {
+        if (diag === "1") win7.visible = true;
+        else if (diag === "2") win8.visible = true;
+    }
+
+    function resetWinStrikes() {
+        win1.visible = false;
+        win2.visible = false;
+        win3.visible = false;
+        win4.visible = false;
+        win5.visible = false;
+        win6.visible = false;
+        win7.visible = false;
+        win8.visible = false;
+    }
+
     // win rectangles are used to display the
     // visual cross out line for 3 in a row
     //

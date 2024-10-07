@@ -69,7 +69,7 @@ void GameLogic::setPlayerWon(bool won)
     qDebug() << __FUNCTION__ << "player: " << m_currentPlayer << " won:" << won;
 
     m_playerWon = won;
-    emit playerWonChanged();
+    //emit playerWonChanged();
 }
 
 
@@ -153,7 +153,7 @@ void GameLogic::checkForHorizontalWin()
         if (m_ticTacToeBoard[row + "1"] && m_ticTacToeBoard[row + "2"] && m_ticTacToeBoard[row + "3"]) {
             qDebug() << __FUNCTION__ << "player won:" << m_currentPlayer;
             setPlayerWon(true);
-            emit gameWon(row);
+            emit playerWonChanged("horizontal", row);  // Emit row (A, B, or C) that won
             return;
         }
     }
@@ -173,7 +173,7 @@ void GameLogic::checkForVerticalWin()
         if (m_ticTacToeBoard["A" + col] && m_ticTacToeBoard["B" + col] && m_ticTacToeBoard["C" + col]) {
             qDebug() << __FUNCTION__ << "player won:" << m_currentPlayer;
             setPlayerWon(true);
-            emit gameWon();
+            emit playerWonChanged("vertical", col);  // Emit column (1, 2, or 3)
             return;
         }
     }
@@ -188,11 +188,14 @@ void GameLogic::checkForDiagonalWin()
 {
     qDebug() << __FUNCTION__ << "Checking for Diagonal Win";
 
-    if ((m_ticTacToeBoard["A1"] && m_ticTacToeBoard["B2"] && m_ticTacToeBoard["C3"]) ||
-        (m_ticTacToeBoard["A3"] && m_ticTacToeBoard["B2"] && m_ticTacToeBoard["C1"])) {
-        qDebug() << __FUNCTION__ << "player won:" << m_currentPlayer;
+    if ((m_ticTacToeBoard["A1"] && m_ticTacToeBoard["B2"] && m_ticTacToeBoard["C3"])) {
         setPlayerWon(true);
-        emit gameWon();
+        emit playerWonChanged("diagonal", "1");  // Emit diagonal type
+        return;
+    } else if ((m_ticTacToeBoard["A3"] && m_ticTacToeBoard["B2"] && m_ticTacToeBoard["C1"])) {
+        setPlayerWon(true);
+        emit playerWonChanged("diagonal", "2");  // Emit diagonal type
+        return;
     }
 }
 
