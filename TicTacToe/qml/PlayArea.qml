@@ -249,6 +249,16 @@ Item {
                 selectedSquare.icon.source = "qrc:///playerTwoIcon.png"
                 selectedSquare.visible = true
 
+                // Convert the square select to same naming convention as the C++ std::map object
+                //
+                var squareKey = selectedSquare.id == "row1rect1Btn" ? "A1" : selectedSquare.id == "row1rect2Btn" ? "A2" : selectedSquare.id == "row1rect3Btn" ? "A3" :
+                                selectedSquare.id == "row2rect1Btn" ? "B1" : selectedSquare.id == "row2rect2Btn" ? "B2" : selectedSquare.id == "row2rect3Btn" ? "B3" :
+                                selectedSquare.id == "row3rect1Btn" ? "C1" : selectedSquare.id == "row3rect2Btn" ? "C2" : "C3"
+
+                // set the square selected
+                //
+                gameLogic.setSquareSelected(squareKey)
+
                 // set the icon color
                 //
                 if(selectedSquare.icon.source == "qrc:///playerOneIcon.png"){

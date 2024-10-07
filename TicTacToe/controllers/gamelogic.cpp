@@ -207,6 +207,9 @@ void GameLogic::checkForHorizontalWin()
 
     const QStringList rows = {"A", "B", "C"};
     for (const auto& row : rows) {
+        qDebug() << "row1:" << m_ticTacToeBoard[row + "1"];
+        qDebug() << "row2:" << m_ticTacToeBoard[row + "2"];
+        qDebug() << "row3:" << m_ticTacToeBoard[row + "3"];
         if (m_ticTacToeBoard[row + "1"] != ' ' &&
             m_ticTacToeBoard[row + "1"] == m_ticTacToeBoard[row + "2"] &&
             m_ticTacToeBoard[row + "2"] == m_ticTacToeBoard[row + "3"]) {
@@ -298,7 +301,7 @@ void GameLogic::playerTwoTurn()
         QStringList emptySquares;
         for (auto it = m_ticTacToeBoard.begin(); it != m_ticTacToeBoard.end(); ++it) {
             if (it->second == ' ') {
-                emptySquares.append(it.key());
+                emptySquares.append(it->first);
             }
         }
         if (!emptySquares.isEmpty()) {
