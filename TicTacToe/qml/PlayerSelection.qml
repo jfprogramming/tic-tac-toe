@@ -155,7 +155,8 @@ Item {
         id: playerSelectionfooter
         homeIcon: "qrc:///backArrow.png"
         homeBtn.onClicked: {
-            stackView.pop(StackView.PushTransition)
+            stackView.clear()
+            stackView.push("Home.qml", StackView.PushTransition)
         }
         homeBtnTxt: "Back"
     }

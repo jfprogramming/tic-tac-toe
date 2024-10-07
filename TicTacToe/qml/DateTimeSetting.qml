@@ -49,15 +49,23 @@ Item {
                 width: 100
                 height: 50
             }
-            Button{
-                id:saveBtn
-                text: "Save"
+
+            Button {
+                text: "Load"
                 onClicked: {
-                    // TODO implement save feature - set application time / set OS date time
-                    console.log("save date and time... "+setHourTextInput.text+":"+setMinutesTextInput.text+":"+setSecondsTextInput.text)
+                    dateTimeInput.text = settingsController.getDateTimeSettings();
                 }
             }
 
+            Button {
+                text: "Save"
+                onClicked: {
+                    // TODO implement save feature - set application time / set OS date time
+                    settingsController.setDateTimeSettings(dateTimeInput.text);
+
+                    console.log("save date and time... "+setHourTextInput.text+":"+setMinutesTextInput.text+":"+setSecondsTextInput.text)
+                }
+            }
         }
     }
 

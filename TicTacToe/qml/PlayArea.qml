@@ -608,7 +608,8 @@ Item {
     Footer {
         id: playAreaFooter
         homeBtn.onClicked: {
-            stackView.pop(StackView.PushTransition)
+            stackView.clear()
+            stackView.push("Home.qml", StackView.PushTransition)
         }
         homeBtnTxt: "Back"
         homeIcon: "qrc:///backArrow.png"

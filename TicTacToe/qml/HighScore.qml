@@ -34,7 +34,8 @@ Item {
     Footer{
         id:highScoreFooter
         homeBtn.onClicked: {
-            stackView.pop(StackView.PushTransition)
+            stackView.clear()
+            stackView.push("Home.qml", StackView.PushTransition)
         }
     }
 }
