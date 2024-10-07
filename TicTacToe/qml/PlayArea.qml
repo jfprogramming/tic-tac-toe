@@ -91,6 +91,17 @@ Item {
         gameLogic.resetCatsCradle()
         gameLogic.resetPlayerWon()
         gameLogic.resetTicTacToeBoard()
+
+        // Reset win strikes visibility
+        //
+        winVisual.winStrike1 = false
+        winVisual.winStrike2 = false
+        winVisual.winStrike3 = false
+        winVisual.winStrike4 = false
+        winVisual.winStrike5 = false
+        winVisual.winStrike6 = false
+        winVisual.winStrike7 = false
+        winVisual.winStrike8 = false
     }
 
     PopupDialog {
