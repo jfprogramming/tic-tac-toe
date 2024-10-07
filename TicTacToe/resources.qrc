@@ -14,5 +14,6 @@
         <file alias="about.png">images/about.png</file>
         <file alias="playerTwoIcon.png">images/playerTwo.png</file>
         <file alias="playerOneIcon.png">images/playerOne.png</file>
+        <file>qml/TicTacToeBoard.qml</file>
     </qresource>
 </RCC>

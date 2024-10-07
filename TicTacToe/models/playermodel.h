@@ -32,7 +32,7 @@ public:
     QString getPlayer1() const { return m_player1; }
     QString getPlayer2() const { return m_player2; }
 
-    QString getPlayerColor(const QString &playerName);
+    Q_INVOKABLE QString getPlayerColor(const QString &playerName);
 
 signals:
     void playerNameChanged(const QString &playerName);

@@ -9,21 +9,24 @@ Item {
     property bool player1Selection: true
     property bool player2Selection: false
 
+    // Property to hold reference to PlayArea
+    //
+    property Item playArea
+
     function player1Selected(playerName) {
         console.log("player1Selected: " + playerName)
         playerModel.setPlayer1(playerName)
-        // TODO set player1 color in the PlayArea.qml file
-        playArea.player1Color.color = playerModel.getPlayerColor(playerName)
+        // Set player1 color in the PlayArea.qml file
+        playArea.player1Color = playerModel.getPlayerColor(playerName)
         showPlayer2Popup()
     }
 
     function player2Selected(playerName) {
         console.log("player2Selected: " + playerName)
         playerModel.setPlayer2(playerName)
-        // TODO set player2 color in the PlayArea.qml file
-        playArea.player2Color.color = playerModel.getPlayerColor(playerName)
+        // Set player2 color in the PlayArea.qml file
+        playArea.player2Color = playerModel.getPlayerColor(playerName)
     }
-
 
     function checkGameType() {
         playerSelectionItem.gameMode = gameLogic.gameType
@@ -89,21 +92,20 @@ Item {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        playerSelectionGridView.currentIndex = model.index;
+                        playerSelectionGridView.currentIndex = model.index
                         console.log("item clicked... " + playerSelectionGridView.currentIndex)
 
                         checkGameType()
 
                         if (player1Selection) {
-                            playerModel.setPlayer1(model.name);
+                            player1Selected(model.name)
                             if (gameMode === "2Player") {
                                 player1Selection = false
                                 player2Selection = true
                                 player2Popup.open()
                             }
-                        }
-                        else if (player2Selection) {
-                            playerModel.setPlayer2(model.name);
+                        } else if (player2Selection) {
+                            player2Selected(model.name)
                             player2Selection = false
                         }
 
@@ -130,7 +132,7 @@ Item {
         color: "white"
         anchors.top: playerSelectionHeader.bottom
         anchors.topMargin: 50
-        anchors.bottom: playerSelectionHeader.top
+        anchors.bottom: playerSelectionfooter.top
         anchors.bottomMargin: 50
         GridView {
             id: playerSelectionGridView
@@ -143,8 +145,8 @@ Item {
             cellHeight: 150
             delegate: playerListdelegate
             Component.onCompleted: {
-                playerSelectionGridView.currentIndex = -1;
-                console.log("1current index: " + playerSelectionGridView.currentIndex)
+                playerSelectionGridView.currentIndex = -1
+                console.log("current index: " + playerSelectionGridView.currentIndex)
             }
         }
     }
