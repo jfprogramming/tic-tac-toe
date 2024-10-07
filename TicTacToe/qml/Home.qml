@@ -6,6 +6,12 @@ Item {
     id: homePage
     objectName: "homePage"
 
+    onVisibleChanged: {
+        if(visible){
+            gameLogic.gameType = ""
+        }
+    }
+
     Header{
         id:homePageHeader
     }

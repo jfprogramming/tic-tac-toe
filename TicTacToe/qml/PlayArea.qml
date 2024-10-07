@@ -6,15 +6,15 @@ Item {
     id: playArea
     objectName: "playArea"
 
-    property string currentP1: playerModel.player1
-    property string currentP2: playerModel.player2
-
-    // Defualt player colors for the game
-    // Player 1 is blue and Player 2 is red
-    // These colors are used to set the icon color in the game
+    // TODO you player model to set the currentPlayer1 and currentPlayer2 in the PlayArea
     //
-    property string player1Color: playerModel.getPlayerColor(currentP1)
-    property string player2Color: playerModel.getPlayerColor(currentP2)
+    //property string currentP1: playerModel.player1
+    //property string currentP2: playerModel.player2
+
+    // Defualt player colors for the game | Player 1 is blue and Player 2 is red
+    //
+    property string player1Color: "#0078D7" //playerModel.getPlayerColor(currentP1)
+    property string player2Color: "#FF0000" //playerModel.getPlayerColor(currentP2)
 
     property int currentPlayer: 0
     property bool playerWon: false
@@ -22,12 +22,26 @@ Item {
     property int p1Score: 0
     property int p2Score: 0
 
+    // Icon colors holders - defualt is Grey ("#808080")
+    //
+    property string r1b1IconColor: "#808080"
+    property string r1b2IconColor: "#808080"
+    property string r1b3IconColor: "#808080"
+    property string r2b1IconColor: "#808080"
+    property string r2b2IconColor: "#808080"
+    property string r2b3IconColor: "#808080"
+    property string r3b1IconColor: "#808080"
+    property string r3b2IconColor: "#808080"
+    property string r3b3IconColor: "#808080"
+
     // Set the game type to 1Player or 2Player
+    //
     property string gameMode: ""
 
     // Create an array to store item IDs
+    //
     property var itemIds: []
-    property var emptyImgs: []
+    property var emptyIcons: []
 
     property alias rowWidth: row1.width
     property alias row1Id: row1
@@ -57,20 +71,23 @@ Item {
         console.log("resetting the game board...")
 
         // Re-Enable Board Items
+        //
         for (const item of itemIds) {
             item.icon.source = ""
-            item.visible = false
-            item.enabled = true
+            item.parent.enabled = true
         }
         mainColumn.enabled = true
 
         // Reset the current player
+        //
         currentPlayer = 1
 
         // Reset the win variable
+        //
         playerWon = false
 
         // Reset C++ objects
+        //
         gameLogic.resetCatsCradle()
         gameLogic.resetPlayerWon()
         gameLogic.resetTicTacToeBoard()
@@ -107,6 +124,7 @@ Item {
         gameLogic.checkPlayerTurn()
         currentPlayer = gameLogic.currentPlayer
         console.log("set player turn to: " + currentPlayer)
+
         if(gameMode == "2Player"){
             nextPlayerPopup.open()
         }
@@ -201,6 +219,15 @@ Item {
                 selectedSquare.icon.source = "qrc:///playerTwoIcon.png"
                 selectedSquare.visible = true
 
+                // set the icon color
+                //
+                if(selectedSquare.icon.source == "qrc:///playerOneIcon.png"){
+                    selectedSquare.icon.color = player1Color
+                }
+                else{
+                    selectedSquare.icon.color = player2Color
+                }
+
                 if(!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()){
                     checkForCatsCradle()
                 }
@@ -266,20 +293,21 @@ Item {
                     Button {
                         id: row1rect1Btn
                         icon.source: ""
-                        icon.color: "#0078D4"
-                        visible: false
-                        enabled: true
+                        icon.color: r1b1IconColor
+                        icon.height: parent.height
+                        icon.width: parent.width
                         anchors.fill: parent
                         Component.onCompleted: {
                             itemIds.push(row1rect1Btn)
                         }
                         onClicked: {
-                            console.log("row1rect1Btn clicked")
-                            row1rect1Btn.visible = true
+                            console.log("row1rect1Btn clicked gameMode:"+gameMode + ", "+gameLogic.gameType)
                             row1rect1Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                            r1b1IconColor = icon.source == "qrc:///playerOneIcon.png" ? player1Color : player2Color
                             playerSelectSquare("A1")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
                                 if (gameMode == "1Player") {
+                                    console.log("start 2nd player timer...")
                                     delayTimer.start()
                                 }
                                 row1rect1.enabled = false
@@ -299,18 +327,20 @@ Item {
                     Button {
                         id: row1rect2Btn
                         icon.source: ""
-                        icon.color: "#0078D4"
-                        visible: false
+                        icon.color: r1b2IconColor
+                        icon.height: parent.height
+                        icon.width: parent.width
                         anchors.fill: parent
                         Component.onCompleted: {
                             itemIds.push(row1rect2Btn)
                         }
                         onClicked: {
-                            row1rect2Btn.visible = true
                             row1rect2Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                            r1b2IconColor = icon.source == "qrc:///playerOneIcon.png" ? player1Color : player2Color
                             playerSelectSquare("A2")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
                                 if (gameMode == "1Player") {
+                                    console.log("start 2nd player timer...")
                                     delayTimer.start()
                                 }
                                 row1rect2.enabled = false
@@ -330,18 +360,20 @@ Item {
                     Button {
                         id: row1rect3Btn
                         icon.source: ""
-                        icon.color: "#0078D4"
-                        visible: false
+                        icon.color: r1b3IconColor
+                        icon.height: parent.height
+                        icon.width: parent.width
                         anchors.fill: parent
                         Component.onCompleted: {
                             itemIds.push(row1rect3Btn)
                         }
                         onClicked: {
-                            row1rect3Btn.visible = true
                             row1rect3Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                            r1b3IconColor = icon.source == "qrc:///playerOneIcon.png" ? player1Color : player2Color
                             playerSelectSquare("A3")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
                                 if (gameMode == "1Player") {
+                                    console.log("start 2nd player timer...")
                                     delayTimer.start()
                                 }
                                 row1rect3.enabled = false
@@ -369,18 +401,20 @@ Item {
                     Button {
                         id: row2rect1Btn
                         icon.source: ""
-                        icon.color: "#0078D4"
-                        visible: false
+                        icon.color: r2b1IconColor
+                        icon.height: parent.height
+                        icon.width: parent.width
                         anchors.fill: parent
                         Component.onCompleted: {
                             itemIds.push(row2rect1Btn)
                         }
                         onClicked: {
-                            row2rect1Btn.visible = true
                             row2rect1Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                            r2b1IconColor = icon.source == "qrc:///playerOneIcon.png" ? player1Color : player2Color
                             playerSelectSquare("B1")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
                                 if (gameMode == "1Player") {
+                                    console.log("start 2nd player timer...")
                                     delayTimer.start()
                                 }
                                 row2rect1.enabled = false
@@ -400,18 +434,20 @@ Item {
                     Button {
                         id: row2rect2Btn
                         icon.source: ""
-                        icon.color: "#0078D4"
-                        visible: false
+                        icon.color: r2b2IconColor
+                        icon.height: parent.height
+                        icon.width: parent.width
                         anchors.fill: parent
                         Component.onCompleted: {
                             itemIds.push(row2rect2Btn)
                         }
                         onClicked: {
-                            row2rect2Btn.visible = true
                             row2rect2Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                            r2b2IconColor = icon.source == "qrc:///playerOneIcon.png" ? player1Color : player2Color
                             playerSelectSquare("B2")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
                                 if (gameMode == "1Player") {
+                                    console.log("start 2nd player timer...")
                                     delayTimer.start()
                                 }
                                 row2rect2.enabled = false
@@ -431,18 +467,20 @@ Item {
                     Button {
                         id: row2rect3Btn
                         icon.source: ""
-                        icon.color: "#0078D4"
-                        visible: false
+                        icon.color: r2b3IconColor
+                        icon.height: parent.height
+                        icon.width: parent.width
                         anchors.fill: parent
                         Component.onCompleted: {
                             itemIds.push(row2rect3Btn)
                         }
                         onClicked: {
-                            row2rect3Btn.visible = true
                             row2rect3Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                            r2b3IconColor = icon.source == "qrc:///playerOneIcon.png" ? player1Color : player2Color
                             playerSelectSquare("B3")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
                                 if (gameMode == "1Player") {
+                                    console.log("start 2nd player timer...")
                                     delayTimer.start()
                                 }
                                 row2rect3.enabled = false
@@ -472,13 +510,20 @@ Item {
                         width: parent.width
                         height: parent.height
                         icon.source: ""
-                        visible: false
+                        icon.color: r3b1IconColor
+                        icon.height: parent.height
+                        icon.width: parent.width
+                        anchors.fill: parent
+                        Component.onCompleted: {
+                            itemIds.push(row3rect1Btn)
+                        }
                         onClicked: {
-                            row3rect1Btn.icon.visible = true
                             row3rect1Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                            r3b1IconColor = icon.source == "qrc:///playerOneIcon.png" ? player1Color : player2Color
                             playerSelectSquare("C1")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
                                 if (gameMode == "1Player") {
+                                    console.log("start 2nd player timer...")
                                     delayTimer.start()
                                 }
                                 row3rect1.enabled = false
@@ -499,13 +544,20 @@ Item {
                         width: parent.width
                         height: parent.height
                         icon.source: ""
-                        visible: false
+                        icon.color: r3b2IconColor
+                        icon.height: parent.height
+                        icon.width: parent.width
+                        anchors.fill: parent
+                        Component.onCompleted: {
+                            itemIds.push(row3rect2Btn)
+                        }
                         onClicked: {
-                            row3rect2Btn.icon.visible = true
                             row3rect2Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                            r3b2IconColor = icon.source == "qrc:///playerOneIcon.png" ? player1Color : player2Color
                             playerSelectSquare("C2")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
                                 if (gameMode == "1Player") {
+                                    console.log("start 2nd player timer...")
                                     delayTimer.start()
                                 }
                                 row3rect2.enabled = false
@@ -526,13 +578,20 @@ Item {
                         width: parent.width
                         height: parent.height
                         icon.source: ""
-                        visible: false
+                        icon.color: r3b3IconColor
+                        icon.height: parent.height
+                        icon.width: parent.width
+                        anchors.fill: parent
+                        Component.onCompleted: {
+                            itemIds.push(row3rect3Btn)
+                        }
                         onClicked: {
-                            row3rect3Btn.icon.visible = true
                             row3rect3Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                            r3b3IconColor = icon.source == "qrc:///playerOneIcon.png" ? player1Color : player2Color
                             playerSelectSquare("C3")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
                                 if (gameMode == "1Player") {
+                                    console.log("start 2nd player timer...")
                                     delayTimer.start()
                                 }
                                 row3rect3.enabled = false

@@ -73,7 +73,7 @@ Rectangle{
         text: qsTr("Home")
         onClicked: {
             console.log("home button clicked...")
-            gameLogic.gameType = ""
+            //gameLogic.gameType = ""
         }
     }
 }

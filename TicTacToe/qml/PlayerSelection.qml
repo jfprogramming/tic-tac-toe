@@ -17,7 +17,6 @@ Item {
         console.log("player1Selected: " + playerName)
         playerModel.player1 = playerName
         playerModel.player1Color = playerModel.getPlayerColor(playerName)
-
     }
 
     function player2Selected(playerName) {
@@ -28,7 +27,7 @@ Item {
     }
 
     function checkGameType() {
-        playerSelectionItem.gameMode = gameLogic.gameType
+        gameMode = gameLogic.gameType
     }
 
     Component.onCompleted: {
@@ -103,16 +102,17 @@ Item {
                                 player2Selection = true
                                 player2Popup.open()
                             }
+                            player1Selection = false
                         } else if (player2Selection) {
                             player2Selected(model.name)
                             player2Selection = false
                         }
 
                         console.log(gameMode + " " + player1Selection + " " + player2Selection)
-                        if (gameMode === "1Player" && player1Selection) {
+                        if (gameMode === "1Player" && !player1Selection) {
                             stackView.push("PlayArea.qml")
                         }
-                        if (gameMode === "2Player" && player1Selection && player2Selection) {
+                        if (gameMode === "2Player" && !player1Selection && !player2Selection) {
                             stackView.push("PlayArea.qml")
                         }
                     }

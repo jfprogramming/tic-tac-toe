@@ -260,7 +260,7 @@ void GameLogic::resetTicTacToeBoard()
         {"B1", false}, {"B2", false}, {"B3", false},
         {"C1", false}, {"C2", false}, {"C3", false}
     };
-    setCurrentPlayer(0);
+    setCurrentPlayer(1);
     setPlayerWon(false);
     resetCatsCradle();
 }
