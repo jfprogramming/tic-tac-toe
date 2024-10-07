@@ -237,7 +237,7 @@ Item {
 
         if (gameMode == "1Player" && currentPlayer == 2) {
             for (const item of itemIds) {
-                console.log("Item ID:", item.objectName, "Source:", item.icon.source)
+                console.log("Item ID:", item.id, "Source:", item.icon.source)
                 if (item.icon.source == "") {
                     emptySquares.push(item)
                 }
@@ -249,11 +249,35 @@ Item {
                 selectedSquare.icon.source = "qrc:///playerTwoIcon.png"
                 selectedSquare.visible = true
 
+                console.log("selectedSquare: " + selectedSquare.objectName)
+
                 // Convert the square select to same naming convention as the C++ std::map object
                 //
-                var squareKey = selectedSquare.id == "row1rect1Btn" ? "A1" : selectedSquare.id == "row1rect2Btn" ? "A2" : selectedSquare.id == "row1rect3Btn" ? "A3" :
-                                selectedSquare.id == "row2rect1Btn" ? "B1" : selectedSquare.id == "row2rect2Btn" ? "B2" : selectedSquare.id == "row2rect3Btn" ? "B3" :
-                                selectedSquare.id == "row3rect1Btn" ? "C1" : selectedSquare.id == "row3rect2Btn" ? "C2" : "C3"
+                var squareKey = "";
+                if (selectedSquare.objectName == "row1rect1Btn") {
+                    squareKey = "A1";
+                } else if (selectedSquare.objectName == "row1rect2Btn") {
+                    squareKey = "A2";
+                } else if (selectedSquare.objectName == "row1rect3Btn") {
+                    squareKey = "A3";
+                } else if (selectedSquare.objectName == "row2rect1Btn") {
+                    squareKey = "B1";
+                } else if (selectedSquare.objectName == "row2rect2Btn") {
+                    squareKey = "B2";
+                } else if (selectedSquare.objectName == "row2rect3Btn") {
+                    squareKey = "B3";
+                } else if (selectedSquare.objectName == "row3rect1Btn") {
+                    squareKey = "C1";
+                } else if (selectedSquare.objectName == "row3rect2Btn") {
+                    squareKey = "C2";
+                } else if (selectedSquare.objectName == "row3rect3Btn") {
+                    squareKey = "C3";
+                }
+                else{
+                    console.log("error computer selection....")
+                }
+
+                console.log("squareKey: "+squareKey)
 
                 // set the square selected
                 //
@@ -338,6 +362,7 @@ Item {
                     enabled: true
                     Button {
                         id: row1rect1Btn
+                        objectName: "row1rect1Btn"
                         icon.source: ""
                         icon.color: r1b1IconColor
                         icon.height: parent.height
@@ -372,6 +397,7 @@ Item {
                     enabled: true
                     Button {
                         id: row1rect2Btn
+                        objectName: "row1rect2Btn"
                         icon.source: ""
                         icon.color: r1b2IconColor
                         icon.height: parent.height
@@ -405,6 +431,7 @@ Item {
                     enabled: true
                     Button {
                         id: row1rect3Btn
+                        objectName: "row1rect3Btn"
                         icon.source: ""
                         icon.color: r1b3IconColor
                         icon.height: parent.height
@@ -446,6 +473,7 @@ Item {
                     enabled: true
                     Button {
                         id: row2rect1Btn
+                        objectName: "row2rect1Btn"
                         icon.source: ""
                         icon.color: r2b1IconColor
                         icon.height: parent.height
@@ -479,6 +507,7 @@ Item {
                     enabled: true
                     Button {
                         id: row2rect2Btn
+                        objectName: "row2rect2Btn"
                         icon.source: ""
                         icon.color: r2b2IconColor
                         icon.height: parent.height
@@ -512,6 +541,7 @@ Item {
                     enabled: true
                     Button {
                         id: row2rect3Btn
+                        objectName: "row2rect3Btn"
                         icon.source: ""
                         icon.color: r2b3IconColor
                         icon.height: parent.height
@@ -553,6 +583,7 @@ Item {
                     enabled: true
                     Button {
                         id: row3rect1Btn
+                        objectName: "row3rect1Btn"
                         width: parent.width
                         height: parent.height
                         icon.source: ""
@@ -587,6 +618,7 @@ Item {
                     enabled: true
                     Button {
                         id: row3rect2Btn
+                        objectName: "row3rect2Btn"
                         width: parent.width
                         height: parent.height
                         icon.source: ""
@@ -621,6 +653,7 @@ Item {
                     enabled: true
                     Button {
                         id: row3rect3Btn
+                        objectName: "row3rect3Btn"
                         width: parent.width
                         height: parent.height
                         icon.source: ""
