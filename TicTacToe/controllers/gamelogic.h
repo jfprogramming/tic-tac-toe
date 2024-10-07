@@ -69,5 +69,5 @@ private:
     bool m_playerWon;
     bool m_catsCradle;
     QString m_gameType;
-    QMap<QString, bool> m_ticTacToeBoard;
+    std::map<QString, char> m_ticTacToeBoard;
 };
