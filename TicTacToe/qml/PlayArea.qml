@@ -26,7 +26,7 @@ Item {
 
     property alias rowWidth: row1.width
     property alias row1Id: row1
-    property alias row1Rect1ImgAlias: row1rect1Img
+    property alias row1Rect1ImgAlias: row1rect1Btn
 
     // Get the current gameMode, currentPlayer, and playerWon
     //
@@ -71,7 +71,7 @@ Item {
 
         // Row 1
         //
-        row1rect1Img.source = ""
+        row1rect1Btn.source = ""
         row1rect2Img.source = ""
         row1rect3Img.source = ""
         // Row 2
@@ -318,7 +318,7 @@ Item {
             anchors.fill: parent
 
             // Row 1
-            Row{
+            Row {
                 id: row1
                 spacing: 10
                 width: mainColumn.width
@@ -330,70 +330,61 @@ Item {
                     height: row1.height
                     color: "white"
                     enabled: true
-                    Image {
-                        id: row1rect1Img
-                        anchors.fill: parent
+                    Button {
+                        id: row1rect1Btn
+                        icon.source: ""
+                        icon.color: "#0078D4"
                         visible: false
-                        source: ""
-                        Component.onCompleted: {
-                            itemIds.push(row1rect1Img)
-                        }
-                    }
-                    MouseArea {
                         anchors.fill: parent
-                        onClicked:{
-                            // set X or O based of player 1 or player 2
-                            //
-                            row1rect1Img.visible = true
-                            row1rect1Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                        Component.onCompleted: {
+                            itemIds.push(row1rect1Btn)
+                        }
+                        onClicked: {
+                            // set X or O based on player 1 or player 2
+                            row1rect1Btn.visible = true
+                            row1rect1Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             playerSelectSquare("A1")  // This should be the key for this specific square
                             // check for a winner
-                            //
-                            if(!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin())
-                                if(gameMode  == "1Player"){
+                            if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
+                                if (gameMode == "1Player") {
                                     // Start the timer after the click
-                                    //
                                     delayTimer.start()
                                 }
-                            // No Wins next player
-                            //
-                            row1rect1.enabled = false
-                            mainColumn.enabled = false
-                            checkPlayerTurn()
+                                // No Wins next player
+                                row1rect1.enabled = false
+                                mainColumn.enabled = false
+                                checkPlayerTurn()
+                            }
                         }
                     }
                 }
+
                 Rectangle {
                     id: row1rect2
                     width: row1.width / 3
                     height: row1.height
                     color: "white"
                     enabled: true
-                    Image {
-                        id: row1rect2Img
+                    Button {
+                        id: row1rect2Btn
+                        icon.source: ""
+                        icon.color: "#0078D4"
                         visible: false
                         anchors.fill: parent
-                        source: ""
                         Component.onCompleted: {
-                            itemIds.push(row1rect2Img)
+                            itemIds.push(row1rect2Btn)
                         }
-                    }
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked:{
-                            row1rect2Img.visible = true
-                            row1rect2Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                        onClicked: {
+                            row1rect2Btn.visible = true
+                            row1rect2Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             playerSelectSquare("A2")
                             // check for a winner
-                            //
-                            if(!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()){
-                                if(gameMode  == "1Player"){
+                            if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
+                                if (gameMode == "1Player") {
                                     // Start the timer after the click
-                                    //
                                     delayTimer.start()
                                 }
                                 // No Wins next player
-                                //
                                 row1rect2.enabled = false
                                 mainColumn.enabled = false
                                 checkPlayerTurn()
@@ -401,37 +392,33 @@ Item {
                         }
                     }
                 }
+
                 Rectangle {
                     id: row1rect3
                     width: row1.width / 3
                     height: row1.height
                     color: "white"
                     enabled: true
-                    Image {
-                        id: row1rect3Img
+                    Button {
+                        id: row1rect3Btn
+                        icon.source: ""
+                        icon.color: "#0078D4"
                         visible: false
                         anchors.fill: parent
-                        source: ""
                         Component.onCompleted: {
-                            itemIds.push(row1rect3Img)
+                            itemIds.push(row1rect3Btn)
                         }
-                    }
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked:{
-                            row1rect3Img.visible = true
-                            row1rect3Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                        onClicked: {
+                            row1rect3Btn.visible = true
+                            row1rect3Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             playerSelectSquare("A3")
                             // check for a winner
-                            //
-                            if(!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()){
-                                if(gameMode  == "1Player"){
+                            if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
+                                if (gameMode == "1Player") {
                                     // Start the timer after the click
-                                    //
                                     delayTimer.start()
                                 }
                                 // No Wins next player
-                                //
                                 row1rect3.enabled = false
                                 mainColumn.enabled = false
                                 checkPlayerTurn()
@@ -442,7 +429,7 @@ Item {
             }
 
             // Row 2
-            Row{
+            Row {
                 id: row2
                 spacing: 10
                 width: mainColumn.width
@@ -454,31 +441,27 @@ Item {
                     height: row2.height
                     color: "white"
                     enabled: true
-                    Image {
-                        id: row2rect1Img
+                    Button {
+                        id: row2rect1Btn
+                        icon.source: ""
+                        icon.color: "#0078D4"
                         visible: false
                         anchors.fill: parent
-                        source: ""
                         Component.onCompleted: {
-                            itemIds.push(row2rect1Img)
+                            itemIds.push(row2rect1Btn)
                         }
-                    }
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked:{
-                            row2rect1Img.visible = true
-                            row2rect1Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                        onClicked: {
+                            // set X or O based on player 1 or player 2
+                            row2rect1Btn.visible = true
+                            row2rect1Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             playerSelectSquare("B1")
                             // check for a winner
-                            //
-                            if(!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()){
-                                if(gameMode  == "1Player"){
+                            if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
+                                if (gameMode == "1Player") {
                                     // Start the timer after the click
-                                    //
                                     delayTimer.start()
                                 }
                                 // No Wins next player
-                                //
                                 row2rect1.enabled = false
                                 mainColumn.enabled = false
                                 checkPlayerTurn()
@@ -486,37 +469,33 @@ Item {
                         }
                     }
                 }
+
                 Rectangle {
                     id: row2rect2
                     width: row2.width / 3
                     height: row2.height
                     color: "white"
                     enabled: true
-                    Image {
-                        id: row2rect2Img
+                    Button {
+                        id: row2rect2Btn
+                        icon.source: ""
+                        icon.color: "#0078D4"
                         visible: false
                         anchors.fill: parent
-                        source: ""
                         Component.onCompleted: {
-                            itemIds.push(row2rect2Img)
+                            itemIds.push(row2rect2Btn)
                         }
-                    }
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked:{
-                            row2rect2Img.visible = true
-                            row2rect2Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                        onClicked: {
+                            row2rect2Btn.visible = true
+                            row2rect2Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             playerSelectSquare("B2")
                             // check for a winner
-                            //
-                            if(!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()){
-                                if(gameMode  == "1Player"){
+                            if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
+                                if (gameMode == "1Player") {
                                     // Start the timer after the click
-                                    //
                                     delayTimer.start()
                                 }
                                 // No Wins next player
-                                //
                                 row2rect2.enabled = false
                                 mainColumn.enabled = false
                                 checkPlayerTurn()
@@ -524,37 +503,33 @@ Item {
                         }
                     }
                 }
+
                 Rectangle {
                     id: row2rect3
                     width: row2.width / 3
                     height: row2.height
                     color: "white"
                     enabled: true
-                    Image {
-                        id: row2rect3Img
+                    Button {
+                        id: row2rect3Btn
+                        icon.source: ""
+                        icon.color: "#0078D4"
                         visible: false
                         anchors.fill: parent
-                        source: ""
                         Component.onCompleted: {
-                            itemIds.push(row2rect3Img)
+                            itemIds.push(row2rect3Btn)
                         }
-                    }
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked:{
-                            row2rect3Img.visible = true
-                            row2rect3Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                        onClicked: {
+                            row2rect3Btn.visible = true
+                            row2rect3Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             playerSelectSquare("B3")
                             // check for a winner
-                            //
-                            if(!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()){
-                                if(gameMode  == "1Player"){
+                            if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
+                                if (gameMode == "1Player") {
                                     // Start the timer after the click
-                                    //
                                     delayTimer.start()
                                 }
                                 // No Wins next player
-                                //
                                 row2rect3.enabled = false
                                 mainColumn.enabled = false
                                 checkPlayerTurn()
@@ -565,7 +540,7 @@ Item {
             }
 
             // Row 3
-            Row{
+            Row {
                 id: row3
                 spacing: 10
                 width: mainColumn.width
@@ -577,32 +552,23 @@ Item {
                     height: row3.height
                     color: "white"
                     enabled: true
-                    Image {
-                        id: row3rect1Img
-                        visible: false
-                        anchors.fill: parent
-                        source: ""
-                        Component.onCompleted: {
-                            itemIds.push(row3rect1Img)
-                        }
-                    }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked:{
-                            row3rect1Img.visible = true
-                            row3rect1Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                    Button {
+                        id: row3rect1Btn
+                        width: parent.width
+                        height: parent.height
+                        icon.source: ""
+                        icon.visible: false
+                        onClicked: {
+                            row3rect1Btn.icon.visible = true
+                            row3rect1Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             playerSelectSquare("C1")
                             // check for a winner
-                            //
-                            if(!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()){
-                                if(gameMode  == "1Player"){
+                            if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
+                                if (gameMode == "1Player") {
                                     // Start the timer after the click
-                                    //
                                     delayTimer.start()
                                 }
                                 // No Wins next player
-                                //
                                 row3rect1.enabled = false
                                 mainColumn.enabled = false
                                 checkPlayerTurn()
@@ -616,31 +582,23 @@ Item {
                     height: row3.height
                     color: "white"
                     enabled: true
-                    Image {
-                        id: row3rect2Img
-                        visible: false
-                        anchors.fill: parent
-                        source: ""
-                        Component.onCompleted: {
-                            itemIds.push(row3rect2Img)
-                        }
-                    }
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked:{
-                            row3rect2Img.visible = true
-                            row3rect2Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                    Button {
+                        id: row3rect2Btn
+                        width: parent.width
+                        height: parent.height
+                        icon.source: ""
+                        icon.visible: false
+                        onClicked: {
+                            row3rect2Btn.icon.visible = true
+                            row3rect2Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             playerSelectSquare("C2")
                             // check for a winner
-                            //
-                            if(!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()){
-                                if(gameMode  == "1Player"){
+                            if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
+                                if (gameMode == "1Player") {
                                     // Start the timer after the click
-                                    //
                                     delayTimer.start()
                                 }
                                 // No Wins next player
-                                //
                                 row3rect2.enabled = false
                                 mainColumn.enabled = false
                                 checkPlayerTurn()
@@ -654,31 +612,23 @@ Item {
                     height: row3.height
                     color: "white"
                     enabled: true
-                    Image {
-                        id: row3rect3Img
-                        visible: false
-                        anchors.fill: parent
-                        source: ""
-                        Component.onCompleted: {
-                            itemIds.push(row3rect3Img)
-                        }
-                    }
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked:{
-                            row3rect3Img.visible = true
-                            row3rect3Img.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                    Button {
+                        id: row3rect3Btn
+                        width: parent.width
+                        height: parent.height
+                        icon.source: ""
+                        icon.visible: false
+                        onClicked: {
+                            row3rect3Btn.icon.visible = true
+                            row3rect3Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
                             playerSelectSquare("C3")
                             // check for a winner
-                            //
-                            if(!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()){
-                                if(gameMode  == "1Player"){
+                            if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()) {
+                                if (gameMode == "1Player") {
                                     // Start the timer after the click
-                                    //
                                     delayTimer.start()
                                 }
                                 // No Wins next player
-                                //
                                 row3rect3.enabled = false
                                 mainColumn.enabled = false
                                 checkPlayerTurn()
@@ -686,7 +636,7 @@ Item {
                         }
                     }
                 }
-            }//end row3
+            } // end row3
         }// end column
     }// end rectangle
 
