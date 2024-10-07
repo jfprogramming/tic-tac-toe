@@ -45,7 +45,7 @@ Item {
         }
     }
 
-    PopupMsg {
+    PopupDialog {
         id: player2Popup
         popupMsgtxt: "Player 2 select"
     }

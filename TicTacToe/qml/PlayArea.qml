@@ -93,7 +93,7 @@ Item {
         gameLogic.resetTicTacToeBoard()
     }
 
-    PopupMsg {
+    PopupDialog {
         id: nextPlayerPopup
         modal: true
         popupMsgtxt: "Next turn: Player" + gameLogic.currentPlayer
@@ -103,7 +103,7 @@ Item {
         }
     }
 
-    PopupMsg {
+    PopupDialog {
         id: gameWonPopup
         modal: true
         popupMsgtxt: "Player" + gameLogic.currentPlayer + " Won"

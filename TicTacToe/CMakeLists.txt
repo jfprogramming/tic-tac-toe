@@ -56,7 +56,7 @@ qt_add_qml_module(appTicTacToe
         qml/PlayerListModel.qml
         qml/PlayerSelection.qml
         qml/About.qml
-        qml/PopupMsg.qml
+        qml/PopupDialog.qml
 
     RESOURCES
         resources.qrc

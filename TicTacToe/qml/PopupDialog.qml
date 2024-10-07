@@ -1,7 +1,7 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls 2.15
 
-Popup {
+Dialog {
     id: popupMsgItem
     objectName: "popupMsgItem"
     width: 200
@@ -9,6 +9,8 @@ Popup {
     modal: true
     focus: true
     anchors.centerIn: parent
+    standardButtons: Dialog.Ok
+    closePolicy: Qt.PopupClosePolicy.NoPopupClose // This disables Popup.CloseOnPressOutside
 
     // Expose properties to other QML files
     //
@@ -38,15 +40,6 @@ Popup {
         from: 0
         to: 1
         duration: 1000
-    }
-
-    Button {
-        text: "OK"
-        anchors.bottom: parent.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        onClicked: {
-            popupMsgItem.close()
-        }
     }
 
 }
