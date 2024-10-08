@@ -1,38 +1,42 @@
-import QtQuick
-import QtQuick.Controls
+import QtQuick 2.15
+import QtQuick.Controls 2.15
 
 Item {
     Header{
-        id:highScoreHeader
+        id: highScoreHeader
     }
 
-    ListView {
-        id: mainArea
+    ScrollView{
+        id: highScoreScrollView
         anchors.fill: parent
-        anchors.top: highScoreHeader.bottom
-        anchors.topMargin: 50
-        anchors.bottom: highScoreFooter.top
-        anchors.bottomMargin: 50
-        model: highscoreModel // Use the registered model
 
-        delegate: Item {
-            height: 40
-            Row {
-                spacing: 30
 
-                Text {
-                    text: (index + 1) + "."
-                }
+        TableView {
+            id: mainArea
+            anchors.fill: parent
+            anchors.top: highScoreHeader.bottom
+            anchors.topMargin: 50
+            anchors.bottom: highScoreFooter.top
+            anchors.bottomMargin: 50
+            model: highscoreModel // Use the registered model
+            //alternatingRowColors: true // Enable striped rows
 
-                Text {
-                    text: display !== undefined ? display : "N/A"
-                }
+            TableViewColumn {
+                role: "index"
+                title: "#"
+                width: 50
+            }
+
+            TableViewColumn {
+                role: "display"
+                title: "Name"
+                width: 200
             }
         }
     }
 
     Footer{
-        id:highScoreFooter
+        id: highScoreFooter
         homeBtn.onClicked: {
             stackView.clear()
             stackView.push("Home.qml", StackView.PushTransition)

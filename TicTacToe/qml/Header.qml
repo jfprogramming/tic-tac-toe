@@ -52,11 +52,32 @@ Rectangle {
         height: 40
         Text {
             id: scoreText
-            text: qsTr("Score - Player 1: " + player1Score + "   Player 2: " + player2Score)
-            anchors.centerIn: parent
+            text: qsTr("Player 1: " + player1Score + "   Player 2: " + player2Score)
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 5
+            anchors.horizontalCenter: parent.horizontalCenter
             font.bold: true
-            font.pointSize: 16
+            font.pointSize: 11
             color: "#0078D4" // Matching text color
+        }
+        Rectangle {
+            id: scoreTitle
+            anchors.top: parent.top
+            visible: true
+            color: "lightBlue"
+            border.color: "#0078D4"
+            radius: 10
+            width: parent.width
+            height: 15
+            Text {
+                id: scoreTitleText
+                text: qsTr("Score")
+                anchors.centerIn: parent
+                anchors.margins: 5
+                font.bold: true
+                font.pointSize: 9
+                color: "#0078D4" // Matching text color
+            }
         }
     }
 
