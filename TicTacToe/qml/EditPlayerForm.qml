@@ -44,7 +44,7 @@ Item {
                 id: playerNameTextInput
                 width: 300
                 height: 50
-                text: adminPlayModel.playerName
+                text: stackView.currentItem.playerName
             }
 
             Label{
@@ -55,7 +55,7 @@ Item {
                 id: playerColorTextInput
                 width: 300
                 height: 50
-                text: adminPlayModel.playerColor
+                text: stackView.currentItem.playerColor
             }
             Button{
                 id: saveButton
