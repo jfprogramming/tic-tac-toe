@@ -41,22 +41,23 @@ Item {
                     width: parent.width
                     height: 50
                     Row {
-                        spacing: 50
+                        anchors.fill: parent
+                        spacing: 10
                         Text {
                             text: model.id
-                            width: parent.width / 2
+                            width: parent.width / 4
                         }
                         Text {
                             text: model.name
-                            width: parent.width / 2
+                            width: parent.width / 4
                         }
                         Text {
                             text: model.color
-                            width: parent.width / 2
+                            width: parent.width / 4
                         }
                         Text {
                             text: model.highScore
-                            width: parent.width / 2
+                            width: parent.width / 4
                         }
                     }
                     MouseArea {

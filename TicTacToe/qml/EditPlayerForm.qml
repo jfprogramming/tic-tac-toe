@@ -8,8 +8,8 @@ Item {
 
     // Property alias
     //
-    property alias nameLabelTxt: playerNameLabel.text
-    property alias coloLabelTxt: playerColorLabel.text
+    property alias playerName: playerNameLabel.text
+    property alias playerColor: playerColorLabel.text
 
     Header{
         id:homePageHeader
