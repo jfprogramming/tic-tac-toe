@@ -12,6 +12,7 @@ AdminPlayerModel::AdminPlayerModel(QObject *parent) : QAbstractListModel{parent}
 {
     qDebug() << __FUNCTION__ << "AdminPlayerModel constructor";
     m_allPlayers = getAllPlayers();
+    qDebug() << "All Players:" << m_allPlayers[0].name;
 }
 
 
@@ -59,9 +60,9 @@ QVariant AdminPlayerModel::data(const QModelIndex &index, int role) const {
  */
 QHash<int, QByteArray> AdminPlayerModel::roleNames() const {
     QHash<int, QByteArray> roles;
-    roles[IdRole] = "id";
-    roles[NameRole] = "name";
-    roles[ColorRole] = "color";
+    roles[IdRole]        = "id";
+    roles[NameRole]      = "name";
+    roles[ColorRole]     = "color";
     roles[HighScoreRole] = "highScore";
     return roles;
 }

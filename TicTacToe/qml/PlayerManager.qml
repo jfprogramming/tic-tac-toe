@@ -34,20 +34,28 @@ Item {
                 id: playerListView
                 width: parent.width
                 height: parent.height
-                model: adminPlayerModel.playerList
+                model: adminPlayerModel
                 clip: true
 
                 delegate: Item {
                     width: parent.width
                     height: 50
                     Row {
-                        spacing: 10
+                        spacing: 50
                         Text {
-                            text: model.playerName
+                            text: model.id
                             width: parent.width / 2
                         }
                         Text {
-                            text: model.playerColor
+                            text: model.name
+                            width: parent.width / 2
+                        }
+                        Text {
+                            text: model.color
+                            width: parent.width / 2
+                        }
+                        Text {
+                            text: model.highScore
                             width: parent.width / 2
                         }
                     }

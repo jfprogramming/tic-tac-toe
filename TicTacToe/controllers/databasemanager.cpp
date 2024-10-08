@@ -467,12 +467,18 @@ int DatabaseManager::getHighScoreForPlayer(int playerId) {
  */
 QList<AdminPlayer> DatabaseManager::getAllPlayers() {
     QList<AdminPlayer> players;
-    QSqlQuery query("SELECT name, color FROM players"); // Adjust query based on your table schema
+    QSqlQuery query("SELECT PlayerTable.playerId, PlayerTable.playerName, PlayerTable.playerColor, HighScoreTable.highscore "
+                    "FROM HighScoreTable "
+                    "JOIN PlayerTable ON HighScoreTable.playerId = PlayerTable.playerId");
+    if (!query.exec()) {
+        qWarning() << "Query execution failed:" << query.lastError().text();
+        return {};
+    }
     while (query.next()) {
         AdminPlayer adminPlayer;
-        adminPlayer.id        = query.value("id").toInt();
-        adminPlayer.name      = query.value("name").toString();
-        adminPlayer.color     = query.value("color").toString();
+        adminPlayer.id        = query.value("playerId").toInt();
+        adminPlayer.name      = query.value("playerName").toString();
+        adminPlayer.color     = query.value("playerColor").toString();
         adminPlayer.highScore = query.value("highscore").toInt();
         players.append(adminPlayer);
     }
