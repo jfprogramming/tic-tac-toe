@@ -98,13 +98,9 @@ Below is a list of features not yet complete:
     
 ## TODO
 - **TODO List**
-  - Clean up win graphics.
   - Implement Player Management for Admin User.
   - Implement date/time settings for Admin User.
-  - Implement 2 Player Game Mode logic.
-  - Finish High Score.
-  - Finish integrating QSettings File example.
-  - Convert javaScript to c++ where possible for improved performance. 
+  - Finish integrating QSettings File example. 
   - Improve threading with QMutex locking.
   - Improve class design by implementing common base class.
   - Improve Object Oriented design by implementing smart pointers.
