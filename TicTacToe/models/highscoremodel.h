@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QAbstractListModel>
 
+
 /**
  * \file HighscoreModel.h
  *

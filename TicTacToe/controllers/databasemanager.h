@@ -33,8 +33,8 @@ public:
     //
     bool createNewPlayer(const QString &playerName, const QString &playerColor);
 
-    QString getPlayerName(int userId);
-    QString getPlayerColor(const QString &playerName);
+    QString retrievePlayerName(const int id);
+    QString retrievePlayerColor(const int id);
 
     bool setPlayerName(int playerId, QString &newName);
     bool setPlayerColor(int playerId, QString &color);

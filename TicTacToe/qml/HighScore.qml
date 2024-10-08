@@ -33,6 +33,10 @@ Item {
                     width: 50
                 }
                 Text {
+                    id: name
+                    text: qsTr("text")
+                }
+                Text {
                     text: model.display
                     width: 200
                 }

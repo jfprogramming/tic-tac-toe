@@ -74,7 +74,9 @@ QVariant HighscoreModel::playerName(const QModelIndex &index) const
     if (!index.isValid())
         return QVariant();
 
-    return Controllers::dbManager.getPlayerName(index.row());
+    QString playerName = Controllers::dbManager.retrievePlayerName(index.row());
+
+    return playerName;
 }
 
 

@@ -268,26 +268,40 @@ bool DatabaseManager::createNewPlayer(const QString &playerName, const QString &
 
 
 /**
- * \fn      DatabaseManager::getPlayerName
+ * \fn      DatabaseManager::retrievePlayerName
  * \brief   Gets a player by their row index in the high score table
  * \param   QString name
  * \return  bool
  */
-QString DatabaseManager::getPlayerName(int userId)
+QString DatabaseManager::retrievePlayerName(const int id)
 {
+    QSqlQuery query;
+    query.prepare("SELECT playerName FROM HighScore WHERE id = :id");
+    query.bindValue(":id", id);
 
+    qDebug() << "player name successfully retrieved";
+    if (query.exec() && query.next())
+        return query.value(0).toString();
+    return "";
 }
 
 
 /**
- * \fn      DatabaseManager::getPlayerColor
+ * \fn      DatabaseManager::retrievePlayerColor
  * \brief   Gets a player by their row index in the high score table
  * \param   QString name
  * \return  bool
  */
-QString DatabaseManager::getPlayerColor(const QString &playerName)
+QString DatabaseManager::retrievePlayerColor(const int id)
 {
+    QSqlQuery query;
+    query.prepare("SELECT playerColor FROM HighScore WHERE id = :id");
+    query.bindValue(":id", id);
 
+    qDebug() << "player name successfully retrieved";
+    if (query.exec() && query.next())
+        return query.value(0).toString();
+    return "";
 }
 
 
