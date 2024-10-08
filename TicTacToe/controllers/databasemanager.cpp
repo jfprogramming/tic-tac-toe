@@ -513,3 +513,21 @@ int DatabaseManager::getHighScoreForPlayer(int playerId) {
     else
         return 0;
 }
+
+
+/**
+ * \fn      DatabaseManager::getAllPlayers
+ * \brief   Get a list of all the players in the database
+ * \return  QList<QMap<QString, QString>>
+ */
+QList<QMap<QString, QString>> DatabaseManager::getAllPlayers() {
+    QList<QMap<QString, QString>> players;
+    QSqlQuery query("SELECT name, color FROM players"); // Adjust query based on your table schema
+    while (query.next()) {
+        QMap<QString, QString> player;
+        player["name"] = query.value("name").toString();
+        player["color"] = query.value("color").toString();
+        players.append(player);
+    }
+    return players;
+}

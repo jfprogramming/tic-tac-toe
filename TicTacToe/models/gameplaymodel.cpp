@@ -1,43 +1,25 @@
-#include "playermodel.h"
+#include "gameplaymodel.h"
 #include "controllers.h"
 #include <QDebug>
 
 
 /**
- * \fn PlayerModel::PlayerModel(QObject* parent) : QObject(parent)
- * \brief Constructor for PlayerModel.
+ * \fn GamePlayModel::GamePlayModel(QObject* parent) : QObject(parent)
+ * \brief Constructor for GamePlayModel.
  * \param parent The parent QObject.
  */
-PlayerModel::PlayerModel(QObject* parent) : QObject(parent)
+GamePlayModel::GamePlayModel(QObject* parent) : QObject(parent)
 {
     qDebug() << __FUNCTION__ << "PlayerModel constructor";
 }
 
-/**
- * \fn PlayerModel::onAdminLogin(const QString &username, const QString &password){
- * \brief Authenticates an admin user.
- * \param username The admin username.
- * \param password The admin password.
- * \return True if authentication is successful, false otherwise.
- */
-bool PlayerModel::onAdminLogin(const QString &username, const QString &password){
-    qDebug() << __FUNCTION__ << "Admin login...";
-
-    if(Controllers::dbManager.authenticateAdmin(username, password)){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
-
 
 /**
- * \fn PlayerModel::setPlayerColor(const QString &newPlayerColor)
+ * \fn GamePlayModel::setPlayerColor(const QString &newPlayerColor)
  * \brief Sets the player1's color.
  * \param newPlayerColor The new player color.
  */
-void PlayerModel::setPlayer1Color(const QString& newPlayer1Color)
+void GamePlayModel::setPlayer1Color(const QString& newPlayer1Color)
 {
     qDebug() << __FUNCTION__ << "setting player1Color...";
 
@@ -49,11 +31,11 @@ void PlayerModel::setPlayer1Color(const QString& newPlayer1Color)
 
 
 /**
- * \fn PlayerModel::setPlayerName(const QString &newPlayerName)
+ * \fn GamePlayModel::setPlayerName(const QString &newPlayerName)
  * \brief Sets the player1's name.
  * \param newPlayerName The new player name.
  */
-void PlayerModel::setPlayer1Name(const QString &newPlayer1Name)
+void GamePlayModel::setPlayer1Name(const QString &newPlayer1Name)
 {
     qDebug() << __FUNCTION__ << "setting player1Name...";
 
@@ -65,11 +47,11 @@ void PlayerModel::setPlayer1Name(const QString &newPlayer1Name)
 
 
 /**
- * \fn PlayerModel::setPlayer2Color(const QString &newPlayerColor)
+ * \fn GamePlayModel::setPlayer2Color(const QString &newPlayerColor)
  * \brief Sets the player'2s color.
  * \param newPlayerColor The new player color.
  */
-void PlayerModel::setPlayer2Color(const QString& newPlayer2Color)
+void GamePlayModel::setPlayer2Color(const QString& newPlayer2Color)
 {
     qDebug() << __FUNCTION__ << "setting player2Color...";
 
@@ -81,11 +63,11 @@ void PlayerModel::setPlayer2Color(const QString& newPlayer2Color)
 
 
 /**
- * \fn PlayerModel::setPlayer2Name(const QString &newPlayerName)
+ * \fn GamePlayModel::setPlayer2Name(const QString &newPlayerName)
  * \brief Sets the player2's name.
  * \param newPlayerName The new player name.
  */
-void PlayerModel::setPlayer2Name(const QString &newPlayer2Name)
+void GamePlayModel::setPlayer2Name(const QString &newPlayer2Name)
 {
     qDebug() << __FUNCTION__ << "setting player2Name...";
 
@@ -97,11 +79,11 @@ void PlayerModel::setPlayer2Name(const QString &newPlayer2Name)
 
 
 /**
- * \fn PlayerModel::setPlayer1(const QString &newPlayer1)
+ * \fn GamePlayModel::setPlayer1(const QString &newPlayer1)
  * \brief Sets the first player's name.
  * \param newPlayer1 The new player name.
  */
-void PlayerModel::setPlayer1(const QString &newPlayer1) {
+void GamePlayModel::setPlayer1(const QString &newPlayer1) {
     qDebug() << __FUNCTION__ << "setting player1...";
 
     QString trimmedPlayer1 = newPlayer1;
@@ -122,11 +104,11 @@ void PlayerModel::setPlayer1(const QString &newPlayer1) {
 
 
 /**
- * \fn PlayerModel::setPlayer2(const QString &newPlayer2)
+ * \fn GamePlayModel::setPlayer2(const QString &newPlayer2)
  * \brief Sets the second player's name.
  * \param newPlayer2 The new player name.
  */
-void PlayerModel::setPlayer2(const QString &newPlayer2)
+void GamePlayModel::setPlayer2(const QString &newPlayer2)
 {
     qDebug() << __FUNCTION__ << "setting player2...";
 
@@ -148,11 +130,11 @@ void PlayerModel::setPlayer2(const QString &newPlayer2)
 
 
 /**
- * \fn PlayerModel::setPlayerHighScoreValue(QString playerName, int score)
+ * \fn GamePlayModel::setPlayerHighScoreValue(QString playerName, int score)
  * \brief Sets the player's high score value.
  * \param int score.
  */
-void PlayerModel::setPlayerHighScoreValue(QString playerName, int score)
+void GamePlayModel::setPlayerHighScoreValue(QString playerName, int score)
 {
     int playerId = Controllers::dbManager.getPlayerIdByName(playerName);
     int highscore = Controllers::dbManager.getHighScoreForPlayer(playerId);
@@ -161,23 +143,13 @@ void PlayerModel::setPlayerHighScoreValue(QString playerName, int score)
     Controllers::dbManager.updatePlayerHighScore(playerName, newScore);
 }
 
-/**
- * \fn PlayerModel::savePlayerToDatabase(const QString &name, const QString &color)
- * \brief Saves the player's name and color to the database.
- * \param name The player's name.
- * \param color The player's color.
- */
-void PlayerModel::savePlayerToDatabase(const QString &name, const QString &color){
-    Controllers::dbManager.createNewPlayer(name, color);
-}
-
 
 /**
- * \fn PlayerModel::lookupPlayer(const QString &name)
+ * \fn GamePlayModel::lookupPlayer(const QString &name)
  * \brief Admin Function  - Looks up the player's name and color in the database.
  * \param name The player's name.
  */
-void PlayerModel::lookupPlayer(const QString &name) {
+void GamePlayModel::lookupPlayer(const QString &name) {
     qDebug() << "player lookup...";
     QMap<QString, QString> player = Controllers::dbManager.getPlayerByName(name);
     if (player.contains("playerName") && player.contains("playerColor")) {
@@ -193,26 +165,11 @@ void PlayerModel::lookupPlayer(const QString &name) {
 
 
 /**
- * \fn PlayerModel::getPlayerColor(const QString &playerName)
+ * \fn GamePlayModel::getPlayerColor(const QString &playerName)
  * \brief Looks up the player's name and color in the database.
  * \param name The player's name.
  */
-QString PlayerModel::getPlayerColor(const QString &playerName) {
+QString GamePlayModel::getPlayerColor(const QString &playerName) {
     qDebug() << __PRETTY_FUNCTION__ << "playerNumber:" << playerName;
     return Controllers::dbManager.getPlayerColor(playerName);
-}
-
-
-/**
- * \fn PlayerModel::getPlayerColor(const QString &playerName)
- * \brief Looks up the player's name and color in the database.
- * \param name The player's name.
- */
-QList<QObject*> PlayerModel::getAllPlayers() {
-    QList<QObject*> playerList;
-    auto players = Controllers::dbManager.getAllPlayers();
-    for (const auto &player : players) {
-        playerList.append(new Player(player["name"], player["color"]));
-    }
-    return playerList;
 }

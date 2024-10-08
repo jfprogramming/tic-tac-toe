@@ -1,32 +1,21 @@
 #pragma once
 #include <QObject>
 
-// Player data structure holds player data
-//
-struct Player
-{
-    int id;
-    QString name;
-    QString color;
-    int highScore;
-};
-
-
 /**
- * \file PlayerModel.h
+ * \file GamePlayModel.h
  *
- * \brief The PlayerModel class manages player data.
+ * \brief The GamePlayModel class manages player data.
  *        Handles player name and color information.
  *        Provides interface for setting and retrieving player details.
  */
-class PlayerModel : public QObject
+class GamePlayModel : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString player1Name READ getPlayer1Name WRITE setPlayer1Name NOTIFY player1NameChanged)
+    Q_PROPERTY(QString player1Name  READ getPlayer1Name  WRITE setPlayer1Name  NOTIFY player1NameChanged)
     Q_PROPERTY(QString player1Color READ getPlayer1Color WRITE setPlayer1Color NOTIFY player1ColorChanged)
 
-    Q_PROPERTY(QString player2Name READ getPlayer2Name WRITE setPlayer2Name NOTIFY player2NameChanged)
+    Q_PROPERTY(QString player2Name  READ getPlayer2Name  WRITE setPlayer2Name NOTIFY player2NameChanged)
     Q_PROPERTY(QString player2Color READ getPlayer2Color WRITE setPlayer2Color NOTIFY player2ColorChanged)
 
     Q_PROPERTY(QString player1 READ getPlayer1 WRITE setPlayer1 NOTIFY player1Changed FINAL)
@@ -34,14 +23,14 @@ class PlayerModel : public QObject
 
 
 public:
-    explicit PlayerModel(QObject* parent = nullptr);
+    explicit GamePlayModel(QObject* parent = nullptr);
 
     // Get Player info (name, color)
     //
-    QString getPlayer1Name() const { return m_player1Name; }
+    QString getPlayer1Name()  const { return m_player1Name; }
     QString getPlayer1Color() const { return m_player1Color; }
 
-    QString getPlayer2Name() const { return m_player2Name; }
+    QString getPlayer2Name()  const { return m_player2Name; }
     QString getPlayer2Color() const { return m_player2Color; }
 
     // Set Game-play player names selected and color associated with player
@@ -50,8 +39,6 @@ public:
     QString getPlayer2() const { return m_player2; }
 
     Q_INVOKABLE QString getPlayerColor(const QString &playerName);
-
-    Q_INVOKABLE QList<QObject*> getAllPlayers();
 
 signals:
     void player1NameChanged(const QString &playerName);
@@ -63,12 +50,7 @@ signals:
     void player1Changed();
     void player2Changed();
 
-    void checkAdminLogin();
-
 public slots:
-    bool onAdminLogin(const QString &username, const QString &password);
-
-    void savePlayerToDatabase(const QString &name, const QString &color);
     void lookupPlayer(const QString &name);
 
     void setPlayer1Color(const QString &newPlayerColor);

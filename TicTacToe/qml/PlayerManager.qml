@@ -15,16 +15,16 @@ Item {
     }
 
     Header {
-        id: homePageHeader
+        id: playerManagerPageHeader
     }
 
     Rectangle {
         id: mainArea
         anchors.fill: parent
         color: "white"
-        anchors.top: homePageHeader.bottom
+        anchors.top: playerManagerPageHeader.bottom
         anchors.topMargin: 50
-        anchors.bottom: homePagefooter.top
+        anchors.bottom: playerManagerPagefooter.top
         anchors.bottomMargin: 50
 
         ListView {
@@ -59,7 +59,7 @@ Item {
     }
 
     Footer {
-        id: homePagefooter
+        id: playerManagerPagefooter
         backBtn.visible: true
         backBtn.onClicked: {
             stackView.pop(StackView.PushTransition)

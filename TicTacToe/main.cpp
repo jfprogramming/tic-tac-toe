@@ -5,7 +5,7 @@
 #include <QQmlContext>
 #include <QtCore>
 #include "controllers.h"
-#include "models/playermodel.h"
+#include "models/gameplaymodel.h"
 #include "controllers/gamelogic.h"
 #include "controllers/systemsettings.h"
 
@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 
     // Register PlayerModel with QML
     //
-    qmlRegisterType<PlayerModel>("PlayerModel", 1, 0, "PlayerModel");
+    qmlRegisterType<GamePlayModel>("PlayerModel", 1, 0, "PlayerModel");
 
     // Setup DB
     //
@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 
     // Setup models for QML
     //
-    PlayerModel playerModel;
+    GamePlayModel playerModel;
     engine.rootContext()->setContextProperty("playerModel", &playerModel);
 
     HighscoreModel highscoreModel;

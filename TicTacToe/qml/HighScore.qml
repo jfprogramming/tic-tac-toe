@@ -10,7 +10,6 @@ Item {
         id: highScoreScrollView
         anchors.fill: parent
 
-
         TableView {
             id: mainArea
             anchors.fill: parent

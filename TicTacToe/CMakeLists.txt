@@ -32,14 +32,14 @@ qt_add_qml_module(appTicTacToe
         controllers/databasemanager.cpp        
         controllers/systemsettings.h
         controllers/systemsettings.cpp
-        models/playermodel.h
-        models/playermodel.cpp
+        models/gameplaymodel.h
+        models/gameplaymodel.cpp
         models/aboutinfo.h
         models/aboutinfo.cpp
-        models/gamemodel.h
-        models/gamemodel.cpp
         models/highscoremodel.h
         models/highscoremodel.cpp
+        models/adminplayermodel.h
+        models/adminplayermodel.cpp
         controllers.h
         controllers.cpp
         cryptclass.h

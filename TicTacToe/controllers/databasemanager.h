@@ -43,6 +43,8 @@ public:
     QString getAdminUsername();
     QString getDecryptedAdminPassword();
 
+    QList<QMap<QString, QString>> getAllPlayers();
+
     QList<int> getHighScoreList();
 
     void fetchPlayerId(const QString &playerName);
