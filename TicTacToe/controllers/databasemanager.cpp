@@ -425,15 +425,20 @@ QList<QPair<QString, int>> DatabaseManager::getHighScoreList() {
 
     QList<QPair<QString, int>> highScores;
 
-    QSqlQuery query("SELECT PlayerTable.name, HighScoreTable.highScore FROM HighScoreTable "
-                    "JOIN PlayerTable ON HighScoreTable.playerId = PlayerTable.id");
+    QSqlQuery query;
+    if (!query.exec("SELECT PlayerTable.PlayerName, HighScoreTable.HighScore FROM HighScoreTable "
+                    "JOIN PlayerTable ON HighScoreTable.playerId = PlayerTable.playerId")) {
+        qWarning() << "Query execution failed:" << query.lastError().text();
+        return {};
+    }
+
     while (query.next()) {
         QString playerName = query.value(0).toString();
         int highScore = query.value(1).toInt();
         highScores.append(qMakePair(playerName, highScore));
     }
 
-    qInfo() << "highscore list:" << highScores;
+    qInfo() << "Highscore list:" << highScores;
     return highScores;
 }
 

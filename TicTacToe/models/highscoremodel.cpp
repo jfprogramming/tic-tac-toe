@@ -10,6 +10,7 @@
 HighscoreModel::HighscoreModel(QObject *parent) : QAbstractListModel{parent}
 {
     QList<QPair<QString, int>> fetchedHighScores = Controllers::dbManager.getHighScoreList();
+    qDebug() << "Fetched High Scores:" << fetchedHighScores;
     setHighScoreList(fetchedHighScores);
 }
 
@@ -27,6 +28,7 @@ void HighscoreModel::setHighScoreList(const QList<QPair<QString, int>> &newHighS
 {
     beginResetModel();
     m_highScoreList = newHighScoreList;
+    qDebug() << "Setting High Score List:" << m_highScoreList;
     endResetModel();
 }
 
@@ -54,12 +56,16 @@ QVariant HighscoreModel::data(const QModelIndex &index, int role) const {
     if (!index.isValid())
         return QVariant();
 
-    const auto &entry = m_highScoreList.at(index.row());
+    if (!index.isValid() || index.row() >= m_highScoreList.size())
+        return QVariant();
+
+    const auto &pair = m_highScoreList.at(index.row());
+
     switch (role) {
     case PlayerNameRole:
-        return entry.first;
+        return pair.first;
     case HighScoreRole:
-        return entry.second;
+        return pair.second;
     default:
         return QVariant();
     }
@@ -76,6 +82,7 @@ QHash<int, QByteArray> HighscoreModel::roleNames() const {
     roles[HighScoreRole] = "highScore";
     return roles;
 }
+
 
 /**
  * \brief Returns the player name for a given index.

@@ -33,11 +33,11 @@ Item {
                     width: 50
                 }
                 Text {
-                    text: model.playerName  // Player Name
+                    text: model.playerName
                     width: 200
                 }
                 Text {
-                    text: model.highScore  // Player High Score
+                    text: model.highScore
                     width: 100
                 }
             }
