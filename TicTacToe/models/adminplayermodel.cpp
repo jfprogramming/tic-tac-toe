@@ -8,9 +8,62 @@
  * \brief Constructs an AdminPlayerModel object.
  * \param parent QObject* The parent object.
  */
-AdminPlayerModel::AdminPlayerModel(QObject* parent) : QObject(parent)
+AdminPlayerModel::AdminPlayerModel(QObject *parent) : QAbstractListModel{parent}
 {
     qDebug() << __FUNCTION__ << "AdminPlayerModel constructor";
+    m_allPlayers = getAllPlayers();
+}
+
+
+/**
+ * \fn int AdminPlayerModel::rowCount(const QModelIndex &parent) const
+ * \brief Returns the number of rows in the model.
+ * \param parent const QModelIndex& The parent index.
+ * \return int The number of rows in the model.
+ */
+int AdminPlayerModel::rowCount(const QModelIndex &parent) const {
+    Q_UNUSED(parent);
+    return m_allPlayers.count();
+}
+
+
+/**
+ * \fn QVariant AdminPlayerModel::data(const QModelIndex &index, int role) const
+ * \brief Returns the data stored under the given role for the item referred to by the index.
+ * \param index const QModelIndex& The index of the item.
+ * \param role int The role of the data.
+ * \return QVariant The data stored under the given role.
+ */
+QVariant AdminPlayerModel::data(const QModelIndex &index, int role) const {
+    if (index.row() < 0 || index.row() >= m_allPlayers.count())
+        return QVariant();
+
+    const AdminPlayer &player = m_allPlayers[index.row()];
+    if (role == IdRole)
+        return player.id;
+    else if (role == NameRole)
+        return player.name;
+    else if (role == ColorRole)
+        return player.color;
+    else if (role == HighScoreRole)
+        return player.highScore;
+
+    return QVariant();
+}
+
+
+/**
+ * \fn QHash<int, QByteArray> AdminPlayerModel::roleNames() const
+ * \brief Returns the names of the roles used in the model.
+ * \return QHash<int, QByteArray> A hash of role names.
+ */
+QHash<int, QByteArray> AdminPlayerModel::roleNames() const {
+    QHash<int, QByteArray> roles;
+    roles[IdRole] = "id";
+    roles[NameRole] = "name";
+    roles[ColorRole] = "color";
+    roles[HighScoreRole] = "highScore";
+    return roles;
 }
 
 

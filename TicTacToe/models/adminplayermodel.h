@@ -1,6 +1,8 @@
 #pragma once
+
 #include <QObject>
 #include <QMap>
+#include <qabstractitemmodel.h>
 
 
 // Player data structure holds player data
@@ -19,12 +21,23 @@ struct AdminPlayer
  *
  * \brief The AdminPlayerModel class handles admin operations and player data management.
  */
-class AdminPlayerModel : public QObject
+class AdminPlayerModel : public QAbstractListModel
 {
     Q_OBJECT
 
 public:
     explicit AdminPlayerModel(QObject* parent = nullptr);
+
+    enum AdminPlayerRoles {
+        IdRole = Qt::UserRole + 1,
+        NameRole,
+        ColorRole,
+        HighScoreRole
+    };
+
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    QHash<int, QByteArray> roleNames() const override;
 
 signals:
     void playerDataChanged();
