@@ -1,5 +1,5 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick
+import QtQuick.Controls
 
 Item {
     Header{
@@ -18,7 +18,7 @@ Item {
             anchors.bottom: highScoreFooter.top
             anchors.bottomMargin: 50
             model: highscoreModel // Use the registered model
-            //alternatingRowColors: true // Enable striped rows
+            alternatingRowColors: true // Enable striped rows
 
             TableViewColumn {
                 role: "index"

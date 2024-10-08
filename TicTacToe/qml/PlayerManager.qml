@@ -27,32 +27,31 @@ Item {
         anchors.bottom: playerManagerPagefooter.top
         anchors.bottomMargin: 50
 
-        ListView {
-            id: playerListView
-            width: parent.width
-            height: parent.height
-            model: adminPlayerModel.playerList
-            clip: true
-
-            delegate: Item {
+        ScrollView {
+            id: playerManagerScrollView
+            anchors.fill: parent
+            ListView {
+                id: playerListView
                 width: parent.width
-                height: 50
-                Row {
-                    spacing: 10
-                    Text {
-                        text: model.playerName
-                        width: parent.width / 2
+                height: parent.height
+                model: adminPlayerModel.playerList
+                clip: true
+
+                delegate: Item {
+                    width: parent.width
+                    height: 50
+                    Row {
+                        spacing: 10
+                        Text {
+                            text: model.playerName
+                            width: parent.width / 2
+                        }
+                        Text {
+                            text: model.playerColor
+                            width: parent.width / 2
+                        }
                     }
-                    Text {
-                        text: model.playerColor
-                        width: parent.width / 2
-                    }
-                }
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        stackView.push("EditForm.qml", { playerName: model.playerName, playerColor: model.playerColor })
-                    }
+
                 }
             }
         }
