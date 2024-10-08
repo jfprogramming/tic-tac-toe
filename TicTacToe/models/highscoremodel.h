@@ -25,7 +25,7 @@ public:
 
     // Set the high score list
     //
-    void setHighScoreList(const QList<int> &newHighScoreList);
+    void setHighScoreList(const QList<QPair<QString, int> > &newHighScoreList);
 
     // Get the player name for a given index
     //
@@ -36,5 +36,5 @@ public:
     QVariant playerHighScore(const QModelIndex &index) const;
 
 private:
-    QList<int> m_highScoreList;
+    QList<QPair<QString, int>> m_highScoreList;
 };

@@ -51,7 +51,7 @@ public:
 
     // High Score Mngt
     //
-    QList<int> getHighScoreList();
+    QList<QPair<QString, int> > getHighScoreList();
     bool setPlayerHighScoreValue(int playerId, int score);
 
     bool authenticateAdmin(const QString &username, const QString &password);

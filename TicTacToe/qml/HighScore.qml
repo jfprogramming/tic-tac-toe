@@ -33,12 +33,12 @@ Item {
                     width: 50
                 }
                 Text {
-                    id: name
-                    text: qsTr("text")
+                    text: model.display.split(":")[0]  // Player Name
+                    width: 200
                 }
                 Text {
-                    text: model.display
-                    width: 200
+                    text: model.display.split(":")[1]  // Player High Score
+                    width: 100
                 }
             }
         }

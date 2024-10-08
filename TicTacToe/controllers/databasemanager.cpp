@@ -420,14 +420,17 @@ bool DatabaseManager::updatePlayerHighScore(const QString &playerName, int score
  * \brief  Retrieves the high score list from the database.
  * \return A QList of high scores.
  */
-QList<int> DatabaseManager::getHighScoreList(){
+QList<QPair<QString, int>> DatabaseManager::getHighScoreList() {
     qDebug() << __FUNCTION__ << "Fetching high score list...";
 
-    QList<int> highScores;
+    QList<QPair<QString, int>> highScores;
 
-    QSqlQuery query("SELECT highScore FROM HighScoreTable");
+    QSqlQuery query("SELECT PlayerTable.name, HighScoreTable.highScore FROM HighScoreTable "
+                    "JOIN PlayerTable ON HighScoreTable.playerId = PlayerTable.id");
     while (query.next()) {
-        highScores.append(query.value(0).toInt());
+        QString playerName = query.value(0).toString();
+        int highScore = query.value(1).toInt();
+        highScores.append(qMakePair(playerName, highScore));
     }
 
     qInfo() << "highscore list:" << highScores;

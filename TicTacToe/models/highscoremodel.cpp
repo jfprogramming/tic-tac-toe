@@ -9,7 +9,7 @@
  */
 HighscoreModel::HighscoreModel(QObject *parent) : QAbstractListModel{parent}
 {
-    QList<int> fetchedHighScores = Controllers::dbManager.getHighScoreList();
+    QList<QPair<QString, int>> fetchedHighScores = Controllers::dbManager.getHighScoreList();
     setHighScoreList(fetchedHighScores);
 }
 
@@ -23,7 +23,7 @@ HighscoreModel::~HighscoreModel(){}
  * \brief Sets the high score list.
  * \param newHighScoreList The new list of high scores.
  */
-void HighscoreModel::setHighScoreList(const QList<int> &newHighScoreList)
+void HighscoreModel::setHighScoreList(const QList<QPair<QString, int>> &newHighScoreList)
 {
     beginResetModel();
     m_highScoreList = newHighScoreList;
@@ -50,19 +50,17 @@ int HighscoreModel::rowCount(const QModelIndex &parent) const
  * \param  role The role for which data is requested.
  * \return The data as a QVariant.
  */
-QVariant HighscoreModel::data(const QModelIndex &index, int role) const
-{
+QVariant HighscoreModel::data(const QModelIndex &index, int role) const {
     if (!index.isValid())
         return QVariant();
 
     if (role == Qt::DisplayRole) {
-        // Return the high score value as a QVariant
-        return m_highScoreList.at(index.row());
+        const auto &entry = m_highScoreList.at(index.row());
+        return QString("%1: %2").arg(entry.first).arg(entry.second);
     }
 
     return QVariant();
 }
-
 
 /**
  * \brief Returns the player name for a given index.
