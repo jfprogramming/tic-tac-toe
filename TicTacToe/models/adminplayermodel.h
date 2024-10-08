@@ -14,6 +14,11 @@ struct Player
 };
 
 
+/**
+ * \file adminplayermodel.h
+ *
+ * \brief The AdminPlayerModel class handles admin operations and player data management.
+ */
 class AdminPlayerModel : public QObject
 {
     Q_OBJECT
