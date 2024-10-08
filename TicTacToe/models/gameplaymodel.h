@@ -23,11 +23,11 @@ class GamePlayModel : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString player1Name  READ getPlayer1Name  WRITE setPlayer1Name  NOTIFY player1NameChanged)
-    Q_PROPERTY(QString player1Color READ getPlayer1Color WRITE setPlayer1Color NOTIFY player1ColorChanged)
+    Q_PROPERTY(QString player1Name  READ getPlayer1Name  NOTIFY player1NameChanged)
+    Q_PROPERTY(QString player1Color READ getPlayer1Color NOTIFY player1ColorChanged)
 
-    Q_PROPERTY(QString player2Name  READ getPlayer2Name  WRITE setPlayer2Name NOTIFY player2NameChanged)
-    Q_PROPERTY(QString player2Color READ getPlayer2Color WRITE setPlayer2Color NOTIFY player2ColorChanged)
+    Q_PROPERTY(QString player2Name  READ getPlayer2Name  NOTIFY player2NameChanged)
+    Q_PROPERTY(QString player2Color READ getPlayer2Color NOTIFY player2ColorChanged)
 
 public:
     explicit GamePlayModel(QObject* parent = nullptr);
@@ -60,18 +60,12 @@ signals:
     void player2Changed();
 
 public slots:
-    // Slots are used in the game-play view (QML) to set the player names and colors
+    // Set the players chosen for game play
     //
-    void setPlayer1Color(const QString &newPlayerColor);
-    void setPlayer1Name(const QString &newPlayerName);
-
-    void setPlayer2Color(const QString &newPlayerColor);
-    void setPlayer2Name(const QString &newPlayerName);
-
     void setPlayer1(const QString &newPlayer1);
     void setPlayer2(const QString &newPlayer2);
 
-    void setPlayerHighScoreValue(QString playerName, int score);
+    void updatePlayerHighScoreValue(QString playerName, int score);
 
 private:
     QString m_player1Name;

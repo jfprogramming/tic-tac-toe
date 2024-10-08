@@ -63,11 +63,11 @@ void GamePlayModel::setPlayer2(const QString &newPlayer2)
 
 
 /**
- * \fn GamePlayModel::setPlayerHighScoreValue(QString playerName, int score)
+ * \fn GamePlayModel::updatePlayerHighScoreValue(QString playerName, int score)
  * \brief Sets the player's high score value.
  * \param int score.
  */
-void GamePlayModel::setPlayerHighScoreValue(QString playerName, int score)
+void GamePlayModel::updatePlayerHighScoreValue(QString playerName, int score)
 {
     qDebug() << __FUNCTION__ << "setting player high score...";
 

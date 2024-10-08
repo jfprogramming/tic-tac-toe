@@ -1,5 +1,7 @@
 #include "controllers/databasemanager.h"
 #include "models/highscoremodel.h"
+#include "models/adminplayermodel.h"
+#include "models/gameplaymodel.h"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -18,9 +20,10 @@ int main(int argc, char *argv[])
     //
     qmlRegisterType<GameLogic>("GameLogic", 1, 0, "GameLogic");
 
-    // Register PlayerModel with QML
+    // Register models with QML
     //
-    qmlRegisterType<GamePlayModel>("PlayerModel", 1, 0, "PlayerModel");
+    qmlRegisterType<GamePlayModel>("GamePlayModel", 1, 0, "GamePlayModel");
+    qmlRegisterType<AdminPlayerModel>("AdminPlayerModel", 1, 0, "AdminPlayerModel");
 
     // Setup DB
     //
@@ -34,15 +37,19 @@ int main(int argc, char *argv[])
     HighscoreModel highscoreModel;
     engine.rootContext()->setContextProperty("highscoreModel", &highscoreModel);
 
+    AdminPlayerModel adminPlayerModel;
+    engine.rootContext()->setContextProperty("adminPlayerModel", &adminPlayerModel);
+
     // Setup game logic for QML
     //
     GameLogic gameLogic;
     engine.rootContext()->setContextProperty("gameLogic", &gameLogic);
 
-    // System setttings for QML
+    // System settings for QML
     //
     SystemSettings settingsController;
     engine.rootContext()->setContextProperty("settingsController", &settingsController);
+
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
     QObject::connect(
