@@ -2,25 +2,22 @@
 #include "controllers.h"
 #include "controllers/databasemanager.h"
 
+
 /**
  * \brief Constructor for HighscoreModel.
  * \param parent The parent QObject.
  */
 HighscoreModel::HighscoreModel(QObject *parent) : QAbstractListModel{parent}
 {
-    //DatabaseManager dbManager;
-    //QList<int> fetchedHighScores = dbManager.getHighScoreList();
-
     QList<int> fetchedHighScores = Controllers::dbManager.getHighScoreList();
     setHighScoreList(fetchedHighScores);
 }
 
+
 /**
  * \brief Destructor for HighscoreModel.
  */
-HighscoreModel::~HighscoreModel(){
-
-}
+HighscoreModel::~HighscoreModel(){}
 
 /**
  * \brief Sets the high score list.
@@ -33,6 +30,7 @@ void HighscoreModel::setHighScoreList(const QList<int> &newHighScoreList)
     endResetModel();
 }
 
+
 /**
  * \brief Returns the number of rows in the model.
  * \param parent The parent QModelIndex.
@@ -44,6 +42,7 @@ int HighscoreModel::rowCount(const QModelIndex &parent) const
         return 0; // No child items
     return m_highScoreList.size();
 }
+
 
 /**
  * \brief  Returns the data for a given index and role.
@@ -62,4 +61,32 @@ QVariant HighscoreModel::data(const QModelIndex &index, int role) const
     }
 
     return QVariant();
+}
+
+
+/**
+ * \brief Returns the player name for a given index.
+ * \param index The QModelIndex.
+ * \return The player name as a QVariant.
+ */
+QVariant HighscoreModel::playerName(const QModelIndex &index) const
+{
+    if (!index.isValid())
+        return QVariant();
+
+    return Controllers::dbManager.getPlayerName(index.row());
+}
+
+
+/**
+ * \brief Returns the player high score for a given index.
+ * \param index The QModelIndex.
+ * \return The player high score as a QVariant.
+ */
+QVariant HighscoreModel::playerHighScore(const QModelIndex &index) const
+{
+    if (!index.isValid())
+        return QVariant();
+
+    return Controllers::dbManager.getHighScoreForPlayer(index.row());
 }

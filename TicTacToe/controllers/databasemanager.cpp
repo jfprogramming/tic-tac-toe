@@ -268,6 +268,30 @@ bool DatabaseManager::createNewPlayer(const QString &playerName, const QString &
 
 
 /**
+ * \fn      DatabaseManager::getPlayerName
+ * \brief   Gets a player by their row index in the high score table
+ * \param   QString name
+ * \return  bool
+ */
+QString DatabaseManager::getPlayerName(int userId)
+{
+
+}
+
+
+/**
+ * \fn      DatabaseManager::getPlayerColor
+ * \brief   Gets a player by their row index in the high score table
+ * \param   QString name
+ * \return  bool
+ */
+QString DatabaseManager::getPlayerColor(const QString &playerName)
+{
+
+}
+
+
+/**
  * \fn      DatabaseManager::getPlayerByName
  * \brief   Gets a player by their name
  * \param   QString name

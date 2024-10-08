@@ -3,7 +3,6 @@
 #include <QObject>
 #include <QAbstractListModel>
 
-
 /**
  * \file HighscoreModel.h
  *
@@ -18,7 +17,6 @@ public:
     explicit HighscoreModel(QObject *parent = nullptr);
     ~HighscoreModel();
 
-
     // Implement the necessary methods for a list model
     //
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -26,9 +24,16 @@ public:
 
     // Set the high score list
     //
-    void setHighScoreList(const QList<int> &newHighScoreList);;
+    void setHighScoreList(const QList<int> &newHighScoreList);
+
+    // Get the player name for a given index
+    //
+    QVariant playerName(const QModelIndex &index) const;
+
+    // Get the player high score for a given index
+    //
+    QVariant playerHighScore(const QModelIndex &index) const;
 
 private:
     QList<int> m_highScoreList;
 };
-

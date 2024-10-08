@@ -2,39 +2,45 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 Item {
-    Header{
+    Header {
         id: highScoreHeader
     }
 
-    ScrollView{
+    ScrollView {
         id: highScoreScrollView
-        anchors.fill: parent
+        anchors.top: highScoreHeader.bottom
+        anchors.bottom: highScoreFooter.top
+        anchors.left: parent.left
+        anchors.right: parent.right
 
-        TableView {
-            id: mainArea
-            anchors.fill: parent
-            anchors.top: highScoreHeader.bottom
-            anchors.topMargin: 50
-            anchors.bottom: highScoreFooter.top
-            anchors.bottomMargin: 50
-            model: highscoreModel // Use the registered model
-            alternatingRowColors: true // Enable striped rows
-
-            TableViewColumn {
-                role: "index"
-                title: "#"
-                width: 50
+        ListView {
+            id: highScoreListView
+            width: parent.width - 20
+            height: parent.height - 20
+            model: highscoreModel
+            highlight: Rectangle {
+                color: "lightblue"
+                width: highScoreListView.width
+                height: 50
             }
-
-            TableViewColumn {
-                role: "display"
-                title: "Name"
-                width: 200
+            highlightFollowsCurrentItem: true
+            focus: true
+            delegate: Row {
+                id: delegateRow
+                spacing: 50
+                Text {
+                    text: (index + 1).toString()
+                    width: 50
+                }
+                Text {
+                    text: model.display
+                    width: 200
+                }
             }
         }
     }
 
-    Footer{
+    Footer {
         id: highScoreFooter
         homeBtn.onClicked: {
             stackView.clear()
