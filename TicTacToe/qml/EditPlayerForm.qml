@@ -1,11 +1,13 @@
-import QtQuick
-import QtQuick.Controls
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.VirtualKeyboard 2.0  // Add virtual keyboard import
 
 Item {
     id:editFormPageItem
     objectName: "editFormPage"
 
     // Property alias
+    //
     property alias nameLabelTxt: playerNameLabel.text
     property alias coloLabelTxt: playerColorLabel.text
 
@@ -74,6 +76,16 @@ Item {
         }
     }
 
+    // VirtualKeyboard
+    //
+    InputPanel {
+        id: inputPanel
+        z: 99
+        anchors.bottom: parent.bottom
+        active: true
+    }
+
+
     Footer{
         id: homePagefooter
         backBtn.visible: true
@@ -86,4 +98,3 @@ Item {
         }
     }
 }
-
