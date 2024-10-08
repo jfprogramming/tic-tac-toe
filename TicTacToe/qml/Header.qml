@@ -18,9 +18,9 @@ Rectangle {
     function savePlayerHighScore(playerName, score) {
         console.log("save player high score: " + playerName + " score: " + score)
         if (playerName === "Player1") {
-            gamePlayModel.setPlayerHighScoreValue(playerName, score);
+            gamePlayModel.updatePlayerHighScoreValue(playerName, score);
         } else if (playerName === "Player2") {
-            gamePlayModel.setPlayerHighScoreValue(playerName, score);
+            gamePlayModel.updatePlayerHighScoreValue(playerName, score);
         }
     }
 

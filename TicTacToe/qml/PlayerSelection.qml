@@ -32,16 +32,8 @@ Item {
         console.log("gameMode: " + gameLogic.gameType)
     }
 
-    GamePlayModel {
-        id: gamePlayModel
-        onPlayer1Changed: {
-            console.log("player1 changed: " + gamePlayModel.player1)
-        }
-        onPlayer2Changed: {
-            console.log("player2 changed: " + gamePlayModel.player2)
-        }
-    }
-
+    // Player selection notification
+    //
     PopupDialog {
         id: player2Popup
         popupMsgtxt: "Player 2 select"

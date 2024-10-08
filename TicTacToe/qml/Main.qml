@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
 import GameLogic 1.0
+import GamePlayModel 1.0
 
 Window {
     width: 640
@@ -25,6 +26,10 @@ Window {
         onPlayerWonChanged: {
             console.log("Player won changed to: "+gameLogic.playerWon)
         }
+    }
+
+    GamePlayModel {
+        id: gamePlayModel
     }
 
     StackView {
