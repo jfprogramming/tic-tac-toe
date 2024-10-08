@@ -7,24 +7,20 @@ Item {
     objectName: "playerSelectionPage"
 
     property string gameMode: ""
-    property bool player1Selection: true
-    property bool player2Selection: false
+    property bool   player1Selection: true
+    property bool   player2Selection: false
 
-    // Property to hold reference to PlayArea
+
+    // JavaScript Functions
     //
-    //property Item playArea
-
     function player1Selected(playerName) {
         console.log("player1Selected: " + playerName)
-        gamePlayModel.player1 = playerName
-        gamePlayModel.player1Color = gamePlayModel.getPlayerColor(playerName)
+        gamePlayModel.setPlayer1(playerName)
     }
 
     function player2Selected(playerName) {
         console.log("player2Selected: " + playerName)
         gamePlayModel.setPlayer2(playerName)
-        gamePlayModel.player2 = playerName
-        gamePlayModel.player2Color = gamePlayModel.getPlayerColor(playerName)
     }
 
     function checkGameType() {

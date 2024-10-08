@@ -152,23 +152,11 @@ Item {
         var playerColor = currentPlayer == 1 ? player1Color : player2Color
         console.log("playerColor: " + playerColor)
 
-        // Update win strike items with the player's color
-        //
-        // if (gameLogic.horizontalWin) {
-        //     winVisual.showHorizontalWin(gameLogic.winRow, playerColor)
-        // } else if (gameLogic.verticalWin) {
-        //     winVisual.showVerticalWin(gameLogic.winCol, playerColor)
-        // } else if (gameLogic.diagonalWin) {
-        //     winVisual.showDiagonalWin(gameLogic.winDiag, playerColor)
-        // }
-
         if (currentPlayer == 1) {
             p1Score++
-            gamePlayModel.player1Score = p1Score
             playAreaHeader.savePlayerHighScore("Player1", p1Score)
         } else if (currentPlayer == 2) {
             p2Score++
-            gamePlayModel.player2Score = p2Score
             playAreaHeader.savePlayerHighScore("Player2", p2Score)
         }
 

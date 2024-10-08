@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
+import GamePlayModel 1.0
 
 Rectangle {
     id: header
