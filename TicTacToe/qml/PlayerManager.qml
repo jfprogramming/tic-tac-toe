@@ -8,7 +8,7 @@ Item {
     Component.onCompleted: {
         // Populate the ListModel with data from the PlayerModel
         //
-        var players = playerModel.getAllPlayers()
+        var players = adminPlayerModel.getAllPlayers()
         for (var i = 0; i < players.length; i++) {
             playerListModel.append({ playerName: players[i].name, playerColor: players[i].color })
         }
@@ -31,7 +31,7 @@ Item {
             id: playerListView
             width: parent.width
             height: parent.height
-            model: playerModel.playerList
+            model: adminPlayerModel.playerList
             clip: true
 
             delegate: Item {

@@ -31,6 +31,7 @@ class GamePlayModel : public QObject
 
 public:
     explicit GamePlayModel(QObject* parent = nullptr);
+    ~GamePlayModel();
 
     // Get Player1 info (name, color)
     //

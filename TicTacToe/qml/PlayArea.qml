@@ -6,11 +6,6 @@ Item {
     id: playArea
     objectName: "playArea"
 
-    // TODO you player model to set the currentPlayer1 and currentPlayer2 in the PlayArea
-    //
-    //property string currentP1: playerModel.player1
-    //property string currentP2: playerModel.player2
-
     // Defualt player colors for the game | Player 1 is blue and Player 2 is red
     //
     property string player1Color: "#0078D7" //playerModel.getPlayerColor(currentP1)
@@ -169,11 +164,11 @@ Item {
 
         if (currentPlayer == 1) {
             p1Score++
-            playerModel.player1Score = p1Score
+            gamePlayModel.player1Score = p1Score
             playAreaHeader.savePlayerHighScore("Player1", p1Score)
         } else if (currentPlayer == 2) {
             p2Score++
-            playerModel.player2Score = p2Score
+            gamePlayModel.player2Score = p2Score
             playAreaHeader.savePlayerHighScore("Player2", p2Score)
         }
 

@@ -42,7 +42,7 @@ Item {
                 id: playerNameTextInput
                 width: 300
                 height: 50
-                text: playerModel.playerName
+                text: adminPlayModel.playerName
             }
 
             Label{
@@ -53,22 +53,22 @@ Item {
                 id: playerColorTextInput
                 width: 300
                 height: 50
-                text: playerModel.playerColor
+                text: adminPlayModel.playerColor
             }
             Button{
                 id: saveButton
                 text: qsTr("Save")
                 onClicked: {
-                    playerModel.savePlayerToDatabase(playerNameTextInput.text, playerColorTextInput.text)
+                    adminPlayModel.savePlayerToDatabase(playerNameTextInput.text, playerColorTextInput.text)
                 }
             }
             Button{
                 id: lookupButton
                 text: qsTr("Lookup")
                 onClicked: {
-                    playerModel.lookupPlayer(playerNameTextInput.text)
-                    playerNameTextInput.text = playerModel.player1Name
-                    playerColorTextInput.text = playerModel.player1Color
+                    adminPlayModel.lookupPlayer(playerNameTextInput.text)
+                    playerNameTextInput.text = adminPlayModel.player1Name
+                    playerColorTextInput.text = adminPlayModel.player1Color
                 }
             }
         }

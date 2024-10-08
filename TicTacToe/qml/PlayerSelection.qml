@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Controls
-import PlayerModel 1.0
+import GamePlayModel 1.0
 
 Item {
     id: playerSelectionItem
@@ -16,15 +16,15 @@ Item {
 
     function player1Selected(playerName) {
         console.log("player1Selected: " + playerName)
-        playerModel.player1 = playerName
-        playerModel.player1Color = playerModel.getPlayerColor(playerName)
+        gamePlayModel.player1 = playerName
+        gamePlayModel.player1Color = gamePlayModel.getPlayerColor(playerName)
     }
 
     function player2Selected(playerName) {
         console.log("player2Selected: " + playerName)
-        playerModel.setPlayer2(playerName)
-        playerModel.player2 = playerName
-        playerModel.player2Color = playerModel.getPlayerColor(playerName)
+        gamePlayModel.setPlayer2(playerName)
+        gamePlayModel.player2 = playerName
+        gamePlayModel.player2Color = gamePlayModel.getPlayerColor(playerName)
     }
 
     function checkGameType() {
@@ -36,13 +36,13 @@ Item {
         console.log("gameMode: " + gameLogic.gameType)
     }
 
-    PlayerModel {
-        id: playerModel
+    GamePlayModel {
+        id: gamePlayModel
         onPlayer1Changed: {
-            console.log("player1 changed: " + playerModel.player1)
+            console.log("player1 changed: " + gamePlayModel.player1)
         }
         onPlayer2Changed: {
-            console.log("player2 changed: " + playerModel.player2)
+            console.log("player2 changed: " + gamePlayModel.player2)
         }
     }
 

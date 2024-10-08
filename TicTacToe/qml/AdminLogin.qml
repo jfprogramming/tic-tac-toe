@@ -51,7 +51,7 @@ Item {
             target: adminLoginPagefooter
             function onLoginBtnClicked(username, password) {
                 console.log("admin login slot")
-                if(playerModel.onAdminLogin(username, password)){
+                if(adminPlayModel.onAdminLogin(username, password)){
                     stackView.push("AdminPage.qml", StackView.PushTransition)
                     // Clear the text fields on succesful login
                     //

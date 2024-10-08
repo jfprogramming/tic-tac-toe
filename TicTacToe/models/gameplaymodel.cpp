@@ -10,11 +10,18 @@
  */
 GamePlayModel::GamePlayModel(QObject* parent) : QObject(parent)
 {
-    qDebug() << __FUNCTION__ << "PlayerModel constructor";
+    qDebug() << __FUNCTION__ << "GamePlayModel constructor";
 }
 
 
-
+/**
+ * \fn GamePlayModel::~GamePlayModel()
+ * \brief Destructor for GamePlayModel.
+ */
+GamePlayModel::~GamePlayModel()
+{
+    qDebug() << __FUNCTION__ << "GamePlayModel destructor";
+}
 
 
 /**
