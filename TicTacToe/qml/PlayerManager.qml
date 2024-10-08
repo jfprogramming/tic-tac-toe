@@ -1,22 +1,24 @@
-import QtQuick
-import QtQuick.Controls
+import QtQuick 2.15
+import QtQuick.Controls 2.15
 
 Item {
-    id:playerManagerPageItem
+    id: playerManagerPageItem
     objectName: "playerManagerPage"
 
-    Header{
-        id:homePageHeader
-    }
-
     Component.onCompleted: {
-        // Clear text fields on entry
+        // Populate the ListModel with data from the PlayerModel
         //
-        playerNameTextInput.text = ""
-        playerColorTextInput.text = ""
+        var players = playerModel.getAllPlayers()
+        for (var i = 0; i < players.length; i++) {
+            playerListModel.append({ playerName: players[i].name, playerColor: players[i].color })
+        }
     }
 
-    Rectangle{
+    Header {
+        id: homePageHeader
+    }
+
+    Rectangle {
         id: mainArea
         anchors.fill: parent
         color: "white"
@@ -25,52 +27,38 @@ Item {
         anchors.bottom: homePagefooter.top
         anchors.bottomMargin: 50
 
-        Column{
-            id:inputColumn
-            anchors.centerIn: parent
-            spacing: 10
+        ListView {
+            id: playerListView
+            width: parent.width
+            height: parent.height
+            model: playerModel.playerList
+            clip: true
 
-            Label{
-                id: playerNameLabel
-                text: qsTr("Enter Player Name")
-            }
-            TextField{
-                id: playerNameTextInput
-                width: 300
+            delegate: Item {
+                width: parent.width
                 height: 50
-                text: playerModel.playerName
-            }
-
-            Label{
-                id: playerColorLabel
-                text: qsTr("Enter Player Color")
-            }
-            TextField{
-                id: playerColorTextInput
-                width: 300
-                height: 50
-                text: playerModel.playerColor
-            }
-            Button{
-                id: saveButton
-                text: qsTr("Save")
-                onClicked: {
-                    playerModel.savePlayerToDatabase(playerNameTextInput.text, playerColorTextInput.text)
+                Row {
+                    spacing: 10
+                    Text {
+                        text: model.playerName
+                        width: parent.width / 2
+                    }
+                    Text {
+                        text: model.playerColor
+                        width: parent.width / 2
+                    }
                 }
-            }
-            Button{
-                id: lookupButton
-                text: qsTr("Lookup")
-                onClicked: {
-                    playerModel.lookupPlayer(playerNameTextInput.text)
-                    playerNameTextInput.text = playerModel.player1Name
-                    playerColorTextInput.text = playerModel.player1Color
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        stackView.push("EditForm.qml", { playerName: model.playerName, playerColor: model.playerColor })
+                    }
                 }
             }
         }
     }
 
-    Footer{
+    Footer {
         id: homePagefooter
         backBtn.visible: true
         backBtn.onClicked: {

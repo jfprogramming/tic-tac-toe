@@ -201,3 +201,18 @@ QString PlayerModel::getPlayerColor(const QString &playerName) {
     qDebug() << __PRETTY_FUNCTION__ << "playerNumber:" << playerName;
     return Controllers::dbManager.getPlayerColor(playerName);
 }
+
+
+/**
+ * \fn PlayerModel::getPlayerColor(const QString &playerName)
+ * \brief Looks up the player's name and color in the database.
+ * \param name The player's name.
+ */
+QList<QObject*> PlayerModel::getAllPlayers() {
+    QList<QObject*> playerList;
+    auto players = Controllers::dbManager.getAllPlayers();
+    for (const auto &player : players) {
+        playerList.append(new Player(player["name"], player["color"]));
+    }
+    return playerList;
+}

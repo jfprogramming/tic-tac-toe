@@ -1,5 +1,7 @@
 import QtQuick
 
+// Used for PlayerSelection.qml
+//
 ListModel {
     id: playerListModel
     objectName: "playerListModel"

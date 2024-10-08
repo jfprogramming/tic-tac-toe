@@ -1,6 +1,17 @@
 #pragma once
 #include <QObject>
 
+// Player data structure holds player data
+//
+struct Player
+{
+    int id;
+    QString name;
+    QString color;
+    int highScore;
+};
+
+
 /**
  * \file PlayerModel.h
  *
@@ -39,6 +50,8 @@ public:
     QString getPlayer2() const { return m_player2; }
 
     Q_INVOKABLE QString getPlayerColor(const QString &playerName);
+
+    Q_INVOKABLE QList<QObject*> getAllPlayers();
 
 signals:
     void player1NameChanged(const QString &playerName);
