@@ -1,6 +1,17 @@
 #pragma once
 #include <QObject>
 
+
+// Player data structure holds player data
+//
+struct Player
+{
+    int id;
+    QString name;
+    QString color;
+    int highScore;
+};
+
 /**
  * \file GamePlayModel.h
  *
@@ -18,25 +29,23 @@ class GamePlayModel : public QObject
     Q_PROPERTY(QString player2Name  READ getPlayer2Name  WRITE setPlayer2Name NOTIFY player2NameChanged)
     Q_PROPERTY(QString player2Color READ getPlayer2Color WRITE setPlayer2Color NOTIFY player2ColorChanged)
 
-    Q_PROPERTY(QString player1 READ getPlayer1 WRITE setPlayer1 NOTIFY player1Changed FINAL)
-    Q_PROPERTY(QString player2 READ getPlayer2 WRITE setPlayer2 NOTIFY player2Changed FINAL)
-
-
 public:
     explicit GamePlayModel(QObject* parent = nullptr);
 
-    // Get Player info (name, color)
+    // Get Player1 info (name, color)
     //
-    QString getPlayer1Name()  const { return m_player1Name; }
-    QString getPlayer1Color() const { return m_player1Color; }
+    QString getPlayer1Name()  const { return m_player1.name; }
+    QString getPlayer1Color() const { return m_player1.color; }
 
-    QString getPlayer2Name()  const { return m_player2Name; }
-    QString getPlayer2Color() const { return m_player2Color; }
-
-    // Set Game-play player names selected and color associated with player
+    // Get Player1 info (name, color)
     //
-    QString getPlayer1() const { return m_player1; }
-    QString getPlayer2() const { return m_player2; }
+    QString getPlayer2Name()  const { return m_player2.name; }
+    QString getPlayer2Color() const { return m_player2.color; }
+
+    // Get the player data
+    //
+    Player getPlayer1() const { return m_player1; }
+    Player getPlayer2() const { return m_player2; }
 
     Q_INVOKABLE QString getPlayerColor(const QString &playerName);
 
@@ -51,8 +60,8 @@ signals:
     void player2Changed();
 
 public slots:
-    void lookupPlayer(const QString &name);
-
+    // Slots are used in the game-play view (QML) to set the player names and colors
+    //
     void setPlayer1Color(const QString &newPlayerColor);
     void setPlayer1Name(const QString &newPlayerName);
 
@@ -65,15 +74,12 @@ public slots:
     void setPlayerHighScoreValue(QString playerName, int score);
 
 private:
-    QString m_player1Name="";
-    QString m_player1Color="";
+    QString m_player1Name;
+    QString m_player1Color;
 
-    QString m_player2Name="";
-    QString m_player2Color="";
+    QString m_player2Name;
+    QString m_player2Color;
 
-    QString m_player1="";
-    QString m_player2="";
-
-    int m_player1Id;
-    int m_player2Id;
+    Player m_player1;
+    Player m_player2;
 };

@@ -45,7 +45,7 @@ void AdminPlayerModel::savePlayerToDatabase(const QString &name, const QString &
  */
 void AdminPlayerModel::lookupPlayer(const QString &name) {
     qDebug() << "player lookup...";
-    m_playerData = Controllers::dbManager.getPlayerByName(name);
+    //m_playerData = Controllers::dbManager.getPlayerByName(name);
     emit playerDataChanged();
 }
 
@@ -55,11 +55,9 @@ void AdminPlayerModel::lookupPlayer(const QString &name) {
  * \brief Retrieves a list of all players.
  * \return QList<Player> A list of Player objects.
  */
-QList<Player> AdminPlayerModel::getAllPlayers() {
-    QList<Player> playerList;
-    auto players = Controllers::dbManager.getAllPlayers();
-    for (const auto &player : players) {
-        playerList.append(new Player(player["name"], player["color"], player["highscore"]));
-    }
-    return playerList;
+QList<AdminPlayer> AdminPlayerModel::getAllPlayers() {
+    qDebug() << __FUNCTION__ << "Retrieving all players...";
+
+    m_allPlayers = Controllers::dbManager.getAllPlayers();
+    return m_allPlayers;
 }

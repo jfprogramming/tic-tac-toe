@@ -1,5 +1,7 @@
 #pragma once
 
+#include "models/adminplayermodel.h"
+#include "models/gameplaymodel.h"
 #include "qdebug.h"
 #include "qsqldatabase.h"
 #include <QThread>
@@ -29,33 +31,31 @@ public:
 
     // Player Management
     //
+    bool createNewPlayer(const QString &playerName, const QString &playerColor);
+
     QString getPlayerName(int userId);
     QString getPlayerColor(const QString &playerName);
     QString getUserSelectedOption(int userId);
 
     bool setPlayerName(int playerId, QString &newName);
     bool setPlayerColor(int playerId, QString &color);
-    bool createNewPlayer(const QString &playerName, const QString &playerColor);
-    QMap<QString, QString> getPlayerByName(const QString &name);
+
+    Player getPlayerByName(const QString &name);
+    Player getPlayerById(const int id);
+
+    QList<AdminPlayer> getAllPlayers();
 
     // Admin Login
     //
     QString getAdminUsername();
     QString getDecryptedAdminPassword();
 
-    QList<QMap<QString, QString>> getAllPlayers();
-
+    // High Score Mngt
+    //
     QList<int> getHighScoreList();
-
-    void fetchPlayerId(const QString &playerName);
     bool setPlayerHighScoreValue(int playerId, int score);
 
-    int playerId() const;
-
-public slots:
     bool authenticateAdmin(const QString &username, const QString &password);
-    void setPlayerOneId(int playerOneId);
-    void setPlayerTwoId(int playerTwoId);
     bool updatePlayerHighScore(const QString &playerName, int score);
 
 private:

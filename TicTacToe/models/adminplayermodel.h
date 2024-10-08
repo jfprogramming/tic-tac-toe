@@ -5,7 +5,7 @@
 
 // Player data structure holds player data
 //
-struct Player
+struct AdminPlayer
 {
     int id;
     QString name;
@@ -36,8 +36,9 @@ public slots:
     void savePlayerToDatabase(const QString &name, const QString &color);
     void lookupPlayer(const QString &name);
 
-    QList<Player> getAllPlayers();
+    QList<AdminPlayer> getAllPlayers();
 
 private:
     QMap<QString, QString> m_playerData;
+    QList<AdminPlayer> m_allPlayers;
 };

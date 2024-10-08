@@ -5,6 +5,7 @@
 #include <QDateTime>
 #include "databasemanager.h"
 #include "cryptclass.h"
+#include "models/adminplayermodel.h"
 
 /**
 *  \fn    DatabaseManager::DatabaseManager
@@ -76,25 +77,258 @@ void DatabaseManager::closeDatabase()
 
 
 /**
- * \fn    DatabaseManager::fetchPlayerId
- * \brief Closes the database.
- * \param int score
- * \return bool.
+ * \fn     DatabaseManager::getAdminUsername
+ * \brief  Retrieves the admin username from the database.
+ * \return The admin username as a QString.
  */
-void DatabaseManager::fetchPlayerId(const QString &playerName)
+QString DatabaseManager::getAdminUsername()
 {
-    qDebug() << __FUNCTION__ << "Fetching player ID for player:" << playerName;
+    qDebug() << __FUNCTION__ << "Fetching admin username...";
+
+    QSqlQuery query;
+    query.prepare("SELECT adminName FROM AdminTable");
+    if (query.exec() && query.next())
+        return query.value(0).toString();
+    else
+        return "";
+}
+
+
+/**
+ * \fn     DatabaseManager::getDecryptedAdminPassword
+ * \brief  Retrieves and decrypts the admin password from the database.
+ * \return The decrypted admin password as a QString.
+ */
+QString DatabaseManager::getDecryptedAdminPassword()
+{
+    qDebug() << __FUNCTION__ << "Fetching and decrypting admin password...";
+
+    QString decryptedPassword;
+    QSqlQuery query;
+    query.prepare("SELECT adminPassword FROM AdminTable");
+
+    if (query.exec() && query.next())
+    {
+        QString encryptedPassword = query.value(0).toString();
+
+        // Decrypt the password using bcrypt (replace "admin" with the actual admin password)
+        //
+        QString decryptedPassword = CryptClass::bcrypt_checkpw("admin", encryptedPassword.toUtf8().constData())
+                                        ? "admin" // Correct password
+                                        : ""; // Incorrect password
+        return decryptedPassword;
+    }
+    else
+        return "";
+}
+
+
+/**
+ * \fn     DatabaseManager::authenticateAdmin
+ * \brief  Authenticates the admin user.
+ * \param  username The admin username.
+ * \param  password The admin password.
+ * \return True if authentication is successful, false otherwise.
+ */
+bool DatabaseManager::authenticateAdmin(const QString &username, const QString &password)
+{
+    qDebug() << __FUNCTION__ << "Authenticating admin...";
+
+    QSqlQuery query;
+    QString   adminName;
+    QString   adminPassword;
+
+    qInfo() << "Admin Login username:" << username << " Admin password:" << password;
+
+    query.prepare("SELECT * FROM AdminTable WHERE adminName = :adminName");
+    query.bindValue(":adminName", username);
+
+    qInfo() << "Query:" << &query;
+
+    if (query.exec() && query.next()) {
+        int count = query.value(0).toInt();
+
+        qInfo() << "Query executed successfully. Record count:" << count;
+
+        adminName     = query.value("adminName").toString();
+        adminPassword = query.value("adminPassword").toString();
+    }
+    else {
+        qWarning() << "Error executing query:" << query.lastError().text();
+        return false;
+    }
+
+    // Decrypt the password using bcrypt
+    //
+    QByteArray byteArray      = password.toLatin1();
+    const char* charArray     = byteArray.data();
+    QString decryptedPassword = CryptClass::bcrypt_checkpw(charArray, password.toUtf8().constData())
+                                    ? "admin" // Correct password
+                                    : ""; // Incorrect password
+
+    qInfo() << "Decrypted password:" << decryptedPassword;
+
+    if(username == adminName && password == decryptedPassword){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+
+/**
+ * \fn    DatabaseManager::setPlayerName
+ * \brief  Sets the name of a player in the database.
+ * \param  playerId The ID of the player.
+ * \param  newName The new name of the player.
+ * \return bool True if the operation was successful, false otherwise.
+ */
+bool DatabaseManager::setPlayerName(int playerId, QString &newName)
+{
+    qDebug() << __FUNCTION__ << "Setting player name for player:" << playerId << " new name:" << newName;
+
+    QSqlQuery query;
+
+    if(playerId == 1){
+        // Create new player
+        QString na = "N/A";
+        createNewPlayer(newName, na);
+    } else {
+        query.prepare("UPDATE PlayerTable SET playerName = :playerName WHERE playerId = :playerId");
+        query.bindValue(":playerName", newName);
+        query.bindValue(":playerId",   playerId);
+    }
+
+    return query.exec();
+}
+
+
+/**
+ * \fn     DatabaseManager::setPlayerColor
+ * \brief  set the player color int the player table
+ * \param  playerId
+ * \param  color
+ * \return bool
+ */
+bool DatabaseManager::setPlayerColor(int playerId, QString &color)
+{
+    qDebug() << __FUNCTION__ << "Setting player color for player:" << playerId << " new color:" << color;
+
+    QSqlQuery query;
+
+    if(playerId ==1){
+        // Create new player
+        //
+        QString na = "N/A";
+        createNewPlayer(na, color);
+    }else{
+        query.prepare("UPDATE UserTable SET userAge = :playerColor WHERE playerId = :playerId");
+        query.bindValue(":playerColor", color);
+        query.bindValue(":playerId",    playerId);
+    }
+
+    return query.exec();
+}
+
+
+/**
+ * \fn      DatabaseManager::createNewPlayer
+ * \brief   Inserts a new user int the player table
+ * \param   playerName
+ * \param   playerColor
+ * \return  bool
+ */
+bool DatabaseManager::createNewPlayer(const QString &playerName, const QString &playerColor)
+{
+    qDebug() << __FUNCTION__ << "Creating new player:" << playerName << " color:" << playerColor;
 
     QSqlQuery query;
     query.prepare("SELECT playerId FROM PlayerTable WHERE playerName = :playerName");
     query.bindValue(":playerName", playerName);
+
     if (query.exec() && query.next()) {
+        // Player exists, update the playerColor
+        //
         int playerId = query.value(0).toInt();
-        setPlayerOneId(playerId);
+        query.prepare("UPDATE PlayerTable SET playerColor = :playerColor WHERE playerId = :playerId");
+        query.bindValue(":playerColor", playerColor);
+        query.bindValue(":playerId",    playerId);
     } else {
-        qWarning() << "Failed to fetch player ID:" << query.lastError();
+        // Player does not exist, create a new player
+        //
+        query.prepare("INSERT INTO PlayerTable (playerName, playerColor, dateTime) VALUES(:playerName, :playerColor, :dateTime)");
+        query.bindValue(":playerName",  playerName);
+        query.bindValue(":playerColor", playerColor);
+        query.bindValue(":dateTime", QDateTime::currentDateTime());
     }
+
+    return query.exec();
 }
+
+
+/**
+ * \fn      DatabaseManager::getPlayerByName
+ * \brief   Gets a player by their name
+ * \param   QString name
+ * \return  bool
+ */
+Player DatabaseManager::getPlayerById(const int id) {
+    qDebug() << __FUNCTION__ << "Fetching player by id:" << id;
+
+    Player player;
+
+    QSqlQuery query;
+    query.prepare("SELECT id, playerName, playerColor, highScore FROM PlayerTable WHERE id = :id");
+    query.bindValue(":id", id);
+
+    if (query.exec() && query.next()) {
+        player.id        = query.value(0).toInt();
+        player.name      = query.value(1).toString();
+        player.color     = query.value(2).toString();
+        player.highScore = query.value(3).toInt();
+    } else {
+        qWarning() << "Failed to fetch player by id:" << query.lastError();
+        player.id        = -1;
+        player.name      = "DNE";
+        player.color     = "DNE";
+        player.highScore = 0;
+    }
+    return player;
+}
+
+
+
+/**
+ * \fn      DatabaseManager::getPlayerByName
+ * \brief   Gets a player by their name
+ * \param   QString name
+ * \return  bool
+ */
+Player DatabaseManager::getPlayerByName(const QString &name) {
+    qDebug() << __FUNCTION__ << "Fetching player by name:" << name;
+
+    Player player;
+
+    QSqlQuery query;
+    query.prepare("SELECT id, playerName, playerColor, highScore FROM PlayerTable WHERE playerName = :name");
+    query.bindValue(":name", name);
+
+    if (query.exec() && query.next()) {
+        player.id        = query.value(0).toInt();
+        player.name      = query.value(1).toString();
+        player.color     = query.value(2).toString();
+        player.highScore = query.value(3).toInt();
+    } else {
+        qWarning() << "Failed to fetch player by name:" << query.lastError();
+        player.id        = -1;
+        player.name      = "DNE";
+        player.color     = "DNE";
+        player.highScore = 0;
+    }
+    return player;
+}
+
 
 /**
  * \fn    DatabaseManager::setPlayerHighScoreValue
@@ -164,341 +398,6 @@ QList<int> DatabaseManager::getHighScoreList(){
 
 
 /**
- * \fn     DatabaseManager::getAdminUsername
- * \brief  Retrieves the admin username from the database.
- * \return The admin username as a QString.
- */
-QString DatabaseManager::getAdminUsername()
-{
-    qDebug() << __FUNCTION__ << "Fetching admin username...";
-
-    QSqlQuery query;
-    query.prepare("SELECT adminName FROM AdminTable");
-    if (query.exec() && query.next())
-        return query.value(0).toString();
-    else
-        return "";
-}
-
-
-/**
- * \fn     DatabaseManager::getDecryptedAdminPassword
- * \brief  Retrieves and decrypts the admin password from the database.
- * \return The decrypted admin password as a QString.
- */
-QString DatabaseManager::getDecryptedAdminPassword()
-{
-    qDebug() << __FUNCTION__ << "Fetching and decrypting admin password...";
-
-    QString decryptedPassword;
-    QSqlQuery query;
-    query.prepare("SELECT adminPassword FROM AdminTable");
-    if (query.exec() && query.next())
-    {
-        QString encryptedPassword = query.value(0).toString();
-        // Decrypt the password using bcrypt (replace "admin" with the actual admin password)
-        QString decryptedPassword = CryptClass::bcrypt_checkpw("admin", encryptedPassword.toUtf8().constData())
-                                        ? "admin" // Correct password
-                                        : ""; // Incorrect password
-        return decryptedPassword;
-    }
-    else
-        return "";
-}
-
-
-/**
- * \fn     DatabaseManager::authenticateAdmin
- * \brief  Authenticates the admin user.
- * \param  username The admin username.
- * \param  password The admin password.
- * \return True if authentication is successful, false otherwise.
- */
-bool DatabaseManager::authenticateAdmin(const QString &username, const QString &password)
-{
-    qDebug() << __FUNCTION__ << "Authenticating admin...";
-
-    QSqlQuery query;
-    QString   adminName;
-    QString   adminPassword;
-
-    qInfo() << "Admin Login username:" << username << " Admin password:" << password;
-
-    query.prepare("SELECT * FROM AdminTable WHERE adminName = :adminName");
-    query.bindValue(":adminName", username);
-
-    qInfo() << "Query:" << &query;
-
-    if (query.exec() && query.next()) {
-        int count = query.value(0).toInt();
-
-        qInfo() << "Query executed successfully. Record count:" << count;
-
-        adminName     = query.value("adminName").toString();
-        adminPassword = query.value("adminPassword").toString();
-    } else {
-        qWarning() << "Error executing query:" << query.lastError().text();
-        return false;
-    }
-
-    // Decrypt the password using bcrypt
-    QByteArray byteArray      = password.toLatin1();
-    const char* charArray     = byteArray.data();
-    QString decryptedPassword = CryptClass::bcrypt_checkpw(charArray, password.toUtf8().constData())
-                                    ? "admin" // Correct password
-                                    : ""; // Incorrect password
-
-    qInfo() << "Decrypted password:" << decryptedPassword;
-
-    if(username == adminName && password == decryptedPassword){
-        return true;
-    }else{
-        return false;
-    }
-}
-
-/**
- * \fn     DatabaseManager::playerId
- * \brief  return the current playerId
- * \return void
- */
-int DatabaseManager::playerId() const
-{
-    qDebug() << __FUNCTION__ << "current player id:" << m_playerId;
-
-    return m_playerId;
-}
-
-/**
- * \fn     DatabaseManager::setPlayerOneId
- * \brief  set the current player id
- * \return void
- */
-void DatabaseManager::setPlayerOneId(int playerOneId)
-{
-    qDebug() << __FUNCTION__ << "Setting player id:" << playerOneId;
-
-    m_playerId = playerOneId;
-}
-
-/**
- * \fn     DatabaseManager::setPlayerTwoId
- * \brief  set the current player id
- * \return void
- */
-void DatabaseManager::setPlayerTwoId(int playerTwoId)
-{
-    qDebug() << __FUNCTION__ << "Setting player id:" << playerTwoId;
-
-    m_playerId = playerTwoId;
-}
-
-
-/**
- * \fn     DatabaseManager::getPlayerName
- * \brief  Retrieves the name of a player from the database.
- * \param  playerId The ID of the player.
- * \return QString The name of the player.
- */
-QString DatabaseManager::getPlayerName(int playerId)
-{
-    qDebug() << __FUNCTION__ << "Fetching player name for player:" << playerId;
-
-    QSqlQuery query;
-    query.prepare("SELECT palyerName FROM PlayerTable WHERE playerId = :id");
-    query.bindValue(":playerId", playerId);
-    if (query.exec() && query.next())
-        return query.value(0).toString();
-    else
-        return "";
-}
-
-
-/**
- * \fn     DatabaseManager::getPlayerColor
- * \brief  Retrieves the color associated with a player from the database.
- * \param  color The color to search for.
- * \return QString The color associated with the player.
- */
-QString DatabaseManager::getPlayerColor(const QString &playerName)
-{
-    qDebug() << __FUNCTION__ << "Fetching color for playerName:" << playerName;
-
-    int playerId = getPlayerIdByName(playerName);
-
-    QSqlQuery query;
-    query.prepare("SELECT playerColor FROM PlayerTable WHERE playerId = :playerId");
-    query.bindValue(":playerId", playerId);
-
-    qDebug() << __FUNCTION__ << "query:" << query.lastQuery();
-
-    if (query.exec() && query.next()){
-        qDebug() << __FUNCTION__ << "query.value(0).toString():" << query.value(0).toString();
-        return query.value(0).toString();
-    }
-    else{
-        return "";
-    }
-}
-
-
-/**
- * \fn     DatabaseManager::getUserSelectedOption
- * \brief  Retrieves the selected option of a user from the database.
- * \param  userId The ID of the user.
- * \return QString The selected option of the user.
- */
-QString DatabaseManager::getUserSelectedOption(int userId)
-{
-    qDebug() << __FUNCTION__ << "Fetching user selected option for user:" << userId;
-
-    QSqlQuery query;
-    query.prepare("SELECT userSelectedOption FROM UserTable WHERE userId = :id");
-    query.bindValue(":id", userId);
-    if (query.exec() && query.next()) {
-        return query.value(0).toString();
-    }
-    else {
-        return "";
-    }
-}
-
-
-/**
- * \fn    DatabaseManager::setPlayerName
- * \brief  Sets the name of a player in the database.
- * \param  playerId The ID of the player.
- * \param  newName The new name of the player.
- * \return bool True if the operation was successful, false otherwise.
- */
-bool DatabaseManager::setPlayerName(int playerId, QString &newName)
-{
-    qDebug() << __FUNCTION__ << "Setting player name for player:" << playerId << " new name:" << newName;
-
-    QSqlQuery query;
-
-    if(playerId == 1){
-        // Create new player
-        QString na = "N/A";
-        createNewPlayer(newName, na);
-    } else {
-        query.prepare("UPDATE PlayerTable SET playerName = :playerName WHERE playerId = :playerId");
-        query.bindValue(":playerName", newName);
-        query.bindValue(":playerId", playerId);
-    }
-
-    return query.exec();
-}
-
-
-/**
- * \fn     DatabaseManager::setPlayerColor
- * \brief  set the player color int the player table
- * \param  playerId
- * \param  color
- * \return bool
- */
-bool DatabaseManager::setPlayerColor(int playerId, QString &color)
-{
-    qDebug() << __FUNCTION__ << "Setting player color for player:" << playerId << " new color:" << color;
-
-    QSqlQuery query;
-
-    if(playerId ==1){
-        // Create new player
-        //
-        QString na = "N/A";
-        createNewPlayer(na, color);
-    }else{
-        query.prepare("UPDATE UserTable SET userAge = :playerColor WHERE playerId = :playerId");
-        query.bindValue(":playerColor", color);
-        query.bindValue(":playerId", playerId);
-    }
-
-    return query.exec();
-}
-
-
-/**
- * \fn      DatabaseManager::createNewPlayer
- * \brief   Inserts a new user int the player table
- * \param   playerName
- * \param   playerColor
- * \return  bool
- */
-bool DatabaseManager::createNewPlayer(const QString &playerName, const QString &playerColor)
-{
-    qDebug() << __FUNCTION__ << "Creating new player:" << playerName << " color:" << playerColor;
-
-    QSqlQuery query;
-    query.prepare("SELECT playerId FROM PlayerTable WHERE playerName = :playerName");
-    query.bindValue(":playerName", playerName);
-
-    if (query.exec() && query.next()) {
-        // Player exists, update the playerColor
-        //
-        int playerId = query.value(0).toInt();
-        query.prepare("UPDATE PlayerTable SET playerColor = :playerColor WHERE playerId = :playerId");
-        query.bindValue(":playerColor", playerColor);
-        query.bindValue(":playerId", playerId);
-    } else {
-        // Player does not exist, create a new player
-        //
-        query.prepare("INSERT INTO PlayerTable (playerName, playerColor, dateTime) VALUES(:playerName, :playerColor, :dateTime)");
-        query.bindValue(":playerName", playerName);
-        query.bindValue(":playerColor", playerColor);
-        query.bindValue(":dateTime", QDateTime::currentDateTime());
-    }
-
-    return query.exec();
-}
-
-
-/**
- * \fn      DatabaseManager::getPlayerByName
- * \brief   Gets a player by their name
- * \param   QString name
- * \return  bool
- */
-QMap<QString, QString> DatabaseManager::getPlayerByName(const QString &name) {
-    qDebug() << __FUNCTION__ << "Fetching player by name:" << name;
-
-    QSqlQuery query;
-    query.prepare("SELECT playerName, playerColor FROM PlayerTable WHERE playerName = :name");
-    query.bindValue(":name", name);
-
-    QMap<QString, QString> playerInfo;
-    if (query.exec() && query.next()) {
-        playerInfo["playerName"] = query.value(0).toString();
-        playerInfo["playerColor"] = query.value(1).toString();
-    } else {
-        qWarning() << "Failed to fetch player by name:" << query.lastError();
-        playerInfo["playerName"] = "DNE";
-        playerInfo["playerColor"] = "DNE";
-    }
-    return playerInfo;
-}
-
-
-/**
- * \fn      DatabaseManager::getPlayerIdByName
- * \brief   Gets a player by their ID
- * \param   QString name
-
- * \return  bool
- */
-int DatabaseManager::getPlayerIdByName(const QString &name) {
-    QSqlQuery query;
-    query.prepare("SELECT playerId FROM PlayerTable WHERE playerName = :name");
-    query.bindValue(":name", name);
-    if (query.exec() && query.next())
-        return query.value(0).toInt();
-    else
-        return -1;
-}
-
-
-/**
  * \fn      DatabaseManager::getHighScoreForPlayer
  * \brief   Gets a high score asscoated with a player
  * \param   int playerId
@@ -520,14 +419,16 @@ int DatabaseManager::getHighScoreForPlayer(int playerId) {
  * \brief   Get a list of all the players in the database
  * \return  QList<QMap<QString, QString>>
  */
-QList<QMap<QString, QString>> DatabaseManager::getAllPlayers() {
-    QList<QMap<QString, QString>> players;
+QList<AdminPlayer> DatabaseManager::getAllPlayers() {
+    QList<AdminPlayer> players;
     QSqlQuery query("SELECT name, color FROM players"); // Adjust query based on your table schema
     while (query.next()) {
-        QMap<QString, QString> player;
-        player["name"] = query.value("name").toString();
-        player["color"] = query.value("color").toString();
-        players.append(player);
+        AdminPlayer adminPlayer;
+        adminPlayer.id        = query.value("id").toInt();
+        adminPlayer.name      = query.value("name").toString();
+        adminPlayer.color     = query.value("color").toString();
+        adminPlayer.highScore = query.value("highscore").toInt();
+        players.append(adminPlayer);
     }
     return players;
 }

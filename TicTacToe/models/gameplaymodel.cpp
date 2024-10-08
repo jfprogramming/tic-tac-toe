@@ -14,68 +14,7 @@ GamePlayModel::GamePlayModel(QObject* parent) : QObject(parent)
 }
 
 
-/**
- * \fn GamePlayModel::setPlayerColor(const QString &newPlayerColor)
- * \brief Sets the player1's color.
- * \param newPlayerColor The new player color.
- */
-void GamePlayModel::setPlayer1Color(const QString& newPlayer1Color)
-{
-    qDebug() << __FUNCTION__ << "setting player1Color...";
 
-    if (m_player1Color == newPlayer1Color)
-        return;
-    m_player1Color = newPlayer1Color;
-    emit player1ColorChanged(m_player1Color);
-}
-
-
-/**
- * \fn GamePlayModel::setPlayerName(const QString &newPlayerName)
- * \brief Sets the player1's name.
- * \param newPlayerName The new player name.
- */
-void GamePlayModel::setPlayer1Name(const QString &newPlayer1Name)
-{
-    qDebug() << __FUNCTION__ << "setting player1Name...";
-
-    if (m_player1Name == newPlayer1Name)
-        return;
-    m_player1Name = newPlayer1Name;
-    emit player1NameChanged(m_player1Name);
-}
-
-
-/**
- * \fn GamePlayModel::setPlayer2Color(const QString &newPlayerColor)
- * \brief Sets the player'2s color.
- * \param newPlayerColor The new player color.
- */
-void GamePlayModel::setPlayer2Color(const QString& newPlayer2Color)
-{
-    qDebug() << __FUNCTION__ << "setting player2Color...";
-
-    if (m_player2Color == newPlayer2Color)
-        return;
-    m_player2Color = newPlayer2Color;
-    emit player2ColorChanged(m_player2Color);
-}
-
-
-/**
- * \fn GamePlayModel::setPlayer2Name(const QString &newPlayerName)
- * \brief Sets the player2's name.
- * \param newPlayerName The new player name.
- */
-void GamePlayModel::setPlayer2Name(const QString &newPlayer2Name)
-{
-    qDebug() << __FUNCTION__ << "setting player2Name...";
-
-    if (m_player2Name == newPlayer2Name)
-        return;
-    m_player2Name = newPlayer2Name;
-    emit player2NameChanged(m_player2Name);
-}
 
 
 /**
@@ -89,15 +28,12 @@ void GamePlayModel::setPlayer1(const QString &newPlayer1) {
     QString trimmedPlayer1 = newPlayer1;
     trimmedPlayer1 = trimmedPlayer1.remove(' ');
 
-    if (m_player1 == trimmedPlayer1)
+    if (m_player1.name == trimmedPlayer1)
         return;
-    m_player1 = trimmedPlayer1;
 
     // Look up player by name
     //
-    lookupPlayer(m_player1);
-    m_player1Id = Controllers::dbManager.getPlayerIdByName(m_player1);
-    m_player1Color = getPlayerColor(m_player1);
+    m_player1 = Controllers::dbManager.getPlayerByName(trimmedPlayer1);
 
     emit player1Changed();
 }
@@ -115,15 +51,12 @@ void GamePlayModel::setPlayer2(const QString &newPlayer2)
     QString trimmedPlayer2 = newPlayer2;
     trimmedPlayer2 = trimmedPlayer2.remove(' ');
 
-    if (m_player2 == trimmedPlayer2)
+    if (m_player2.name == trimmedPlayer2)
         return;
-    m_player2 = trimmedPlayer2;
 
     // Look up player by name
     //
-    lookupPlayer(m_player2);
-    m_player2Id = Controllers::dbManager.getPlayerIdByName(m_player2);
-    m_player2Color = getPlayerColor(m_player2);
+    m_player2 = Controllers::dbManager.getPlayerByName(trimmedPlayer2);
 
     emit player2Changed();
 }
@@ -136,32 +69,15 @@ void GamePlayModel::setPlayer2(const QString &newPlayer2)
  */
 void GamePlayModel::setPlayerHighScoreValue(QString playerName, int score)
 {
-    int playerId = Controllers::dbManager.getPlayerIdByName(playerName);
-    int highscore = Controllers::dbManager.getHighScoreForPlayer(playerId);
+    qDebug() << __FUNCTION__ << "setting player high score...";
+
+    Player player = Controllers::dbManager.getPlayerByName(playerName);
+    int highscore = Controllers::dbManager.getHighScoreForPlayer(player.id);
     int newScore = highscore + score;
 
     Controllers::dbManager.updatePlayerHighScore(playerName, newScore);
 }
 
-
-/**
- * \fn GamePlayModel::lookupPlayer(const QString &name)
- * \brief Admin Function  - Looks up the player's name and color in the database.
- * \param name The player's name.
- */
-void GamePlayModel::lookupPlayer(const QString &name) {
-    qDebug() << "player lookup...";
-    QMap<QString, QString> player = Controllers::dbManager.getPlayerByName(name);
-    if (player.contains("playerName") && player.contains("playerColor")) {
-        qDebug() << "Player found...";
-        // TOOD come up with new variablse for player look up
-        setPlayer1Name(player["playerName"]);
-        setPlayer1Color(player["playerColor"]);
-    } else {
-        setPlayer1Name("DNE");
-        setPlayer1Color("DNE");
-    }
-}
 
 
 /**
@@ -170,6 +86,14 @@ void GamePlayModel::lookupPlayer(const QString &name) {
  * \param name The player's name.
  */
 QString GamePlayModel::getPlayerColor(const QString &playerName) {
-    qDebug() << __PRETTY_FUNCTION__ << "playerNumber:" << playerName;
-    return Controllers::dbManager.getPlayerColor(playerName);
+    qDebug() << __FUNCTION__ << "playerNumber:" << playerName;
+
+    if(m_player1.name == playerName)
+        return m_player1.color;
+    else if(m_player2.name == playerName)
+        return m_player2.color;
+    else{
+        qWarning() << __FUNCTION__ << "Error getting player color - Player not found!";
+        return "";
+    }
 }
