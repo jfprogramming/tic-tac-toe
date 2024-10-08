@@ -22,6 +22,7 @@ public:
     //
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    QHash<int, QByteArray> roleNames() const override;
 
     // Set the high score list
     //
@@ -37,4 +38,8 @@ public:
 
 private:
     QList<QPair<QString, int>> m_highScoreList;
+    enum HighScoreRoles {
+        PlayerNameRole = Qt::UserRole + 1,
+        HighScoreRole
+    };
 };

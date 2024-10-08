@@ -54,12 +54,27 @@ QVariant HighscoreModel::data(const QModelIndex &index, int role) const {
     if (!index.isValid())
         return QVariant();
 
-    if (role == Qt::DisplayRole) {
-        const auto &entry = m_highScoreList.at(index.row());
-        return QString("%1: %2").arg(entry.first).arg(entry.second);
+    const auto &entry = m_highScoreList.at(index.row());
+    switch (role) {
+    case PlayerNameRole:
+        return entry.first;
+    case HighScoreRole:
+        return entry.second;
+    default:
+        return QVariant();
     }
+}
 
-    return QVariant();
+
+/**
+ * \brief  Returns the role names.
+ * \return The data as a QHash.
+ */
+QHash<int, QByteArray> HighscoreModel::roleNames() const {
+    QHash<int, QByteArray> roles;
+    roles[PlayerNameRole] = "playerName";
+    roles[HighScoreRole] = "highScore";
+    return roles;
 }
 
 /**

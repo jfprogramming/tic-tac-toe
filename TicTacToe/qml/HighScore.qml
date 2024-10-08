@@ -33,11 +33,11 @@ Item {
                     width: 50
                 }
                 Text {
-                    text: model.display.split(":")[0]  // Player Name
+                    text: model.playerName  // Player Name
                     width: 200
                 }
                 Text {
-                    text: model.display.split(":")[1]  // Player High Score
+                    text: model.highScore  // Player High Score
                     width: 100
                 }
             }
