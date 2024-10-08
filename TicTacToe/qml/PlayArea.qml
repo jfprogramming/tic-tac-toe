@@ -139,7 +139,7 @@ Item {
     // Reset logic
     //
     function resetWinStrikes() {
-        winVisual.resetWinStrikes();
+        winVisual.resetWinStrikes()
     }
 
     function setWinVariables(player) {
@@ -236,25 +236,25 @@ Item {
 
                 // Convert the square select to same naming convention as the C++ std::map object
                 //
-                var squareKey = "";
+                var squareKey = ""
                 if (selectedSquare.objectName == "row1rect1Btn") {
-                    squareKey = "A1";
+                    squareKey = "A1"
                 } else if (selectedSquare.objectName == "row1rect2Btn") {
-                    squareKey = "A2";
+                    squareKey = "A2"
                 } else if (selectedSquare.objectName == "row1rect3Btn") {
-                    squareKey = "A3";
+                    squareKey = "A3"
                 } else if (selectedSquare.objectName == "row2rect1Btn") {
-                    squareKey = "B1";
+                    squareKey = "B1"
                 } else if (selectedSquare.objectName == "row2rect2Btn") {
-                    squareKey = "B2";
+                    squareKey = "B2"
                 } else if (selectedSquare.objectName == "row2rect3Btn") {
-                    squareKey = "B3";
+                    squareKey = "B3"
                 } else if (selectedSquare.objectName == "row3rect1Btn") {
-                    squareKey = "C1";
+                    squareKey = "C1"
                 } else if (selectedSquare.objectName == "row3rect2Btn") {
-                    squareKey = "C2";
+                    squareKey = "C2"
                 } else if (selectedSquare.objectName == "row3rect3Btn") {
-                    squareKey = "C3";
+                    squareKey = "C3"
                 }
                 else{
                     console.log("error computer selection....")
@@ -673,13 +673,13 @@ Item {
     Connections {
         target: gameLogic
         function onPlayerWonChanged(winType, winLocation) {
-            var playerColor = currentPlayer == 1 ? player1Color : player2Color;
+            var playerColor = currentPlayer == 1 ? player1Color : player2Color
             if (winType === "horizontal") {
-                winVisual.showHorizontalWin(winLocation, playerColor);
+                winVisual.showHorizontalWin(winLocation, playerColor)
             } else if (winType === "vertical") {
-                winVisual.showVerticalWin(winLocation, playerColor);
+                winVisual.showVerticalWin(winLocation, playerColor)
             } else if (winType === "diagonal") {
-                winVisual.showDiagonalWin(winLocation, playerColor);
+                winVisual.showDiagonalWin(winLocation, playerColor)
             }
         }
     }
@@ -689,6 +689,9 @@ Item {
         homeBtn.onClicked: {
             stackView.clear()
             stackView.push("Home.qml", StackView.PushTransition)
+            resetBoard()
+            resetWinStrikes()
+            gameLogic.resetTicTacToeBoard() // Ensure this line resets the board
         }
         homeBtnTxt: "Back"
         homeIcon: "qrc:///backArrow.png"
@@ -696,7 +699,7 @@ Item {
         resetBtn.visible: true
         resetBtn.onClicked: {
             resetBoard()
-            resetWinStrikes();
+            resetWinStrikes()
         }
     }
 }

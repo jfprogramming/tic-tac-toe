@@ -2,6 +2,8 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 Item {
+    focus: true  // Ensure the parent Item can receive focus
+
     Header {
         id: highScoreHeader
     }
@@ -20,8 +22,7 @@ Item {
             model: highscoreModel
             highlight: Rectangle {
                 color: "lightblue"
-                width: highScoreListView.width
-                height: 50
+
             }
             highlightFollowsCurrentItem: true
             focus: true
@@ -39,6 +40,7 @@ Item {
                 Text {
                     text: model.highScore
                     width: 100
+
                 }
             }
         }

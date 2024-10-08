@@ -73,7 +73,6 @@ Rectangle{
         text: qsTr("Home")
         onClicked: {
             console.log("home button clicked...")
-            gameLogic.resetTicTacToeBoard() // Ensure this line resets the board
         }
     }
 }
