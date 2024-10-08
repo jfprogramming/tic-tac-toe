@@ -6,11 +6,13 @@ project(TicTacToe VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(Qt6_DIR /opt/Qt/6.7.2/gcc_64/lib/cmake/Qt6)
+set(Qt6_DIR /opt/Qt/6.7.2/gcc_64/)
+
+# set(Qt6_FOUND TRUE)
 
 # Include Qt libraries
 # find_package(Qt6 6.7 REQUIRED COMPONENTS Quick Test Sql)
-find_package(Qt6 6.7 REQUIRED COMPONENTS Quick Test Sql Network HINTS /opt/Qt/6.7.2/gcc_64/lib/cmake/Qt6)
+find_package(Qt6 6.7 REQUIRED COMPONENTS Quick Test Sql Network QuickControls2 HINTS /opt/Qt/6.7.2/gcc_64/lib/cmake)
 
 set(CMAKE_AUTORCC ON)
 
@@ -76,7 +78,7 @@ set_target_properties(appTicTacToe PROPERTIES
 
 # Link Qt libraries
 target_link_libraries(appTicTacToe
-    PRIVATE Qt6::Quick Qt6::Sql Qt6::Test Qt6::Network
+    PRIVATE Qt6::Quick Qt6::Sql Qt6::Network Qt6::QuickControls2
     PRIVATE crypt crypto
 )
 
