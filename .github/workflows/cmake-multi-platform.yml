@@ -47,8 +47,8 @@ jobs:
     - name: Install dependencies on Windows
       if: matrix.os == 'windows-latest'
       run: |
-        powershell -command "Invoke-WebRequest -Uri 'https://download.qt.io/official_releases/qt/6.5/6.5.2/qt-opensource-windows-x86-6.5.2.exe' -OutFile 'qt-installer.exe'"
-        powershell -command "Start-Process -FilePath 'qt-installer.exe' -ArgumentList '--script qt-installer-noninteractive.qs' -NoNewWindow -Wait"
+        pip install aqtinstall
+        aqt install-qt windows desktop 6.7.2 win64_msvc2019_64
 
     - name: Set reusable strings
       id: strings
