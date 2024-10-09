@@ -46,10 +46,15 @@ jobs:
     - name: Install dependencies on Windows
       if: matrix.os == 'windows-latest'
       run: |
+        choco install openssl
         pip install aqtinstall
         aqt install-qt windows desktop 6.7.0 win64_msvc2019_64 --outputdir C:\\Qt
         echo "CMAKE_PREFIX_PATH=C:\\Qt\\6.7.0\\msvc2019_64" >> $env:GITHUB_ENV
-        
+        echo "OPENSSL_ROOT_DIR=C:\\Program Files\\OpenSSL-Win64" >> $env:GITHUB_ENV
+        echo "OPENSSL_INCLUDE_DIR=C:\\Program Files\\OpenSSL-Win64\\include" >> $env:GITHUB_ENV
+        echo "OPENSSL_CRYPTO_LIBRARY=C:\\Program Files\\OpenSSL-Win64\\lib\\libcrypto.lib" >> $env:GITHUB_ENV
+        echo "OPENSSL_SSL_LIBRARY=C:\\Program Files\\OpenSSL-Win64\\lib\\libssl.lib" >> $env:GITHUB_ENV
+
     - name: Set reusable strings
       id: strings
       shell: bash
