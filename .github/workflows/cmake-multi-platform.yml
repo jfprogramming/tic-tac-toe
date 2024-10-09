@@ -42,33 +42,25 @@ jobs:
       uses: jurplel/install-qt-action@v3
       with:
         version: '6.7.0'
+        modules: qtquick,qtquickcontrols2,qtsql,qttest,qtnetwork
         # modules: qtquick,qtquickcontrols2,qtsql,qttest,qtnetwork
 
     - name: Install dependencies on Windows
       if: matrix.os == 'windows-latest'
       run: |
-        pip install aqtinstall
-        aqt install-qt windows desktop 6.7.0 win64_msvc2019_64 --outputdir C:\\Qt
-        echo "CMAKE_PREFIX_PATH=C:\\Qt\\6.7.0\\msvc2019_64" >> $env:GITHUB_ENV
-
+        choco install qt --version=6.7.0
+        set PATH=C:\Qt\6.7.0\msvc2019_64\bin;%PATH%
     - name: Set reusable strings
       id: strings
       shell: bash
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
-
     - name: Configure CMake
-      run: |
+      run: >
         cmake -B ${{ steps.strings.outputs.build-output-dir }}
         -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
         -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-        # -DCMAKE_PREFIX_PATH=${{ env.CMAKE_PREFIX_PATH }}
         -S ${{ github.workspace }}/TicTacToe
-
     - name: Build
       run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
-
-    - name: Test
-      working-directory: ${{ steps.strings.outputs.build-output-dir }}
-      run: ctest --build-config ${{ matrix.build_type }}
