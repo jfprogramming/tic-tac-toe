@@ -18,6 +18,48 @@ Item {
         id: playerManagerPageHeader
     }
 
+    Row {
+        width: parent.width
+        height: 50
+        spacing: 10
+        Rectangle {
+            width: parent.width / 4
+            height: parent.height
+            color: "lightgray"
+            Text {
+                anchors.centerIn: parent
+                text: "ID"
+            }
+        }
+        Rectangle {
+            width: parent.width / 4
+            height: parent.height
+            color: "lightgray"
+            Text {
+                anchors.centerIn: parent
+                text: "Name"
+            }
+        }
+        Rectangle {
+            width: parent.width / 4
+            height: parent.height
+            color: "lightgray"
+            Text {
+                anchors.centerIn: parent
+                text: "Color"
+            }
+        }
+        Rectangle {
+            width: parent.width / 4
+            height: parent.height
+            color: "lightgray"
+            Text {
+                anchors.centerIn: parent
+                text: "High Score"
+            }
+        }
+    }
+
     Rectangle {
         id: mainArea
         anchors.fill: parent

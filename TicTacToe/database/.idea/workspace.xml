@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c4a013bb-8cd7-40fd-ab30-3dcfadad489b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../controllers/databasemanager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../controllers/databasemanager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tictactoe.db" beforeDir="false" afterPath="$PROJECT_DIR$/tictactoe.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../models/playermodel.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../models/playermodel.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../models/playermodel.h" beforeDir="false" afterPath="$PROJECT_DIR$/../models/playermodel.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../qml/Header.qml" beforeDir="false" afterPath="$PROJECT_DIR$/../qml/Header.qml" afterDir="false" />
-    </list>
+    <list default="true" id="c4a013bb-8cd7-40fd-ab30-3dcfadad489b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

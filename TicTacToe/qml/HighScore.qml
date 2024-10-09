@@ -2,45 +2,84 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 Item {
-    focus: true  // Ensure the parent Item can receive focus
+    id: highScorePageItem
+    objectName: "highScorePage"
+    focus: true
 
     Header {
         id: highScoreHeader
     }
 
-    ScrollView {
-        id: highScoreScrollView
-        anchors.top: highScoreHeader.bottom
-        anchors.bottom: highScoreFooter.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-
-        ListView {
-            id: highScoreListView
-            width: parent.width - 20
-            height: parent.height - 20
-            model: highscoreModel
-            highlight: Rectangle {
-                color: "lightblue"
-
+    Row {
+        width: parent.width
+        height: 50
+        spacing: 50
+        Rectangle {
+            width: parent.width / 3
+            height: parent.height
+            color: "lightgray"
+            Text {
+                anchors.centerIn: parent
+                text: "Rank"
             }
-            highlightFollowsCurrentItem: true
-            focus: true
-            delegate: Row {
-                id: delegateRow
-                spacing: 50
-                Text {
-                    text: (index + 1).toString()
-                    width: 50
-                }
-                Text {
-                    text: model.playerName
-                    width: 200
-                }
-                Text {
-                    text: model.highScore
-                    width: 100
+        }
+        Rectangle {
+            width: parent.width / 3
+            height: parent.height
+            color: "lightgray"
+            Text {
+                anchors.centerIn: parent
+                text: "Player Name"
+            }
+        }
+        Rectangle {
+            width: parent.width / 3
+            height: parent.height
+            color: "lightgray"
+            Text {
+                anchors.centerIn: parent
+                text: "High Score"
+            }
+        }
+    }
+    Rectangle {
+        id: mainArea
+        anchors.fill: parent
+        color: "white"
+        anchors.top: highScoreHeader.bottom
+        anchors.topMargin: 50
+        anchors.bottom: highScoreFooter.top
+        anchors.bottomMargin: 50
 
+        ScrollView {
+            id: highScoreScrollView
+            anchors.fill: parent
+
+            ListView {
+                id: highScoreListView
+                width: parent.width
+                height: parent.height
+                model: highscoreModel
+                highlight: Rectangle {
+                    color: "lightblue"
+                }
+                highlightFollowsCurrentItem: true
+                focus: true
+                delegate: Row {
+                    id: delegateRow
+                    spacing: 50
+                    Text {
+                        text: (index + 1).toString()
+                        width: parent.width / 3
+                    }
+                    Text {
+                        text: model.playerName
+                        width: parent.width / 3
+                    }
+                    Text {
+                        text: model.highScore
+                        width: parent.width / 3
+                    }
                 }
             }
         }
