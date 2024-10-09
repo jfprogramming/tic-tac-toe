@@ -54,7 +54,8 @@ sudo apt install gawk \
                  nodejs \
                  vim \
                  neovim \
-                 curl 
+                 curl \
+                 valgrind
                               
                  
 
