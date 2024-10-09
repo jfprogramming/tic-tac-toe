@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 
 Item {
 
-    Header{
+    GameHeader{
         id:dateTimePageHeader
     }
 
@@ -69,7 +69,7 @@ Item {
         }
     }
 
-    Footer{
+    GameFooter{
         id: dateTimePagefooter
         backBtn.visible: true
         backBtn.onClicked: {

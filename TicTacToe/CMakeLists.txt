@@ -50,8 +50,8 @@ qt_add_qml_module(appTicTacToe
         qml/AdminLogin.qml
         qml/AdminPage.qml
         qml/DateTimeSetting.qml
-        qml/Footer.qml
-        qml/Header.qml
+        qml/GameFooter.qml
+        qml/GameHeader.qml
         qml/HighScore.qml
         qml/Home.qml
         qml/Main.qml

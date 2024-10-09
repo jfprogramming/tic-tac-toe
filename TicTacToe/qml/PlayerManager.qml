@@ -14,51 +14,10 @@ Item {
         }
     }
 
-    Header {
+    GameHeader {
         id: playerManagerPageHeader
     }
 
-    Row {
-        width: parent.width
-        height: 50
-        spacing: 10
-        Rectangle {
-            width: parent.width / 4
-            height: parent.height
-            color: "lightgray"
-            Text {
-                anchors.centerIn: parent
-                text: "ID"
-            }
-        }
-        Rectangle {
-            width: parent.width / 4
-            height: parent.height
-            color: "lightgray"
-            Text {
-                anchors.centerIn: parent
-                text: "Name"
-            }
-        }
-        Rectangle {
-            width: parent.width / 4
-            height: parent.height
-            color: "lightgray"
-            Text {
-                anchors.centerIn: parent
-                text: "Color"
-            }
-        }
-        Rectangle {
-            width: parent.width / 4
-            height: parent.height
-            color: "lightgray"
-            Text {
-                anchors.centerIn: parent
-                text: "High Score"
-            }
-        }
-    }
 
     Rectangle {
         id: mainArea
@@ -78,29 +37,107 @@ Item {
                 height: parent.height
                 model: adminPlayerModel
                 clip: true
-
+                header:
+                    Row {
+                    width: parent.width
+                    height: 50
+                    spacing: 10
+                    Rectangle {
+                        width: parent.width / 4
+                        height: parent.height
+                        color: "lightgray"
+                        Text {
+                            anchors.centerIn: parent
+                            text: "ID"
+                            color: "black"
+                            font.bold: true
+                            font.pointSize: 12
+                            font.capitalization: Font.AllUppercase
+                        }
+                    }
+                    Rectangle {
+                        width: parent.width / 4
+                        height: parent.height
+                        color: "lightgray"
+                        Text {
+                            anchors.centerIn: parent
+                            text: "Name"
+                            color: "black"
+                            font.bold: true
+                            font.pointSize: 12
+                            font.capitalization: Font.AllUppercase
+                        }
+                    }
+                    Rectangle {
+                        width: parent.width / 4
+                        height: parent.height
+                        color: "lightgray"
+                        Text {
+                            anchors.centerIn: parent
+                            text: "Color"
+                            color: "black"
+                            font.bold: true
+                            font.pointSize: 12
+                            font.capitalization: Font.AllUppercase
+                        }
+                    }
+                    Rectangle {
+                        width: parent.width / 4
+                        height: parent.height
+                        color: "lightgray"
+                        Text {
+                            anchors.centerIn: parent
+                            text: "High Score"
+                            color: "black"
+                            font.bold: true
+                            font.pointSize: 12
+                            font.capitalization: Font.AllUppercase
+                        }
+                    }
+                }
                 delegate: Item {
                     width: parent.width
                     height: 50
                     Row {
                         anchors.fill: parent
                         spacing: 10
-                        Text {
-                            text: model.id
+                        Rectangle {
                             width: parent.width / 4
+                            height: parent.height
+                            Text {
+                                anchors.centerIn: parent
+                                text: model.id
+                                width: parent.width / 4
+                            }
                         }
-                        Text {
-                            text: model.name
+                        Rectangle {
                             width: parent.width / 4
+                            height: parent.height
+                            Text {
+                                anchors.centerIn: parent
+                                text: model.name
+                                width: parent.width / 4
+                            }
                         }
-                        Text {
-                            text: model.color
+                        Rectangle {
                             width: parent.width / 4
+                            height: parent.height
+                            Text {
+                                anchors.centerIn: parent
+                                text: model.color
+                                width: parent.width / 4
+                            }
                         }
-                        Text {
-                            text: model.highScore
+                        Rectangle {
                             width: parent.width / 4
+                            height: parent.height
+                            Text {
+                                anchors.centerIn: parent
+                                text: model.highScore
+                                width: parent.width / 4
+                            }
                         }
+
                     }
                     MouseArea {
                         anchors.fill: parent
@@ -113,7 +150,7 @@ Item {
         }
     }
 
-    Footer {
+    GameFooter {
         id: playerManagerPagefooter
         backBtn.visible: true
         backBtn.onClicked: {

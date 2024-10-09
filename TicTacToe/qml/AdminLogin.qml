@@ -5,7 +5,7 @@ Item {
     id:adminLoginItem
     objectName: "adminLoginPage"
 
-    Header{
+    GameHeader{
         id:adminLoginPageHeader
     }
 
@@ -66,7 +66,7 @@ Item {
         }
     }
 
-    Footer{
+    GameFooter{
         id: adminLoginPagefooter
         homeBtnTxt: "Login"
         homeIcon: "qrc:///login.png"

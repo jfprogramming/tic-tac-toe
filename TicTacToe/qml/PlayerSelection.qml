@@ -39,7 +39,7 @@ Item {
         popupMsgtxt: "Player 2 select"
     }
 
-    Header {
+    GameHeader {
         id: playerSelectionHeader
     }
 
@@ -139,7 +139,7 @@ Item {
         }
     }
 
-    Footer {
+    GameFooter {
         id: playerSelectionfooter
         homeIcon: "qrc:///backArrow.png"
         homeBtn.onClicked: {

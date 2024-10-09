@@ -303,7 +303,7 @@ Item {
         }
     }
 
-    Header {
+    GameHeader {
         id: playAreaHeader
         scoreAlias.visible: true
         player1Score: p1Score
@@ -684,7 +684,7 @@ Item {
         }
     }
 
-    Footer {
+    GameFooter {
         id: playAreaFooter
         homeBtn.onClicked: {
             stackView.clear()

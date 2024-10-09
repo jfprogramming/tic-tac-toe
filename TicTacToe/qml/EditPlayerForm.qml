@@ -11,7 +11,7 @@ Item {
     property alias playerName: playerNameLabel.text
     property alias playerColor: playerColorLabel.text
 
-    Header{
+    GameHeader{
         id:homePageHeader
     }
 
@@ -83,10 +83,12 @@ Item {
         z: 99
         anchors.bottom: parent.bottom
         active: true
+        visible: true
+        enabled: true
     }
 
 
-    Footer{
+    GameFooter{
         id: homePagefooter
         backBtn.visible: true
         backBtn.onClicked: {

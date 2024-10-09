@@ -5,7 +5,7 @@ Item {
     id:aboutPageItem
     objectName: "aboutPage"
 
-    Header{
+    GameHeader{
         id:aboutPageHeader
     }
     Rectangle{
@@ -13,7 +13,7 @@ Item {
         anchors.fill: parent
     }
 
-    Footer{
+    GameFooter{
         id: adminLoginPagefooter
         homeBtn.onClicked: {
             stackView.clear()

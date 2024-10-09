@@ -6,7 +6,7 @@ Item {
     id:adminPageItem
     objectName: "adminSettingsPage"
 
-    Header{
+    GameHeader{
         id:adminPageHeader
     }
 
@@ -71,7 +71,7 @@ Item {
     }
 
 
-    Footer{
+    GameFooter{
         id: adminPagefooter
         homeBtn.onClicked: {
             stackView.clear()

@@ -12,7 +12,7 @@ Item {
         }
     }
 
-    Header{
+    GameHeader{
         id:homePageHeader
     }
 
@@ -72,7 +72,7 @@ Item {
         }
     }
 
-    Footer{
+    GameFooter{
         id: homePagefooter
         homeBtn.width: 200
         homeBtn.onClicked: {
