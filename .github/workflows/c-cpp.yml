@@ -16,7 +16,7 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
-        version: '6.5.0'  # Specify the version of Qt you need
+        version: '6.7.2'  # Specify the version of Qt you need
         modules: qtbase,qttools,qtdeclarative  # Specify the Qt modules you need
 
     - name: Install dependencies
