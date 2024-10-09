@@ -10,8 +10,7 @@
 SystemSettings::SystemSettings(QObject *parent)
     : QObject(parent), m_settingsFile(m_settingsFilePath, QSettings::IniFormat)
 {
-    //m_settingsFile("/data/config/settings.ini", QSettings::IniFormat);
-    qDebug() << "Settings file path: " << m_settingsFilePath;
+    qDebug() << "Settings file path:" << m_settingsFilePath;
 }
 
 /**
@@ -30,7 +29,8 @@ SystemSettings::~SystemSettings()
  */
 QString SystemSettings::getAppName() const
 {
-    return m_settingsFile.value("appName", "TicTacToe").toString();
+    qDebug() << "Getting application name: " << m_settingsFile.value("AppName", "TicTacToe").toString();
+    return m_settingsFile.value("AppName", "TicTacToe").toString();
 }
 
 
@@ -41,7 +41,8 @@ QString SystemSettings::getAppName() const
  */
 void SystemSettings::setAppName(const QString &appName)
 {
-    m_settingsFile.setValue("appName", appName);
+    qDebug() << "Setting application name to: " << appName;
+    m_settingsFile.setValue("AppName", appName);
 }
 
 
@@ -52,7 +53,8 @@ void SystemSettings::setAppName(const QString &appName)
  */
 QString SystemSettings::getSoftwareVersion() const
 {
-    return m_settingsFile.value("softwareVersion", "1.0").toString();
+    qDebug() << "Getting software version: " << m_settingsFile.value("SoftwareVersion", "1.0").toString();
+    return m_settingsFile.value("SoftwareVersion", "1.0").toString();
 }
 
 
@@ -63,7 +65,8 @@ QString SystemSettings::getSoftwareVersion() const
  */
 void SystemSettings::setSoftwareVersion(const QString &softwareVersion)
 {
-    m_settingsFile.setValue("softwareVersion", softwareVersion);
+    qDebug() << "Setting software version to: " << softwareVersion;
+    m_settingsFile.setValue("SoftwareVersion", softwareVersion);
 }
 
 
@@ -74,7 +77,8 @@ void SystemSettings::setSoftwareVersion(const QString &softwareVersion)
  */
 QDateTime SystemSettings::getDateTime() const
 {
-    return m_settingsFile.value("dateTime", QDateTime::currentDateTime()).toDateTime();
+    qDebug() << "Getting date and time: " << m_settingsFile.value("DateTime", QDateTime::currentDateTime()).toDateTime();
+    return m_settingsFile.value("DateTime", QDateTime::currentDateTime()).toDateTime();
 }
 
 
@@ -85,5 +89,6 @@ QDateTime SystemSettings::getDateTime() const
  */
 void SystemSettings::setDateTime(const QDateTime &dateTime)
 {
-    m_settingsFile.setValue("dateTime", dateTime);
+    qDebug() << "Setting date and time to: " << dateTime;
+    m_settingsFile.setValue("DateTime", dateTime);
 }

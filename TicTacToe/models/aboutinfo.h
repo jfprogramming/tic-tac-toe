@@ -33,8 +33,8 @@ signals:
     void dataChanged();
 
 private:
-    QString m_appName;
-    QString m_softwareVersion;
+    QString   m_appName;
+    QString   m_softwareVersion;
     QDateTime m_dateTime;
 
     SystemSettings m_settingsManager;

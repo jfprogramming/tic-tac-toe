@@ -30,6 +30,7 @@ AboutInfo::~AboutInfo()
  */
 QString AboutInfo::getAppName() const
 {
+    qDebug() << "Getting application name: " << m_settingsManager.getAppName();
     return m_settingsManager.getAppName();
 }
 
@@ -40,6 +41,7 @@ QString AboutInfo::getAppName() const
  */
 QString AboutInfo::getSoftwareVersion() const
 {
+    qDebug() << "Getting software version: " << m_settingsManager.getSoftwareVersion();
     return m_settingsManager.getSoftwareVersion();
 }
 
@@ -50,5 +52,6 @@ QString AboutInfo::getSoftwareVersion() const
  */
 QDateTime AboutInfo::getDateTime() const
 {
+    qDebug() << "Getting date and time: " << m_settingsManager.getDateTime().toString();
     return m_settingsManager.getDateTime();
 }
