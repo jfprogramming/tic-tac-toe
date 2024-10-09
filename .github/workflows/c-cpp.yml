@@ -16,11 +16,7 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
-        version: '5.15.2'  # Specify the version of Qt you need
-        modules: qtquick,qtquickcontrols2,qtsql,qttest,qtnetwork  # Specify the Qt modules you need
-        install-deps: 'true'
-        setup-python: 'true'
-        set-env: 'true'
+        version: '6.7.0'  # Specify the version of Qt you need
 
     - name: Install dependencies
       run: |
