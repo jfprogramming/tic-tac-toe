@@ -112,6 +112,10 @@ void AdminPlayerModel::lookupPlayer(const QString &name) {
 QList<AdminPlayer> AdminPlayerModel::getAllPlayers() {
     qDebug() << __FUNCTION__ << "Retrieving all players...";
 
+    // Clear the existing list
+    //
+    m_allPlayers.clear();
+
     m_allPlayers = Controllers::dbManager.getAllPlayers();
     return m_allPlayers;
 }

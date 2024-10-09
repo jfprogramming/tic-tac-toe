@@ -6,27 +6,16 @@ Item {
     objectName: "aboutPage"
     property var aboutInfo: AboutInfo
 
-    GridView {
-        id: gridView
-        anchors.fill: parent
-        model: ListModel {
-            ListElement { key: "App Name"; value: aboutInfo.appName }
-            ListElement { key: "Software Version"; value: aboutInfo.softwareVersion }
-            ListElement { key: "Database Version"; value: aboutInfo.databaseVersion }
-            ListElement { key: "Data Directory"; value: aboutInfo.dataDir }
-            ListElement { key: "Date and Time"; value: aboutInfo.dateTime.toString() }
-        }
-        delegate: Row {
-            width: gridView.width
-            Text {
-                text: model.key
-                width: parent.width / 2
-            }
-            Text {
-                text: model.value
-                width: parent.width / 2
-            }
-        }
+    Component.onCompleted: {
+        aboutInfo = aboutInfo || {}
+        aboutInfo.about = "This is a simple TicTacToe game developed using Qt Quick Controls 2.15"
+        aboutInfoListView.model.get(0).value = aboutInfo.appName
+        aboutInfoListView.model.get(1).value = aboutInfo.softwareVersion
+        aboutInfoListView.model.get(2).value = aboutInfo.dateTime
+
+        console.log("aboutInfo appName: " + aboutInfo.appName +", "+ aboutInfoListView.model.get(0).value)
+        console.log("aboutInfo softwareVersion: " + aboutInfo.softwareVersion +", "+ aboutInfoListView.model.get(1).value)
+        console.log("aboutInfo dateTime: " + aboutInfo.dateTime +", "+ aboutInfoListView.model.get(2).value)
     }
 
     GameHeader {
@@ -35,7 +24,31 @@ Item {
 
     Rectangle {
         id: aboutPageRect
-        anchors.fill: parent
+        anchors.top: aboutPageHeader.bottom
+        anchors.bottom: adminLoginPagefooter.top
+        width: parent.width
+        color: "white"
+        ListView {
+            id: aboutInfoListView
+            anchors.fill: parent
+            model: ListModel {
+                ListElement { key: "App Name"; value: ""}
+                ListElement { key: "Software Version"; value: ""}
+                ListElement { key: "Date and Time"; value: ""}
+            }
+            delegate: Row {
+                width: aboutInfoListView.width
+                spacing: 50
+                Text {
+                    text: model.key
+                    width: parent.width / 2
+                }
+                Text {
+                    text: model.value
+                    width: parent.width / 2
+                }
+            }
+        }
     }
 
     GameFooter {

@@ -10,7 +10,8 @@
 SystemSettings::SystemSettings(QObject *parent)
     : QObject(parent), m_settingsFile(m_settingsFilePath, QSettings::IniFormat)
 {
-    qDebug() << "SystemSettings object created.";
+    //m_settingsFile("/data/config/settings.ini", QSettings::IniFormat);
+    qDebug() << "Settings file path: " << m_settingsFilePath;
 }
 
 /**

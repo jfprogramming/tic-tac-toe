@@ -34,8 +34,6 @@ qt_add_qml_module(appTicTacToe
         controllers/databasemanager.cpp        
         controllers/systemsettings.h
         controllers/systemsettings.cpp
-        models/systemsettingmodel.h
-        models/systemsettingmodel.cpp
         models/gameplaymodel.h
         models/gameplaymodel.cpp
         models/aboutinfo.h
