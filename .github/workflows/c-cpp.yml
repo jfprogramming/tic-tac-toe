@@ -22,7 +22,7 @@ jobs:
       uses: jurplel/install-qt-action@v3
       with:
         version: '6.7.0'  # Specify the version of Qt you need
-        modules: qtquick,qtquickcontrols2,qtsql,qttest,qtnetwork  # Specify the Qt modules you need
+        # modules: qtquick,qtquickcontrols2,qtsql,qttest,qtnetwork  # Specify the Qt modules you need
             
     - name: Configure CMake
       run: cmake -S . -B build
