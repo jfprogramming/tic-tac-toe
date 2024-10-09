@@ -40,9 +40,11 @@ jobs:
     - name: Install dependencies on Ubuntu
       if: matrix.os == 'ubuntu-latest'
       run: |
-        sudo sh -c 'echo "deb [trusted=yes] https://download.qt.io/stable/linux_releases/6.x/ qt6-stable main" > /etc/apt/sources.list.d/qt6.list'
         sudo apt-get update
-        sudo apt-get install -y qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools qt6-declarative-dev qt6-network-dev qt6-quick-dev qt6-quickcontrols2-dev qt6-sql-dev
+        sudo apt-get install -y wget libgl-dev xcb libxcb-cursor0 libssl-dev libxkbcommon-x11-0 libxcb-icccm4 libxcb-keysyms1 libxcb-shape0
+        wget https://download.qt.io/official_releases/qt/6.7/6.7.0/qt-opensource-linux-x64-6.7.0.run
+        chmod +x qt-opensource-linux-x64-6.7.0.run
+        ./qt-opensource-linux-x64-6.7.0.run --platform minimal --script qt-installer-noninteractive.qs
 
     - name: Install dependencies on Windows
       if: matrix.os == 'windows-latest'
