@@ -42,7 +42,6 @@ jobs:
       uses: jurplel/install-qt-action@v3
       with:
         version: '6.7.0'
-        modules: qtquick,qtquickcontrols2,qtsql,qttest,qtnetwork
         # modules: qtquick,qtquickcontrols2,qtsql,qttest,qtnetwork
 
     - name: Install dependencies on Windows
