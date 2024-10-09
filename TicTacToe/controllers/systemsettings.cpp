@@ -75,10 +75,10 @@ void SystemSettings::setSoftwareVersion(const QString &softwareVersion)
  * \brief Gets the date and time setting.
  * \return QDateTime The date and time setting.
  */
-QDateTime SystemSettings::getDateTime() const
+QString SystemSettings::getDateTime() const
 {
-    qDebug() << "Getting date and time: " << m_settingsFile.value("DateTime", QDateTime::currentDateTime()).toDateTime();
-    return m_settingsFile.value("DateTime", QDateTime::currentDateTime()).toDateTime();
+    qDebug() << "Getting date and time: " << m_settingsFile.value("DateFormat", "YYYY-MM-dd").toString();
+    return m_settingsFile.value("DateFormat", "YYYY-MMM-dd").toString();
 }
 
 

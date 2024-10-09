@@ -15,7 +15,7 @@ AboutInfo::AboutInfo(QObject *parent): QObject(parent)
 
     qDebug() << "Application name: " << m_appName;
     qDebug() << "Software version: " << m_softwareVersion;
-    qDebug() << "Date and time: "    << m_dateTime.toString();
+    qDebug() << "Date and time: "    << m_dateTime;
 }
 
 /**
@@ -50,12 +50,12 @@ QString AboutInfo::getSoftwareVersion() const
 }
 
 /**
- * \fn QDateTime AboutInfo::getDateTime() const
+ * \fn QString AboutInfo::getDateTime() const
  * \brief Gets the current date and time.
- * \return The current date and time as a QDateTime.
+ * \return The current date and time as a QString.
  */
-QDateTime AboutInfo::getDateTime() const
+QString AboutInfo::getDateTime() const
 {
-    qDebug() << "Getting date and time: " << m_settingsManager.getDateTime().toString();
+    qDebug() << "Getting date and time: " << m_settingsManager.getDateTime();
     return m_settingsManager.getDateTime();
 }

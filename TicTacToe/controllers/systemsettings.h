@@ -18,7 +18,7 @@ public:
     QString getSoftwareVersion() const;
     void setSoftwareVersion(const QString &softwareVersion);
 
-    QDateTime getDateTime() const;
+    QString getDateTime() const;
     void setDateTime(const QDateTime &dateTime);
 
 private:
