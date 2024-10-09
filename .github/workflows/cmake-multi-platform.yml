@@ -47,8 +47,8 @@ jobs:
     - name: Install dependencies on Windows
       if: matrix.os == 'windows-latest'
       run: |
-        choco install qt --version=6.7.0
-        set PATH=C:\Qt\6.7.0\msvc2019_64\bin;%PATH%
+        powershell -command "Invoke-WebRequest -Uri 'https://download.qt.io/official_releases/qt/6.5/6.5.2/qt-opensource-windows-x86-6.5.2.exe' -OutFile 'qt-installer.exe'"
+        powershell -command "Start-Process -FilePath 'qt-installer.exe' -ArgumentList '--script qt-installer-noninteractive.qs' -NoNewWindow -Wait"
 
     - name: Set reusable strings
       id: strings
