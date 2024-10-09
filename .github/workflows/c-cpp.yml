@@ -18,6 +18,8 @@ jobs:
       with:
         version: '6.7.2'  # Specify the version of Qt you need
         modules: qtbase,qttools,qtdeclarative  # Specify the Qt modules you need
+        setup-python: 'true'
+        set-env: 'true'
 
     - name: Install dependencies
       run: |
