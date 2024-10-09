@@ -271,6 +271,11 @@ void GameLogic::checkForDiagonalWin()
  * \brief Checks for a tie (CatsCradle).
  * \return void
  */
+/**
+ * \fn GameLogic::checkForCatsCradle()
+ * \brief Checks for a tie (CatsCradle).
+ * \return void
+ */
 void GameLogic::checkForCatsCradle()
 {
     qDebug() << __FUNCTION__ << "Checking for Cats Cradle";
@@ -284,6 +289,9 @@ void GameLogic::checkForCatsCradle()
     }
     if (allFilled) {
         setCatsCradle(true);
+        emit catsCradleMatch(); // Emit signal for UI to open the popup
+    } else {
+        setCatsCradle(false);
     }
 }
 
