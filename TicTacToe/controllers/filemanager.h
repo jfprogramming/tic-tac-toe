@@ -1,15 +1,26 @@
-#ifndef FILEMANAGER_H
-#define FILEMANAGER_H
+#pragma once
 
 #include <QObject>
+#include <QSettings>
+#include <QString>
+#include <QDateTime>
 
-class fileManager : public QObject
+class FileManager : public QObject
 {
     Q_OBJECT
 public:
-    explicit fileManager(QObject *parent = nullptr);
+    explicit FileManager(QObject *parent = nullptr);
+    ~FileManager();
 
-signals:
+    QString getAppName() const;
+    void setAppName(const QString &appName);
+
+    QString getSoftwareVersion() const;
+    void setSoftwareVersion(const QString &softwareVersion);
+
+    QDateTime getDateTime() const;
+    void setDateTime(const QDateTime &dateTime);
+
+private:
+    QSettings m_settings;
 };
-
-#endif // FILEMANAGER_H
