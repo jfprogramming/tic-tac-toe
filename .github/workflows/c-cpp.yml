@@ -16,10 +16,13 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common
-        sudo add-apt-repository ppa:qt6/qt6
-        sudo apt-get update
-        sudo apt-get install -y qt6-base-dev libsqlite3-dev
+        sudo apt-get install -y wget libgl-dev xcb libxcb-cursor0 libssl-dev
+
+    - name: Install Qt6
+      run: |
+        wget https://download.qt.io/official_releases/online_installers/qt-unified-linux-x64-online.run -O qt-installer.run
+        chmod +x qt-installer.run
+        ./qt-installer.run --script install-qt-noninteractive.qs
 
     - name: configure
       run: ./configure
