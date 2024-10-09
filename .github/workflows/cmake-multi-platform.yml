@@ -39,12 +39,10 @@ jobs:
 
     - name: Install dependencies on Ubuntu
       if: matrix.os == 'ubuntu-latest'
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y wget libgl-dev xcb libxcb-cursor0 libssl-dev libxkbcommon-x11-0 libxcb-icccm4 libxcb-keysyms1 libxcb-shape0
-        wget https://download.qt.io/official_releases/qt/6.7/6.7.0/qt-opensource-linux-x64-6.7.0.run
-        chmod +x qt-opensource-linux-x64-6.7.0.run
-        ./qt-opensource-linux-x64-6.7.0.run --platform minimal --script qt-installer-noninteractive.qs
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: '6.7.0'
+        modules: qtquick,qtquickcontrols2,qtsql,qttest,qtnetwork
 
     - name: Install dependencies on Windows
       if: matrix.os == 'windows-latest'
