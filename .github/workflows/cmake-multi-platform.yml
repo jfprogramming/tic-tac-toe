@@ -47,8 +47,9 @@ jobs:
     - name: Install dependencies on Windows
       if: matrix.os == 'windows-latest'
       run: |
-        choco install qt --version=6.7.0
-        set PATH=C:\Qt\6.7.0\msvc2019_64\bin;%PATH%
+        pip install aqtinstall
+        aqt install-qt windows desktop 6.7.0 win64_msvc2019_64 --outputdir C:\\Qt
+        echo "CMAKE_PREFIX_PATH=C:\\Qt\\6.7.0\\msvc2019_64" >> $env:GITHUB_ENV
     - name: Set reusable strings
       id: strings
       shell: bash
