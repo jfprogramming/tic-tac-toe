@@ -12,6 +12,10 @@ AboutInfo::AboutInfo(QObject *parent): QObject(parent)
     m_appName         = getAppName();
     m_softwareVersion = getSoftwareVersion();
     m_dateTime        = getDateTime();
+
+    qDebug() << "Application name: " << m_appName;
+    qDebug() << "Software version: " << m_softwareVersion;
+    qDebug() << "Date and time: "    << m_dateTime.toString();
 }
 
 /**

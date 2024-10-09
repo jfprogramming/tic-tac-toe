@@ -21,49 +21,88 @@ Item {
             anchors.centerIn: parent
             spacing: 10
 
-            Label{
-                id: setHourLabel
-                text: "set hour"
-            }
-            TextField{
-                id: setHourTextInput
-                width: 100
-                height: 50
-            }
+            Row {
+                spacing: 20
+                Column {
+                    spacing: 10
 
-            Label{
-                id: setMinutesLabel
-                text: "set minutes"
-            }
-            TextField{
-                id: setMinutesTextInput
-                width: 100
-                height: 50
-            }
-            Label{
-                id: setSecondsLabel
-                text: "set seconds"
-            }
-            TextField{
-                id: setSecondsTextInput
-                width: 100
-                height: 50
-            }
+                    Label{
+                        id: setHourLabel
+                        text: "set hour"
+                    }
+                    TextField{
+                        id: setHourTextInput
+                        width: 100
+                        height: 50
+                    }
 
-            Button {
-                text: "Load"
-                onClicked: {
-                    dateTimeInput.text = settingsController.getDateTimeSettings();
+                    Label{
+                        id: setMinutesLabel
+                        text: "set minutes"
+                    }
+                    TextField{
+                        id: setMinutesTextInput
+                        width: 100
+                        height: 50
+                    }
+                    Label{
+                        id: setSecondsLabel
+                        text: "set seconds"
+                    }
+                    TextField{
+                        id: setSecondsTextInput
+                        width: 100
+                        height: 50
+                    }
+                }
+
+                Column {
+                    spacing: 10
+
+                    Label {
+                        text: "Select Date Format"
+                    }
+                    Button {
+                        text: "YYYY-MM-dd"
+                        onClicked: {
+                            console.log("Date format selected: YYYY-MM-dd");
+                            // TODO: Add logic to apply this date format
+                        }
+                    }
+                    Button {
+                        text: "MM-dd-YYYY"
+                        onClicked: {
+                            console.log("Date format selected: MM-dd-YYYY");
+                            // TODO: Add logic to apply this date format
+                        }
+                    }
+                    Button {
+                        text: "dd-MM-YYYY"
+                        onClicked: {
+                            console.log("Date format selected: dd-MM-YYYY");
+                            // TODO: Add logic to apply this date format
+                        }
+                    }
                 }
             }
 
-            Button {
-                text: "Save"
-                onClicked: {
-                    // TODO implement save feature - set application time / set OS date time
-                    settingsController.setDateTimeSettings(dateTimeInput.text);
+            Row {
+                spacing: 20
+                Button {
+                    text: "Load"
+                    onClicked: {
+                        dateTimeInput.text = settingsController.getDateTimeSettings();
+                    }
+                }
 
-                    console.log("save date and time... "+setHourTextInput.text+":"+setMinutesTextInput.text+":"+setSecondsTextInput.text)
+                Button {
+                    text: "Save"
+                    onClicked: {
+                        // TODO implement save feature - set application time / set OS date time
+                        settingsController.setDateTimeSettings(dateTimeInput.text);
+
+                        console.log("save date and time... "+setHourTextInput.text+":"+setMinutesTextInput.text+":"+setSecondsTextInput.text)
+                    }
                 }
             }
         }

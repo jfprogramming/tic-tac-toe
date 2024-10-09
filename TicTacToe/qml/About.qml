@@ -4,18 +4,15 @@ import QtQuick.Controls 2.15
 Item {
     id: aboutPageItem
     objectName: "aboutPage"
-    property var aboutInfo: AboutInfo
 
     Component.onCompleted: {
-        aboutInfo = aboutInfo || {}
-        aboutInfo.about = "This is a simple TicTacToe game developed using Qt Quick Controls 2.15"
         aboutInfoListView.model.get(0).value = aboutInfo.appName
         aboutInfoListView.model.get(1).value = aboutInfo.softwareVersion
         aboutInfoListView.model.get(2).value = aboutInfo.dateTime
 
-        console.log("aboutInfo appName: " + aboutInfo.appName +", "+ aboutInfoListView.model.get(0).value)
+        console.log("aboutInfo appName: " +         aboutInfo.appName +", "+         aboutInfoListView.model.get(0).value)
         console.log("aboutInfo softwareVersion: " + aboutInfo.softwareVersion +", "+ aboutInfoListView.model.get(1).value)
-        console.log("aboutInfo dateTime: " + aboutInfo.dateTime +", "+ aboutInfoListView.model.get(2).value)
+        console.log("aboutInfo dateTime: " +        aboutInfo.dateTime +", "+        aboutInfoListView.model.get(2).value)
     }
 
     GameHeader {
@@ -36,16 +33,39 @@ Item {
                 ListElement { key: "Software Version"; value: ""}
                 ListElement { key: "Date and Time"; value: ""}
             }
+            header: Rectangle {
+                width: aboutInfoListView.width
+                height: 50
+                color: "lightgray"
+                Text {
+                    anchors.centerIn: parent
+                    text: "System Information"
+                    color: "black"
+                    font.bold: true
+                    font.pointSize: 12
+                    font.capitalization: Font.AllUppercase
+                }
+            }
             delegate: Row {
                 width: aboutInfoListView.width
                 spacing: 50
-                Text {
-                    text: model.key
+                Rectangle {
                     width: parent.width / 2
+                    height: 50
+                    Text {
+                        text: model.key
+                        width: parent.width / 2
+                        anchors.centerIn: parent
+                    }
                 }
-                Text {
-                    text: model.value
+                Rectangle {
                     width: parent.width / 2
+                    height: 50
+                    Text {
+                        text: model.value
+                        width: parent.width / 2
+                        anchors.centerIn: parent
+                    }
                 }
             }
         }
