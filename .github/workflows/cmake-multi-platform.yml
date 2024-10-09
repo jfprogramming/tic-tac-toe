@@ -42,15 +42,14 @@ jobs:
       uses: jurplel/install-qt-action@v3
       with:
         version: '6.7.0'
-        modules: qtquick,qtquickcontrols2,qtsql,qttest,qtnetwork
+        # modules: qtquick,qtquickcontrols2,qtsql,qttest,qtnetwork
 
     - name: Install dependencies on Windows
       if: matrix.os == 'windows-latest'
       run: |
         pip install aqtinstall
         aqt install-qt windows desktop 6.7.0 win64_msvc2019_64 --outputdir C:\\Qt
-        setx CMAKE_PREFIX_PATH C:\\Qt\\6.7.0\\msvc2019_64
-        echo $Env:CMAKE_PREFIX_PATH
+        echo "CMAKE_PREFIX_PATH=C:\\Qt\\6.7.0\\msvc2019_64" >> $env:GITHUB_ENV
 
     - name: Set reusable strings
       id: strings
@@ -64,7 +63,7 @@ jobs:
         -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
         -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-        -DCMAKE_PREFIX_PATH=$Env:CMAKE_PREFIX_PATH
+        -DCMAKE_PREFIX_PATH=${{ env.CMAKE_PREFIX_PATH }}
         -S ${{ github.workspace }}/TicTacToe
 
     - name: Build
