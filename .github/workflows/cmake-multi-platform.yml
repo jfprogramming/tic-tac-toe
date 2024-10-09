@@ -63,7 +63,7 @@ jobs:
         -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
         -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-        -DCMAKE_PREFIX_PATH=${{ env.CMAKE_PREFIX_PATH }}
+        # -DCMAKE_PREFIX_PATH=${{ env.CMAKE_PREFIX_PATH }}
         -S ${{ github.workspace }}/TicTacToe
 
     - name: Build
