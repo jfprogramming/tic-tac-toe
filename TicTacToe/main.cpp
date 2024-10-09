@@ -1,4 +1,5 @@
 #include "controllers/databasemanager.h"
+#include "models/aboutinfo.h"
 #include "models/highscoremodel.h"
 #include "models/adminplayermodel.h"
 #include "models/gameplaymodel.h"
@@ -39,6 +40,9 @@ int main(int argc, char *argv[])
 
     AdminPlayerModel adminPlayerModel;
     engine.rootContext()->setContextProperty("adminPlayerModel", &adminPlayerModel);
+
+    AboutInfo aboutInfo;
+    engine.rootContext()->setContextProperty("aboutInfo", &aboutInfo);
 
     // Setup game logic for QML
     //

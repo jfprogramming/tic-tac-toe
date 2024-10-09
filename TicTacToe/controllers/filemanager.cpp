@@ -8,7 +8,8 @@
  *
  * \return FileManager* The new FileManager object.
  */
-FileManager::FileManager(QObject *parent) : QObject(parent), m_settings("YourCompany", "TicTacToe")
+FileManager::FileManager(QObject *parent)
+    : QObject(parent), m_settingsFile(m_settingsFilePath, QSettings::IniFormat)
 {
     qDebug() << "FileManager object created.";
 }
@@ -29,7 +30,7 @@ FileManager::~FileManager()
  */
 QString FileManager::getAppName() const
 {
-    return m_settings.value("appName", "TicTacToe").toString();
+    return m_settingsFile.value("appName", "TicTacToe").toString();
 }
 
 
@@ -40,7 +41,7 @@ QString FileManager::getAppName() const
  */
 void FileManager::setAppName(const QString &appName)
 {
-    m_settings.setValue("appName", appName);
+    m_settingsFile.setValue("appName", appName);
 }
 
 
@@ -51,7 +52,7 @@ void FileManager::setAppName(const QString &appName)
  */
 QString FileManager::getSoftwareVersion() const
 {
-    return m_settings.value("softwareVersion", "1.0").toString();
+    return m_settingsFile.value("softwareVersion", "1.0").toString();
 }
 
 
@@ -62,7 +63,7 @@ QString FileManager::getSoftwareVersion() const
  */
 void FileManager::setSoftwareVersion(const QString &softwareVersion)
 {
-    m_settings.setValue("softwareVersion", softwareVersion);
+    m_settingsFile.setValue("softwareVersion", softwareVersion);
 }
 
 
@@ -73,7 +74,7 @@ void FileManager::setSoftwareVersion(const QString &softwareVersion)
  */
 QDateTime FileManager::getDateTime() const
 {
-    return m_settings.value("dateTime", QDateTime::currentDateTime()).toDateTime();
+    return m_settingsFile.value("dateTime", QDateTime::currentDateTime()).toDateTime();
 }
 
 
@@ -84,5 +85,5 @@ QDateTime FileManager::getDateTime() const
  */
 void FileManager::setDateTime(const QDateTime &dateTime)
 {
-    m_settings.setValue("dateTime", dateTime);
+    m_settingsFile.setValue("dateTime", dateTime);
 }

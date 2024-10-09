@@ -22,5 +22,6 @@ public:
     void setDateTime(const QDateTime &dateTime);
 
 private:
-    QSettings m_settings;
+    QSettings m_settingsFile;
+    QString m_settingsFilePath="/data/config/settings.ini";
 };

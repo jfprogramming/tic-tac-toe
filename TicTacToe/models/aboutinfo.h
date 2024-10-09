@@ -1,6 +1,9 @@
 #pragma once
+
 #include <QObject>
 #include <QSettings>
+#include <QString>
+#include <QDateTime>
 
 
 /**
@@ -10,44 +13,28 @@
  *        Handles saving, loading, and displaying application settings.
  *        Provides interface for About screen details.
  */
-class AboutInfo :  public QObject
+class AboutInfo : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString appName READ getAppName NOTIFY dataChanged)
+    Q_PROPERTY(QString softwareVersion READ getSoftwareVersion NOTIFY dataChanged)
+    Q_PROPERTY(QString databaseVersion READ getDatabaseVersion NOTIFY dataChanged)
+    Q_PROPERTY(QString dataDir READ getDataDir NOTIFY dataChanged)
+    Q_PROPERTY(QDateTime dateTime READ getDateTime NOTIFY dataChanged)
+
 public:
-    AboutInfo(QObject* parent = nullptr);
-    ~AboutInfo();
+    explicit AboutInfo(QObject *parent = nullptr);
 
-    // Configuratoin File Interface
-    //
-    void save(QSettings &settings);
-    void info(QSettings &settings);
-    void load(QSettings &settings);
+    QString getAppName() const;
+    QString getSoftwareVersion() const;
+    QString getDatabaseVersion() const;
+    QString getDataDir() const;
+    QDateTime getDateTime() const;
 
-    // About Screen
-    //
-    QString softwareVersion() const;
-    QString databaseVersion() const;
-
-    QString dataDir() const;
-
-    QString appName() const;
-
-public slots:
-    // About Screen
-    //
-    void setSoftwareVersion(const QString &newSoftwareVersion);
-    void setDatabaseVersion(const QString &newDatabaseVersion);
-
-    void setDataDir(const QString &newDataDir);
-
-    void setAppName(const QString &newAppName);
+signals:
+    void dataChanged();
 
 private:
-    QString m_settingFileName="/data/config/settings.ini";
-    QString m_softwareVersion;
-    QString m_databaseVersion;
-    QString m_dataDir;
-    QString m_appName;
-
+    QSettings m_settings;
+    QString m_settingsFilePath = "/data/config/settings.ini";
 };
-
