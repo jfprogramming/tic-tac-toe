@@ -66,16 +66,17 @@ Item {
 
     // win rectangles are used to display the
     // visual cross out line for 3 in a row
+    // default color is grey #808080
     //
     Rectangle{
         id: win1
         visible: false
         rotation: 0
         width: parent.width
-        height: 20
+        height: 10
         anchors.top: parent.top
-        anchors.topMargin: 50
-        color: "red"
+        anchors.topMargin: 60
+        color: "#808080"
         onVisibleChanged: {
             console.log("win1 rectangle visible change.... " + win1.visible)
         }
@@ -86,10 +87,10 @@ Item {
         visible: false
         rotation: 0
         width: parent.width
-        height: 20
+        height: 10
         anchors.top: parent.top
-        anchors.topMargin: 185
-        color: "red"
+        anchors.topMargin: 195
+        color: "#808080"
 
     }
 
@@ -98,10 +99,10 @@ Item {
         visible: false
         rotation: 0
         width: parent.width
-        height: 20
+        height: 10
         anchors.top: parent.top
-        anchors.topMargin: 325
-        color: "red"
+        anchors.topMargin: 335
+        color: "#808080"
     }
 
     Rectangle{
@@ -109,10 +110,10 @@ Item {
         visible: false
         rotation: 0
         height: parent.height
-        width: 20
+        width: 10
         anchors.left: parent.left
         anchors.leftMargin: 100
-        color: "red"
+        color: "#808080"
     }
 
     Rectangle{
@@ -120,10 +121,10 @@ Item {
         visible: false
         rotation: 0
         height: parent.height
-        width: 20
+        width: 10
         anchors.left: parent.left
-        anchors.leftMargin: 315
-        color: "red"
+        anchors.leftMargin: 325
+        color: "#808080"
     }
 
     Rectangle{
@@ -131,29 +132,29 @@ Item {
         visible: false
         rotation: 0
         height: parent.height
-        width: 20
+        width: 10
         anchors.left: parent.left
-        anchors.leftMargin: 540
-        color: "red"
+        anchors.leftMargin: 550
+        color: "#808080"
     }
 
     Rectangle{
         id: win7
         visible: false
-        rotation: 40
+        rotation: 30
         width: parent.width
-        height: 20
+        height: 10
         anchors.centerIn: parent
-        color: "red"
+        color: "#808080"
     }
 
     Rectangle{
         id: win8
         visible: false
-        rotation: -40
+        rotation: -30
         width: parent.width
-        height: 20
+        height: 10
         anchors.centerIn: parent
-        color: "red"
+        color: "#808080"
     }
 }
