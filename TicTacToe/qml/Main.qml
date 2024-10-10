@@ -22,7 +22,7 @@ Window {
             console.log("Game type changed to: "+gameLogic.gameType)
         }
         onPlayerChanged: {
-            console.log("Player changed to: "+gameLogic.player)
+            console.log("Player changed to: "+gameLogic.currentPlayer)
         }
         onPlayerWonChanged: {
             console.log("Player won changed to: "+gameLogic.playerWon)

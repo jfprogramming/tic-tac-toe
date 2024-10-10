@@ -11,7 +11,7 @@ Item {
     property string player1Color: "#0078D7" //playerModel.getPlayerColor(currentP1)
     property string player2Color: "#FF0000" //playerModel.getPlayerColor(currentP2)
 
-    property int currentPlayer: 0
+    property int currentPlayer: gameLogic.currentPlayer
     property bool playerWon: false
 
     property int p1Score: 0
@@ -44,25 +44,12 @@ Item {
 
 
 
-    onVisibleChanged: {
-        console.log("playArea visibility:", visible)
-        if(visible){
-            update()
-        }
-    }
-
     Component.onCompleted: {
-        update()
         console.log("gameMode:" + gameMode + ", enabled:" + mainColumn.enabled)
         checkPlayerTurn()
-
-    }
-
-    function update(){
         gameMode = gameLogic.gameType
-        playerWon = gameLogic.playerWon
-        currentPlayer = getCurrentPlayer()
     }
+
 
     function getCurrentPlayer() {
         console.log("getCurrentPlayer currentPlayer" + gameLogic.currentPlayer)
@@ -98,10 +85,6 @@ Item {
         }
         mainColumn.enabled = true
 
-        // Reset the current player
-        //
-        currentPlayer = 1
-
         // Reset the win variable
         //
         playerWon = false
@@ -111,6 +94,10 @@ Item {
         gameLogic.resetCatsCradle()
         gameLogic.resetPlayerWon()
         gameLogic.resetTicTacToeBoard()
+
+        // Reset the current player
+        //
+        currentPlayer = gameLogic.currentPlayer
 
         // Reset win strikes visibility
         //
@@ -251,11 +238,10 @@ Item {
 
                 // set the icon color
                 //
-                if(selectedSquare.icon.source == "qrc:///playerOneIcon.png"){
-                    selectedSquare.icon.color = player1Color
-                }
-                else{
+                if(selectedSquare.icon.source == "qrc:///playerTwoIcon.png"){
+                    console.log("selectedSquare.icon.color "+selectedSquare.icon.color)
                     selectedSquare.icon.color = player2Color
+                    console.log("selectedSquare.icon.color "+selectedSquare.icon.color)
                 }
 
                 if(!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin()){
@@ -273,8 +259,10 @@ Item {
             checkForCatsCradle()
         }
 
-        if(!playerWon){ mainColumn.enabled = true }
-        checkPlayerTurn()
+        if(!playerWon){
+            mainColumn.enabled = true
+            checkPlayerTurn()
+        }
     }
 
     // Player/User Nofitication Popups
@@ -302,8 +290,16 @@ Item {
     PopupDialog {
         id: catsCradlePopup
         modal: true
-        popupMsgtxt: "It's a tie! All squares filled without a winner."
-        width: popupMsgtxt.length + 50
+        visible: true
+        width: textItem.paintedWidth + 50
+        popupMsgtxtVisible: false
+        Text {
+            id: textItem
+            text: "It's a tie! All squares filled without a winner."
+            wrapMode: Text.Wrap
+            anchors.centerIn: parent
+            font.pointSize: 12
+        }
         onClosed: {
             console.log("Cats cradle popup closed")
             resetBoard()
@@ -369,6 +365,9 @@ Item {
                         objectName: "row1rect1Btn"
                         icon.source: ""
                         icon.color: r1b1IconColor
+                        onBackgroundChanged:  {
+                            console.log("color changed")
+                        }
                         icon.height: parent.height
                         icon.width: parent.width
                         anchors.fill: parent
@@ -376,9 +375,12 @@ Item {
                             itemIds.push(row1rect1Btn)
                         }
                         onClicked: {
+                            console.log("1 icon color: "+icon.color)
                             console.log("row1rect1Btn clicked gameMode:"+gameMode + ", "+gameLogic.gameType)
                             row1rect1Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
-                            r1b1IconColor = icon.source == "qrc:///playerOneIcon.png" ? player1Color : player2Color
+                            console.log("1 icon color: "+icon.color)
+                            r1b1IconColor = currentPlayer == 1 ?  player1Color : player2Color
+                            console.log("1 icon color: "+icon.color)
                             playerSelectSquare("A1")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin() && !checkForCatsCradle()) {
                                 if (gameMode == "1Player") {
@@ -411,16 +413,17 @@ Item {
                             itemIds.push(row1rect2Btn)
                         }
                         onClicked: {
+                            console.log("2 icon color: "+icon.color)
                             row1rect2Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
-                            r1b2IconColor = icon.source == "qrc:///playerOneIcon.png" ? player1Color : player2Color
+                            console.log("2 icon color: "+icon.color)
+                            r1b2IconColor = currentPlayer == 1 ?  player1Color : player2Color
+                            console.log("2 icon color: "+icon.color)
                             playerSelectSquare("A2")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin() && !checkForCatsCradle()) {
                                 if (gameMode == "1Player") {
                                     console.log("start 2nd player timer...")
                                     delayTimer.start()
                                 }
-                                row1rect2.enabled = false
-                                mainColumn.enabled = false
                                 checkPlayerTurn()
                             }
                         }
@@ -445,8 +448,11 @@ Item {
                             itemIds.push(row1rect3Btn)
                         }
                         onClicked: {
+                            console.log("3 icon color: "+icon.color)
                             row1rect3Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
-                            r1b3IconColor = icon.source == "qrc:///playerOneIcon.png" ? player1Color : player2Color
+                            console.log("3  icon color: "+icon.color)
+                            r1b3IconColor = currentPlayer == 1 ?  player1Color : player2Color
+                            console.log("3 icon color: "+icon.color)
                             playerSelectSquare("A3")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin() && !checkForCatsCradle()) {
                                 if (gameMode == "1Player") {
@@ -488,8 +494,11 @@ Item {
                             itemIds.push(row2rect1Btn)
                         }
                         onClicked: {
+                            console.log("4 icon color: "+icon.color)
                             row2rect1Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
-                            r2b1IconColor = icon.source == "qrc:///playerOneIcon.png" ? player1Color : player2Color
+                            console.log("4 icon color: "+icon.color)
+                            r2b1IconColor = currentPlayer == 1 ?  player1Color : player2Color
+                            console.log("4 icon color: "+icon.color)
                             playerSelectSquare("B1")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin() && !checkForCatsCradle()) {
                                 if (gameMode == "1Player") {
@@ -522,8 +531,11 @@ Item {
                             itemIds.push(row2rect2Btn)
                         }
                         onClicked: {
+                            console.log("5 icon color: "+icon.color)
                             row2rect2Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
-                            r2b2IconColor = icon.source == "qrc:///playerOneIcon.png" ? player1Color : player2Color
+                            console.log("5 icon color: "+icon.color)
+                            r2b2IconColor = currentPlayer == 1 ?  player1Color : player2Color
+                            console.log("5 icon color: "+icon.color)
                             playerSelectSquare("B2")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin() && !checkForCatsCradle()) {
                                 if (gameMode == "1Player") {
@@ -556,8 +568,11 @@ Item {
                             itemIds.push(row2rect3Btn)
                         }
                         onClicked: {
+                            console.log("6 icon color: "+icon.color)
                             row2rect3Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
-                            r2b3IconColor = icon.source == "qrc:///playerOneIcon.png" ? player1Color : player2Color
+                            console.log("6 icon color: "+icon.color)
+                            r2b3IconColor = currentPlayer == 1 ?  player1Color : player2Color
+                            console.log("6 icon color: "+icon.color)
                             playerSelectSquare("B3")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin() && !checkForCatsCradle()) {
                                 if (gameMode == "1Player") {
@@ -601,8 +616,11 @@ Item {
                             itemIds.push(row3rect1Btn)
                         }
                         onClicked: {
+                            console.log("7 icon color: "+icon.color)
                             row3rect1Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
-                            r3b1IconColor = icon.source == "qrc:///playerOneIcon.png" ? player1Color : player2Color
+                            console.log("7 icon color: "+icon.color)
+                            r3b1IconColor = currentPlayer == 1 ?  player1Color : player2Color
+                            console.log("7 icon color: "+icon.color)
                             playerSelectSquare("C1")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin() && !checkForCatsCradle()) {
                                 if (gameMode == "1Player") {
@@ -636,8 +654,11 @@ Item {
                             itemIds.push(row3rect2Btn)
                         }
                         onClicked: {
+                            console.log("8 icon color: "+icon.color)
                             row3rect2Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
-                            r3b2IconColor = icon.source == "qrc:///playerOneIcon.png" ? player1Color : player2Color
+                            console.log("8 icon color: "+icon.color)
+                            r3b2IconColor = currentPlayer == 1 ?  player1Color : player2Color
+                            console.log("8 icon color: "+icon.color)
                             playerSelectSquare("C2")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin() && !checkForCatsCradle()) {
                                 if (gameMode == "1Player") {
@@ -671,8 +692,11 @@ Item {
                             itemIds.push(row3rect3Btn)
                         }
                         onClicked: {
+                            console.log("9 icon color: "+icon.color)
                             row3rect3Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
-                            r3b3IconColor = icon.source == "qrc:///playerOneIcon.png" ? player1Color : player2Color
+                            console.log("9 icon color: "+icon.color)
+                            r3b3IconColor = currentPlayer == 1 ?  player1Color : player2Color
+                            console.log("9 icon color: "+icon.color)
                             playerSelectSquare("C3")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin() && !checkForCatsCradle()) {
                                 if (gameMode == "1Player") {

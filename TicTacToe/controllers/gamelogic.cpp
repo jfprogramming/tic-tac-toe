@@ -90,7 +90,6 @@ void GameLogic::setPlayerWon(bool won)
     qDebug() << __FUNCTION__ << "player: " << m_currentPlayer << " won:" << won;
 
     m_playerWon = won;
-    //emit playerWonChanged();
 }
 
 
@@ -215,7 +214,9 @@ void GameLogic::checkForHorizontalWin()
             m_ticTacToeBoard[row + "2"] == m_ticTacToeBoard[row + "3"]) {
             qDebug() << __FUNCTION__ << "player won:" << m_currentPlayer;
             setPlayerWon(true);
-            emit playerWonChanged("horizontal", row);  // Emit row (A, B, or C) that won
+            // Emit winType (Row = horizontal) that won and strike that won (Row: A, B, C)
+            //
+            emit playerWonChanged("horizontal", row);
             return;
         }
     }
@@ -238,6 +239,8 @@ void GameLogic::checkForVerticalWin()
             m_ticTacToeBoard["B" + col] == m_ticTacToeBoard["C" + col]) {
             qDebug() << __FUNCTION__ << "player won:" << m_currentPlayer;
             setPlayerWon(true);
+            // Emit winType (Column = vertical) that won and strike that won (Column: 1, 2, 3)
+            //
             emit playerWonChanged("vertical", col);  // Emit column (1, 2, or 3)
             return;
         }
@@ -256,11 +259,15 @@ void GameLogic::checkForDiagonalWin()
 
     if (m_ticTacToeBoard["A1"] != ' ' && m_ticTacToeBoard["A1"] == m_ticTacToeBoard["B2"] && m_ticTacToeBoard["B2"] == m_ticTacToeBoard["C3"]) {
         setPlayerWon(true);
-        emit playerWonChanged("diagonal", "1");  // Emit diagonal type
+        // Emit winType (Diagonal = A1, B2, C3) that won and strike that won (Diagonal: 1)
+        //
+        emit playerWonChanged("diagonal", "1");
         return;
     } else if (m_ticTacToeBoard["A3"] != ' ' && m_ticTacToeBoard["A3"] == m_ticTacToeBoard["B2"] && m_ticTacToeBoard["B2"] == m_ticTacToeBoard["C1"]) {
         setPlayerWon(true);
-        emit playerWonChanged("diagonal", "2");  // Emit diagonal type
+        // Emit winType (Diagonal = A3, B2, C1) that won and strike that won (Diagonal: 2)
+        //
+        emit playerWonChanged("diagonal", "2");
         return;
     }
 }
@@ -289,9 +296,12 @@ void GameLogic::checkForCatsCradle()
     }
     if (allFilled) {
         setCatsCradle(true);
-        emit catsCradleMatch(); // Emit signal for UI to open the popup
+
+        // Emit signal for UI to open the cats-cradle popup
+        //
+        emit catsCradleMatch();
     } else {
-        setCatsCradle(false);
+        qDebug() << __FUNCTION__ << "Cats Cradle not found";
     }
 }
 

@@ -16,6 +16,7 @@ Dialog {
     //
     property alias popupMsgtxt: popupMsgText.text
     property alias popupMsgColor: popupMsgRect.color
+    property alias popupMsgtxtVisible: popupMsgText.visible
 
     Rectangle {
         id: popupMsgRect

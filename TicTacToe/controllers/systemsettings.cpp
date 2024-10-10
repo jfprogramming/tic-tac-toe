@@ -78,7 +78,7 @@ void SystemSettings::setSoftwareVersion(const QString &softwareVersion)
 QString SystemSettings::getDateTime() const
 {
     qDebug() << "Getting date and time: " << m_settingsFile.value("DateFormat", "YYYY-MM-dd").toString();
-    return m_settingsFile.value("DateFormat", "YYYY-MMM-dd").toString();
+    return m_settingsFile.value("DateFormat", "YYYY-MM-dd").toString();
 }
 
 
