@@ -115,11 +115,14 @@ Item {
         r3b2IconColor = "#808080"
         r3b3IconColor = "#808080"
 
+        // Clear the list of itemIds
+        //itemIds = []
+
         // Reset the icons interacted with by Computer in 1Player mode
         //
         for (const item of itemIds) {
-            console.log("Item ID:", item.id, "Source:", item.icon.source)
-            console.log("Item ID:", item.id, "Color:", item.icon.color)
+            console.log("Item ID:", item.objectName, "Source:", item.icon.source)
+            console.log("Item ID:", item.objectName, "Color:", item.icon.color)
 
             // Clear the icon source and reset to defualt color grey #808080
             //
@@ -207,7 +210,7 @@ Item {
 
         if (gameMode == "1Player" && currentPlayer == 2) {
             for (const item of itemIds) {
-                console.log("Item ID:", item.id, "Source:", item.icon.source)
+                console.log("playerTwoTurn - Item ID:", item.objectName, "Source:", item.icon.source)
                 if (item.icon.source == "") {
                     emptySquares.push(item)
                 }
@@ -217,7 +220,7 @@ Item {
                 var randomIndex = Math.floor(Math.random() * emptySquares.length)
                 selectedSquare = emptySquares[randomIndex]
                 selectedSquare.icon.source = "qrc:///playerTwoIcon.png"
-                selectedSquare.visible = true
+                //selectedSquare.visible = true
 
                 console.log("selectedSquare: " + selectedSquare.objectName)
 
@@ -397,12 +400,26 @@ Item {
                             itemIds.push(row1rect1Btn)
                         }
                         onClicked: {
+                            console.log("onClicked row1rect1Btn gameMode:"+gameMode + ", "+gameLogic.gameType)
+
+                            // Loop through all the squares itemIds and set the icon source and color
+                            //
+                            for (const item of itemIds) {
+                                console.log("onClicked row1rect1Btn ItemId:", item.objectName, "Source:", item.icon.source)
+
+                                if(item.objectName == "row1rect1Btn"){
+                                    if (item.icon.source == "") {
+                                        row1rect1Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                                    }
+                                    if (item.icon.color == "" || item.icon.color == "#808080") {
+                                        item.icon.color = currentPlayer == 1 ?  player1Color : player2Color
+
+                                    }
+                                }
+                            }
+
                             console.log("1 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
-                            console.log("row1rect1Btn clicked gameMode:"+gameMode + ", "+gameLogic.gameType)
-                            row1rect1Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
-                            console.log("1 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
-                            r1b1IconColor = currentPlayer == 1 ?  player1Color : player2Color
-                            console.log("1 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
+
                             playerSelectSquare("A1")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin() && !checkForCatsCradle()) {
                                 if (gameMode == "1Player") {
@@ -435,11 +452,27 @@ Item {
                             itemIds.push(row1rect2Btn)
                         }
                         onClicked: {
-                            console.log("2 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
-                            row1rect2Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
-                            console.log("2 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
-                            r1b2IconColor = currentPlayer == 1 ?  player1Color : player2Color
-                            console.log("2 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
+                            console.log("onClicked row1rect1Btn gameMode:"+gameMode + ", "+gameLogic.gameType)
+
+                            // Loop through all the squares itemIds and set the icon source and color
+                            //
+                            for (const item of itemIds) {
+                                console.log("onClicked row1rect1Btn ItemId:", item.objectName, "Source:", item.icon.source)
+
+                                if(item.objectName == "row1rect2Btn"){
+                                    if (item.icon.source == "") {
+                                        row1rect2Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                                    }
+                                    if (item.icon.color == "" || item.icon.color == "#808080") {
+                                        item.icon.color = currentPlayer == 1 ?  player1Color : player2Color
+
+                                    }
+                                }
+                            }
+
+                            console.log("1 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
+
+
                             playerSelectSquare("A2")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin() && !checkForCatsCradle()) {
                                 if (gameMode == "1Player") {
@@ -470,11 +503,27 @@ Item {
                             itemIds.push(row1rect3Btn)
                         }
                         onClicked: {
-                            console.log("3 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
-                            row1rect3Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
-                            console.log("3  icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
-                            r1b3IconColor = currentPlayer == 1 ?  player1Color : player2Color
-                            console.log("3 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
+                            console.log("onClicked row1rect3Btn gameMode:"+gameMode + ", "+gameLogic.gameType)
+
+                            // Loop through all the squares itemIds and set the icon source and color
+                            //
+                            for (const item of itemIds) {
+                                console.log("onClicked row1rect3Btn ItemId:", item.objectName, "Source:", item.icon.source)
+
+                                if(item.objectName == "row1rect3Btn"){
+                                    if (item.icon.source == "") {
+                                        row1rect3Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                                    }
+                                    if (item.icon.color == "" || item.icon.color == "#808080") {
+                                        item.icon.color = currentPlayer == 1 ?  player1Color : player2Color
+
+                                    }
+                                }
+                            }
+
+                            console.log("1 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
+
+
                             playerSelectSquare("A3")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin() && !checkForCatsCradle()) {
                                 if (gameMode == "1Player") {
@@ -516,11 +565,26 @@ Item {
                             itemIds.push(row2rect1Btn)
                         }
                         onClicked: {
-                            console.log("4 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
-                            row2rect1Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
-                            console.log("4 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
-                            r2b1IconColor = currentPlayer == 1 ?  player1Color : player2Color
-                            console.log("4 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
+                            console.log("onClicked row2rect1Btn gameMode:"+gameMode + ", "+gameLogic.gameType)
+
+                            // Loop through all the squares itemIds and set the icon source and color
+                            //
+                            for (const item of itemIds) {
+                                console.log("onClicked row2rect1Btn ItemId:", item.objectName, "Source:", item.icon.source)
+
+                                if(item.objectName == "row2rect1Btn"){
+                                    if (item.icon.source == "") {
+                                        row2rect1Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                                    }
+                                    if (item.icon.color == "" || item.icon.color == "#808080") {
+                                        item.icon.color = currentPlayer == 1 ?  player1Color : player2Color
+
+                                    }
+                                }
+                            }
+
+                            console.log("1 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
+
                             playerSelectSquare("B1")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin() && !checkForCatsCradle()) {
                                 if (gameMode == "1Player") {
@@ -553,11 +617,26 @@ Item {
                             itemIds.push(row2rect2Btn)
                         }
                         onClicked: {
-                            console.log("5 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
-                            row2rect2Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
-                            console.log("5 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
-                            r2b2IconColor = currentPlayer == 1 ?  player1Color : player2Color
-                            console.log("5 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
+                            console.log("onClicked row2rect2Btn gameMode:"+gameMode + ", "+gameLogic.gameType)
+
+                            // Loop through all the squares itemIds and set the icon source and color
+                            //
+                            for (const item of itemIds) {
+                                console.log("onClicked row2rect2Btn ItemId:", item.objectName, "Source:", item.icon.source)
+
+                                if(item.objectName == "row2rect2Btn"){
+                                    if (item.icon.source == "") {
+                                        row2rect2Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                                    }
+                                    if (item.icon.color == "" || item.icon.color == "#808080") {
+                                        item.icon.color = currentPlayer == 1 ?  player1Color : player2Color
+
+                                    }
+                                }
+                            }
+
+                            console.log("1 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
+
                             playerSelectSquare("B2")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin() && !checkForCatsCradle()) {
                                 if (gameMode == "1Player") {
@@ -590,11 +669,26 @@ Item {
                             itemIds.push(row2rect3Btn)
                         }
                         onClicked: {
-                            console.log("6 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
-                            row2rect3Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
-                            console.log("6 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
-                            r2b3IconColor = currentPlayer == 1 ?  player1Color : player2Color
-                            console.log("6 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
+                            console.log("onClicked row2rect3Btn gameMode:"+gameMode + ", "+gameLogic.gameType)
+
+                            // Loop through all the squares itemIds and set the icon source and color
+                            //
+                            for (const item of itemIds) {
+                                console.log("onClicked row2rect3Btn ItemId:", item.objectName, "Source:", item.icon.source)
+
+                                if(item.objectName == "row2rect3Btn"){
+                                    if (item.icon.source == "") {
+                                        row2rect3Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                                    }
+                                    if (item.icon.color == "" || item.icon.color == "#808080") {
+                                        item.icon.color = currentPlayer == 1 ?  player1Color : player2Color
+
+                                    }
+                                }
+                            }
+
+                            console.log("1 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
+
                             playerSelectSquare("B3")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin() && !checkForCatsCradle()) {
                                 if (gameMode == "1Player") {
@@ -638,11 +732,26 @@ Item {
                             itemIds.push(row3rect1Btn)
                         }
                         onClicked: {
-                            console.log("7 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
-                            row3rect1Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
-                            console.log("7 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
-                            r3b1IconColor = currentPlayer == 1 ?  player1Color : player2Color
-                            console.log("7 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
+                            console.log("onClicked row3rect1Btn gameMode:"+gameMode + ", "+gameLogic.gameType)
+
+                            // Loop through all the squares itemIds and set the icon source and color
+                            //
+                            for (const item of itemIds) {
+                                console.log("onClicked row3rect1Btn ItemId:", item.objectName, "Source:", item.icon.source)
+
+                                if(item.objectName == "row3rect1Btn"){
+                                    if (item.icon.source == "") {
+                                        row3rect1Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                                    }
+                                    if (item.icon.color == "" || item.icon.color == "#808080") {
+                                        item.icon.color = currentPlayer == 1 ?  player1Color : player2Color
+
+                                    }
+                                }
+                            }
+
+                            console.log("1 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
+
                             playerSelectSquare("C1")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin() && !checkForCatsCradle()) {
                                 if (gameMode == "1Player") {
@@ -676,11 +785,27 @@ Item {
                             itemIds.push(row3rect2Btn)
                         }
                         onClicked: {
-                            console.log("8 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
-                            row3rect2Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
-                            console.log("8 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
-                            r3b2IconColor = currentPlayer == 1 ?  player1Color : player2Color
-                            console.log("8 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
+                            console.log("onClicked row3rect2Btn gameMode:"+gameMode + ", "+gameLogic.gameType)
+
+                            // Loop through all the squares itemIds and set the icon source and color
+                            //
+                            for (const item of itemIds) {
+                                console.log("onClicked row3rect2Btn ItemId:", item.objectName, "Source:", item.icon.source)
+
+                                if(item.objectName == "row3rect2Btn"){
+                                    if (item.icon.source == "") {
+                                        row3rect2Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                                    }
+                                    if (item.icon.color == "" || item.icon.color == "#808080") {
+                                        item.icon.color = currentPlayer == 1 ?  player1Color : player2Color
+
+                                    }
+                                }
+                            }
+
+                            console.log("1 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
+
+
                             playerSelectSquare("C2")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin() && !checkForCatsCradle()) {
                                 if (gameMode == "1Player") {
@@ -714,11 +839,26 @@ Item {
                             itemIds.push(row3rect3Btn)
                         }
                         onClicked: {
-                            console.log("9 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
-                            row3rect3Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
-                            console.log("9 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
-                            r3b3IconColor = currentPlayer == 1 ?  player1Color : player2Color
-                            console.log("9 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
+                            console.log("onClicked row3rect3Btn gameMode:"+gameMode + ", "+gameLogic.gameType)
+
+                            // Loop through all the squares itemIds and set the icon source and color
+                            //
+                            for (const item of itemIds) {
+                                console.log("onClicked row3rect3Btn ItemId:", item.objectName, "Source:", item.icon.source)
+
+                                if(item.objectName == "row3rect3Btn"){
+                                    if (item.icon.source == "") {
+                                        row3rect3Btn.icon.source = currentPlayer == 1 ? "qrc:///playerOneIcon.png" : "qrc:///playerTwoIcon.png"
+                                    }
+                                    if (item.icon.color == "" || item.icon.color == "#808080") {
+                                        item.icon.color = currentPlayer == 1 ?  player1Color : player2Color
+
+                                    }
+                                }
+                            }
+
+                            console.log("1 icon color: "+icon.color + ", currentPlayer: "+currentPlayer)
+
                             playerSelectSquare("C3")
                             if (!checkForHorizontalWin() && !checkForVerticalWin() && !checkForDiagonalWin() && !checkForCatsCradle()) {
                                 if (gameMode == "1Player") {
