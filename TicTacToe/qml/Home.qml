@@ -28,6 +28,7 @@ Item {
         Column{
             id:btnColumn
             anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
             spacing: 30
 
             Button{

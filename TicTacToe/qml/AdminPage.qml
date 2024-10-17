@@ -19,11 +19,11 @@ Item {
         anchors.bottom: adminPagefooter.top
         anchors.bottomMargin: 50
 
-
         Column{
             id:btnColumn
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: 20
+            anchors.verticalCenter: parent.verticalCenter
 
 
             Button{
