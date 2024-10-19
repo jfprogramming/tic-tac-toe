@@ -63,24 +63,47 @@ Item {
                         text: "Select Date Format"
                     }
                     Button {
+                        id: yyyymmddBtn
                         text: "YYYY-MM-dd"
+                        checked: settingsController.getDateFormat() === "YYYY-MM-dd" ? true : false
                         onClicked: {
                             console.log("Date format selected: YYYY-MM-dd");
-                            // TODO: Add logic to apply this date format
+                            // Apply date format to qsettings file
+                            //
+                            settingsController.setDateFormat("YYYY-MM-dd");
+                            if (!checked) {
+                                checked = true
+                                mmddyyyyBtn.checked = false
+                                ddmmyyyyBtn.checked = false
+                            }
                         }
                     }
                     Button {
+                        id: mmddyyyyBtn
                         text: "MM-dd-YYYY"
+                        checked: settingsController.getDateFormat() === "MM-dd-YYYY" ? true : false
                         onClicked: {
                             console.log("Date format selected: MM-dd-YYYY");
-                            // TODO: Add logic to apply this date format
+                            settingsController.setDateFormat("MM-dd-YYYY");
+                            if (!checked) {
+                                checked = true
+                                yyyymmddBtn.checked = false
+                                ddmmyyyyBtn.checked = false
+                            }
                         }
                     }
                     Button {
+                        id: ddmmyyyyBtn
                         text: "dd-MM-YYYY"
+                        checked: settingsController.getDateFormat() === "dd-MM-YYYY" ? true : false
                         onClicked: {
                             console.log("Date format selected: dd-MM-YYYY");
-                            // TODO: Add logic to apply this date format
+                            settingsController.setDateFormat("dd-MM-YYYY");
+                            if (!checked) {
+                                checked = true
+                                yyyymmddBtn.checked = false
+                                mmddyyyyBtn.checked = false
+                            }
                         }
                     }
                 }
@@ -88,12 +111,12 @@ Item {
 
             Row {
                 spacing: 20
-                Button {
-                    text: "Load"
-                    onClicked: {
-                        dateTimeInput.text = settingsController.getDateTimeSettings();
-                    }
-                }
+                // Button {
+                //     text: "Load"
+                //     onClicked: {
+                //         dateTimeInput.text = settingsController.getDateTimeSettings();
+                //     }
+                // }
 
                 Button {
                     text: "Save"

@@ -18,11 +18,22 @@ public:
     QString getSoftwareVersion() const;
     void setSoftwareVersion(const QString &softwareVersion);
 
-    QString getDateTime() const;
-    void setDateTime(const QDateTime &dateTime);
+    Q_INVOKABLE QString getDateFormat() const;
+    Q_INVOKABLE void setDateFormat(const QString &dateFormat);
+
+    Q_INVOKABLE QString getTime() const;
+    Q_INVOKABLE void setTime(const QDateTime &dateTime);
+
+
+    Q_INVOKABLE QString getDate() const;
+    Q_INVOKABLE void setDate(const QDateTime &dateTime);
+
+    Q_INVOKABLE QString getDateTime() const;
+    Q_INVOKABLE void setDateTime(const QDateTime &dateTime);
 
 private:
     QString m_settingsFilePath="/data/config/settings.ini";
     QSettings m_settingsFile;
+    QString m_dateFormate;
 
 };

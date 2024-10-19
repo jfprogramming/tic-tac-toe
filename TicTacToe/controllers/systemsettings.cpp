@@ -69,6 +69,42 @@ void SystemSettings::setSoftwareVersion(const QString &softwareVersion)
     m_settingsFile.setValue("SoftwareVersion", softwareVersion);
 }
 
+QString SystemSettings::getDateFormat() const
+{
+    qDebug() << "Getting date formayt: " << m_settingsFile.value("DateFormat", "YYYY-MM-dd").toString();
+    return m_settingsFile.value("DateFormat", "YYYY-MM-dd").toString();
+}
+
+void SystemSettings::setDateFormat(const QString &dateFormat)
+{
+    qDebug() << "Setting date format to: " << dateFormat;
+    m_settingsFile.setValue("Date Format:", dateFormat);
+}
+
+QString SystemSettings::getTime() const
+{
+    qDebug() << "Getting date and time: " << m_settingsFile.value("DateFormat", "YYYY-MM-dd").toString();
+    return m_settingsFile.value("DateFormat", "YYYY-MM-dd").toString();
+}
+
+void SystemSettings::setTime(const QDateTime &dateTime)
+{
+    qDebug() << "Setting date and time to: " << dateTime;
+    m_settingsFile.setValue("DateTime", dateTime);
+}
+
+QString SystemSettings::getDate() const
+{
+    qDebug() << "Getting date and time: " << m_settingsFile.value("DateFormat", "YYYY-MM-dd").toString();
+    return m_settingsFile.value("DateFormat", "YYYY-MM-dd").toString();
+}
+
+void SystemSettings::setDate(const QDateTime &dateTime)
+{
+    qDebug() << "Setting date and time to: " << dateTime;
+    m_settingsFile.setValue("DateTime", dateTime);
+}
+
 
 /**
  * \fn  SystemSettings::getDateTime
