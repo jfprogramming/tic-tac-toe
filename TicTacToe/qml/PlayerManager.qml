@@ -142,7 +142,7 @@ Item {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            stackView.push("EditPlayerForm.qml", { playerName: model.playerName, playerColor: model.playerColor })
+                            stackView.push("EditPlayerForm.qml", { playerName: model.name, playerColor: model.color })
                         }
                     }
                 }

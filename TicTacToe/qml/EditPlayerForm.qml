@@ -8,18 +8,23 @@ Item {
 
     // Property alias
     //
-    property alias playerName: playerNameLabel.text
-    property alias playerColor: playerColorLabel.text
+    property alias playerName: playerNameTextInput.text
+    property alias playerColor: playerColorTextInput.text
+
+
+    // JavaScript Functions
+    //
+    function clearTextFields() {
+        playerNameTextInput.text = ""
+        playerColorTextInput.text = ""
+    }
 
     GameHeader{
         id:homePageHeader
     }
 
     Component.onCompleted: {
-        // Clear text fields on entry
-        //
-        playerNameTextInput.text = ""
-        playerColorTextInput.text = ""
+        console.log("Component.onCompleted Edit Player Form Page")
     }
 
     Rectangle{
@@ -64,15 +69,15 @@ Item {
                     adminPlayModel.savePlayerToDatabase(playerNameTextInput.text, playerColorTextInput.text)
                 }
             }
-            Button{
-                id: lookupButton
-                text: qsTr("Lookup")
-                onClicked: {
-                    adminPlayModel.lookupPlayer(playerNameTextInput.text)
-                    playerNameTextInput.text = adminPlayModel.player1Name
-                    playerColorTextInput.text = adminPlayModel.player1Color
-                }
-            }
+            // Button{
+            //     id: lookupButton
+            //     text: qsTr("Lookup")
+            //     onClicked: {
+            //         adminPlayModel.lookupPlayer(playerNameTextInput.text)
+            //         playerNameTextInput.text = adminPlayModel.player1Name
+            //         playerColorTextInput.text = adminPlayModel.player1Color
+            //     }
+            // }
         }
     }
 
@@ -92,9 +97,11 @@ Item {
         id: homePagefooter
         backBtn.visible: true
         backBtn.onClicked: {
+            clearTextFields()
             stackView.pop(StackView.PushTransition)
         }
         homeBtn.onClicked: {
+            clearTextFields()
             stackView.clear()
             stackView.push("Home.qml", StackView.PushTransition)
         }
