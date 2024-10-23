@@ -1,10 +1,9 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtQuick.VirtualKeyboard 2.0  // Add virtual keyboard import
 
 Item {
-    id:editFormPageItem
-    objectName: "editFormPage"
+    id:editPlayerFormPageItem
+    objectName: "editPlayerFormPage"
 
     // Property alias
     //
@@ -50,8 +49,10 @@ Item {
                 width: 300
                 height: 50
                 text: stackView.currentItem.playerName
+                onPressed: {
+                    stackView.push("EditFieldForm.qml", { textField: playerNameTextInput.text})
+                }
             }
-
             Label{
                 id: playerColorLabel
                 text: qsTr("Enter Player Color")
@@ -61,6 +62,9 @@ Item {
                 width: 300
                 height: 50
                 text: stackView.currentItem.playerColor
+                onPressed: {
+                    stackView.push("EditFieldForm.qml", { textField: playerColorTextInput.text})
+                }
             }
             Button{
                 id: saveButton
@@ -69,27 +73,7 @@ Item {
                     adminPlayModel.savePlayerToDatabase(playerNameTextInput.text, playerColorTextInput.text)
                 }
             }
-            // Button{
-            //     id: lookupButton
-            //     text: qsTr("Lookup")
-            //     onClicked: {
-            //         adminPlayModel.lookupPlayer(playerNameTextInput.text)
-            //         playerNameTextInput.text = adminPlayModel.player1Name
-            //         playerColorTextInput.text = adminPlayModel.player1Color
-            //     }
-            // }
         }
-    }
-
-    // VirtualKeyboard
-    //
-    InputPanel {
-        id: inputPanel
-        z: 99
-        anchors.bottom: parent.bottom
-        active: true
-        visible: true
-        enabled: true
     }
 
 

@@ -30,7 +30,7 @@ SystemSettings::~SystemSettings()
 QString SystemSettings::getAppName() const
 {
     qDebug() << "Getting application name: " << m_settingsFile.value("AppName", "TicTacToe").toString();
-    return m_settingsFile.value("AppName", "TicTacToe").toString();
+    return m_settingsFile.value("AppSettings/AppName", "TicTacToe").toString();
 }
 
 
@@ -66,7 +66,7 @@ QString SystemSettings::getSoftwareVersion() const
 void SystemSettings::setSoftwareVersion(const QString &softwareVersion)
 {
     qDebug() << "Setting software version to: " << softwareVersion;
-    m_settingsFile.setValue("SoftwareVersion", softwareVersion);
+    m_settingsFile.setValue("AppSettings/SoftwareVersion", softwareVersion);
 }
 
 QString SystemSettings::getDateFormat() const
@@ -78,7 +78,7 @@ QString SystemSettings::getDateFormat() const
 void SystemSettings::setDateFormat(const QString &dateFormat)
 {
     qDebug() << "Setting date format to: " << dateFormat;
-    m_settingsFile.setValue("Date Format:", dateFormat);
+    m_settingsFile.setValue("AppSettings/DateFormat", dateFormat);
 }
 
 QString SystemSettings::getTime() const
@@ -90,7 +90,7 @@ QString SystemSettings::getTime() const
 void SystemSettings::setTime(const QDateTime &dateTime)
 {
     qDebug() << "Setting date and time to: " << dateTime;
-    m_settingsFile.setValue("DateTime", dateTime);
+    m_settingsFile.setValue("AppSettings/DateTime", dateTime);
 }
 
 QString SystemSettings::getDate() const
@@ -102,7 +102,7 @@ QString SystemSettings::getDate() const
 void SystemSettings::setDate(const QDateTime &dateTime)
 {
     qDebug() << "Setting date and time to: " << dateTime;
-    m_settingsFile.setValue("DateTime", dateTime);
+    m_settingsFile.setValue("AppSettings/DateTime", dateTime);
 }
 
 

@@ -63,6 +63,7 @@ qt_add_qml_module(appTicTacToe
         qml/PopupDialog.qml
         qml/WinStrike.qml
         qml/EditPlayerForm.qml
+        qml/EditFieldForm.qml
 
     RESOURCES
         resources.qrc
