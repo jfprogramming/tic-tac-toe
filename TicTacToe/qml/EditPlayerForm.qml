@@ -18,22 +18,21 @@ Item {
         playerColorTextInput.text = ""
     }
 
-    GameHeader{
-        id:homePageHeader
-    }
-
     Component.onCompleted: {
         console.log("Component.onCompleted Edit Player Form Page")
     }
 
+    GameHeader{
+        id:editPlayerFormHeader
+    }
+
     Rectangle{
         id: mainArea
-        anchors.fill: parent
         color: "white"
-        anchors.top: homePageHeader.bottom
-        anchors.topMargin: 50
-        anchors.bottom: homePagefooter.top
-        anchors.bottomMargin: 50
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: editPlayerFormHeader.bottom
+        anchors.bottom: editPlayerFormFooter.top
 
         Column{
             id:inputColumn
@@ -78,7 +77,7 @@ Item {
 
 
     GameFooter{
-        id: homePagefooter
+        id: editPlayerFormFooter
         backBtn.visible: true
         backBtn.onClicked: {
             clearTextFields()

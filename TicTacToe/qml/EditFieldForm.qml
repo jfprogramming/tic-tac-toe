@@ -16,48 +16,73 @@ Item {
         fieldTextInput.text = ""
     }
 
-    GameHeader {
-        id:homePageHeader
-    }
-
     Component.onCompleted: {
         console.log("Component.onCompleted Edit Field Form Page")
     }
 
+    GameHeader {
+        id:editFieldFormHeader
+    }
+
     Rectangle {
         id: mainArea
-        anchors.fill: parent
         color: "white"
-        anchors.top: homePageHeader.bottom
-        anchors.topMargin: 50
-        anchors.bottom: homePagefooter.top
-        anchors.bottomMargin: 50
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: editFieldFormHeader.bottom
+        anchors.bottom: editFieldFormFooter.top
 
-        Column {
-            id:inputColumn
-            anchors.centerIn: parent
-            spacing: 10
+        Label {
+            id: fieldTextLabel
+            text: qsTr("Enter Player Name")
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: parent.top
+            anchors.topMargin: inputPanel.visible ? 50 : 200
+        }
+        TextField {
+            id: fieldTextInput
+            anchors.top: fieldTextLabel.bottom
+            anchors.topMargin: 10
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: 300
+            height: 50
+            text: stackView.currentItem.playerName
+            onPressed: {
+                // Show the virtual keyboard
+                //
+                inputPanel.visible = true
+            }
+        }
 
-            Label {
-                id: fieldTextLabel
-                text: qsTr("Enter Player Name")
-            }
-            TextField {
-                id: fieldTextInput
-                width: 300
-                height: 50
-                text: stackView.currentItem.playerName
-                onPressed: {
-                    // Show the virtual keyboard
-                    //
-                    inputPanel.visible = true
-                }
-            }
+        // VirtualKeyboard
+        //
+        InputPanel {
+            id: inputPanel
+            z: 99
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: parent.bottom
+            anchors.bottom: parent.bottom
+            active: true
+            visible: false
+            enabled: true
         }
     }
 
+
+    SpringAnimation {
+        id: inputPanelAnimation
+        target: inputPanel
+        property: "y"
+        from: inputPanel.height
+        to: 0
+        duration: 300
+        easing.type: Easing.InOutQuad
+    }
+
+
     GameFooter {
-        id: homePagefooter
+        id: editFieldFormFooter
         backBtn.visible: true
         backBtn.onClicked: {
             clearTextFields()
