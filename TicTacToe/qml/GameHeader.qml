@@ -28,8 +28,24 @@ Rectangle {
         }
     }
 
+    function updateDateTime() {
+        dateTimeText.text = Qt.formatDateTime(new Date(), "yyyy-MM-dd hh:mm:ss");
+        console.log("dateTimeText: "+dateTimeText.text)
+    }
+
+    Timer {
+        id: timer
+        interval: 1000
+        running: true
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: updateDateTime()
+    }
+
     Component.onCompleted: {
         console.log("Component.onCompleted header")
+        updateDateTime()
+        timer.start()
     }
 
     Rectangle {
@@ -92,14 +108,14 @@ Rectangle {
     Rectangle {
         id: dateTimeLabel
         anchors.right: parent.right
-        anchors.rightMargin: 10
+        anchors.rightMargin: 85
         anchors.verticalCenter: parent.verticalCenter
         color: "transparent"
         Text {
             id: dateTimeText
-            text: Qt.formatDateTime(new Date(), "yyyy-MM-dd hh:mm:ss")
+            text: ""
             anchors.centerIn: parent
-            font.pointSize: 14
+            font.pointSize: 12
             color: "white" // Consistent text color
         }
     }

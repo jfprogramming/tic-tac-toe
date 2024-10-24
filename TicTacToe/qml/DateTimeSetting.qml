@@ -149,6 +149,7 @@ Item {
             Button {
                 text: "Save"
                 onClicked: {
+                    //TODO: set the date and time in the game
                     settingsController.setDateFormat(dateTimeInput.text)
                     console.log("save date and time... " + setHourTextInput.text + ":" + setMinutesTextInput.text + ":" + setSecondsTextInput.text)
                 }
