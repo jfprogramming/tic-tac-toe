@@ -11,7 +11,8 @@ tic-tac-toe
 │   └── package and dependencies script 
 ├── TicTacToe Game Directory 
 │   ├── Database (SQLite3 db) 
-│   ├── Documents (project docs) 
+│   ├── Documents (project docs)
+│   ├── Config (application qsettings file)
 │   ├── Images (graphics used by game) 
 │   ├── Controllers (C++ M-V-C) 
 │   ├── QML (view) 
@@ -38,26 +39,46 @@ tic-tac-toe
 - Open the TicTacToe project in Qt Creator, set up the compiler, and build and run the project.
 
 ## Screen/Page Layout
-- **Home Screen**
-  - **1 Player Mode Selected**
-    - Player Selection Page
-      - Game Board Page
-  - **2 Player Mode Selected**
-    - Player Selection Page
-      - Game Board Page
-  - High Score Page
-  - Admin Login Page
-    - Admin Page
-      - About Page
-      - Date Time Settings Page
-      - Player Manager Page
+```mermiad
+graph TD
+    A[Home Screen] --> B[1 Player Mode Selected]
+    A --> C[2 Player Mode Selected]
+    A --> D[High Score Page]
+    A --> E[Admin Login Page]
+    B --> F[Player Selection Page]
+    F --> G[Game Board Page]
+    C --> H[Player Selection Page]
+    H --> I[Game Board Page]
+    E --> J[Admin Page]
+    J --> K[About Page]
+    J --> L[Date Time Settings Page]
+    J --> M[Player Manager Page]
+```
 
 ## Game Mode
-- **Selecting 1 Player**
-  - Select player
-    - Play against the computer
-    - Score is kept in the header
-  - Once the game is complete, select the RESET button to clear the board.
+```mermaid
+graph TD
+    A[Home Screen] --> B[Selecting 1 Player Mode]
+    B --> C[Select a Player from the list]
+    C --> D[Game Board Displays]
+    D --> E[1 Player Mode vs Computer]
+    D --> F[Score Kept in Header]
+    F --> G[Win Popup Displays Winner]
+    G --> H[Game Board Resets]
+
+    A --> I[Selecting 2 Player Mode]
+    I --> J[First Player Selects Player]
+    J --> K[Popup: Player 2 Selects Player]
+    K --> L[Second Player Selects Player]
+    L --> M[Game Board Displays]
+    M --> N[Player 1 Marks First X]
+    N --> O[Popup: Player 2 Turn]
+    M --> P[Score Kept in Header]
+    P --> Q[Win Popup Displays Winner]
+    Q --> R[Game Board Resets]
+    P --> S[Cats Cradle/Tie Popup]
+    S --> T[Game Board Resets]
+```
 
 - **Screen Navigation Buttons** (located in the footer of the application)
   - Home button
@@ -70,53 +91,65 @@ tic-tac-toe
   - Username: `admin`
   - Password: `admin`
 - Admin mode gives you access to system setting features:
-  - About Page (Partially complete)
+  - About Page (complete)
   - Date Time Settings Page (Partially complete)
   - Player Manager Page (Partially complete)
 
 ## Features Incomplete
 Below is a list of features not yet complete:
-- **2 Player Mode**
-  - Player input control
-- **Date/Time Setting** (Admin Only)
+- **QSetting Files** (Partial)
+  - Date/Time Setting (Admin Only)
 - **Player Management** (Admin Only)
 - **High Score** (Partial)
-  - High score data is being pulled from the database and displayed in the GUI table.
-  - TODO: Accumulate player scores and save to the database.
-- **Other Game Modes**: Connect 4 / Battle Ships
+  - TODO: Verify Accumulation of player scores and save to the database.
 - **IoT High Score Web App**
   - Implement the AWS web application for displaying high scores.
 - **Mqtt API Creation and Integration**
   - Create API and coresponding API Document.
-  - Mqtt Connectivity and payload managemnet. 
-- **Popup** (Partial)
-  - Popup mechanism to control player input and player turn sequence.
-- **QSetting Files** (Partial)
-- **Custom Poky Build** (Partial)
-  - Consisting of Qt and application patches, touch screen driver.
-  - Housed in a separate repo.
+  - Mqtt Connectivity and payload managemnet.
+- **Custom Log Agent**
+  - Create a custom message handler  
     
 ## TODO
 - **TODO List**
-  - Implement Player Management for Admin User.
-  - Implement date/time settings for Admin User.
-  - Finish integrating QSettings File example. 
-  - Improve threading with QMutex locking.
-  - Improve class design by implementing common base class.
-  - Improve Object Oriented design by implementing smart pointers.
-  - Implement Export high score list feature.
-  - Create AWS web application to display high score table over the web.
-  - Integrate MQTT protocol and payload management.
-  - Create custom Poky build for RootFS.
-  - Build directory structure to include /data and /application directories.
-  - Integrate Qt into Poky recipes.
-  - Integrate cross-compiled RPI binary to Poky recipes.
-  - Integrate touch screen driver to Poky recipes.
-  - Integrate SSH capabilities for remote connections.
-  - Deploy to RPI SD Card.
+  - Inprogress: Player Management for Admin User.
+  - Inprogress: date/time settings for Admin User.
+  - Inprogress: integrating QSettings File. 
+  - Improve: threading with QMutex locking.
+  - Improve: class design by implementing common base class.
+  - Improve: Object Oriented design by implementing smart pointers.
+  - Implement: Export high score list feature.
+  - Clean up: Debug / Warning / Fatal statements
+    - create debug/engineering mode to capture more verbose data
+  - Implement: create AWS web application to display high score table over the web.
+  - Integrate: MQTT protocol and payload management.
+  - Create: custom Poky build for RootFS.
+  - **Custom Poky Build** (Partial)
+    - Inprogress: Create Poky recipes.
+      - Housed in a separate repo.
+      - Consisting of Qt6, supporting packages, patches, touch screen driver, application and database.
+      - Build directory structure to include /data and /application directories. 
+  - Inprogress: cross-compiled RPI binary to Poky recipes.
+  - Integrate: touch screen driver to Poky recipes.
+  - Integrate: SSH capabilities for remote connections.
+  - Deploy: Write OS and application to RPI SD Card.
   - **Create boot up script.**
     - /etc/init.d/
     - ln -s /etc/init.d/TicTacToe /etc/rc3.d/S99TicTacToe
     - update-rc.d TicTacToe defaults
-  - Implement sub project Connect 4.
-  - Implement sub project Battleships.
+  - **Other Game Modes**:
+    - Implement: sub project Connect 4.
+    - Implement: sub project Battleships.
+
+
+## Icon Images Source 
+- **Google Fonts**
+  - https://fonts.google.com/icons?icon.size=24&icon.color=%235f6368
+ 
+```plaintext
+tic-tac-toe 
+├── TicTacToe Game Directory 
+│   ├── Images (google font: graphics used by game)
+```
+
+
