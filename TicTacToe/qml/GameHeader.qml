@@ -11,10 +11,14 @@ Rectangle {
     width: parent.width
     color: "#0078D4" // Matching icon color
 
+    // Object Properties
+    //
     property int player1Score: 0
     property int player2Score: 0
     property alias scoreAlias: score
 
+    // JavaScript functions
+    //
     function savePlayerHighScore(playerName, score) {
         console.log("save player high score: " + playerName + " score: " + score)
         if (playerName === "Player1") {
@@ -24,6 +28,9 @@ Rectangle {
         }
     }
 
+    Component.onCompleted: {
+        console.log("Component.onCompleted header")
+    }
 
     Rectangle {
         id: title

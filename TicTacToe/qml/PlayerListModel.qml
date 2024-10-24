@@ -6,6 +6,10 @@ ListModel {
     id: playerListModel
     objectName: "playerListModel"
 
+    Component.onCompleted: {
+        console.log("playerListModel Component.onCompleted")
+    }
+
     ListElement {
         name: "Player1"
         portrait: "qrc:///onePlayer.png"

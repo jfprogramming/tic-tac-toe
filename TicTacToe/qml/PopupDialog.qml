@@ -18,6 +18,10 @@ Dialog {
     property alias popupMsgColor: popupMsgRect.color
     property alias popupMsgtxtVisible: popupMsgText.visible
 
+    Component.onCompleted: {
+        console.log("Component.onCompleted popupMsgItem")
+    }
+
     Rectangle {
         id: popupMsgRect
         anchors.fill: parent

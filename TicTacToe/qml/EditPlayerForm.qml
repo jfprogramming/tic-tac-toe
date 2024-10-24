@@ -18,7 +18,7 @@ Item {
     }
 
     Component.onCompleted: {
-        console.log("Component.onCompleted Edit Player Form Page" +
+        console.log("Component.onCompleted editPlayerFormPage" +
                     " playerName: " + playerName + ", playerColor: " + playerColor)
     }
 

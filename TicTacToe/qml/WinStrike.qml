@@ -18,6 +18,8 @@ Item {
     property bool verticalWin: false
     property bool diagonalWin: false
 
+    // JavaScript functions
+    //
     function showHorizontalWin(row, color) {
         console.log("showVerticalWin: "+color +", ")
         if (row === "A") win1.visible = true;

@@ -5,15 +5,25 @@ import QtQuick.VirtualKeyboard 2.0
 Item {
     id: dateTimeSettingItem
     objectName: "dateTimeSettingPage"
+
+    // Object Properties
+    //
     property alias hour: setHourTextInput.text
     property alias minutes: setMinutesTextInput.text
     property alias seconds: setSecondsTextInput.text
+
     signal dataChanged(string data, string field)
 
+    // JavaScript functions
+    //
     function clearTextFields() {
         setHourTextInput.text = ""
         setMinutesTextInput.text = ""
         setSecondsTextInput.text = ""
+    }
+
+    Component.onCompleted: {
+        console.log("Component.onCompleted dateTimeSettingPage")
     }
 
     GameHeader {
@@ -33,7 +43,6 @@ Item {
             id: dateTimeEntryColumn
             anchors.centerIn: parent
             spacing: 10
-
             Row {
                 spacing: 20
                 Column {

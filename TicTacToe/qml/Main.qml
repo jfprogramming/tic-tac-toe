@@ -37,6 +37,8 @@ Window {
         id: gamePlayModel
     }
 
+    // Display the home page
+    //
     StackView {
         id: stackView
         anchors.fill: parent

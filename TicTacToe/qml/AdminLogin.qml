@@ -7,7 +7,7 @@ Item {
     objectName: "adminLoginPage"
 
     Component.onCompleted: {
-        console.log("Component.onCompleted Admin Login Page")
+        console.log("Component.onCompleted adminLoginPage")
     }
 
     GameHeader{
