@@ -73,9 +73,9 @@ graph TD
     M --> N[Player 1 Marks First X]
     N --> O[Popup: Player 2 Turn]
     O --> P[Game Complete]
-    P[Win Popup Displays Winner] --> P[Cats Cradle/Tie Popup]
-    P --> Q[Game Board Resets]
+    P[Win Popup Displays Winner] --> Q[Cats Cradle/Tie Popup]
     P --> R[Game Board Resets]
+    Q --> S[Game Board Resets]
 ```
 
 - **Screen Navigation Buttons** (located in the footer of the application)
