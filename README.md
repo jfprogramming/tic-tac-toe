@@ -3,6 +3,9 @@
 ## About
 A simple Tic Tac Toe game developed using Qt, C++/QML, CMake, and SQLite3.
 
+## Objective
+Create a Qt C++/QML application for a RPI4 touch screen device and all of its supporting infastructure. 
+
 ## Project Structure
 
 ```plaintext
@@ -94,9 +97,14 @@ graph TD
   - Username: `admin`
   - Password: `admin`
 - Admin mode gives you access to system setting features:
-  - About Page (complete)
+  - About Page: displays system information. 
   - Date Time Settings Page (Partially complete)
   - Player Manager Page (Partially complete)
+
+### Player Management 
+- By default the application is loaded with 10 defualt players.
+- The max players allowed is 10.
+- Using the Player Manager Utility Admins can edit/configure existing and new players
 
 ## Features Incomplete
 Below is a list of features not yet complete:
