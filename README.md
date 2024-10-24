@@ -62,7 +62,7 @@ graph TD
     B --> C[Select a Player from the list]
     C --> D[Game Board Displays]
     D --> E[1 Player Mode vs Computer]
-    E --> F[Allow up to 1 second for Player 2 (computer) to place its mark 'O'.]
+    E --> F[Allow up to 1 second for Player 2 the Computer to place its O mark.]
     F --> G[Win Popup Displays Winner]
     G --> H[Game Board Resets]
     A --> I[Selecting 2 Player Mode]
