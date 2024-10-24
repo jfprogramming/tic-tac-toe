@@ -6,6 +6,10 @@ Item {
     id: homePage
     objectName: "homePage"
 
+    Component.onCompleted: {
+        console.log("Component.onCompleted homePage")
+    }
+
     onVisibleChanged: {
         if(visible){
             gameLogic.gameType = ""

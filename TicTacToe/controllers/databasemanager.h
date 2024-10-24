@@ -31,13 +31,10 @@ public:
 
     // Player Management
     //
-    bool createNewPlayer(const QString &playerName, const QString &playerColor);
+    bool updatePlayer(const int playerId, const QString &playerName, const QString &playerColor);
 
     QString retrievePlayerName(const int id);
     QString retrievePlayerColor(const int id);
-
-    bool setPlayerName(int playerId, QString &newName);
-    bool setPlayerColor(int playerId, QString &color);
 
     Player getPlayerByName(const QString &name);
     Player getPlayerById(const int id);

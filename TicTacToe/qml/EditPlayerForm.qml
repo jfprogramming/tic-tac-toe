@@ -9,6 +9,7 @@ Item {
     //
     property alias playerName: playerNameTextInput.text
     property alias playerColor: playerColorTextInput.text
+    property int playerIndex: -1
 
     // JavaScript functions
     //
@@ -75,7 +76,9 @@ Item {
                 id: saveButton
                 text: qsTr("Save")
                 onClicked: {
-                    adminPlayModel.savePlayerToDatabase(playerNameTextInput.text, playerColorTextInput.text)
+                    // Add one to the passed index to account for 0 playerIndex
+                    //
+                    adminPlayModel.updatePlayer(playerIndex+1, playerNameTextInput.text, playerColorTextInput.text)
                 }
             }
         }

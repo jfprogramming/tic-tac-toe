@@ -87,8 +87,9 @@ bool AdminPlayerModel::onAdminLogin(const QString &username, const QString &pass
  * \param name const QString& The player's name.
  * \param color const QString& The player's color.
  */
-void AdminPlayerModel::savePlayerToDatabase(const QString &name, const QString &color){
-    Controllers::dbManager.createNewPlayer(name, color);
+void AdminPlayerModel::updatePlayer(const int playerId, const QString &name, const QString &color){
+    qDebug() << __FUNCTION__ << "updating player..." << "playerId:" << playerId << "name:" << name << "color:" << color;
+    Controllers::dbManager.updatePlayer(playerId, name, color);
 }
 
 

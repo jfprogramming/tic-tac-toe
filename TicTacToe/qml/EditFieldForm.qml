@@ -20,7 +20,7 @@ Item {
     }
 
     Component.onCompleted: {
-        console.log("Component.onCompleted Edit Field Form Page")
+        console.log("Component.onCompleted editFieldFormPage")
         fieldTextInput.focus = true
         console.log("fieldTextInput.focus: " + fieldTextInput.focus)
     }

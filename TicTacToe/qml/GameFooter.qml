@@ -23,6 +23,10 @@ Rectangle{
     property alias backBtnTxt: backButton.text
     property alias backIcon: backButton.icon.source
 
+    Component.onCompleted: {
+        console.log("Component.onCompleted footer")
+    }
+
     Rectangle{
         id: copyRight
         anchors.left: parent.left

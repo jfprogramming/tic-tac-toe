@@ -46,7 +46,7 @@ signals:
 
 public slots:
     bool onAdminLogin(const QString &username, const QString &password);
-    void savePlayerToDatabase(const QString &name, const QString &color);
+    void updatePlayer(const int playerId, const QString &name, const QString &color);
     void lookupPlayer(const QString &name);
 
     QList<AdminPlayer> getAllPlayers();

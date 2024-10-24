@@ -178,92 +178,26 @@ bool DatabaseManager::authenticateAdmin(const QString &username, const QString &
 
 
 /**
- * \fn    DatabaseManager::setPlayerName
- * \brief  Sets the name of a player in the database.
- * \param  playerId The ID of the player.
- * \param  newName The new name of the player.
- * \return bool True if the operation was successful, false otherwise.
- */
-bool DatabaseManager::setPlayerName(int playerId, QString &newName)
-{
-    qDebug() << __FUNCTION__ << "Setting player name for player:" << playerId << " new name:" << newName;
-
-    QSqlQuery query;
-
-    if(playerId == 1){
-        // Create new player
-        QString na = "N/A";
-        createNewPlayer(newName, na);
-    } else {
-        query.prepare("UPDATE PlayerTable SET playerName = :playerName WHERE playerId = :playerId");
-        query.bindValue(":playerName", newName);
-        query.bindValue(":playerId",   playerId);
-    }
-
-    return query.exec();
-}
-
-
-/**
- * \fn     DatabaseManager::setPlayerColor
- * \brief  set the player color int the player table
- * \param  playerId
- * \param  color
- * \return bool
- */
-bool DatabaseManager::setPlayerColor(int playerId, QString &color)
-{
-    qDebug() << __FUNCTION__ << "Setting player color for player:" << playerId << " new color:" << color;
-
-    QSqlQuery query;
-
-    if(playerId ==1){
-        // Create new player
-        //
-        QString na = "N/A";
-        createNewPlayer(na, color);
-    }else{
-        query.prepare("UPDATE UserTable SET userAge = :playerColor WHERE playerId = :playerId");
-        query.bindValue(":playerColor", color);
-        query.bindValue(":playerId",    playerId);
-    }
-
-    return query.exec();
-}
-
-
-/**
- * \fn      DatabaseManager::createNewPlayer
+ * \fn      DatabaseManager::updatePlayer
  * \brief   Inserts a new user int the player table
  * \param   playerName
  * \param   playerColor
  * \return  bool
  */
-bool DatabaseManager::createNewPlayer(const QString &playerName, const QString &playerColor)
-{
-    qDebug() << __FUNCTION__ << "Creating new player:" << playerName << " color:" << playerColor;
+bool DatabaseManager::updatePlayer(const int playerId, const QString &playerName, const QString &playerColor) {
+    qDebug() << __FUNCTION__ << "Updating player:" << "playerId:"    << playerId
+                                                   << "playerName:"  << playerName
+                                                   << "playerColor:" << playerColor;
 
-    QSqlQuery query;
-    query.prepare("SELECT playerId FROM PlayerTable WHERE playerName = :playerName");
-    query.bindValue(":playerName", playerName);
-
-    if (query.exec() && query.next()) {
-        // Player exists, update the playerColor
+        // Update the playerName, playerColor, and dateTime fields
         //
-        int playerId = query.value(0).toInt();
-        query.prepare("UPDATE PlayerTable SET playerColor = :playerColor WHERE playerId = :playerId");
-        query.bindValue(":playerColor", playerColor);
-        query.bindValue(":playerId",    playerId);
-    } else {
-        // Player does not exist, create a new player
-        //
-        query.prepare("INSERT INTO PlayerTable (playerName, playerColor, dateTime) VALUES(:playerName, :playerColor, :dateTime)");
-        query.bindValue(":playerName",  playerName);
+        QSqlQuery query;
+        query.prepare("UPDATE PlayerTable SET playerName = :playerName, playerColor = :playerColor, dateTime = :dateTime WHERE playerId = :playerId");
+        query.bindValue(":playerName", playerName);
         query.bindValue(":playerColor", playerColor);
         query.bindValue(":dateTime", QDateTime::currentDateTime());
-    }
-
-    return query.exec();
+        query.bindValue(":playerId", playerId);
+        return query.exec();
 }
 
 

@@ -6,6 +6,10 @@ Item {
     id:adminPageItem
     objectName: "adminSettingsPage"
 
+    Component.onCompleted: {
+        console.log("Component.onCompleted adminSettingsPage")
+    }
+
     GameHeader{
         id:adminPageHeader
     }
