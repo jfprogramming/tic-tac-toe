@@ -62,7 +62,7 @@ graph TD
     B --> C[Select a Player from the list]
     C --> D[Game Board Displays]
     D --> E[1 Player Mode vs Computer]
-    D --> F[Score Kept in Header]
+    E --> F[Allow up to 1 second for Player 2 (computer) to place its mark 'O'.]
     F --> G[Win Popup Displays Winner]
     G --> H[Game Board Resets]
     A --> I[Selecting 2 Player Mode]
@@ -81,8 +81,6 @@ graph TD
 - **Screen Navigation Buttons** (located in the footer of the application)
   - Home button
   - Back button
-
-- **Note**: Please allow up to 1 second for Player 2 (computer) to place its mark 'O'.
 
 ## Admin Mode
 - You can log in as an admin user from the home screen by clicking the login admin button.
