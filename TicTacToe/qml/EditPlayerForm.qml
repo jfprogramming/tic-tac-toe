@@ -2,16 +2,15 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 Item {
-    id:editPlayerFormPageItem
+    id: editPlayerFormPageItem
     objectName: "editPlayerFormPage"
 
-    // Property alias
+    // Object Properties
     //
     property alias playerName: playerNameTextInput.text
     property alias playerColor: playerColorTextInput.text
 
-
-    // JavaScript Functions
+    // JavaScript functions
     //
     function clearTextFields() {
         playerNameTextInput.text = ""
@@ -19,54 +18,60 @@ Item {
     }
 
     Component.onCompleted: {
-        console.log("Component.onCompleted Edit Player Form Page")
+        console.log("Component.onCompleted Edit Player Form Page" +
+                    " playerName: " + playerName + ", playerColor: " + playerColor)
     }
 
-    GameHeader{
-        id:editPlayerFormHeader
+    GameHeader {
+        id: editPlayerFormHeader
     }
 
-    Rectangle{
+    Rectangle {
         id: mainArea
         color: "white"
         anchors.top: editPlayerFormHeader.bottom
         anchors.bottom: editPlayerFormFooter.top
         width: parent.width
 
-        Column{
-            id:inputColumn
+        Column {
+            id: inputColumn
             anchors.centerIn: parent
             spacing: 10
-
-            Label{
+            Label {
                 id: playerNameLabel
                 text: qsTr("Enter Player Name")
             }
-            TextField{
+            TextField {
                 id: playerNameTextInput
                 width: 300
-                height: 50
-                text: stackView.currentItem.playerName
+                height: 45
+                text: playerName
                 readOnly: true
                 onPressed: {
-                    stackView.push("EditFieldForm.qml", { textField: playerNameTextInput.text})
+                    var editFieldForm = stackView.push("EditFieldForm.qml", { textField: playerNameTextInput.text, textFieldLabel: playerNameLabel.text })
+                    editFieldForm.dataChanged.connect(function(data) {
+                        playerNameTextInput.text = data
+                    })
                 }
             }
-            Label{
+            Label {
                 id: playerColorLabel
                 text: qsTr("Enter Player Color")
             }
-            TextField{
+            TextField {
                 id: playerColorTextInput
                 width: 300
-                height: 50
-                text: stackView.currentItem.playerColor
+                height: 45
+                text: playerColor
                 readOnly: true
                 onPressed: {
-                    stackView.push("EditFieldForm.qml", { textField: playerColorTextInput.text})
+                    var editFieldForm = stackView.push("EditFieldForm.qml", { textField: playerColorTextInput.text, textFieldLabel: playerColorLabel.text })
+                    editFieldForm.dataChanged.connect(function(data) {
+                        playerColorTextInput.text = data
+                    })
                 }
             }
-            Button{
+            Button {
                 id: saveButton
                 text: qsTr("Save")
                 onClicked: {
@@ -76,13 +81,13 @@ Item {
         }
     }
 
-
-    GameFooter{
+    GameFooter {
         id: editPlayerFormFooter
         backBtn.visible: true
         backBtn.onClicked: {
             clearTextFields()
-            stackView.pop(StackView.PushTransition)
+            stackView.push("PlayerManager.qml", StackView.PushTransition)
+            console.log("stack view size: " + stackView.depth + " " + stackView.get(0))
         }
         homeBtn.onClicked: {
             clearTextFields()

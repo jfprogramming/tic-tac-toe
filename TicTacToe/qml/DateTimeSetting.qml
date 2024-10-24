@@ -1,13 +1,26 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtQuick.VirtualKeyboard 2.0
 
 Item {
+    id: dateTimeSettingItem
+    objectName: "dateTimeSettingPage"
+    property alias hour: setHourTextInput.text
+    property alias minutes: setMinutesTextInput.text
+    property alias seconds: setSecondsTextInput.text
+    signal dataChanged(string data, string field)
 
-    GameHeader{
-        id:dateTimePageHeader
+    function clearTextFields() {
+        setHourTextInput.text = ""
+        setMinutesTextInput.text = ""
+        setSecondsTextInput.text = ""
     }
 
-    Rectangle{
+    GameHeader {
+        id: dateTimePageHeader
+    }
+
+    Rectangle {
         id: mainArea
         anchors.fill: parent
         color: "white"
@@ -17,7 +30,7 @@ Item {
         anchors.bottomMargin: 50
 
         Column {
-            id:dateTimeEntryColumn
+            id: dateTimeEntryColumn
             anchors.centerIn: parent
             spacing: 10
 
@@ -25,40 +38,57 @@ Item {
                 spacing: 20
                 Column {
                     spacing: 10
-
-                    Label{
+                    Label {
                         id: setHourLabel
                         text: "set hour"
                     }
-                    TextField{
+                    TextField {
                         id: setHourTextInput
                         width: 100
                         height: 50
+                        text: hour
+                        onPressed: {
+                            var editFieldForm = stackView.push("EditFieldForm.qml", { textField: setHourTextInput.text, textFieldLabel: setHourLabel.text })
+                            editFieldForm.dataChanged.connect(function(data) {
+                                setHourTextInput.text = data
+                            })
+                        }
                     }
-
-                    Label{
+                    Label {
                         id: setMinutesLabel
                         text: "set minutes"
                     }
-                    TextField{
+                    TextField {
                         id: setMinutesTextInput
                         width: 100
                         height: 50
+                        text: minutes
+                        onPressed: {
+                            var editFieldForm = stackView.push("EditFieldForm.qml", { textField: setMinutesTextInput.text, textFieldLabel: setMinutesLabel.text })
+                            editFieldForm.dataChanged.connect(function(data) {
+                                setMinutesTextInput.text = data
+                            })
+                        }
                     }
-                    Label{
+                    Label {
                         id: setSecondsLabel
                         text: "set seconds"
                     }
-                    TextField{
+                    TextField {
                         id: setSecondsTextInput
                         width: 100
                         height: 50
+                        text: seconds
+                        onPressed: {
+                            var editFieldForm = stackView.push("EditFieldForm.qml", { textField: setSecondsTextInput.text, textFieldLabel: setSecondsLabel.text })
+                            editFieldForm.dataChanged.connect(function(data) {
+                                setSecondsTextInput.text = data
+                            })
+                        }
                     }
                 }
-
                 Column {
                     spacing: 10
-
                     Label {
                         text: "Select Date Format"
                     }
@@ -67,10 +97,8 @@ Item {
                         text: "YYYY-MM-dd"
                         checked: settingsController.getDateFormat() === "YYYY-MM-dd" ? true : false
                         onClicked: {
-                            console.log("Date format selected: YYYY-MM-dd");
-                            // Apply date format to qsettings file
-                            //
-                            settingsController.setDateFormat("YYYY-MM-dd");
+                            console.log("Date format selected: YYYY-MM-dd")
+                            settingsController.setDateFormat("YYYY-MM-dd")
                             if (!checked) {
                                 checked = true
                                 mmddyyyyBtn.checked = false
@@ -83,8 +111,8 @@ Item {
                         text: "MM-dd-YYYY"
                         checked: settingsController.getDateFormat() === "MM-dd-YYYY" ? true : false
                         onClicked: {
-                            console.log("Date format selected: MM-dd-YYYY");
-                            settingsController.setDateFormat("MM-dd-YYYY");
+                            console.log("Date format selected: MM-dd-YYYY")
+                            settingsController.setDateFormat("MM-dd-YYYY")
                             if (!checked) {
                                 checked = true
                                 yyyymmddBtn.checked = false
@@ -97,8 +125,8 @@ Item {
                         text: "dd-MM-YYYY"
                         checked: settingsController.getDateFormat() === "dd-MM-YYYY" ? true : false
                         onClicked: {
-                            console.log("Date format selected: dd-MM-YYYY");
-                            settingsController.setDateFormat("dd-MM-YYYY");
+                            console.log("Date format selected: dd-MM-YYYY")
+                            settingsController.setDateFormat("dd-MM-YYYY")
                             if (!checked) {
                                 checked = true
                                 yyyymmddBtn.checked = false
@@ -109,35 +137,25 @@ Item {
                 }
             }
 
-            Row {
-                spacing: 20
-                // Button {
-                //     text: "Load"
-                //     onClicked: {
-                //         dateTimeInput.text = settingsController.getDateTimeSettings();
-                //     }
-                // }
-
-                Button {
-                    text: "Save"
-                    onClicked: {
-                        // TODO implement save feature - set application time / set OS date time
-                        settingsController.setDateTimeSettings(dateTimeInput.text);
-
-                        console.log("save date and time... "+setHourTextInput.text+":"+setMinutesTextInput.text+":"+setSecondsTextInput.text)
-                    }
+            Button {
+                text: "Save"
+                onClicked: {
+                    settingsController.setDateFormat(dateTimeInput.text)
+                    console.log("save date and time... " + setHourTextInput.text + ":" + setMinutesTextInput.text + ":" + setSecondsTextInput.text)
                 }
             }
         }
     }
 
-    GameFooter{
+    GameFooter {
         id: dateTimePagefooter
         backBtn.visible: true
         backBtn.onClicked: {
+            clearTextFields()
             stackView.pop(StackView.PushTransition)
         }
         homeBtn.onClicked: {
+            clearTextFields()
             stackView.clear()
             stackView.push("Home.qml", StackView.PushTransition)
         }

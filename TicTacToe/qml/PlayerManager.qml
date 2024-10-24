@@ -154,7 +154,8 @@ Item {
         id: playerManagerPagefooter
         backBtn.visible: true
         backBtn.onClicked: {
-            stackView.pop(StackView.PushTransition)
+            stackView.push("AdminPage.qml", StackView.PushTransition)
+            console.log("stack view size: "+stackView.depth+" "+stackView.get(0))
         }
         homeBtn.onClicked: {
             stackView.clear()

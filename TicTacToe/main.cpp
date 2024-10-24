@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
     AboutInfo aboutInfo;
     engine.rootContext()->setContextProperty("aboutInfo", &aboutInfo);
 
-    //qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
+    qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
 
     // Setup game logic for QML
     //

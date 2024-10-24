@@ -1,18 +1,21 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtQuick.VirtualKeyboard 2.0  // Add virtual keyboard import
+import QtQuick.VirtualKeyboard 2.0
 
 Item {
-    id:editFormPageItem
+    id: editFormPageItem
     objectName: "editFieldFormPage"
 
-    // Property alias
+    // Object properties
     //
     property alias textField: fieldTextInput.text
+    property alias textFieldLabel: fieldTextLabel.text
 
-    // JavaScript Functions
+    signal dataChanged(string data)
+
+    // JavaScript functions
     //
-    function clearTextFields() {
+    function clearTextField() {
         fieldTextInput.text = ""
     }
 
@@ -23,7 +26,7 @@ Item {
     }
 
     GameHeader {
-        id:editFieldFormHeader
+        id: editFieldFormHeader
     }
 
     Rectangle {
@@ -32,13 +35,12 @@ Item {
         anchors.top: editFieldFormHeader.bottom
         anchors.bottom: editFieldFormFooter.top
         width: parent.width
-
         Label {
             id: fieldTextLabel
             text: qsTr("Enter Player Name")
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
-            anchors.topMargin: inputPanel.visible ? 50 : 200
+            anchors.topMargin: inputPanel.visible ? 50 : 100
         }
         TextField {
             id: fieldTextInput
@@ -46,18 +48,25 @@ Item {
             anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
             width: 300
-            height: 50
-            text: stackView.currentItem.playerName
+            height: 45
             onPressed: {
-                inputPanel.visible = true
-                inputPanel.active  = true
-                inputPanel.enabled = true
                 focus = true
-                //Qt.inputMethod.show()
+            }
+        }
+        Button {
+            id: okButton
+            anchors.top: fieldTextInput.bottom
+            anchors.topMargin: 20
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: "OK"
+            onClicked: {
+                dataChanged(fieldTextInput.text)
+                clearTextField()
+                stackView.pop()
             }
         }
 
-        // VirtualKeyboard
+        // Virtual Keyboard
         //
         InputPanel {
             id: inputPanel
@@ -66,12 +75,11 @@ Item {
             anchors.right: parent.right
             anchors.top: parent.bottom
             anchors.bottom: parent.bottom
-            active: false
-            visible: false
-            enabled: false
+            active: true
+            visible: true
+            enabled: true
         }
     }
-
 
     SpringAnimation {
         id: inputPanelAnimation
@@ -82,7 +90,6 @@ Item {
         duration: 300
         easing.type: Easing.InOutQuad
     }
-
 
     GameFooter {
         id: editFieldFormFooter
