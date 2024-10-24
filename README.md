@@ -4,7 +4,9 @@
 - A simple Tic Tac Toe game developed using Qt, C++/QML, CMake, and SQLite3.
 
 ## Objective
-- Create a Qt C++/QML application for a RPI4 touch screen device and all of its supporting infastructure. 
+- Create a Qt C++/QML application for a RPI4 touch screen device and all of its supporting infastructure.
+- **Purpouse**: Create a gaming device that can be played in a company office setting.
+  - Challenge another colluege to a game of Tic-Tac-Toe while you wait for your meeting to start. 
 
 ## Project Structure
 
@@ -104,6 +106,7 @@ graph TD
 ### Player Management 
 - By default the application is loaded with 10 defualt players.
 - The max players allowed is 10.
+  - No player can be deleted and no new players can be added/
 - Using the Player Manager Utility Admins can edit/configure existing and new players
 
 ## Features Incomplete
