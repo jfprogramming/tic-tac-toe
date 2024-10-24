@@ -57,7 +57,7 @@ Item {
                         height: 50
                         text: hour
                         onPressed: {
-                            var editFieldForm = stackView.push("EditFieldForm.qml", { textField: setHourTextInput.text, textFieldLabel: setHourLabel.text })
+                            var editFieldForm = stackView.push("EditFieldForm.qml", { fromDateTimeSettings: true, textField: setHourTextInput.text, textFieldLabel: setHourLabel.text })
                             editFieldForm.dataChanged.connect(function(data) {
                                 setHourTextInput.text = data
                             })
@@ -73,7 +73,7 @@ Item {
                         height: 50
                         text: minutes
                         onPressed: {
-                            var editFieldForm = stackView.push("EditFieldForm.qml", { textField: setMinutesTextInput.text, textFieldLabel: setMinutesLabel.text })
+                            var editFieldForm = stackView.push("EditFieldForm.qml", { fromDateTimeSettings: true, textField: setMinutesTextInput.text, textFieldLabel: setMinutesLabel.text })
                             editFieldForm.dataChanged.connect(function(data) {
                                 setMinutesTextInput.text = data
                             })
@@ -89,7 +89,7 @@ Item {
                         height: 50
                         text: seconds
                         onPressed: {
-                            var editFieldForm = stackView.push("EditFieldForm.qml", { textField: setSecondsTextInput.text, textFieldLabel: setSecondsLabel.text })
+                            var editFieldForm = stackView.push("EditFieldForm.qml", { fromDateTimeSettings: true, textField: setSecondsTextInput.text, textFieldLabel: setSecondsLabel.text })
                             editFieldForm.dataChanged.connect(function(data) {
                                 setSecondsTextInput.text = data
                             })

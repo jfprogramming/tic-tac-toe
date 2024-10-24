@@ -1,15 +1,17 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.VirtualKeyboard 2.0
+import QtQuick.Layouts
 
 Item {
     id: editFormPageItem
     objectName: "editFieldFormPage"
 
-    // Object properties
+    // Object Properties
     //
     property alias textField: fieldTextInput.text
     property alias textFieldLabel: fieldTextLabel.text
+    property bool fromDateTimeSettings: false
 
     signal dataChanged(string data)
 
@@ -35,6 +37,7 @@ Item {
         anchors.top: editFieldFormHeader.bottom
         anchors.bottom: editFieldFormFooter.top
         width: parent.width
+
         Label {
             id: fieldTextLabel
             text: qsTr("Enter Player Name")
@@ -42,6 +45,7 @@ Item {
             anchors.top: parent.top
             anchors.topMargin: inputPanel.visible ? 50 : 100
         }
+
         TextField {
             id: fieldTextInput
             anchors.top: fieldTextLabel.bottom
@@ -51,8 +55,14 @@ Item {
             height: 45
             onPressed: {
                 focus = true
+                if (fromDateTimeSettings) {
+                    keypad.visible = true
+                } else {
+                    inputPanel.visible = true
+                }
             }
         }
+
         Button {
             id: okButton
             anchors.top: fieldTextInput.bottom
@@ -75,9 +85,57 @@ Item {
             anchors.right: parent.right
             anchors.top: parent.bottom
             anchors.bottom: parent.bottom
-            active: true
-            visible: true
-            enabled: true
+            visible: false
+        }
+
+        // Custom Keypad
+        //
+        Rectangle {
+            id: keypad
+            color: "lightgrey"
+            width: parent.width
+            height: 200
+            anchors.bottom: parent.bottom
+            visible: false
+
+            GridLayout {
+                anchors.centerIn: parent
+                columns: 3
+                rowSpacing: 5
+
+                Repeater {
+                    model: ListModel {
+                        ListElement { value: "1" }
+                        ListElement { value: "2" }
+                        ListElement { value: "3" }
+                        ListElement { value: "4" }
+                        ListElement { value: "5" }
+                        ListElement { value: "6" }
+                        ListElement { value: "7" }
+                        ListElement { value: "8" }
+                        ListElement { value: "9" }
+                        ListElement { value: "0" }
+                        ListElement { value: "C" }
+                        ListElement { value: "OK" }
+                    }
+                    delegate: Button {
+                        text: model.value
+                        width: 80
+                        height: 80
+                        onClicked: {
+                            if (text === "C") {
+                                fieldTextInput.text = ""
+                            } else if (text === "OK") {
+                                dataChanged(fieldTextInput.text)
+                                keypad.visible = false
+                                stackView.pop()
+                            } else {
+                                fieldTextInput.text += text
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -95,11 +153,11 @@ Item {
         id: editFieldFormFooter
         backBtn.visible: true
         backBtn.onClicked: {
-            clearTextFields()
+            clearTextField()
             stackView.pop(StackView.PushTransition)
         }
         homeBtn.onClicked: {
-            clearTextFields()
+            clearTextField()
             stackView.clear()
             stackView.push("Home.qml", StackView.PushTransition)
         }

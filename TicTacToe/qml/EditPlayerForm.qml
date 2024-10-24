@@ -49,7 +49,7 @@ Item {
                 text: playerName
                 readOnly: true
                 onPressed: {
-                    var editFieldForm = stackView.push("EditFieldForm.qml", { textField: playerNameTextInput.text, textFieldLabel: playerNameLabel.text })
+                    var editFieldForm = stackView.push("EditFieldForm.qml", { fromDateTimeSettings: false, textField: playerNameTextInput.text, textFieldLabel: playerNameLabel.text })
                     editFieldForm.dataChanged.connect(function(data) {
                         playerNameTextInput.text = data
                     })
@@ -66,7 +66,7 @@ Item {
                 text: playerColor
                 readOnly: true
                 onPressed: {
-                    var editFieldForm = stackView.push("EditFieldForm.qml", { textField: playerColorTextInput.text, textFieldLabel: playerColorLabel.text })
+                    var editFieldForm = stackView.push("EditFieldForm.qml", { fromDateTimeSettings: false, textField: playerColorTextInput.text, textFieldLabel: playerColorLabel.text })
                     editFieldForm.dataChanged.connect(function(data) {
                         playerColorTextInput.text = data
                     })
