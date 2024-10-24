@@ -18,6 +18,8 @@ Item {
 
     Component.onCompleted: {
         console.log("Component.onCompleted Edit Field Form Page")
+        fieldTextInput.focus = true
+        console.log("fieldTextInput.focus: " + fieldTextInput.focus)
     }
 
     GameHeader {
@@ -27,10 +29,9 @@ Item {
     Rectangle {
         id: mainArea
         color: "white"
-        anchors.left: parent.left
-        anchors.right: parent.right
         anchors.top: editFieldFormHeader.bottom
         anchors.bottom: editFieldFormFooter.top
+        width: parent.width
 
         Label {
             id: fieldTextLabel
@@ -48,9 +49,11 @@ Item {
             height: 50
             text: stackView.currentItem.playerName
             onPressed: {
-                // Show the virtual keyboard
-                //
                 inputPanel.visible = true
+                inputPanel.active  = true
+                inputPanel.enabled = true
+                focus = true
+                //Qt.inputMethod.show()
             }
         }
 
@@ -63,9 +66,9 @@ Item {
             anchors.right: parent.right
             anchors.top: parent.bottom
             anchors.bottom: parent.bottom
-            active: true
+            active: false
             visible: false
-            enabled: true
+            enabled: false
         }
     }
 

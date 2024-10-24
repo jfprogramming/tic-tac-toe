@@ -29,10 +29,9 @@ Item {
     Rectangle{
         id: mainArea
         color: "white"
-        anchors.left: parent.left
-        anchors.right: parent.right
         anchors.top: editPlayerFormHeader.bottom
         anchors.bottom: editPlayerFormFooter.top
+        width: parent.width
 
         Column{
             id:inputColumn
@@ -48,6 +47,7 @@ Item {
                 width: 300
                 height: 50
                 text: stackView.currentItem.playerName
+                readOnly: true
                 onPressed: {
                     stackView.push("EditFieldForm.qml", { textField: playerNameTextInput.text})
                 }
@@ -61,6 +61,7 @@ Item {
                 width: 300
                 height: 50
                 text: stackView.currentItem.playerColor
+                readOnly: true
                 onPressed: {
                     stackView.push("EditFieldForm.qml", { textField: playerColorTextInput.text})
                 }

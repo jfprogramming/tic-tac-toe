@@ -12,7 +12,7 @@ set(Qt6_DIR /opt/Qt/6.7.2/gcc_64/)
 
 # Include Qt libraries
 # find_package(Qt6 6.7 REQUIRED COMPONENTS Quick Test Sql)
-find_package(Qt6 6.7 REQUIRED COMPONENTS Quick Test Sql Network QuickControls2 HINTS /opt/Qt/6.7.2/gcc_64/lib/cmake)
+find_package(Qt6 6.7 REQUIRED COMPONENTS Quick Test Sql Network QuickControls2 VirtualKeyboard HINTS /opt/Qt/6.7.2/gcc_64/lib/cmake)
 
 set(CMAKE_AUTORCC ON)
 
@@ -79,7 +79,7 @@ set_target_properties(appTicTacToe PROPERTIES
 
 # Link Qt libraries
 target_link_libraries(appTicTacToe
-    PRIVATE Qt6::Quick Qt6::Sql Qt6::Network Qt6::QuickControls2
+    PRIVATE Qt6::Quick Qt6::Sql Qt6::Network Qt6::QuickControls2 Qt6::VirtualKeyboard
     PRIVATE crypt crypto
 )
 
