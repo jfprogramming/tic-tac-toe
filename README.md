@@ -1,10 +1,10 @@
 # Tic-Tac-Toe
 
 ## About
-A simple Tic Tac Toe game developed using Qt, C++/QML, CMake, and SQLite3.
+- A simple Tic Tac Toe game developed using Qt, C++/QML, CMake, and SQLite3.
 
 ## Objective
-Create a Qt C++/QML application for a RPI4 touch screen device and all of its supporting infastructure. 
+- Create a Qt C++/QML application for a RPI4 touch screen device and all of its supporting infastructure. 
 
 ## Project Structure
 
