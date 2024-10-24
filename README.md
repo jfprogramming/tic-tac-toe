@@ -39,7 +39,7 @@ tic-tac-toe
 - Open the TicTacToe project in Qt Creator, set up the compiler, and build and run the project.
 
 ## Screen/Page Layout
-```mermiad
+```mermaid
 graph TD
     A[Home Screen] --> B[1 Player Mode Selected]
     A --> C[2 Player Mode Selected]
@@ -65,7 +65,6 @@ graph TD
     D --> F[Score Kept in Header]
     F --> G[Win Popup Displays Winner]
     G --> H[Game Board Resets]
-
     A --> I[Selecting 2 Player Mode]
     I --> J[First Player Selects Player]
     J --> K[Popup: Player 2 Selects Player]
@@ -73,11 +72,10 @@ graph TD
     L --> M[Game Board Displays]
     M --> N[Player 1 Marks First X]
     N --> O[Popup: Player 2 Turn]
-    M --> P[Score Kept in Header]
-    P --> Q[Win Popup Displays Winner]
-    Q --> R[Game Board Resets]
-    P --> S[Cats Cradle/Tie Popup]
-    S --> T[Game Board Resets]
+    O --> P[Win Popup Displays Winner]
+    P --> Q[Game Board Resets]
+    Q --> R[Cats Cradle/Tie Popup]
+    R --> S[Game Board Resets]
 ```
 
 - **Screen Navigation Buttons** (located in the footer of the application)
