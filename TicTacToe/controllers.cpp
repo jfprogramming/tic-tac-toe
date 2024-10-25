@@ -7,6 +7,8 @@
 namespace Controllers
 {
     DatabaseManager dbManager(&Threads::dbManagerThread);
+    SystemSettings  sysSettings(&Threads::sysSettingsThread);
+    GameLogic       gameLogic(&Threads::gameLogicThread);
 }
 
 /**
@@ -16,4 +18,6 @@ namespace Controllers
 namespace Threads
 {
     QThread dbManagerThread;
+    QThread sysSettingsThread;
+    QThread gameLogicThread;
 }

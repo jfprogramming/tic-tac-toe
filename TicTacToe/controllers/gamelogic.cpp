@@ -8,7 +8,7 @@
  * \brief Constructor for GameLogic.
  * \param parent The parent QObject.
  */
-GameLogic::GameLogic(QObject *parent)
+GameLogic::GameLogic(QThread* home, QObject* parent)
     : QObject{parent}, m_currentPlayer{0}, m_playerWon{false}, m_catsCradle{false}, m_gameType{""}
 {
     qDebug() << __FUNCTION__ << "GameLogic constructor";

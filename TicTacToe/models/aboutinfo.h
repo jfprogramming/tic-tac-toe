@@ -17,8 +17,8 @@ class AboutInfo : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString   appName         READ getAppName         NOTIFY dataChanged)
-    Q_PROPERTY(QString   softwareVersion READ getSoftwareVersion NOTIFY dataChanged)
+    Q_PROPERTY(QString appName         READ getAppName         NOTIFY dataChanged)
+    Q_PROPERTY(QString softwareVersion READ getSoftwareVersion NOTIFY dataChanged)
     Q_PROPERTY(QString dateTime        READ getDateTime        NOTIFY dataChanged)
 
 public:

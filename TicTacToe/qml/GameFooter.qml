@@ -11,17 +11,17 @@ Rectangle{
     width: parent.width
     color: "#0078D4"
 
-    property alias homeBtn: homeButton
+    property alias homeBtn:    homeButton
     property alias homeBtnTxt: homeButton.text
-    property alias homeIcon: homeButton.icon.source
+    property alias homeIcon:   homeButton.icon.source
 
-    property alias resetBtn: resetButton
+    property alias resetBtn:    resetButton
     property alias resetBtnTxt: resetButton.text
-    property alias resetIcon: resetButton.icon.source
+    property alias resetIcon:   resetButton.icon.source
 
-    property alias backBtn: backButton
+    property alias backBtn:    backButton
     property alias backBtnTxt: backButton.text
-    property alias backIcon: backButton.icon.source
+    property alias backIcon:   backButton.icon.source
 
     Component.onCompleted: {
         console.log("Component.onCompleted footer")

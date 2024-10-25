@@ -9,7 +9,7 @@ Rectangle {
     anchors.top: parent.top
     height: 50
     width: parent.width
-    color: "#0078D4" // Matching icon color
+    color: "#0078D4"
 
     // Object Properties
     //
@@ -30,7 +30,7 @@ Rectangle {
 
     function updateDateTime() {
         dateTimeText.text = Qt.formatDateTime(new Date(), "yyyy-MM-dd hh:mm:ss");
-        console.log("dateTimeText: "+dateTimeText.text)
+        //console.log("dateTimeText: "+dateTimeText.text)
     }
 
     Timer {
@@ -60,7 +60,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             font.bold: true
             font.pointSize: 20
-            color: "white" // Consistent text color
+            color: "white"
         }
     }
 
@@ -82,7 +82,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             font.bold: true
             font.pointSize: 11
-            color: "#0078D4" // Matching text color
+            color: "#0078D4"
         }
         Rectangle {
             id: scoreTitle
@@ -100,7 +100,7 @@ Rectangle {
                 anchors.margins: 5
                 font.bold: true
                 font.pointSize: 9
-                color: "#0078D4" // Matching text color
+                color: "#0078D4"
             }
         }
     }
@@ -116,7 +116,7 @@ Rectangle {
             text: ""
             anchors.centerIn: parent
             font.pointSize: 12
-            color: "white" // Consistent text color
+            color: "white"
         }
     }
 }

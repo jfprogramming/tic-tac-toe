@@ -6,7 +6,7 @@ Item {
     id: playerSelectionItem
     objectName: "playerSelectionPage"
 
-    property string gameMode: ""
+    property string gameMode:         ""
     property bool   player1Selection: true
     property bool   player2Selection: false
 

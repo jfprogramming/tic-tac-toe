@@ -7,7 +7,7 @@
  * \param parent The parent QObject, default is nullptr.
  * \return SystemSettings* The new SystemSettings object.
  */
-SystemSettings::SystemSettings(QObject *parent)
+SystemSettings::SystemSettings(QThread* home, QObject* parent)
     : QObject(parent), m_settingsFile(m_settingsFilePath, QSettings::IniFormat)
 {
     qDebug() << "Settings file path:" << m_settingsFilePath;

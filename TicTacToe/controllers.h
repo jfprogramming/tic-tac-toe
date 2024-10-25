@@ -1,6 +1,8 @@
 #pragma once
 #include <QThread>
 #include "controllers/databasemanager.h"
+#include "controllers/gamelogic.h"
+#include "controllers/systemsettings.h"
 
 /**
  * \file controllers.h
@@ -14,6 +16,8 @@ namespace Controllers
     // External declaration of the DatabaseManager instance.
     //
     extern DatabaseManager dbManager;
+    extern SystemSettings  sysSettings;
+    extern GameLogic       gameLogic;
 }
 
 namespace Threads
@@ -21,4 +25,7 @@ namespace Threads
     // External declaration of the QThread instance for the database manager.
     //
     extern QThread dbManagerThread;
+    extern QThread sysSettingsThread;
+    extern QThread gameLogicThread;
+
 }

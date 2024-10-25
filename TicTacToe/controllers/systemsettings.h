@@ -9,7 +9,7 @@ class SystemSettings : public QObject
 {
     Q_OBJECT
 public:
-    explicit SystemSettings(QObject *parent = nullptr);
+    explicit SystemSettings(QThread* home = NULL, QObject *parent = NULL);
     ~SystemSettings();
 
     QString getAppName() const;
@@ -32,8 +32,8 @@ public:
     Q_INVOKABLE void setDateTime(const QDateTime &dateTime);
 
 private:
-    QString m_settingsFilePath="/data/config/settings.ini";
+    QString   m_settingsFilePath="/data/config/settings.ini";
     QSettings m_settingsFile;
-    QString m_dateFormate;
+    QString   m_dateFormate;
 
 };

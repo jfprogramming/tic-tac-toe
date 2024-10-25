@@ -23,9 +23,13 @@ class GamePlayModel : public QObject
 {
     Q_OBJECT
 
+    // Player 1 Properties
+    //
     Q_PROPERTY(QString player1Name  READ getPlayer1Name  NOTIFY player1NameChanged)
     Q_PROPERTY(QString player1Color READ getPlayer1Color NOTIFY player1ColorChanged)
 
+    // Player 2 Properties
+    //
     Q_PROPERTY(QString player2Name  READ getPlayer2Name  NOTIFY player2NameChanged)
     Q_PROPERTY(QString player2Color READ getPlayer2Color NOTIFY player2ColorChanged)
 

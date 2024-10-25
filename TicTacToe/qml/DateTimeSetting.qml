@@ -8,7 +8,7 @@ Item {
 
     // Object Properties
     //
-    property alias hour: setHourTextInput.text
+    property alias hour:    setHourTextInput.text
     property alias minutes: setMinutesTextInput.text
     property alias seconds: setSecondsTextInput.text
 
@@ -17,7 +17,7 @@ Item {
     // JavaScript functions
     //
     function clearTextFields() {
-        setHourTextInput.text = ""
+        setHourTextInput.text    = ""
         setMinutesTextInput.text = ""
         setSecondsTextInput.text = ""
     }

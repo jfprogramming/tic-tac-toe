@@ -7,14 +7,14 @@ Item {
 
     // Object Properties
     //
-    property alias playerName: playerNameTextInput.text
+    property alias playerName:  playerNameTextInput.text
     property alias playerColor: playerColorTextInput.text
-    property int playerIndex: -1
+    property int playerIndex:   -1
 
     // JavaScript functions
     //
     function clearTextFields() {
-        playerNameTextInput.text = ""
+        playerNameTextInput.text  = ""
         playerColorTextInput.text = ""
     }
 

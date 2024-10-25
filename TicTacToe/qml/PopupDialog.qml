@@ -14,8 +14,8 @@ Dialog {
 
     // Expose properties to other QML files
     //
-    property alias popupMsgtxt: popupMsgText.text
-    property alias popupMsgColor: popupMsgRect.color
+    property alias popupMsgtxt:        popupMsgText.text
+    property alias popupMsgColor:      popupMsgRect.color
     property alias popupMsgtxtVisible: popupMsgText.visible
 
     Component.onCompleted: {

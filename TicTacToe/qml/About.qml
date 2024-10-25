@@ -29,9 +29,9 @@ Item {
             id: aboutInfoListView
             anchors.fill: parent
             model: ListModel {
-                ListElement { key: "App Name"; value: ""}
+                ListElement { key: "App Name";         value: ""}
                 ListElement { key: "Software Version"; value: ""}
-                ListElement { key: "Date and Time"; value: ""}
+                ListElement { key: "Date and Time";    value: ""}
             }
             header: Rectangle {
                 width: aboutInfoListView.width

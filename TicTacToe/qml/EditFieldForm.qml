@@ -9,8 +9,8 @@ Item {
 
     // Object Properties
     //
-    property alias textField: fieldTextInput.text
-    property alias textFieldLabel: fieldTextLabel.text
+    property alias textField:           fieldTextInput.text
+    property alias textFieldLabel:      fieldTextLabel.text
     property bool fromDateTimeSettings: false
 
     signal dataChanged(string data)
@@ -23,6 +23,7 @@ Item {
 
     Component.onCompleted: {
         console.log("Component.onCompleted editFieldFormPage")
+
         fieldTextInput.focus = true
         console.log("fieldTextInput.focus: " + fieldTextInput.focus)
     }

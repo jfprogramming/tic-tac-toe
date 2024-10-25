@@ -9,10 +9,10 @@
 //
 struct AdminPlayer
 {
-    int id;
+    int     id;
     QString name;
     QString color;
-    int highScore;
+    int     highScore;
 };
 
 

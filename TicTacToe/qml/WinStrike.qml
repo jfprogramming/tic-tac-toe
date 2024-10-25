@@ -15,8 +15,8 @@ Item {
     property alias winStrike8: win8.visible
 
     property bool horizontalWin: false
-    property bool verticalWin: false
-    property bool diagonalWin: false
+    property bool verticalWin:   false
+    property bool diagonalWin:   false
 
     // JavaScript functions
     //
