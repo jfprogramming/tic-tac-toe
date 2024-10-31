@@ -31,7 +31,7 @@ qt_add_qml_module(appTicTacToe
         controllers/gamelogic.h
         controllers/gamelogic.cpp
         controllers/databasemanager.h
-        controllers/databasemanager.cpp        
+        controllers/databasemanager.cpp
         controllers/systemsettings.h
         controllers/systemsettings.cpp
         models/gameplaymodel.h
@@ -119,13 +119,13 @@ add_test(NAME GoogleTests COMMAND GoogleTests)
 
 # Add QTest files
 set(QTEST_SOURCES
-    ${CMAKE_SOURCE_DIR}/qtests/qtest_1_main.cpp
     # Add other test files here
+    ${CMAKE_SOURCE_DIR}/qtests/test_databasemanager.cpp
+    ${CMAKE_SOURCE_DIR}/qtests/test_databasemanager.h
 )
 
 # Add QTest executable
-add_executable(QTests ${QTEST_SOURCES}
-    qtests/test_databasemanager.h qtests/test_databasemanager.cpp)
+add_executable(QTests ${QTEST_SOURCES})
 
 # Link QTest library
 target_link_libraries(QTests Qt6::Test)
