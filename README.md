@@ -6,7 +6,7 @@
 ## Objective
 - Create a Qt C++/QML application for a RPI4 touch screen device and all of its supporting infastructure.
 - **Purpouse**: Create a gaming device that can be played in a company office setting.
-  - Challenge another colluege to a game of Tic-Tac-Toe while you wait for your meeting to start. 
+  - Challenge another colleague to a game of Tic-Tac-Toe while you wait for your meeting to start. 
 
 ## Project Structure
 
