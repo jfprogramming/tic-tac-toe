@@ -1,6 +1,6 @@
-
 #include "test_databasemanager.h"
 #include "../controllers/databasemanager.h"
+
 
 void TestDatabaseManager::initTestCase()
 {
@@ -52,7 +52,7 @@ void TestDatabaseManager::testGetPlayerIdByName()
     QThread thread;
     DatabaseManager dbManager(&thread);
     dbManager.initializeDatabase();
-    int playerId = dbManager.getPlayerIdByName("PlayerName");
+    int playerId = dbManager.getPlayerIdByName("Player1");
     QVERIFY(playerId != -1); // Assuming -1 indicates an invalid ID
 }
 

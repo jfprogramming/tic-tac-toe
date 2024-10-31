@@ -389,6 +389,32 @@ QList<QPair<QString, int>> DatabaseManager::getHighScoreList() {
 
 
 /**
+ * \fn     DatabaseManager::getPlayerIdByName
+ * \brief  Retrieves the player ID by their name.
+ * \param  name The player's name.
+ * \return The player ID as an integer.
+ */
+int DatabaseManager::getPlayerIdByName(const QString &name)
+{
+    qDebug() << __FUNCTION__ << "Fetching player ID for name:" << name;
+
+    QSqlQuery query;
+    query.prepare("SELECT playerId FROM PlayerTable WHERE playerName = :playerName");
+    query.bindValue(":playerName", name);
+
+    if (query.exec() && query.next())
+    {
+        return query.value(0).toInt();
+    }
+    else
+    {
+        qWarning() << "Failed to fetch player ID:" << query.lastError();
+        return -1; // Assuming -1 indicates an invalid ID
+    }
+}
+
+
+/**
  * \fn      DatabaseManager::getHighScoreForPlayer
  * \brief   Gets a high score asscoated with a player
  * \param   int playerId

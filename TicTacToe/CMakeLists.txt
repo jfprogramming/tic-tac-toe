@@ -143,7 +143,7 @@ set(QTEST_SOURCES
 add_executable(QTests ${QTEST_SOURCES})
 
 # Link QTest library
-target_link_libraries(QTests Qt6::Test Qt6::Sql)
+target_link_libraries(QTests Qt6::Test Qt6::Sql crypt crypto)
 
 # Add QTest to CTest
 add_test(NAME QTests COMMAND QTests)
