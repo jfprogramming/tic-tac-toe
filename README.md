@@ -127,9 +127,10 @@ Below is a list of features not yet complete:
 ## TODO
 - **TODO List**
   - Inprogress: Player Management for Admin User.
-  - Inprogress: date/time settings for Admin User.
-  - Inprogress: integrating QSettings File. 
-  - Improve: threading with QMutex locking.
+  - Inprogress: date/time settings for Admin User. 
+  - Inprogress: threading with QMutex locking.
+  - Inprogress: Player tracking High score.
+  - Bug: Player Assocation when adding to high score. 
   - Improve: class design by implementing common base class.
   - Improve: Object Oriented design by implementing smart pointers.
   - Implement: Export high score list feature.
