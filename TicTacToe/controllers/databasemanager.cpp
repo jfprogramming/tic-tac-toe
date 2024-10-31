@@ -4,8 +4,8 @@
 #include <QDebug>
 #include <QDateTime>
 #include "databasemanager.h"
-#include "cryptclass.h"
-#include "models/adminplayermodel.h"
+#include "../cryptclass.h"
+#include "../models/adminplayermodel.h"
 
 /**
 *  \fn    DatabaseManager::DatabaseManager

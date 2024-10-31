@@ -127,13 +127,23 @@ set(QTEST_SOURCES
     ${CMAKE_SOURCE_DIR}/qtests/test_systemsettings.cpp
     ${CMAKE_SOURCE_DIR}/qtests/test_gamelogic.h
     ${CMAKE_SOURCE_DIR}/qtests/test_gamelogic.cpp
+    # Controller Classes
+    ${CMAKE_SOURCE_DIR}/cryptclass.cpp
+    ${CMAKE_SOURCE_DIR}/cryptclass.h
+    ${CMAKE_SOURCE_DIR}/controllers.cpp
+    ${CMAKE_SOURCE_DIR}/controllers/databasemanager.cpp
+    ${CMAKE_SOURCE_DIR}/controllers/databasemanager.h
+    ${CMAKE_SOURCE_DIR}/controllers/systemsettings.cpp
+    ${CMAKE_SOURCE_DIR}/controllers/systemsettings.h
+    ${CMAKE_SOURCE_DIR}/controllers/gamelogic.cpp
+    ${CMAKE_SOURCE_DIR}/controllers/gamelogic.h
 )
 
 # Add QTest executable
 add_executable(QTests ${QTEST_SOURCES})
 
 # Link QTest library
-target_link_libraries(QTests Qt6::Test)
+target_link_libraries(QTests Qt6::Test Qt6::Sql)
 
 # Add QTest to CTest
 add_test(NAME QTests COMMAND QTests)

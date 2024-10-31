@@ -4,7 +4,8 @@
 
 void TestDatabaseManager::initTestCase()
 {
-    //DatabaseManager dbManager;
+    //QThread thread;
+    //DatabaseManager dbManager(&thread);;
     //dbManager.closeDatabase();
 }
 
@@ -15,7 +16,8 @@ void TestDatabaseManager::cleanupTestCase()
 
 void TestDatabaseManager::init()
 {
-    //DatabaseManager dbManager;
+    //QThread thread;
+    //DatabaseManager dbManager(&thread);
     //dbManager.initializeDatabase();
 }
 
@@ -27,14 +29,16 @@ void TestDatabaseManager::cleanup()
 
 void TestDatabaseManager::testInitializeDatabase()
 {
-    DatabaseManager dbManager;
+    QThread thread;
+    DatabaseManager dbManager(&thread);
     QVERIFY(dbManager.initializeDatabase() == true);
 }
 
 
 void TestDatabaseManager::testCloseDatabase()
 {
-    DatabaseManager dbManager;
+    QThread thread;
+    DatabaseManager dbManager(&thread);
     dbManager.initializeDatabase();
     dbManager.closeDatabase();
     QVERIFY(dbManager.isDatabaseOpen() == false);
@@ -45,7 +49,8 @@ void TestDatabaseManager::testCloseDatabase()
 
 void TestDatabaseManager::testGetPlayerIdByName()
 {
-    DatabaseManager dbManager;
+    QThread thread;
+    DatabaseManager dbManager(&thread);
     dbManager.initializeDatabase();
     int playerId = dbManager.getPlayerIdByName("PlayerName");
     QVERIFY(playerId != -1); // Assuming -1 indicates an invalid ID
@@ -53,7 +58,8 @@ void TestDatabaseManager::testGetPlayerIdByName()
 
 void TestDatabaseManager::testGetHighScoreForPlayer()
 {
-    DatabaseManager dbManager;
+    QThread thread;
+    DatabaseManager dbManager(&thread);
     dbManager.initializeDatabase();
     int highScore = dbManager.getHighScoreForPlayer(1); // Assuming player ID 1 exists
     QVERIFY(highScore >= 0); // Verify that the high score is a non-negative value
