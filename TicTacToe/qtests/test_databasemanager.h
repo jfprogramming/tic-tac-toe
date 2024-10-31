@@ -2,6 +2,7 @@
 
 #include <QObject>
 #include <QtTest/QtTest>
+#include "../controllers/databasemanager.h/"
 
 class TestDatabaseManager : public QObject
 {
@@ -17,7 +18,7 @@ private slots:
     void testInitializeDatabase();
     void testCloseDatabase();
     void testGetPlayerIdByName();
-    //void testGetHighScoreForPlayer();
+    void testGetHighScoreForPlayer();
     //void testUpdatePlayer();
     //void testRetrievePlayerName();
     //void testRetrievePlayerColor();

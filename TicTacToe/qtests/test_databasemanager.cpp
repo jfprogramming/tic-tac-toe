@@ -1,10 +1,9 @@
 #include "test_databasemanager.h"
-//#include "../controllers/databasemanager.h/
-#include "../controllers.h"
 
 void TestDatabaseManager::initTestCase()
 {
-    // Code to set up the test environment before any test functions are executed
+    //DatabaseManager dbManager;
+    //dbManager.closeDatabase();
 }
 
 void TestDatabaseManager::cleanupTestCase()
@@ -14,46 +13,48 @@ void TestDatabaseManager::cleanupTestCase()
 
 void TestDatabaseManager::init()
 {
-    // Code to set up before each test function
+    //DatabaseManager dbManager;
+    //dbManager.initializeDatabase();
 }
 
 void TestDatabaseManager::cleanup()
 {
-    // Code to clean up after each test function
+    // Code to clean up after each test function if needed
 }
 
-// Test cases for each public method in DatabaseManager
+
 void TestDatabaseManager::testInitializeDatabase()
 {
-    //DatabaseManager dbManager;
-    //QVERIFY(dbManager.initializeDatabase() == true);
-    QVERIFY(Controllers::dbManager.initializeDatabase() == true);
+    DatabaseManager dbManager;
+    QVERIFY(dbManager.initializeDatabase() == true);
 }
 
-// Similarly, implement other test cases
+
 void TestDatabaseManager::testCloseDatabase()
 {
-    //DatabaseManager dbManager;
-    //dbManager.initializeDatabase();
-    //dbManager.closeDatabase();
-
-    Controllers::dbManager.initializeDatabase();
-    Controllers::dbManager.closeDatabase();
-    QVERIFY(Controllers::dbManager.isDatabaseOpen() == false);
+    DatabaseManager dbManager;
+    dbManager.initializeDatabase();
+    dbManager.closeDatabase();
+    QVERIFY(dbManager.isDatabaseOpen() == false);
 
     // Add assertions to verify the state after closing the database
 }
 
+
 void TestDatabaseManager::testGetPlayerIdByName()
 {
-    //DatabaseManager dbManager;
-    //dbManager.initializeDatabase();
-    //int playerId = dbManager.getPlayerIdByName("PlayerName");
-    //QVERIFY(playerId != -1); // Assuming -1 indicates an invalid ID
-
-    Controllers::dbManager.initializeDatabase();
-    int playerId = Controllers::dbManager.getPlayerIdByName("Player1");
+    DatabaseManager dbManager;
+    dbManager.initializeDatabase();
+    int playerId = dbManager.getPlayerIdByName("PlayerName");
     QVERIFY(playerId != -1); // Assuming -1 indicates an invalid ID
+}
+
+void TestDatabaseManager::testGetHighScoreForPlayer()
+{
+    DatabaseManager dbManager;
+    dbManager.initializeDatabase();
+    int highScore = dbManager.getHighScoreForPlayer(1); // Assuming player ID 1 exists
+    QVERIFY(highScore >= 0); // Verify that the high score is a non-negative value
 }
 
 #include "test_databasemanager.moc"
