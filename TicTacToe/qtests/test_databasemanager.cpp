@@ -1,5 +1,6 @@
 #include "test_databasemanager.h"
-//#include "../controllers/databasemanager.h"
+//#include "../controllers/databasemanager.h/
+#include "../controllers.h"
 
 void TestDatabaseManager::initTestCase()
 {
@@ -26,6 +27,7 @@ void TestDatabaseManager::testInitializeDatabase()
 {
     //DatabaseManager dbManager;
     //QVERIFY(dbManager.initializeDatabase() == true);
+    QVERIFY(Controllers::dbManager.initializeDatabase() == true);
 }
 
 // Similarly, implement other test cases
@@ -34,6 +36,11 @@ void TestDatabaseManager::testCloseDatabase()
     //DatabaseManager dbManager;
     //dbManager.initializeDatabase();
     //dbManager.closeDatabase();
+
+    Controllers::dbManager.initializeDatabase();
+    Controllers::dbManager.closeDatabase();
+    QVERIFY(Controllers::dbManager.isDatabaseOpen() == false);
+
     // Add assertions to verify the state after closing the database
 }
 
@@ -43,9 +50,10 @@ void TestDatabaseManager::testGetPlayerIdByName()
     //dbManager.initializeDatabase();
     //int playerId = dbManager.getPlayerIdByName("PlayerName");
     //QVERIFY(playerId != -1); // Assuming -1 indicates an invalid ID
+
+    Controllers::dbManager.initializeDatabase();
+    int playerId = Controllers::dbManager.getPlayerIdByName("Player1");
+    QVERIFY(playerId != -1); // Assuming -1 indicates an invalid ID
 }
 
-// Implement other test cases similarly...
-
-QTEST_MAIN(TestDatabaseManager)
 #include "test_databasemanager.moc"

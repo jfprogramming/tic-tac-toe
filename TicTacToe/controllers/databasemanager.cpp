@@ -77,6 +77,17 @@ void DatabaseManager::closeDatabase()
 
 
 /**
+ * \fn    DatabaseManager::isDatabaseOpen
+ * \brief Check if the database is open.
+ * \return void
+ */
+bool DatabaseManager::isDatabaseOpen()
+{
+    return QSqlDatabase::database().isOpen();
+}
+
+
+/**
  * \fn     DatabaseManager::getAdminUsername
  * \brief  Retrieves the admin username from the database.
  * \return The admin username as a QString.

@@ -23,6 +23,7 @@ public:
 
     bool initializeDatabase();
     void closeDatabase();
+    bool isDatabaseOpen();
 
     // High Score Mngt
     //
