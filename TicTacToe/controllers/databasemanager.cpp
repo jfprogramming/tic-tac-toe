@@ -7,6 +7,8 @@
 #include "cryptclass.h"
 #include "models/adminplayermodel.h"
 
+#define DEBUG
+
 /**
 *  \fn    DatabaseManager::DatabaseManager
  * \brief Constructor for DatabaseManager.
@@ -414,7 +416,14 @@ QList<QPair<QString, int>> DatabaseManager::getHighScoreList() {
         highScores.append(qMakePair(playerName, highScore));
     }
 
-    qInfo() << "Highscore list:" << highScores;
+#ifdef DEBUG
+    // Print the list of high scores
+    //
+    for (int i = 0; i < highScores.size(); i++) {
+        qDebug() << "Player Name:" << highScores.at(i).first << " High Score:" << highScores.at(i).second;
+    }
+#endif
+
     return highScores;
 }
 

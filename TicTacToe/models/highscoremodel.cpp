@@ -2,6 +2,7 @@
 #include "controllers.h"
 #include "controllers/databasemanager.h"
 
+//#define DEBUG
 
 /**
  * \brief Constructor for HighscoreModel.
@@ -9,8 +10,9 @@
  */
 HighscoreModel::HighscoreModel(QObject *parent) : QAbstractListModel{parent}
 {
+    qDebug() << __FUNCTION__ << "HighscoreModel constructor";
+
     QList<QPair<QString, int>> fetchedHighScores = Controllers::dbManager.getHighScoreList();
-    qDebug() << "Fetched High Scores:" << fetchedHighScores;
     setHighScoreList(fetchedHighScores);
 }
 
@@ -28,7 +30,6 @@ void HighscoreModel::setHighScoreList(const QList<QPair<QString, int>> &newHighS
 {
     beginResetModel();
     m_highScoreList = newHighScoreList;
-    qDebug() << "Setting High Score List:" << m_highScoreList;
     endResetModel();
 }
 

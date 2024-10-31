@@ -2,6 +2,7 @@
 #include "controllers.h"
 #include <QDebug>
 
+//#define DEBUG
 
 /**
  * \fn AdminPlayerModel::AdminPlayerModel(QObject* parent)

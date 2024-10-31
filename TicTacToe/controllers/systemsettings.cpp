@@ -1,5 +1,6 @@
 #include "systemsettings.h"
 
+#define DEBUG
 
 /**
  * \fn  SystemSettings::SystemSettings

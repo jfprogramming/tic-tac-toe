@@ -166,8 +166,12 @@ void GameLogic::setSquareSelected(const QString &square) {
     if (m_ticTacToeBoard.contains(square)) {
         m_ticTacToeBoard[square] = m_currentPlayer == 1 ? 'X' : 'O';
     }
-    qDebug() << __FUNCTION__ << "Square selected:" << square << "Player:" << m_currentPlayer << "Board:" << m_ticTacToeBoard;
+#ifdef DEBUG
+    qDebug() << __FUNCTION__ << "Square selected:" << square << "Player:" << m_currentPlayer;
+    printGameBoard();
+#endif
 }
+
 
 /**
  * \fn GameLogic::checkPlayerTurn()
