@@ -124,7 +124,8 @@ set(QTEST_SOURCES
 )
 
 # Add QTest executable
-add_executable(QTests ${QTEST_SOURCES})
+add_executable(QTests ${QTEST_SOURCES}
+    qtests/test_databasemanager.h qtests/test_databasemanager.cpp)
 
 # Link QTest library
 target_link_libraries(QTests Qt6::Test)
