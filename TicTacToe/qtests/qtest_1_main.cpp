@@ -1,4 +1,5 @@
 #include <QtTest/QtTest>
+#include "test_databasemanager.h"
 
 // Example class to test
 //
@@ -11,5 +12,6 @@ private slots:
     }
 };
 
-QTEST_MAIN(TestClass)
+QTEST_MAIN(TestDatabaseManager)
+
 #include "qtest_1_main.moc"
