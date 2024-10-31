@@ -123,6 +123,10 @@ set(QTEST_SOURCES
     ${CMAKE_SOURCE_DIR}/qtests/test_main.cpp
     ${CMAKE_SOURCE_DIR}/qtests/test_databasemanager.cpp
     ${CMAKE_SOURCE_DIR}/qtests/test_databasemanager.h
+    ${CMAKE_SOURCE_DIR}/qtests/test_systemsettings.h
+    ${CMAKE_SOURCE_DIR}/qtests/test_systemsettings.cpp
+    ${CMAKE_SOURCE_DIR}/qtests/test_gamelogic.h
+    ${CMAKE_SOURCE_DIR}/qtests/test_gamelogic.cpp
 )
 
 # Add QTest executable
