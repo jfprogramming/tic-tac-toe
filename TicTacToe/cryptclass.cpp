@@ -2,6 +2,8 @@
 #include <crypt.h>
 #include <QDebug>
 
+//#define DEBUG
+
 unsigned char CryptClass::_key256[256];
 unsigned char CryptClass::_iv128[128];
 

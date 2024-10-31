@@ -6,6 +6,7 @@
 #include "qsqldatabase.h"
 #include <QThread>
 #include <QObject>
+#include <qmutex.h>
 
 /**
  * \file databasemanager.h
@@ -36,7 +37,7 @@ public:
     QString retrievePlayerName(const int id);
     QString retrievePlayerColor(const int id);
 
-    Player getPlayerByName(const QString &name);
+    Player getPlayerByName(const QString &playerName);
     Player getPlayerById(const int id);
 
     QList<AdminPlayer> getAllPlayers();
@@ -58,5 +59,6 @@ private:
     bool m_isDatabaseInitialized;
     int m_playerId;
     QSqlDatabase *m_db;
+    QMutex dbLock;
 };
 
