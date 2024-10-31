@@ -1,7 +1,7 @@
 #pragma once
 
-#include "models/adminplayermodel.h"
-#include "models/gameplaymodel.h"
+#include "../models/adminplayermodel.h"
+#include "../models/gameplaymodel.h"
 #include "qdebug.h"
 #include "qsqldatabase.h"
 #include <QThread>
