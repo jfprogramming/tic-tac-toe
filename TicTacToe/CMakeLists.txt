@@ -120,6 +120,7 @@ add_test(NAME GoogleTests COMMAND GoogleTests)
 # Add QTest files
 set(QTEST_SOURCES
     # Add other test files here
+    ${CMAKE_SOURCE_DIR}/qtests/test_main.cpp
     ${CMAKE_SOURCE_DIR}/qtests/test_databasemanager.cpp
     ${CMAKE_SOURCE_DIR}/qtests/test_databasemanager.h
 )
