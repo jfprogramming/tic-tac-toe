@@ -2,7 +2,6 @@
 
 #include <QObject>
 #include <QtTest/QtTest>
-#include "../controllers/databasemanager.h/"
 
 class TestDatabaseManager : public QObject
 {

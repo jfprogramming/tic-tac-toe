@@ -1,4 +1,5 @@
 #include "test_databasemanager.h"
+#include "../controllers/databasemanager.h"
 
 void TestDatabaseManager::initTestCase()
 {
