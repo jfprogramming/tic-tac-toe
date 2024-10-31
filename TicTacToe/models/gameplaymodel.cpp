@@ -41,6 +41,7 @@ void GamePlayModel::setPlayer1(const QString &newPlayer1) {
     // Look up player by name
     //
     m_player1 = Controllers::dbManager.getPlayerByName(trimmedPlayer1);
+    //Controllers::gameLogic.setPlayer1Name(trimmedPlayer1);
 
     emit player1Changed();
 }
