@@ -4,6 +4,7 @@
 #include <QSettings>
 #include <QString>
 #include <QDateTime>
+#include <QThread>
 
 class SystemSettings : public QObject
 {

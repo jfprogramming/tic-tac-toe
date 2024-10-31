@@ -2,6 +2,7 @@
 #include "qdebug.h"
 #include <QRandomGenerator>
 
+#define DEBUG
 
 /**
  * \fn GameLogic::GameLogic
@@ -193,6 +194,22 @@ void GameLogic::checkPlayerTurn()
 }
 
 
+/**
+ * \fn GameLogic::printGameBoard()
+ * \brief Prints out current game board.
+ * \return void
+ */
+void GameLogic::printGameBoard(){
+    //print out gameboard in 3x3 format
+    qDebug() << "Game Board:";
+    qDebug() << "|-----------------|";
+    qDebug() << "| " << m_ticTacToeBoard["A1"] << " | " << m_ticTacToeBoard["A2"] << " | " << m_ticTacToeBoard["A3"] << " |";
+    qDebug() << "|-----------------|";
+    qDebug() << "| " << m_ticTacToeBoard["B1"] << " | " << m_ticTacToeBoard["B2"] << " | " << m_ticTacToeBoard["B3"] << " |";
+    qDebug() << "|-----------------|";
+    qDebug() << "| " << m_ticTacToeBoard["C1"] << " | " << m_ticTacToeBoard["C2"] << " | " << m_ticTacToeBoard["C3"] << " |";
+    qDebug() << "|-----------------|";
+}
 
 
 /**
@@ -204,11 +221,12 @@ void GameLogic::checkForHorizontalWin()
 {
     qDebug() << __FUNCTION__ << "Checking for Horizontal Win";
 
+#ifdef DEBUG
+    printGameBoard();
+#endif
+
     const QStringList rows = {"A", "B", "C"};
     for (const auto& row : rows) {
-        qDebug() << "row1:" << m_ticTacToeBoard[row + "1"];
-        qDebug() << "row2:" << m_ticTacToeBoard[row + "2"];
-        qDebug() << "row3:" << m_ticTacToeBoard[row + "3"];
         if (m_ticTacToeBoard[row + "1"] != ' ' &&
             m_ticTacToeBoard[row + "1"] == m_ticTacToeBoard[row + "2"] &&
             m_ticTacToeBoard[row + "2"] == m_ticTacToeBoard[row + "3"]) {

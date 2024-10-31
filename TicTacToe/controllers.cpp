@@ -21,3 +21,18 @@ namespace Threads
     QThread sysSettingsThread;
     QThread gameLogicThread;
 }
+
+
+/**
+ * \namespace runThreads
+ * \brief Start the threads after the namespace definitions
+ */
+namespace runThreads{
+    struct ThreadStarter {
+        ThreadStarter() {
+            Threads::dbManagerThread.start();
+            Threads::sysSettingsThread.start();
+            Threads::gameLogicThread.start();
+        }
+    } threadStarter;
+}

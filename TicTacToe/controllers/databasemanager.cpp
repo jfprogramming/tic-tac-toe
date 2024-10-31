@@ -186,18 +186,25 @@ bool DatabaseManager::authenticateAdmin(const QString &username, const QString &
  */
 bool DatabaseManager::updatePlayer(const int playerId, const QString &playerName, const QString &playerColor) {
     qDebug() << __FUNCTION__ << "Updating player:" << "playerId:"    << playerId
-                                                   << "playerName:"  << playerName
-                                                   << "playerColor:" << playerColor;
+             << "playerName:"  << playerName
+             << "playerColor:" << playerColor;
 
-        // Update the playerName, playerColor, and dateTime fields
-        //
-        QSqlQuery query;
-        query.prepare("UPDATE PlayerTable SET playerName = :playerName, playerColor = :playerColor, dateTime = :dateTime WHERE playerId = :playerId");
-        query.bindValue(":playerName", playerName);
-        query.bindValue(":playerColor", playerColor);
-        query.bindValue(":dateTime", QDateTime::currentDateTime());
-        query.bindValue(":playerId", playerId);
-        return query.exec();
+    // Update the playerName, playerColor, and dateTime fields
+    //
+    QSqlQuery query;
+    query.prepare("UPDATE PlayerTable SET playerName = :playerName, playerColor = :playerColor, dateTime = :dateTime WHERE playerId = :playerId");
+    query.bindValue(":playerName", playerName);
+    query.bindValue(":playerColor", playerColor);
+    query.bindValue(":dateTime", QDateTime::currentDateTime());
+    query.bindValue(":playerId", playerId);
+#ifdef DEBUG
+    qDebug() << "Query:" << query.lastQuery();
+#endif
+    if (!query.exec()) {
+        qWarning() << "Failed to update player:" << query.lastError();
+        return false;
+    }
+    return true;
 }
 
 
@@ -251,21 +258,34 @@ Player DatabaseManager::getPlayerById(const int id) {
     Player player;
 
     QSqlQuery query;
-    query.prepare("SELECT id, playerName, playerColor, highScore FROM PlayerTable WHERE id = :id");
+    query.prepare("SELECT playerId, playerName, playerColor FROM PlayerTable WHERE id = :id");
     query.bindValue(":id", id);
 
     if (query.exec() && query.next()) {
-        player.id        = query.value(0).toInt();
-        player.name      = query.value(1).toString();
-        player.color     = query.value(2).toString();
-        player.highScore = query.value(3).toInt();
+        player.id    = query.value(0).toInt();
+        player.name  = query.value(1).toString();
+        player.color = query.value(2).toString();
+
+        // Fetching high score based on playerId from highScore table
+        //
+        QSqlQuery highScoreQuery;
+        highScoreQuery.prepare("SELECT highScore FROM highScoreTable WHERE playerId = :playerId");
+        highScoreQuery.bindValue(":playerId", player.id);
+
+        if (highScoreQuery.exec() && highScoreQuery.next()) {
+            player.highScore = highScoreQuery.value(0).toInt();
+        } else {
+            qWarning() << "Failed to fetch high score for player:" << highScoreQuery.lastError();
+            player.highScore = 0;
+        }
     } else {
         qWarning() << "Failed to fetch player by id:" << query.lastError();
-        player.id        = -1;
-        player.name      = "DNE";
-        player.color     = "DNE";
+        player.id    = -1;
+        player.name  = "DNE";
+        player.color = "DNE";
         player.highScore = 0;
     }
+
     return player;
 }
 
@@ -277,29 +297,46 @@ Player DatabaseManager::getPlayerById(const int id) {
  * \param   QString name
  * \return  bool
  */
-Player DatabaseManager::getPlayerByName(const QString &name) {
-    qDebug() << __FUNCTION__ << "Fetching player by name:" << name;
-
+Player DatabaseManager::getPlayerByName(const QString &playerName) {
+    qDebug() << __FUNCTION__ << "Fetching player by name:" << playerName;
     Player player;
-
     QSqlQuery query;
-    query.prepare("SELECT id, playerName, playerColor, highScore FROM PlayerTable WHERE playerName = :name");
-    query.bindValue(":name", name);
 
+    // Fetching player details from PlayerTable
+    //
+    query.prepare("SELECT playerId, playerName, playerColor FROM PlayerTable WHERE playerName = :playerName");
+    query.bindValue(":playerName", playerName);
+    qDebug() << "Query:" << query.lastQuery();
     if (query.exec() && query.next()) {
-        player.id        = query.value(0).toInt();
-        player.name      = query.value(1).toString();
-        player.color     = query.value(2).toString();
-        player.highScore = query.value(3).toInt();
-    } else {
+        int playerId = query.value(0).toInt();
+        player.id    = query.value(0).toInt();
+        player.name  = query.value(1).toString();
+        player.color = query.value(2).toString();
+
+        // Fetching high score based on playerId from highScore table
+        //
+        QSqlQuery highScoreQuery;
+        highScoreQuery.prepare("SELECT highScore FROM highScoreTable WHERE playerId = :playerId");
+        highScoreQuery.bindValue(":playerId", player.id);
+
+        if (highScoreQuery.exec() && highScoreQuery.next()) {
+            player.highScore = highScoreQuery.value(0).toInt();
+        } else {
+            qWarning() << "Failed to fetch high score for player:" << highScoreQuery.lastError();
+            player.highScore = 0;
+        }
+    }
+    else {
         qWarning() << "Failed to fetch player by name:" << query.lastError();
-        player.id        = -1;
-        player.name      = "DNE";
-        player.color     = "DNE";
+        player.id    = -1;
+        player.name  = "DNE";
+        player.color = "DNE";
         player.highScore = 0;
     }
+
     return player;
 }
+
 
 
 /**
@@ -317,6 +354,9 @@ bool DatabaseManager::setPlayerHighScoreValue(int playerId, int score)
     query.bindValue(":playerId", playerId);
     query.bindValue(":score", score);
     query.bindValue(":dateTime", QDateTime::currentDateTime());
+#ifdef DEBUG
+    qDebug() << "Query:" << query.lastQuery();
+#endif
     if (!query.exec()) {
         qWarning() << "Failed to insert high score:" << query.lastError();
         return false;
@@ -340,9 +380,11 @@ bool DatabaseManager::updatePlayerHighScore(const QString &playerName, int score
     query.bindValue(":score", score);
     query.bindValue(":dateTime", QDateTime::currentDateTime().toString(Qt::ISODate));
     query.bindValue(":playerName", playerName);
+#ifdef DEBUG
     qDebug() << "Query:" << query.lastQuery();
+#endif
     if (!query.exec()) {
-        qWarning() << "Failed to update high score:" << query.lastError();
+        qWarning() << "Failed to update player high score:" << query.lastError();
         return false;
     }
     return true;
