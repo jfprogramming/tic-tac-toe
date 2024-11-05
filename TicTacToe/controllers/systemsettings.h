@@ -4,7 +4,7 @@
 #include <QSettings>
 #include <QString>
 #include <QDateTime>
-#include <qQMutex>
+#include <QMutex>
 #include <QThread>
 
 
@@ -37,6 +37,6 @@ private:
     QString   m_settingsFilePath="/data/config/settings.ini";
     QSettings m_settingsFile;
     QString   m_dateFormate;
-    QMutex    *m_mutex;
+    QMutex    m_mutex;
 
 };

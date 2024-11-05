@@ -58,6 +58,6 @@ private:
     bool m_isDatabaseInitialized;
     int m_playerId;
     QSqlDatabase *m_db;
-    QMutex *m_dbLock;
+    QMutex m_dbLock;
 };
 

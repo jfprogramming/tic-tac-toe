@@ -4,6 +4,7 @@
 #include <QVector>
 #include <QMap>
 #include <QThread>
+#include <QMutex>
 
 class GameLogic : public QObject
 {
@@ -73,4 +74,5 @@ private:
 
     QString m_gameType;
     std::map<QString, char> m_ticTacToeBoard;
+    QMutex m_gameLogicMutex;
 };

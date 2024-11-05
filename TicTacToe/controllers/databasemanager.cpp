@@ -3,7 +3,7 @@
 #include <QSqlQuery>
 #include <QDebug>
 #include <QDateTime>
-#include <qmutex.h>
+#include <QMutex>
 #include "databasemanager.h"
 #include "../cryptclass.h"
 #include "../models/adminplayermodel.h"
