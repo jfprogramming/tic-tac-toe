@@ -2,7 +2,8 @@
 #include "controllers.h"
 #include <QDebug>
 
-//#define DEBUG
+#define DEBUG
+
 
 /**
  * \fn AdminPlayerModel::AdminPlayerModel(QObject* parent)
@@ -12,8 +13,18 @@
 AdminPlayerModel::AdminPlayerModel(QObject *parent) : QAbstractListModel{parent}
 {
     qDebug() << __FUNCTION__ << "AdminPlayerModel constructor";
+
+    // Get a list of player objects
+    //
     m_allPlayers = getAllPlayers();
-    qDebug() << "All Players:" << m_allPlayers[0].name;
+
+#ifdef DEBUG
+    for(int i = 0; i < m_allPlayers.size(); i++){
+        qDebug() << "Player name:"       << m_allPlayers[i].name <<
+                    "Player color:"      << m_allPlayers[i].color <<
+                    "Player high score:" << m_allPlayers[i].highScore;
+    }
+#endif
 }
 
 
@@ -91,18 +102,6 @@ bool AdminPlayerModel::onAdminLogin(const QString &username, const QString &pass
 void AdminPlayerModel::updatePlayer(const int playerId, const QString &name, const QString &color){
     qDebug() << __FUNCTION__ << "updating player..." << "playerId:" << playerId << "name:" << name << "color:" << color;
     Controllers::dbManager.updatePlayer(playerId, name, color);
-}
-
-
-/**
- * \fn AdminPlayerModel::lookupPlayer(const QString &name)
- * \brief Looks up a player by name.
- * \param name const QString& The player's name.
- */
-void AdminPlayerModel::lookupPlayer(const QString &name) {
-    qDebug() << "player lookup...";
-    //m_playerData = Controllers::dbManager.getPlayerByName(name);
-    emit playerDataChanged();
 }
 
 

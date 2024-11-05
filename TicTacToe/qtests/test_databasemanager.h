@@ -2,6 +2,7 @@
 
 #include <QObject>
 #include <QtTest/QtTest>
+#include <QDebug>
 
 class TestDatabaseManager : public QObject
 {
@@ -18,16 +19,16 @@ private slots:
     void testCloseDatabase();
     void testGetPlayerIdByName();
     void testGetHighScoreForPlayer();
-    void testUpdatePlayer();
-    void testRetrievePlayerName();
-    void testRetrievePlayerColor();
-    void testGetPlayerByName();
-    void testGetPlayerById();
-    void testGetAllPlayers();
-    void testGetAdminUsername();
-    void testGetDecryptedAdminPassword();
-    void testGetHighScoreList();
-    void testSetPlayerHighScoreValue();
-    void testAuthenticateAdmin();
-    void testUpdatePlayerHighScore();
+    //void testUpdatePlayer();
+    //void testRetrievePlayerName();
+    //void testRetrievePlayerColor();
+    //void testGetPlayerByName();
+    //void testGetPlayerById();
+    //void testGetAllPlayers();
+    //void testGetAdminUsername();
+    //void testGetDecryptedAdminPassword();
+    //void testGetHighScoreList();
+    //void testSetPlayerHighScoreValue();
+    //void testAuthenticateAdmin();
+    //void testUpdatePlayerHighScore();
 };

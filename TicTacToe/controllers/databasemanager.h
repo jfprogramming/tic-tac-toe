@@ -1,7 +1,7 @@
 #pragma once
 
-#include "models/adminplayermodel.h"
-#include "models/gameplaymodel.h"
+#include "../models/adminplayermodel.h"
+#include "../models/gameplaymodel.h"
 #include "qdebug.h"
 #include "qsqldatabase.h"
 #include <QThread>
@@ -24,6 +24,7 @@ public:
 
     bool initializeDatabase();
     void closeDatabase();
+    bool isDatabaseOpen();
 
     // High Score Mngt
     //
@@ -34,10 +35,8 @@ public:
     //
     bool updatePlayer(const int playerId, const QString &playerName, const QString &playerColor);
 
-    QString retrievePlayerName(const int id);
-    QString retrievePlayerColor(const int id);
+    Player getPlayerByName(const QString &name);
 
-    Player getPlayerByName(const QString &playerName);
     Player getPlayerById(const int id);
 
     QList<AdminPlayer> getAllPlayers();
@@ -59,6 +58,6 @@ private:
     bool m_isDatabaseInitialized;
     int m_playerId;
     QSqlDatabase *m_db;
-    QMutex dbLock;
+    QMutex *m_dbLock;
 };
 
