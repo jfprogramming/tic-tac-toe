@@ -3,6 +3,7 @@
 #include <QSqlQuery>
 #include <QDebug>
 #include <QDateTime>
+#include <qmutex.h>
 #include "databasemanager.h"
 #include "../cryptclass.h"
 #include "../models/adminplayermodel.h"
@@ -15,7 +16,7 @@
  */
 DatabaseManager::DatabaseManager(QThread* home, QObject* parent) : QObject(parent)
 {
-    qDebug() << __FUNCTION__ << "DatabaseManager constructor";
+    qInfo() << __FUNCTION__ << "DatabaseManager constructor";
 
     m_isDatabaseInitialized = false;
 }
@@ -26,7 +27,7 @@ DatabaseManager::DatabaseManager(QThread* home, QObject* parent) : QObject(paren
  * \brief Destructor for DatabaseManager.
  */
 DatabaseManager::~DatabaseManager(){
-    qDebug() << __FUNCTION__ << "DatabaseManager destructor";
+    qInfo() << __FUNCTION__ << "DatabaseManager destructor";
 
     closeDatabase();
 }
@@ -51,7 +52,7 @@ bool DatabaseManager::initializeDatabase()
     m_db->setDatabaseName("/data/database/tictactoe.db");
 
     if (!m_db->open()) {
-        qDebug() << "Error opening database:" << m_db->lastError().text();
+        qWarning() << "Error opening database:" << m_db->lastError().text();
         // Handle the error (e.g., show an error message)
         return false;
     } else {
@@ -69,7 +70,7 @@ bool DatabaseManager::initializeDatabase()
  */
 void DatabaseManager::closeDatabase()
 {
-    qDebug() << __FUNCTION__ << "Closing database...";
+    qInfo() << __FUNCTION__ << "Closing database...";
 
     m_isDatabaseInitialized = false;
     QSqlDatabase::database().close();
@@ -94,7 +95,7 @@ bool DatabaseManager::isDatabaseOpen()
  */
 QString DatabaseManager::getAdminUsername()
 {
-    qDebug() << __FUNCTION__ << "Fetching admin username...";
+    qInfo() << __FUNCTION__ << "Fetching admin username...";
 
     QSqlQuery query;
     query.prepare("SELECT adminName FROM AdminTable");
@@ -112,7 +113,7 @@ QString DatabaseManager::getAdminUsername()
  */
 QString DatabaseManager::getDecryptedAdminPassword()
 {
-    qDebug() << __FUNCTION__ << "Fetching and decrypting admin password...";
+    qInfo() << __FUNCTION__ << "Fetching and decrypting admin password...";
 
     QString decryptedPassword;
     QSqlQuery query;
@@ -143,7 +144,7 @@ QString DatabaseManager::getDecryptedAdminPassword()
  */
 bool DatabaseManager::authenticateAdmin(const QString &username, const QString &password)
 {
-    qDebug() << __FUNCTION__ << "Authenticating admin...";
+    qInfo() << __FUNCTION__ << "Authenticating admin...";
 
     QSqlQuery query;
     QString   adminName;
@@ -196,7 +197,7 @@ bool DatabaseManager::authenticateAdmin(const QString &username, const QString &
  * \return  bool
  */
 bool DatabaseManager::updatePlayer(const int playerId, const QString &playerName, const QString &playerColor) {
-    qDebug() << __FUNCTION__ << "Updating player:" << "playerId:"    << playerId
+    qInfo() << __FUNCTION__ << "Updating player:" << "playerId:"    << playerId
                                                    << "playerName:"  << playerName
                                                    << "playerColor:" << playerColor;
 
@@ -209,44 +210,6 @@ bool DatabaseManager::updatePlayer(const int playerId, const QString &playerName
         query.bindValue(":dateTime", QDateTime::currentDateTime());
         query.bindValue(":playerId", playerId);
         return query.exec();
-}
-
-
-/**
- * \fn      DatabaseManager::retrievePlayerName
- * \brief   Gets a player by their row index in the high score table
- * \param   QString name
- * \return  bool
- */
-QString DatabaseManager::retrievePlayerName(const int id)
-{
-    QSqlQuery query;
-    query.prepare("SELECT playerName FROM HighScore WHERE id = :id");
-    query.bindValue(":id", id);
-
-    qDebug() << "player name successfully retrieved";
-    if (query.exec() && query.next())
-        return query.value(0).toString();
-    return "";
-}
-
-
-/**
- * \fn      DatabaseManager::retrievePlayerColor
- * \brief   Gets a player by their row index in the high score table
- * \param   QString name
- * \return  bool
- */
-QString DatabaseManager::retrievePlayerColor(const int id)
-{
-    QSqlQuery query;
-    query.prepare("SELECT playerColor FROM HighScore WHERE id = :id");
-    query.bindValue(":id", id);
-
-    qDebug() << "player name successfully retrieved";
-    if (query.exec() && query.next())
-        return query.value(0).toString();
-    return "";
 }
 
 
@@ -366,7 +329,7 @@ bool DatabaseManager::updatePlayerHighScore(const QString &playerName, int score
  * \return A QList of high scores.
  */
 QList<QPair<QString, int>> DatabaseManager::getHighScoreList() {
-    qDebug() << __FUNCTION__ << "Fetching high score list...";
+    QMutexLocker locker(&m_dbLock); // Ensure this is a reference
 
     QList<QPair<QString, int>> highScores;
 
@@ -383,7 +346,13 @@ QList<QPair<QString, int>> DatabaseManager::getHighScoreList() {
         highScores.append(qMakePair(playerName, highScore));
     }
 
-    qInfo() << "Highscore list:" << highScores;
+#ifdef DEBUG
+    // Print the list of high scores
+    for (int i = 0; i < highScores.size(); i++) {
+        qDebug() << "Player Name:" << highScores.at(i).first << " High Score:" << highScores.at(i).second;
+    }
+#endif
+
     return highScores;
 }
 
@@ -396,7 +365,7 @@ QList<QPair<QString, int>> DatabaseManager::getHighScoreList() {
  */
 int DatabaseManager::getPlayerIdByName(const QString &name)
 {
-    qDebug() << __FUNCTION__ << "Fetching player ID for name:" << name;
+    qInfo() << __FUNCTION__ << "Fetching player ID for name:" << name;
 
     QSqlQuery query;
     query.prepare("SELECT playerId FROM PlayerTable WHERE playerName = :playerName");

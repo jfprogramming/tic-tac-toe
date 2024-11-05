@@ -2,6 +2,7 @@
 
 #include <QObject>
 #include <QtTest/QtTest>
+#include <QDebug>
 
 class TestDatabaseManager : public QObject
 {

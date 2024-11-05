@@ -4,6 +4,7 @@
 #include <QSettings>
 #include <QString>
 #include <QDateTime>
+#include <qmutex.h>
 
 class SystemSettings : public QObject
 {
@@ -24,7 +25,6 @@ public:
     Q_INVOKABLE QString getTime() const;
     Q_INVOKABLE void setTime(const QDateTime &dateTime);
 
-
     Q_INVOKABLE QString getDate() const;
     Q_INVOKABLE void setDate(const QDateTime &dateTime);
 
@@ -35,5 +35,6 @@ private:
     QString   m_settingsFilePath="/data/config/settings.ini";
     QSettings m_settingsFile;
     QString   m_dateFormate;
+    QMutex    *m_mutex;
 
 };

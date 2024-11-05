@@ -14,12 +14,14 @@ void TestDatabaseManager::cleanupTestCase()
     // Code to clean up the test environment after all test functions have been executed
 }
 
+
 void TestDatabaseManager::init()
 {
     //QThread thread;
     //DatabaseManager dbManager(&thread);
     //dbManager.initializeDatabase();
 }
+
 
 void TestDatabaseManager::cleanup()
 {
