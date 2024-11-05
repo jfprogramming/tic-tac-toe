@@ -1,5 +1,7 @@
 #include "aboutinfo.h"
 
+//#define DEBUG
+
 /**
  * \fn AboutInfo::AboutInfo(QObject *parent)
  * \brief Constructor for AboutInfo.

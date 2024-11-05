@@ -4,6 +4,7 @@
 
 #define DEBUG
 
+
 /**
  * \fn AdminPlayerModel::AdminPlayerModel(QObject* parent)
  * \brief Constructs an AdminPlayerModel object.

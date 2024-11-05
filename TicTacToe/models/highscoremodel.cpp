@@ -4,6 +4,7 @@
 
 #define DEBUG
 
+
 /**
  * \brief Constructor for HighscoreModel.
  * \param parent The parent QObject.
@@ -40,7 +41,7 @@ void HighscoreModel::setHighScoreList(const QList<QPair<QString, int>> &newHighS
 #ifdef DEBUG
     qDebug() << "Setting High Score List:" << m_highScoreList;
 #endif
-
+  
     endResetModel();
 }
 

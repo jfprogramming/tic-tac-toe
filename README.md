@@ -6,7 +6,7 @@
 ## Objective
 - Create a Qt C++/QML application for a RPI4 touch screen device and all of its supporting infastructure.
 - **Purpouse**: Create a gaming device that can be played in a company office setting.
-  - Challenge another colluege to a game of Tic-Tac-Toe while you wait for your meeting to start. 
+  - Challenge another colleague to a game of Tic-Tac-Toe while you wait for your meeting to start. 
 
 ## Project Structure
 
@@ -127,9 +127,11 @@ Below is a list of features not yet complete:
 ## TODO
 - **TODO List**
   - Inprogress: Player Management for Admin User.
-  - Inprogress: date/time settings for Admin User.
-  - Inprogress: integrating QSettings File. 
-  - Improve: threading with QMutex locking.
+  - Inprogress: date/time settings for Admin User. 
+  - Inprogress: threading with QMutex locking.
+  - Inprogress: Player tracking High score.
+  - Bug: Player Assocation when adding to high score.
+  - Improve: Player Selection Model need to be derived from db
   - Improve: class design by implementing common base class.
   - Improve: Object Oriented design by implementing smart pointers.
   - Implement: Export high score list feature.

@@ -4,7 +4,9 @@
 #include <QSettings>
 #include <QString>
 #include <QDateTime>
-#include <qmutex.h>
+#include <qQMutex>
+#include <QThread>
+
 
 class SystemSettings : public QObject
 {

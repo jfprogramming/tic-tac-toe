@@ -3,6 +3,7 @@
 #include <QString>
 #include <QVector>
 #include <QMap>
+#include <QThread>
 
 class GameLogic : public QObject
 {
@@ -30,6 +31,8 @@ public:
 
     bool getCatsCradle() const;
     void setCatsCradle(bool newCatsCradle);
+
+    void printGameBoard();
 
     // Win Logic Functions
     //

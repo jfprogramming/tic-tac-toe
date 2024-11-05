@@ -36,6 +36,7 @@ public:
     bool updatePlayer(const int playerId, const QString &playerName, const QString &playerColor);
 
     Player getPlayerByName(const QString &name);
+
     Player getPlayerById(const int id);
 
     QList<AdminPlayer> getAllPlayers();
