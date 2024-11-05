@@ -130,7 +130,8 @@ Below is a list of features not yet complete:
   - Inprogress: date/time settings for Admin User. 
   - Inprogress: threading with QMutex locking.
   - Inprogress: Player tracking High score.
-  - Bug: Player Assocation when adding to high score. 
+  - Bug: Player Assocation when adding to high score.
+  - Improve: Player Selection Model need to be derived from db
   - Improve: class design by implementing common base class.
   - Improve: Object Oriented design by implementing smart pointers.
   - Implement: Export high score list feature.
